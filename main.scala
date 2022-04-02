@@ -21,6 +21,11 @@ object SymUtils {
  - pi root 2 + e root 2 shouldn't necessarily become (pi+e) root 2,
  - which is why pi and e are not considered coefficients.
  - n and d are the numerator and denominator
+ - It is a trait and not a class so that regular integers can be
+ - implicitly made to become (partially atleast) a SymC
+ - The limitation is that 1 == SymCInt(1) doesn't work, even though
+ - SymCInt(1) == 1 works just fine
+ - (can't figure out how to override the int's == operator)
  */
 
 trait SymC {
@@ -60,64 +65,45 @@ implicit class SymCInt(num: Int) extends SymC {
 
 
 
+case class Sym(e: SymE = SymUnit(), c: SymC = SymCInt(1)) {
+  lazy val approx: Double = e.approx * c.approx
+  def ==(s: Sym): Boolean = (e == s.e) && (c == s.c)
+  override lazy val toString = e match {
+    case SymUnit() => c.toString
+    case _ => (if (c == SymCInt(1)) "" else c.toString + " ") + e.toString
+  }
+  def symplify = Sym(e.simplify.e, c * e.simplify.c)
+}
+
 // Short for Symbolic
-trait Sym {
+trait SymE {
   def approx: Double
-  def simplify: Sym = this
+  lazy val simplify: Sym = Sym(this)
   def ==(expr: Sym): Boolean = false
-  def c: SymC
-  def withC(c: SymC): Sym
 }
 
-case class SymUnit(c: SymC = 1) extends Sym {
-  def withC(newC: SymC) = SymUnit(newC)
-  lazy val approx = c.approx
-  override lazy val toString = c.toString
+case class SymUnit() extends SymE {
+  lazy val approx = 1
+  override lazy val toString = "U"
   
-  override def ==(expr: Sym) = expr match {
-    case SymUnit(c1) => c == c1
+  def ==(expr: SymE) = expr match {
+    case SymUnit() => true
     case _ => false
   }
 }
 
-case class SymRoot(num: Sym, root: Sym = SymUnit(2), c: SymC = 1) extends Sym {
-  def withC(newC: SymC) = SymRoot(num, root, newC)
-  lazy val approx = c.approx * math.pow(num.approx, 1.0 / root.approx)
-  override lazy val toString = {if (c == 1) "" else c.toString + " "}
-    .+(if (root == SymUnit(2)) "" else root.toString)
-    .+("√" + num.toString)
-  
-  override def ==(expr: Sym) = expr match {
-    case SymRoot(n2, r2, c2) => (num==n2) && (root==r2) && (c==c2)
-    case _ => false
-  }
+case class SymRoot(num: Sym, root: Sym = Sym(c=2)) extends SymE {
+  lazy val approx = math.pow(num.approx, 1.0 / root.approx)
+  override lazy val toString =
+    (if (root == Sym(c=2)) "" else root.toString) + "√" + num.toString
 }
 
-case class SymProduct(exprs: Seq[Sym], c: SymC = 1) extends Sym {
-  def withC(newC: SymC) = SymProduct(exprs, newC)
-  lazy val approx = exprs.foldLeft(c.approx)(_ * _.approx)
+case class SymProduct(exprs: Seq[Sym]) extends SymE {
+  lazy val approx = exprs.foldLeft(1.0)(_ * _.approx)
   override lazy val simplify =
-    SymProduct(exprs.filter{_ match { case u: SymUnit => false case _ => true }}
-      .map(_.withC(1)),
-      exprs.foldLeft(c)(_ * _.c).simplify)
+    Sym(SymProduct(exprs.map(_.e)
+      .filter{_ match { case SymUnit() => false case _ => true }}
+      .map{exp => Sym(exp)}),
+      exprs.foldLeft(1: SymC)(_ * _.c).simplify)
 }
 
-case class SymSum(exprs: Seq[Sym], c: SymC = 1) extends Sym {
-  def withC(newC: SymC) = SymSum(exprs, newC)
-  lazy val approx = exprs.foldLeft(c.approx)(_ + _.approx)
-
-}
-
-SymProduct(List(
-  SymUnit(SymCFrac(1, 2)),
-  SymRoot(SymUnit(2), SymUnit(3), 2),
-  SymUnit(5),
-  SymRoot(SymUnit(2), SymUnit(3), 3)
-)).simplify
-
-
-List(
-  SymUnit(SymCFrac(1, 2)),
-  SymRoot(SymUnit(2), SymUnit(3), 2),
-  SymUnit(5),
-  SymRoot(SymUnit(2), SymUnit(3), 3)
