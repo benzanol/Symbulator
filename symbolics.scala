@@ -29,6 +29,7 @@ trait SymR extends Sym {
   def d: SymInt
 
   lazy val ratioGcd: SymInt = n gcd d
+  lazy val inverse = SymFrac(d, n)
 }
 
 case class SymInt(int: Int) extends SymR {
@@ -70,6 +71,8 @@ case class SymInt(int: Int) extends SymR {
     SymMultiset[SymInt](map.toMap)
   }
 }
+
+implicit class ImplicitSymInt(val original: Int) extends SymInt(original)
 
 case class SymFrac(n: SymInt, d: SymInt = 1) extends SymR {
   def gcd(o: SymR): SymR = SymFrac(n gcd o.n, d lcm o.d)

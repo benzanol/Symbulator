@@ -52,6 +52,13 @@ case class FracP(n: Pattern = AnyP(), d: Pattern = AnyP()) extends Pattern {
     case _ => Seq[Bindings]()
   }
 }
+case class RationalP(n: Pattern = AnyP(), d: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Bindings] = e match {
+    case SymFrac(a, b) => matchSeveral((a -> n), (b -> d))
+    case a: SymInt => matchSeveral((a -> n), (SymInt(1) -> d))
+    case _ => Seq[Bindings]()
+  }
+}
 case class PowP(base: Pattern = AnyP(), pow: Pattern = AnyP()) extends Pattern {
   def matches(e: Sym): Seq[Bindings] = e match {
     case SymPow(a, b) => matchSeveral((a -> base), (b -> pow))
