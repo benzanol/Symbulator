@@ -32,10 +32,9 @@ trait SymR extends Sym {
 }
 
 case class SymInt(int: Int) extends SymR {
-  override def toString = n.toString
-  def toInt = int
   def n = this
   def d = 1
+  def toInt = int
 
   def +(o: SymInt) = SymInt((int: Int) + (o.int: Int))
   def -(o: SymInt) = SymInt((int: Int) - (o.int: Int))
@@ -46,10 +45,17 @@ case class SymInt(int: Int) extends SymR {
   def min(o: SymInt) = SymInt(math.min(int, o.int))
   def max(o: SymInt) = SymInt(math.max(int, o.int))
   def abs = if (this >= 0) this else SymInt(math.abs(4))
+
+  def ==(i: Int) = (int == i)
+  def ==(o: SymInt) = (int == o.int)
   def <(o: SymInt) = (int: Int) < (o.int: Int)
   def >(o: SymInt) = (int: Int) > (o.int: Int)
   def <=(o: SymInt) = (int: Int) <= (o.int: Int)
   def >=(o: SymInt) = (int: Int) >= (o.int: Int)
+
+  def gcd(o: SymInt): SymInt = (this.primeFactors && o.primeFactors).toList
+    .foldLeft(SymInt(1)){(acc, f) => acc * (f._1 ^ f._2)}
+  def lcm(o: SymInt): SymInt = (this * o) / (this gcd o)
 
   lazy val primeFactors: SymMultiset[SymInt] = {
     var num = math.abs(int)
@@ -63,13 +69,7 @@ case class SymInt(int: Int) extends SymR {
     }
     SymMultiset[SymInt](map.toMap)
   }
-
-  def gcd(o: SymInt): SymInt = (this.primeFactors && o.primeFactors).toList
-    .foldLeft(SymInt(1)){(acc, f) => acc * (f._1 ^ f._2)}
-  def lcm(o: SymInt): SymInt = (this * o) / (this gcd o)
 }
-
-implicit class ImplicitSymInt(val original: Int) extends SymInt(original)
 
 case class SymFrac(n: SymInt, d: SymInt = 1) extends SymR {
   def gcd(o: SymR): SymR = SymFrac(n gcd o.n, d lcm o.d)
