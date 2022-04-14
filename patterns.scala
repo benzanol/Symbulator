@@ -1,24 +1,31 @@
 import scala.util.chaining._
-import scala.reflect.runtime.universe.TypeTag
+import scala.reflect.ClassTag
 
-type Bindings = Map[Symbol, Any]
+type Matchable = Either[Sym, Seq[Sym]]
+type Bindings = Map[Symbol, Matchable]
 
 trait Pattern {
   // The symbols that should get bound to the match of an expression
   def pattern: Pattern = this
   def matches(e: Sym): Seq[Bindings] = Seq()
 
-  // Seq( {Included} {Not included} {Possible bindings} )
-  def matchesIn(syms: Seq[Sym]): Seq[(Any, Seq[Sym], Seq[Bindings])] =
+  // Seq( {Matched object/s} {Not included} {Possible bindings} )
+  def matchesSeq(syms: Seq[Sym]): Seq[(Matchable, Seq[Sym], Seq[Bindings])] =
     (0 until syms.length).map{i =>
-      (syms(i), syms.patch(i, Nil, 1), this.matches(syms(i)))
+      (Left(syms(i)), syms.patch(i, Nil, 1), this.matches(syms(i)))
     }.filter(_._3 != Nil)
 }
 
 implicit class PatternSymbol(s: Symbol) extends Pattern {
-  override def matches(e: Sym): Seq[Bindings] = Seq(Map(s -> e))
+  override def matches(e: Sym): Seq[Bindings] = Seq(Map(s -> Left(e)))
 }
 
+case class P[T]()(implicit tag: ClassTag[T]) extends Pattern {
+  override def matches(e: Sym): Seq[Bindings] = e match {
+    case e: T => Seq(Map())
+    case _ => Seq()
+  }
+}
 case class AnyP() extends Pattern {
   override def matches(e: Sym) = Seq(Map())
 }
@@ -55,17 +62,17 @@ case class ProdP(ps: Pattern*) extends Pattern {
 
 case class Repeat(p: Pattern, min: Int = 0, max: Int = 0) extends Pattern {
   override def matches(e: Sym) = Nil
-  override def matchesIn(seq: Seq[Sym]) =
+  override def matchesSeq(seq: Seq[Sym]) =
     // Creates a tuple of the form ( {match}, {rest} )
     seq.partition(p.matches(_) != Nil)
-      .pipe{t => Seq( (t._1, t._2, Seq(Map())) )}
+      .pipe{t => Seq( (Right(t._1), t._2, Seq(Map())) )}
 }
 
 case class Bind(s: Symbol, p: Pattern) extends Pattern {
   override def matches(e: Sym): Seq[Bindings] =
-    tryCombinations(p.matches(e), Seq[Bindings](Map(s -> e)))
-  override def matchesIn(syms: Seq[Sym]): Seq[(Any, Seq[Sym], Seq[Bindings])] =
-    p.matchesIn(syms).map{ case (matched, rest, bindings) =>
+    tryCombinations(p.matches(e), Seq[Bindings](Map(s -> Left(e))))
+  override def matchesSeq(syms: Seq[Sym]) =
+    p.matchesSeq(syms).map{ case (matched, rest, bindings) =>
       (matched, rest, tryCombinations(bindings, Seq[Bindings](Map(s -> matched))))
     }
   override def pattern = p.pattern
@@ -82,7 +89,7 @@ def matchSeveral(ts: (Sym, Pattern)*): Seq[Bindings] =
 
 def matchSeq(syms: Seq[Sym], ps: Seq[Pattern]): Seq[Bindings] = ps match {
   case Nil => if (syms.isEmpty) Seq(Map()) else Seq()
-  case Seq(head, tail @ _*) => head.matchesIn(syms)
+  case Seq(head, tail @ _*) => head.matchesSeq(syms)
       .map{ case (_, rest, binds) => tryCombinations(binds, matchSeq(rest, tail)) }
       .flatten.distinct
 }
