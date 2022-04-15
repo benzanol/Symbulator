@@ -1,5 +1,11 @@
 import scala.util.chaining._
 
+object SymMultiset {
+  def toMap[T](list: Seq[T]): Map[T, Int] =
+    list.groupBy{a => a}
+      .map{ case (key, list) => (key, list.length) }
+}
+
 implicit class SymMultiset[T](val m: Map[T, SymInt]) {
   override def toString = m.toList.sortWith(_._2 < _._2)
     .map{t => f"${t._2}(${t._1})"}.mkString(", ")
@@ -22,7 +28,9 @@ implicit class SymMultiset[T](val m: Map[T, SymInt]) {
   def toList = m.toList
 }
 
-trait Sym
+trait Sym {
+  def mapParams(f: Sym => Sym): Sym = this
+}
 
 trait SymR extends Sym {
   def n: SymInt
@@ -30,6 +38,12 @@ trait SymR extends Sym {
 
   lazy val ratioGcd: SymInt = n gcd d
   lazy val inverse = SymFrac(d, n)
+
+  def +(o: SymR): SymR = SymFrac(n*o.d + o.n*d, d*o.d)
+  def -(o: SymR): SymR = SymFrac(n*o.d - o.n*d, d*o.d)
+  def *(o: SymR): SymR = SymFrac(n*o.n, d*o.d)
+  def /(o: SymR): SymR = SymFrac(n*o.d, d*o.n)
+  def ^(o: SymInt): SymR = SymFrac(n^o, d^o)
 }
 
 case class SymInt(int: Int) extends SymR {
@@ -42,10 +56,10 @@ case class SymInt(int: Int) extends SymR {
   def *(o: SymInt) = SymInt((int: Int) * (o.int: Int))
   def /(o: SymInt) = SymInt((int: Int) / (o.int: Int))
   def %(o: SymInt) = SymInt((int: Int) % (o.int: Int))
-  def ^(o: SymInt) = SymInt(math.pow(int, o.int).toInt)
   def min(o: SymInt) = SymInt(math.min(int, o.int))
   def max(o: SymInt) = SymInt(math.max(int, o.int))
   def abs = if (this >= 0) this else SymInt(math.abs(4))
+  override def ^(o: SymInt) = SymInt(math.pow(int, o.int).toInt)
 
   def ==(i: Int) = (int == i)
   def ==(o: SymInt) = (int == o.int)
@@ -95,8 +109,23 @@ case class SymUndefined() extends SymR {
   def lcm(o: SymR) = this
 }
 
-case class SymSum(exprs: Sym*) extends Sym
+case class SymSum(exprs: Sym*) extends Sym {
+  override def mapParams(f: Sym => Sym): Sym = SymSum((exprs.map(f)):_*)
 
-case class SymProd(exprs: Sym*) extends Sym
+  def ==(o: SymProd): Boolean =
+    SymMultiset.toMap(exprs) == SymMultiset.toMap(o.exprs)
+}
 
-case class SymPow(base: Sym, pow: Sym) extends Sym
+case class SymProd(exprs: Sym*) extends Sym {
+  override def mapParams(f: Sym => Sym): Sym = SymProd((exprs.map(f)):_*)
+
+  def ==(o: SymProd): Boolean =
+    SymMultiset.toMap(exprs) == SymMultiset.toMap(o.exprs)
+}
+
+case class SymPow(base: Sym, pow: Sym) extends Sym {
+  override def mapParams(f: Sym => Sym): Sym = SymPow(f(base), f(pow))
+}
+
+case class SymPi() extends Sym
+case class SymE() extends Sym

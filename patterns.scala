@@ -22,10 +22,30 @@ trait Pattern {
 }
 
 implicit class SymSymbol(s: Symbol) extends Pattern with Sym {
-  def matches(e: Sym): Seq[Bindings] = Seq(Map(s -> Left(e)))
+  override def toString = "'" + s.name
+  def matches(e: Sym): Seq[Bindings] = {
+    println(f"Testing ${s.name} with $e")
+    s.name match {
+      case "_" | "*" => Seq(Map())
+      case _ => Seq(Map(s -> Left(e)))
+    }
+  }
+
+  override def matchesSeq(syms: Seq[Sym]) = s.name match {
+    case "*" => Seq((Right(syms), Nil, Seq(Map())))
+    // Because matches('_) is already empty, we don't need to add an extra case for it here
+    case _ => (0 until syms.length).map{i =>
+      (Left(syms(i)), syms.patch(i, Nil, 1), this.matches(syms(i)))
+    }.filter(_._3 != Nil)
+  }
+  
+
   def asSymbol: Symbol = this.s
-  def apply[T](implicit env: Bindings): T =
-    env(s).merge.asInstanceOf[T]
+
+  def bound(implicit env: Bindings): Boolean = env.contains(s)
+  def apply[T](implicit env: Bindings): T = env(s).merge.asInstanceOf[T]
+  def maybe[T](implicit env: Bindings): Option[T] =
+    if (this.bound) Some(this.apply) else None
 }
 
 case class P[T]()(implicit tag: ClassTag[T]) extends Pattern {
@@ -67,7 +87,9 @@ case class PowP(base: Pattern = AnyP(), pow: Pattern = AnyP()) extends Pattern {
 }
 case class SumP(ps: Pattern*) extends Pattern {
   def matches(e: Sym): Seq[Bindings] = e match {
-    case SymSum(exprs @ _*) => matchSeq(exprs, ps)
+    case SymSum(exprs @ _*) =>
+      if (ps.nonEmpty && (ps.head == '*)) Seq(Map())
+      else matchSeq(exprs, ps)
     case _ => Seq[Bindings]()
   }
 }
@@ -107,6 +129,40 @@ case class Bind(s: Symbol, p: Pattern) extends Pattern {
 case class Guard(p: Pattern, guards: (Bindings => Boolean)*) extends Pattern {
   def matches(e: Sym): Seq[Bindings] =
     p.matches(e).filter{b => LazyList(guards:_*).map{f => f(b)}.indexOf(false) == -1}
+
+  override def pattern = p.pattern
+}
+
+case class Or(ps: Pattern*) extends Pattern {
+  def matches(e: Sym): Seq[Bindings] =
+    ps.map(_.matches(e)).reduceLeft(_ ++ _).distinct
+
+  override def matchesSeq(syms: Seq[Sym]): Seq[(Matchable, Seq[Sym], Seq[Bindings])] =
+    // Get a sequence of all match groups from all patterns
+    ps.flatMap(_.matchesSeq(syms))
+  // Map(what was matched -> List(match groups))
+      .groupBy(_._1)
+  // List(sequence of match groups with the same match)
+      .values
+  // For each sequence of match groups, concatenate their binding lists
+      .map(_.reduceLeft{ (a, b) => ( a._1, a._2, (a._3 ++ b._3).distinct ) })
+      .toSeq // Shut the compiler up
+}
+case class And(ps: Pattern*) extends Pattern {
+  def matches(e: Sym): Seq[Bindings] =
+    ps.map(_.matches(e)).reduceLeft(tryCombinations)
+
+  override def matchesSeq(syms: Seq[Sym]): Seq[(Matchable, Seq[Sym], Seq[Bindings])] = {
+    val matchGroupLists = ps.map(_.matchesSeq(syms))
+    // Cycle through the match groups in the first pattern
+    matchGroupLists.head.flatMap{ case (m, rest, binds) =>
+      // Instances of the particular match for each pattern
+      val instances = matchGroupLists.tail.map(_.find(_._1 == m))
+      // The match is only valid if it matches every pattern
+      if (instances.contains(None)) None
+      else Some((m, rest, instances.map(_.get._3).foldLeft(binds)(tryCombinations)))
+    }
+  }
 }
 
 def tryMerge(a: Bindings, b: Bindings): Option[Bindings] =
@@ -127,9 +183,18 @@ def matchSeq(syms: Seq[Sym], ps: Seq[Pattern]): Seq[Bindings] = ps match {
 }
 
 // Using the matching to actually do things
-def matchFirst(expr: Sym)(ps: (Pattern, Bindings => Sym)*): Sym =
-  LazyList(ps:_*).map{t => (t._1.matches(expr), t._2)}.find(!_._1.isEmpty) match {
-    case Some((Seq(bind, _*), func)) => func(bind)
-    case None => expr
-  }
+def matchWith(expr: Sym)(pattern: Pattern)(func: Bindings => Sym): Seq[Sym] =
+  pattern.matches(expr).map(func).filter{ e => !(e == expr) }
 
+def matchFirst(expr: Sym)(cases: (Pattern, Bindings => Sym)*): Option[Sym] =
+  LazyList(cases:_*).map{ case (pat, func) => matchWith(expr)(pat)(func) }
+    .find(_.nonEmpty) match {
+      case Some(Seq(a, _*)) => Some(a)
+      case _ => None
+    }
+
+def matchAll(expr: Sym)(cases: (Pattern, Bindings => Sym)*): Seq[Sym] = {
+  cases.flatMap{ case (pattern, func) =>
+    pattern.matches(expr).map(func)
+  }
+}
