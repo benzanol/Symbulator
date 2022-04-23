@@ -1,131 +1,68 @@
 import scala.util.chaining._
 
-object SymMultiset {
-  def toMap[T](list: Seq[T]): Map[T, Int] =
-    list.groupBy{a => a}
-      .map{ case (key, list) => (key, list.length) }
-}
-
-implicit class SymMultiset[T](val m: Map[T, SymInt]) {
-  override def toString = m.toList.sortWith(_._2 < _._2)
-    .map{t => f"${t._2}(${t._1})"}.mkString(", ")
-
-  def ==(o: SymMultiset[T]): Boolean = m == o.m
-
-  def zipNums(o: SymMultiset[T], f: (SymInt, SymInt) => SymInt): SymMultiset[T] =
-    SymMultiset((this.m.keys ++ o.m.keys).toList
-      .map{k => (k, f(this.m.getOrElse(k, SymInt(0)), o.m.getOrElse(k, SymInt(0))))}
-      .filter(_._2 != SymInt(0))
-      .toMap)
-
-  def ++(o: SymMultiset[T]) = this.zipNums(o, _ + _)
-  def --(o: SymMultiset[T]) = this.zipNums(o, _ - _)
-  def &&(o: SymMultiset[T]) = this.zipNums(o, _ min _)
-  def ||(o: SymMultiset[T]) = this.zipNums(o, _ max _)
-
-  def keys = m.keys
-  def counts = m.toList.map(_._2)
-  def toList = m.toList
-}
-
 trait Sym {
-  def mapParams(f: Sym => Sym): Sym = this
+  def exprs: Seq[Sym]
+  def mapExprs(f: Sym => Sym): Sym
+  def sym = this
 }
 
-trait SymR extends Sym {
-  def n: SymInt
-  def d: SymInt
-
-  lazy val ratioGcd: SymInt = n gcd d
-  lazy val inverse = SymFrac(d, n)
-
-  def +(o: SymR): SymR = SymFrac(n*o.d + o.n*d, d*o.d)
-  def -(o: SymR): SymR = SymFrac(n*o.d - o.n*d, d*o.d)
-  def *(o: SymR): SymR = SymFrac(n*o.n, d*o.d)
-  def /(o: SymR): SymR = SymFrac(n*o.d, d*o.n)
-  def ^(o: SymInt): SymR = SymFrac(n^o, d^o)
+/// Special Symbolic Traits
+trait SymConstant extends Sym {
+  def exprs = Seq(this)
+  def mapExprs(f: Sym => Sym) = this
 }
 
-case class SymInt(int: Int) extends SymR {
-  def n = this
-  def d = 1
-  def toInt = int
+trait SymUnordered extends Sym
 
-  def +(o: SymInt) = SymInt((int: Int) + (o.int: Int))
-  def -(o: SymInt) = SymInt((int: Int) - (o.int: Int))
-  def *(o: SymInt) = SymInt((int: Int) * (o.int: Int))
-  def /(o: SymInt) = SymInt((int: Int) / (o.int: Int))
-  def %(o: SymInt) = SymInt((int: Int) % (o.int: Int))
-  def min(o: SymInt) = SymInt(math.min(int, o.int))
-  def max(o: SymInt) = SymInt(math.max(int, o.int))
-  def abs = if (this >= 0) this else SymInt(math.abs(4))
-  override def ^(o: SymInt) = SymInt(math.pow(int, o.int).toInt)
+/// Rationals
+object SymR {
+  def apply(n: BigInt, d: BigInt = 1): SymR = {
+    val gcd: BigInt = n.abs gcd d.abs
+    // 1 if d is positive, -1 if d is negative
+    val one = d / d.abs
 
-  def ==(i: Int) = (int == i)
-  def ==(o: SymInt) = (int == o.int)
-  def <(o: SymInt) = (int: Int) < (o.int: Int)
-  def >(o: SymInt) = (int: Int) > (o.int: Int)
-  def <=(o: SymInt) = (int: Int) <= (o.int: Int)
-  def >=(o: SymInt) = (int: Int) >= (o.int: Int)
-
-  def gcd(o: SymInt): SymInt = (this.primeFactors && o.primeFactors).toList
-    .foldLeft(SymInt(1)){(acc, f) => acc * (f._1 ^ f._2)}
-  def lcm(o: SymInt): SymInt = (this * o) / (this gcd o)
-
-  lazy val primeFactors: SymMultiset[SymInt] = {
-    var num = math.abs(int)
-    var f = 2
-    var map = scala.collection.mutable.Map[SymInt, SymInt]()
-    while (num > 1) {
-      var count = 0
-      while (num % f == 0) {count += 1 ; num /= f}
-      if (count > 0) map += (SymInt(f) -> SymInt(count))
-      f += 1
-    }
-    SymMultiset[SymInt](map.toMap)
+    if (d.abs / gcd == BigInt(1)) SymInt(one * n / gcd)
+    else SymFrac(one * n / gcd, d.abs / gcd)
   }
 }
 
-implicit class ImplicitSymInt(val original: Int) extends SymInt(original)
+trait SymR extends SymConstant {
+  def d: BigInt
+  def n: BigInt
 
-case class SymFrac(n: SymInt, d: SymInt = 1) extends SymR {
-  def gcd(o: SymR): SymR = SymFrac(n gcd o.n, d lcm o.d)
-  def lcm(o: SymR): SymR = SymFrac((n * o.d) lcm (o.n * d), d * o.d)
+  def inverse: SymR = SymR(d, n)
+  def negative: SymR = SymR(-n, d)
+  def +(o: SymR): SymR = SymR((n * o.d) + (o.n * d), d * o.d)
+  def -(o: SymR): SymR = this + o.negative
+  def *(o: SymR): SymR = SymR(n * o.n, d * o.d)
+  def /(o: SymR): SymR = this * o.inverse
 }
 
-case class SymInfinity(negative: Boolean = false) extends SymR {
-  def n = 1
-  def d = 0
+case class SymFrac(n: BigInt, d: BigInt) extends SymR
 
-  def gcd(o: SymR) = o
-  def lcm(o: SymR) = this
+case class SymInt(n: BigInt) extends SymR {
+  def d = BigInt(1)
+  def s = this
+  def ~(o: SymInt) = SymR(n, o.n)
 }
 
-case class SymUndefined() extends SymR {
-  def n = 0
-  def d = 0
+implicit class ImplicitSymBigInt(val original: BigInt) extends SymInt(original)
+implicit class ImplicitSymInt(val original: Int) extends SymInt(BigInt(original))
 
-  def gcd(o: SymR) = this
-  def lcm(o: SymR) = this
+/// Composed Expressions
+case class SymSum(exprs: Sym*) extends SymUnordered {
+  def mapExprs(f: Sym => Sym) = SymSum(exprs.map(f):_*)
 }
 
-case class SymSum(exprs: Sym*) extends Sym {
-  override def mapParams(f: Sym => Sym): Sym = SymSum((exprs.map(f)):_*)
-
-  def ==(o: SymProd): Boolean =
-    SymMultiset.toMap(exprs) == SymMultiset.toMap(o.exprs)
+case class SymProd(exprs: Sym*) extends SymUnordered {
+  def mapExprs(f: Sym => Sym) = SymProd(exprs.map(f):_*)
 }
 
-case class SymProd(exprs: Sym*) extends Sym {
-  override def mapParams(f: Sym => Sym): Sym = SymProd((exprs.map(f)):_*)
-
-  def ==(o: SymProd): Boolean =
-    SymMultiset.toMap(exprs) == SymMultiset.toMap(o.exprs)
+case class SymPow(base: Sym, expt: Sym) extends Sym {
+  def exprs = Seq(base, expt)
+  def mapExprs(f: Sym => Sym) = SymPow(f(base), f(expt))
 }
 
-case class SymPow(base: Sym, pow: Sym) extends Sym {
-  override def mapParams(f: Sym => Sym): Sym = SymPow(f(base), f(pow))
-}
-
-case class SymPi() extends Sym
-case class SymE() extends Sym
+/// Constants
+case class SymPi() extends SymConstant
+case class SymE() extends SymConstant
