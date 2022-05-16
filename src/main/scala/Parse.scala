@@ -5,14 +5,13 @@ import scala.util.chaining._
 import scala.scalajs.js.annotation.JSExportTopLevel
 
 import sympany.symbolics._
-import sympany.simplification.Simplify.simplify
+import sympany.math.Simplify.simplify
 
 object Parse {
 	
 	// Parse a complete latex string into a symbolic object
 	@JSExportTopLevel("parseLatex")
 	def parseLatex(raw: String): Option[Sym] = try {
-		println(f"parseLatex $raw")
 		var str = raw
 			.replaceAll("\\\\right", "")
 			.replaceAll("\\\\left", "")
@@ -52,7 +51,6 @@ object Parse {
 		else sum :+= SymProd(prod:_*)
 		
 		val simplified = simplify(SymSum(sum:_*))
-		println(f"s= $simplified")
 		Some(simplified)
 	} catch {
 		case error: Throwable => None
@@ -108,6 +106,7 @@ object Parse {
 			case n if '0' to '9' contains n =>
 				if (pow) Some((SymInt(n.toString.toInt), str.tail))
 				else Some(readNumber(str))
+			case l if l == 'e' => Some((SymE(), str.tail))
 			case l if ('A' to 'Z') ++ ('a' to 'z') contains l =>
 				Some((SymVar(Symbol(l.toString)), str.tail))
 			case _ => None
@@ -155,6 +154,7 @@ object Parse {
 		
 		// Create a symbolic expression based on the command
 		cmd match {
+			case "pi" => Some(SymPi() -> rest)
 			case "frac" => Some(SymProd(args(0), SymPow(args(1), SymInt(-1))) -> rest)
 			case "ln" => readExpr(rest).map{
 				case (e, rest2) => (SymLog(e) -> rest2)

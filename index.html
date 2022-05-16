@@ -108,7 +108,7 @@
 
          for (let i = 0; i < spans.length; i++) {
              MQ.MathField(spans[i], {
-                 handlers: { edit: (field) => updateFunctions() }
+                 handlers: { edit: ( (field) => updateEquations() ) }
              });
          }
      }
@@ -126,6 +126,11 @@
          }
 
          return latexes
+     }
+
+     function getLatexEquation(id) {
+         let element = document.getElementById(id);
+         return MQ(element).latex()
      }
 
      function getFunctions() {
