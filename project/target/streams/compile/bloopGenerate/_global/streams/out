@@ -1,4 +1,4 @@
-[debug] [calculator-build] Classpath dependencies List()
-[debug] [calculator-build] Dependencies from configurations List()
-[debug] Bloop wrote the configuration of project 'calculator-build' to '/home/quaviq/Documents/Programming/Scala/Calculator/project/.bloop/calculator-build.json'
-[success] Generated .bloop/calculator-build.json
+[0m[[0m[0mdebug[0m] [0m[0m[calculator-build] Classpath dependencies List()[0m
+[0m[[0m[0mdebug[0m] [0m[0m[calculator-build] Dependencies from configurations List()[0m
+[0m[[0m[0mdebug[0m] [0m[0mBloop wrote the configuration of project 'calculator-build' to '/home/quaviq/Documents/Programming/Scala/Calculator/project/.bloop/calculator-build.json'[0m
+[0m[[0m[32msuccess[0m] [0m[0mGenerated .bloop/calculator-build.json[0m

@@ -111,7 +111,7 @@ object Graph {
 
     expressions = strings.filter(_.nonEmpty).flatMap(parseLatex).toList
     functions = expressions.map{e: Sym => {
-      (x: Double) => replaceExpr(e, SymVar('x), SymDecimal(BigDecimal(x))).approx
+      (x: Double) => e.approx(Map('x -> x))
     }}
 
     drawGraph
