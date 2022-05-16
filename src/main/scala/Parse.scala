@@ -156,14 +156,14 @@ object Parse {
 		cmd match {
 			case "pi" => Some(SymPi() -> rest)
 			case "frac" => Some(SymProd(args(0), SymPow(args(1), SymInt(-1))) -> rest)
-			case "ln" => readExpr(rest).map{
+			case "ln" => readExprPower(rest).map{
 				case (e, rest2) => (SymLog(e) -> rest2)
 			}
-			case "log" => readExpr(rest).map{
+			case "log" => readExprPower(rest).map{
 				case (e, rest2) => (SymLog(e, SymInt(10)) -> rest2)
 			}
 			case "log_" => readExpr(rest, pow=true).flatMap{
-				case (base, rest2) => readExpr(rest2).map{
+				case (base, rest2) => readExprPower(rest2).map{
 					case (e, rest3) => (SymLog(e, base) -> rest3)
 				}
 			}

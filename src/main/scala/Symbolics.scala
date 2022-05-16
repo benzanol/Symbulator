@@ -7,11 +7,11 @@ object Sym {
     seq.groupBy(identity).toList
       .map{ case (identity, list) => (identity, list.length) }
       .toMap
-
+  
   def replaceExpr(expr: Sym, target: Sym, replacement: Sym): Sym =
     if (expr == target) replacement
     else expr.mapExprs(replaceExpr(_, target, replacement))
-
+  
   def ++(es: Sym*) = SymSum(es:_*)
   def **(es: Sym*) = SymProd(es:_*)
   def #=(i: BigInt) = SymInt(i)
@@ -27,15 +27,16 @@ object Sym {
 import Sym._
 
 trait Sym {
-	type Env = Map[Symbol, Double]
+  type Env = Map[Symbol, Double]
   def approx(implicit env: Env): Double
-
+  def toLatex: String
+  
   def exprs: Seq[Sym]
   def mapExprs(f: Sym => Sym): Sym
-
+  
   def id: Any = this
   def ==(o: Sym) = this.id == o.id
-
+  
   //def allHoles: Set[Sym] = exprHoles ++ extraHoles
   //def exprHoles: Set[Sym] = Set()
   //var extraHoles = Set[Sym] = Set()
@@ -56,15 +57,21 @@ trait SymUnordered extends Sym
 case class SymDecimal(decimal: BigDecimal) extends SymConstant {
   override def toString = decimal.toString
   def approx(implicit env: Env) = decimal.toDouble
+  def toLatex = decimal.toString
 }
 
 case class SymVar(symbol: Symbol = 'x) extends SymConstant {
   override def toString = symbol.name
   def s = this
-
+	
+  def toLatex = symbol.name.indexOf('/') match {
+		case -1 => symbol.name
+		case n => s"\\frac{${symbol.name.substring(0, n)}}{${symbol.name.substring(n+1)}}"
+	}
+  
   def approx(implicit env: Env) = env.applyOrElse(symbol,
-		{ s: Symbol => throw new Exception(s"Variable $symbol not defined") ; 0 }
-	)
+    { s: Symbol => throw new Exception(s"Variable $symbol not defined") ; 0 }
+  )
 }
 
 object SymR {
@@ -72,11 +79,11 @@ object SymR {
     if (d == 0 && n == 0) return SymUndefined()
     else if (d == 0 && n > 0) return SymPositiveInfinity()
     else if (d == 0 && n < 0) return SymNegativeInfinity()
-
+    
     val gcd: BigInt = n.abs gcd d.abs
     // 1 if d is positive, -1 if d is negative
     val one = d / d.abs
-
+    
     if (d.abs / gcd == BigInt(1)) SymInt(one * n / gcd)
     else SymFrac(one * n / gcd, d.abs / gcd)
   }
@@ -87,7 +94,7 @@ trait SymR extends SymConstant {
   def approx(implicit env: Env) = n.toDouble / d.toDouble
   def n: BigInt
   def d: BigInt
-
+  
   def inverse: SymR = SymR(d, n)
   def negative: SymR = SymR(-n, d)
   def +(o: SymR): SymR = SymR((n * o.d) + (o.n * d), d * o.d)
@@ -97,17 +104,20 @@ trait SymR extends SymConstant {
   def ^(o: SymInt): SymR = SymR(n.pow(o.n.toInt))
 }
 
-case class SymFrac(n: BigInt = 1, d: BigInt = 1) extends SymR
+case class SymFrac(n: BigInt = 1, d: BigInt = 1) extends SymR {
+  def toLatex = s"\\frac{${n.toString}}{${d.toString}}"
+}
 
 //implicit class ImplicitSymBigInt(original: BigInt) extends SymInt(original)
 //implicit class ImplicitSymInt(original: Int) extends SymInt(BigInt(original))
 
 case class SymInt(n: BigInt = 1) extends SymR {
   override def toString = n.toString
+  def toLatex = n.toString
   def d = BigInt(1)
   def s = this
   def ~(o: SymInt) = SymR(n, o.n)
-
+  
   lazy val primeFactors: Map[SymInt, SymInt] = {
     var num = n.abs
     var f = 2
@@ -120,7 +130,7 @@ case class SymInt(n: BigInt = 1) extends SymR {
     }
     map.toMap
   }
-
+  
   override def negative: SymInt = SymInt(-n)
   def +(o: SymInt): SymInt = SymInt(n + o.n)
   def -(o: SymInt): SymInt = this + o.negative
@@ -131,24 +141,31 @@ case class SymInt(n: BigInt = 1) extends SymR {
 case class SymUndefined() extends SymR {
   override def toString = "NaN"
   override def approx(implicit env: Env) = Double.NaN
+  def toLatex = "\\NaN"
   def n = 0
   def d = 0
 }
 case class SymPositiveInfinity() extends SymR {
   override def toString = "Inf"
   override def approx(implicit env: Env) = Double.PositiveInfinity
+  def toLatex = "\\infty"
   def n = 1
   def d = 0
 }
 case class SymNegativeInfinity() extends SymR {
   override def toString = "-Inf"
   override def approx(implicit env: Env) = Double.NegativeInfinity
+  def toLatex = "-\\infty"
   def n = -1
   def d = 0
 }
 
 case class SymSum(exprs: Sym*) extends SymUnordered {
   override def toString = f"(+ " + exprs.mkString(" ") + ")"
+  def toLatex = if (exprs.isEmpty) "" else {
+    "\\left(" + exprs.map(_.toLatex).reduceLeft(_ + " + " + _) + "\\right)"
+  }
+  
   override def id = (SymSum, toMultiset(exprs.map(_.id)))
   def approx(implicit env: Env) = exprs.map(_.approx).sum
   def mapExprs(f: Sym => Sym) = SymSum(exprs.map(f):_*)
@@ -156,6 +173,25 @@ case class SymSum(exprs: Sym*) extends SymUnordered {
 
 case class SymProd(exprs: Sym*) extends SymUnordered {
   override def toString = f"(* " + exprs.mkString(" ") + ")"
+  def toLatex = if (exprs.isEmpty) "1" else {
+    val part = exprs.partitionMap(_ match {
+      case SymPow(b, SymInt(n)) if n.toInt == -1 => Right(b)
+      case SymPow(b, SymInt(n)) if n < 0 => Right(SymPow(b, SymInt(-n)))
+      case SymPow(b, SymProd(es @ _*)) => {
+        val op = es.collect{case si @ SymInt(n) if n < 0 => si}.headOption;
+        val newEs = if (op.isEmpty) es else es.updated(es.indexOf(op.get), SymInt(-op.get.n))
+        SymPow(b, SymProd(newEs:_*)).pipe(if (op.isEmpty) Left(_) else Right(_))
+      }
+      case e => Left(e)
+    })
+    val strs = part.productIterator.toList.map{ in =>
+      val l = in.asInstanceOf[Seq[Sym]]
+      if (l.isEmpty) "1" else l.map(_.toLatex).reduceLeft(_ + " \\cdot " + _)
+    }
+    if (strs(1) == "1") s"\\left(${strs(0)}\\right)"
+		else s"\\frac{${strs(0)}}{${strs(1)}}"
+  }
+  
   override def id = (SymProd, toMultiset(exprs.map(_.id)))
   def approx(implicit env: Env) = exprs.map(_.approx).product
   def mapExprs(f: Sym => Sym) = SymProd(exprs.map(f):_*)
@@ -163,6 +199,7 @@ case class SymProd(exprs: Sym*) extends SymUnordered {
 
 case class SymPow(base: Sym = SymInt(1), expt: Sym = SymInt(1)) extends Sym {
   override def toString = f"(^ $base $expt)"
+  def toLatex = s"${base.toLatex}^{${expt.toLatex}}"
   def approx(implicit env: Env) = Math.pow(base.approx, expt.approx)
   def exprs = Seq(base, expt)
   def mapExprs(f: Sym => Sym) = SymPow(f(base), f(expt))
@@ -170,6 +207,10 @@ case class SymPow(base: Sym = SymInt(1), expt: Sym = SymInt(1)) extends Sym {
 
 case class SymLog(pow: Sym = SymInt(1), base: Sym = SymE()) extends Sym {
   override def toString = if (base == SymE()) f"(ln $pow)" else f"(log $pow $base)"
+  def toLatex =
+    if (base == SymE()) f"\\ln (${pow.toLatex})"
+    else f"\\log_{${pow.toLatex}} (${base.toLatex})"
+	
   def approx(implicit env: Env) = Math.log(pow.approx) / Math.log(base.approx)
   def exprs = Seq(pow, base)
   def mapExprs(f: Sym => Sym) = SymLog(f(pow), f(base))
@@ -177,6 +218,7 @@ case class SymLog(pow: Sym = SymInt(1), base: Sym = SymE()) extends Sym {
 
 case class SymPM(expr: Sym = SymInt(1)) extends Sym {
   override def toString = f"(+- $expr)"
+  def toLatex = f"\\pm${expr.toLatex}"
   def approx(implicit env: Env) = expr.approx
   def exprs = Seq(expr)
   def mapExprs(f: Sym => Sym) = SymPM(f(expr))
@@ -184,9 +226,11 @@ case class SymPM(expr: Sym = SymInt(1)) extends Sym {
 
 case class SymPi() extends SymConstant {
   override def toString = "Pi"
+	def toLatex = "\\pi"
   def approx(implicit env: Env) = Math.PI
 }
 case class SymE() extends SymConstant {
   override def toString = "E"
+	def toLatex = "e"
   def approx(implicit env: Env) = Math.E
 }

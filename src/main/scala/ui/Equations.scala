@@ -63,7 +63,7 @@ object Equations {
 		btn.innerHTML = "×"
 		
 		// Create the div that will store the equation properties
-		val infoDiv = document.createElement("p")
+		val infoDiv = document.createElement("div")
 		infoDiv.setAttribute("class", "eqn-info")
 		
 		// Create the div that will store all elements of a single equation
@@ -130,12 +130,20 @@ object Equations {
 		
 		for (i <- 0 until syms.length) syms(i) match {
 			case None => infos(i).innerText = "undefined"
-			case Some(e: Sym) =>
-				infos(i).innerText = (
-					e.toString +
-						s"\ndy/dx = ${derivative(e)}"
-				)
+			case Some(e: Sym) => {
+				infos(i).replaceChildren()
+				appendNew(infos(i), "p", "\\frac{d}{dx} = " + derivative(e).toLatex, "mq-static")
+			}
 		}
+		js.eval("formatStaticEquations();")
 	}
 	
+	def appendNew(existing: dom.Element, elem: String, text: String, className: String = ""): Unit = {
+		val e = document.createElement(elem)
+		e.innerText = text
+		if (className.nonEmpty)
+			e.setAttribute("class", className)
+
+		existing.appendChild(e)
+	}
 }

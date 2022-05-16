@@ -12,12 +12,17 @@
      }
 
      #equation-container {
+         font-size: 20px;
          width: 40%;
          max-width: 400px;
      }
 
+     .eqn-info {
+         font-size: 14px;
+     }
+
      .mathquill {
-         font-size: 28px;
+         font-size: 36px;
          margin: 10px;
      }
 
@@ -110,6 +115,13 @@
              MQ.MathField(spans[i], {
                  handlers: { edit: ( (field) => updateEquations() ) }
              });
+         }
+     }
+
+     function formatStaticEquations() {
+         var spans = document.getElementsByClassName('mq-static');
+         for (let i = 0; i < spans.length; i++) {
+             MQ.StaticMath(spans[i]);
          }
      }
 

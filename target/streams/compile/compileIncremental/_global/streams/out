@@ -2,31 +2,62 @@
 [0m[[0m[0mdebug[0m] [0m[0mInitial source changes: [0m
 [0m[[0m[0mdebug[0m] [0m[0m	removed:Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	added: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala)[0m
 [0m[[0m[0mdebug[0m] [0m[0mInvalidated products: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mExternal API changes: API Changes: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(sympany.math.Simplify)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(sympany.symbolics.SymProd, sympany.symbolics.SymPi, sympany.symbolics.SymFrac, sympany.symbolics.SymPow, sympany.symbolics.SymPM, sympany.symbolics.SymSum, sympany.symbolics.SymE, sympany.symbolics.Sym, sympany.symbolics.SymLog, sympany.symbolics.SymUndefined, sympany.symbolics.SymPositiveInfinity, sympany.symbolics.SymDecimal, sympany.symbolics.SymVar, sympany.symbolics.SymConstant, sympany.symbolics.SymUnordered, sympany.symbolics.SymInt, sympany.symbolics.SymR, sympany.symbolics.SymNegativeInfinity)[0m
 [0m[[0m[0mdebug[0m] [0m[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0mSources indirectly invalidated by:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	product: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	external source: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(sympany.math.Simplify)[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.Simplify[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(sympany.symbolics.SymProd, sympany.symbolics.SymPi, sympany.symbolics.SymFrac, sympany.symbolics.SymPow, sympany.symbolics.SymPM, sympany.symbolics.SymSum, sympany.symbolics.SymE, sympany.symbolics.Sym, sympany.symbolics.SymLog, sympany.symbolics.SymUndefined, sympany.symbolics.SymPositiveInfinity, sympany.symbolics.SymDecimal, sympany.symbolics.SymVar, sympany.symbolics.SymConstant, sympany.symbolics.SymUnordered, sympany.symbolics.SymInt, sympany.symbolics.SymR, sympany.symbolics.SymNegativeInfinity)[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.symbolics.SymProd, sympany.symbolics.SymPi, sympany.symbolics.SymFrac, sympany.symbolics.SymPow, sympany.symbolics.SymPM, sympany.symbolics.SymSum, sympany.symbolics.SymE, sympany.symbolics.Sym, sympany.symbolics.SymLog, sympany.symbolics.SymUndefined, sympany.symbolics.SymPositiveInfinity, sympany.symbolics.SymDecimal, sympany.symbolics.SymVar, sympany.symbolics.SymConstant, sympany.symbolics.SymUnordered, sympany.symbolics.SymInt, sympany.symbolics.SymR, sympany.symbolics.SymNegativeInfinity[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.symbolics.SymLog by sympany.symbolics.Sym[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.symbolics.SymConstant by sympany.symbolics.Sym[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.symbolics.SymDecimal by sympany.symbolics.SymConstant[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.symbolics.SymVar by sympany.symbolics.SymConstant[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.symbolics.SymR by sympany.symbolics.SymConstant[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.symbolics.SymUndefined by sympany.symbolics.SymR[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.symbolics.SymPositiveInfinity by sympany.symbolics.SymR[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.symbolics.SymInt by sympany.symbolics.SymR[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.symbolics.SymNegativeInfinity by sympany.symbolics.SymR[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.symbolics.SymUnordered by sympany.symbolics.Sym[0m
 [0m[[0m[0minfo[0m] [0m[0mCompiling 1 Scala source to /home/quaviq/Documents/Programming/Scala/Calculator/target/scala-2.13/classes ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.13:1.3.2:compile for Scala 2.13.1[0m
 [0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.13:1.3.2:compile for Scala 2.13.1[0m
-[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 510fda15 for Scala compiler version 2.13.1[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 210ca590 for Scala compiler version 2.13.1[0m
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-Xplugin:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-compiler_2.13.1/1.10.0/scalajs-compiler_2.13.1-1.10.0.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.1/scala-library-2.13.1.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/home/quaviq/Documents/Programming/Scala/Calculator/target/scala-2.13/classes:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-dom_sjs1_2.13/2.1.0/scalajs-dom_sjs1_2.13-2.1.0.jar:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-library_2.13/1.10.0/scalajs-library_2.13-1.10.0.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 0.631625008 s[0m
+[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 0.808413324 s[0m
 [0m[[0m[0mdebug[0m] [0m[0mDone compiling.[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.symbolics.SymE...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.symbolics.SymE[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.symbolics.SymE)[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.parse.Parse. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Derivative. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.symbolics.SymE,ModifiedNames(changes = UsedName(finalize,[Default]))) invalidates 1 classes due to The sympany.symbolics.SymE has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(finalize,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.symbolics.SymE)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m        [0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.symbolics.SymPM...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.symbolics.SymPM[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.symbolics.SymPM)[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Simplify. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.symbolics.SymPM,ModifiedNames(changes = UsedName(finalize,[Default]))) invalidates 1 classes due to The sympany.symbolics.SymPM has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(finalize,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.symbolics.SymPM)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m        [0m
 [0m[[0m[0mdebug[0m] [0m[0mNew invalidations:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: [0m
