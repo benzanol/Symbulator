@@ -1,0 +1,20 @@
+package sympany.main
+
+import org.scalajs.dom
+import org.scalajs.dom.document
+import scala.scalajs.js.annotation.JSExportTopLevel
+
+import sympany.simplification.Simplify.simplify
+import sympany.symbolics.Sym._
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    sympany.ui.graph.Graph.setup
+    sympany.ui.equations.Equations.addEquation()
+  }
+
+  def jslog(arg: Any): Unit =
+    scalajs.js.Dynamic.global.console.log(arg.asInstanceOf[scalajs.js.Any])
+  ///////////////////////////////////
+
+}

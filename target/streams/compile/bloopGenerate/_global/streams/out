@@ -1,0 +1,4 @@
+[debug] [calculator] Classpath dependencies List()
+[debug] [calculator] Dependencies from configurations List()
+[debug] Bloop wrote the configuration of project 'calculator' to '/home/quaviq/Documents/Programming/Scala/Calculator/.bloop/calculator.json'
+[success] Generated .bloop/calculator.json

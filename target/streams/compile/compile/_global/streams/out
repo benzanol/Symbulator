@@ -1,0 +1,13 @@
+[0m[[0m[31merror[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Parse.scala:153:22: overloaded method value + with alternatives:[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: Double)Double <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: Float)Float <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: Long)Long <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: Int)Int <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: Char)Int <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: Short)Int <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: Byte)Int <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: String)String[0m
+[0m[[0m[31merror[0m] [0m[0m cannot be applied to (scala.collection.immutable.NumericRange.Inclusive[Char])[0m
+[0m[[0m[31merror[0m] [0m[0m		val badChars = ' ' + ('0' to '9') + '(' + ')' + '{' + '}'[0m
+[0m[[0m[31merror[0m] [0m[0m		                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

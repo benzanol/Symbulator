@@ -1,0 +1,22 @@
+[0m[[0m[0minfo[0m] [0m[0mFast optimizing /home/quaviq/Documents/Programming/Scala/Calculator/target/scala-2.13/scala-js-tutorial-fastopt[0m
+[0m[[0m[0mdebug[0m] [0m[0mLinker: Compute reachability: 46149 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mLinker: Assemble LinkedClasses: 8871 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mLinker: 68709 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: Batch mode: false[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: Incremental part: 7750 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: Optimizing 237 methods.[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: Optimizer part: 33673 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mOptimizer: 45101 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mRefiner: Compute reachability: 27524 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mRefiner: Assemble LinkedClasses: 3700 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mRefiner: 34794 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mModule Splitter: Calculate Dependency Info: 396 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mModule Splitter: Analyze Modules: 58 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mModule Splitter: Assemble Modules: 559 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mModule Splitter: 1071 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: Generate Classes: 40232 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: Write trees: 2206 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: Class tree cache stats: reused: 722 -- invalidated: 1[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: Method tree cache stats: reused: 4103 -- invalidated: 172[0m
+[0m[[0m[0mdebug[0m] [0m[0mEmitter: 46755 us[0m
+[0m[[0m[0mdebug[0m] [0m[0mBasicBackend: Write result: 154532 us[0m
