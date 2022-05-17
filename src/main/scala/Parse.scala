@@ -22,7 +22,6 @@ object Parse {
 			.replaceAll("\\+ *\\-", "-")
 			.replaceAll("\\- *\\+", "-")
 			.replaceAll("\\+ *\\+", "+")
-    println(str)
     
     // If the expression contains a single equals sign, it is an equation
     val eqlCt = str.count(_ == '=')

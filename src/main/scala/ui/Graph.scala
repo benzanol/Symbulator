@@ -11,6 +11,7 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 import sympany.main.Main.jslog
 import sympany.parse.Parse.parseLatex
 import sympany.symbolics.Sym.replaceExpr
+import sympany.math.Solve
 import sympany.symbolics._
 
 object Graph {
@@ -119,10 +120,9 @@ object Graph {
 		// Draw the functions on the main canvas
 		for (i <- 0 until graphs.length) {
 			fctx.strokeStyle = colors(i % colors.length)
-
+      
       for (expr <- graphs(i).expand) {
-			  val f: Double => Double = { x => expr.approx(Map('x -> x)) }
-			  drawFunction(f)(fctx)
+			  drawFunction(expr)(fctx)
       }
 		}
 		
@@ -202,67 +202,112 @@ object Graph {
 	}
 	
 	// Drawing the actual function
-	def drawFunction(f: Double => Double)(implicit ctx: JsContext): Unit = {
+	def drawFunction(expr: Sym)(implicit ctx: JsContext): Unit = {
 		ctx.beginPath();
 		ctx.lineWidth = 5
+    
+    // Make sure to include important points on the curve (extremas, holes, etc)
+    val tiny = (ctx.canvas.width * pos.xs) / 1000000.0
+    
+    val important = Solve.importantPoints(expr, 'x)
+      .map(_.approx(Map())).flatMap{n => List(n - tiny, n, n + tiny)}
+    
+    val undefined = Solve.undefinedPoints(expr, 'x)
+      .map(_.approx(Map())).flatMap{n => List(n - tiny, n + tiny)}
+    
+    // Calculate the function and derivative
+    val f: Double => Double = { x => expr.approx(Map('x -> x)) }
+    val deriv = sympany.math.Derivative.derivative(expr, 'x)
+    val dfdx: Double => Double = { x => deriv.approx(Map('x -> x)) }
 		
-    // Calculate the points of the curve, removing infinities/NaN
-		val points = functionPoints(f, 100)
+		val segments = functionSegments(f, dfdx, important ++ undefined)
 		
-    val canvasPoints = points.map{ case (x, y) => (canvasX(x), canvasY(y)) }
-		
-		connectWithCurves(canvasPoints)
+    segments.foreach(connectWithCurves)
 		//connectWithLines(canvasPoints)(ctx)
 		
     ctx.stroke()
 	}
 	
-	def functionPoints(f: Double => Double, num: Int): Seq[(Double, Double)] = {
-		// The distance between any two points in the domain that are evaluated
-    val dist = (fc.width - marginX) * pos.xs / num
-		val start = pos.x - (pos.x % dist)
-		
-		var points = List[(Double, Double)]()
-		
-		// Evaluate the function for num equally spaced points in the domain,
-		// ignoring any errors that come from evaluating the function
-    for (i <- -1 to num+1)
-			try {
-				val x = start + i * dist
-				val y = f(x)
-				if (y.isFinite) points +:= (x, y)
-			} catch {
-				case _: Throwable => ()
-			}
-		
-		return points
-	}
-	
-	def connectWithCurves(points: Seq[(Int, Int)])(implicit ctx: JsContext): Unit = {
-		if (points.length < 2) return
-			
-    // Draw the points (algorithm from stack overflow)
-		ctx.moveTo(points(0)._1, points(0)._2);
-    for (i <- 1 to points.length - 3) {
-      val xc = (points(i)._1 + points(i + 1)._1) / 2;
-      val yc = (points(i)._2 + points(i + 1)._2) / 2;
-      ctx.quadraticCurveTo(points(i)._1, points(i)._2, xc, yc);
+  // Get a distrobution of points with higher density of points where there is a steeper derivative
+	def functionSegments(f: Double => Double, dfdx: Double => Double, extras: Seq[Double] = Nil):
+      Seq[Seq[(Double, Double)]] = {
+    
+    // The x position of the current point (starts slightly to the left of the screen)
+		var x = pos.x
+    
+    val minY = pos.y
+    val maxY = pos.y + (fc.height - marginY) * pos.ys
+    def inRange(y: Double) = (y >= minY) && (y <= maxY)
+    
+    val width = (fc.width - marginX) * pos.xs
+    val max = x + width;
+    val dist = width / 500.0;
+    
+    // The extras that haven't yet been used - remove any that are outside of the screen
+    var extrasLeft = extras.sortWith(_ < _).filter(_ > x)
+    
+    // The list of points being made
+		var segments = List(List[(Double, Double)]())
+    
+    while (x < max) {
+      try {
+        val y = f(x)
+        
+        // If the current, last, and last last were out of range, remove the last one
+        if (segments.head.length >= 2 && !inRange(y) &&
+          !inRange(segments.head(0)._2) && !inRange(segments.head(1)._2))
+          segments = segments.head.tail :: segments.tail
+        
+        if (y.isFinite) segments = ((x, y) :: segments.head) :: segments.tail
+        else throw new Exception
+      } catch {
+			  case _: Throwable =>
+          if (segments.head.nonEmpty) segments = Nil :: segments
+      }
+      
+      x += dist
+      
+      if (extrasLeft.nonEmpty && extrasLeft.head < x) {
+        x = extrasLeft.head
+        extrasLeft = extrasLeft.tail
+      }
     }
-    // Curve through the last two points
+	  
+	  return segments
+  }
+  
+  def connectWithCurves(points: Seq[(Double, Double)])(implicit ctx: JsContext): Unit = {
+	  if (points.length < 2) return
+      
+    val ps = points.map{ t => (canvasX(t._1), canvasY(t._2)) }
+    
+    val height = ctx.canvas.height - marginY
+    def inRange(y: Double) = (y >= 0) && (y <= height)
+	  
+    // Draw the points (algorithm from stack overflow)
+	  ctx.moveTo(ps(0)._1, ps(0)._2);
+    for (i <- 1 to ps.length - 3) {
+      //if (i > ps.length - 5 || inRange(ps(i)._2) || inRange(ps(i+1)._2)) {
+      val xc = (ps(i)._1 + ps(i + 1)._1) / 2;
+      val yc = (ps(i)._2 + ps(i + 1)._2) / 2;
+      ctx.quadraticCurveTo(ps(i)._1, ps(i)._2, xc, yc);
+    }
+    
+    
+    // Curve through the last two ps
     ctx.quadraticCurveTo(
-			points(points.length - 2)._1, points(points.length - 2)._2,
-			points.last._1, points.last._2);
-	}
-	
-	def connectWithLines(points: Seq[(Int, Int)])(implicit ctx: JsContext): Unit = {
+		  ps(ps.length - 2)._1, ps(ps.length - 2)._2, ps.last._1, ps.last._2);
+  }
+  
+  def connectWithLines(points: Seq[(Int, Int)])(implicit ctx: JsContext): Unit = {
     if (points.length < 2) return
-			
-		ctx.moveTo(points.head._1, points.head._1)
-		for (i <- 1 to points.length - 2) {
+		  
+	  ctx.moveTo(points.head._1, points.head._1)
+	  for (i <- 1 to points.length - 2) {
       val p = points(i)
-			ctx.lineTo(p._1, p._2)
-			ctx.moveTo(p._1, p._2)
-		}
-		ctx.lineTo(points.last._1, points.last._2)
-	}
+		  ctx.lineTo(p._1, p._2)
+		  ctx.moveTo(p._1, p._2)
+	  }
+	  ctx.lineTo(points.last._1, points.last._2)
+  }
 }
