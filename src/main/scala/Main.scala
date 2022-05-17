@@ -4,6 +4,8 @@ import org.scalajs.dom
 import org.scalajs.dom.document
 import scala.scalajs.js.annotation.JSExportTopLevel
 
+import sympany.symbolics._
+
 object Main {
   def main(args: Array[String]): Unit = {
     sympany.ui.graph.Graph.setup

@@ -15,7 +15,24 @@ object Parse {
 		var str = raw
 			.replaceAll("\\\\right", "")
 			.replaceAll("\\\\left", "")
+      .replaceAll("\\)\\(", ") \\\\cdot (")
 			.replaceAll("\\\\cdot", " ")
+			.replaceAll("\\\\pm", "+ \\\\pm")
+			.replaceAll("^ *\\+", "")
+			.replaceAll("\\+ *\\-", "-")
+			.replaceAll("\\- *\\+", "-")
+			.replaceAll("\\+ *\\+", "+")
+    println(str)
+    
+    // If the expression contains a single equals sign, it is an equation
+    val eqlCt = str.count(_ == '=')
+    if (eqlCt > 1) return None
+    if (eqlCt == 1) {
+      val Array(left, right) = str.split("=").map(parseLatex)
+      if (left.isDefined && right.isDefined)
+        return Some(SymEquation(left.get, right.get))
+      else return None
+    }
 		
 		var sum = List[Sym]()
 		var prod = List[Sym]()
@@ -156,6 +173,7 @@ object Parse {
 		cmd match {
 			case "pi" => Some(SymPi() -> rest)
 			case "frac" => Some(SymProd(args(0), SymPow(args(1), SymInt(-1))) -> rest)
+			case "sqrt" => Some(SymPow(args(0), SymR(1, 2)) -> rest)
 			case "ln" => readExprPower(rest).map{
 				case (e, rest2) => (SymLog(e) -> rest2)
 			}
@@ -166,6 +184,9 @@ object Parse {
 				case (base, rest2) => readExprPower(rest2).map{
 					case (e, rest3) => (SymLog(e, base) -> rest3)
 				}
+			}
+			case "pm" => readExprPower(rest).map{
+				case (e, rest2) => (SymPM(e) -> rest2)
 			}
 			case _ => None
 		}

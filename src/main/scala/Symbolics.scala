@@ -12,15 +12,31 @@ object Sym {
     if (expr == target) replacement
     else expr.mapExprs(replaceExpr(_, target, replacement))
   
+  def containsExpr(expr: Sym, target: Sym): Boolean =
+    if (expr == target) true
+    else expr.exprs.map(containsExpr(_, target)).contains(true)
+  
+  def noParens(str: String): String =
+    if (str.startsWith("\\left(")) str.substring(6, str.length - 7)
+    else if (str.head == '(') str.substring(1, str.length - 1)
+    else str
+  
+  def combos[T](l1: Seq[Seq[T]], l2: Seq[T]): Seq[Seq[T]] =
+    l1.flatMap{a => l2.map{b => a :+ b}}
+  
+  def allCombos[T](ls: Seq[T]*): Seq[Seq[T]] =
+    ls.foldLeft(Seq(Seq[T]()))(combos[T])
+  
   def ++(es: Sym*) = SymSum(es:_*)
   def **(es: Sym*) = SymProd(es:_*)
   def #=(i: BigInt) = SymInt(i)
+  def #=(n: BigInt, d: BigInt) = SymR(n, d)
   def ^(base: Sym, expt: Sym) = SymPow(base, expt)
   def log(pow: Sym, base: Sym = SymE()) = SymLog(pow, base)
   def +-(e: Sym) = SymPM(e)
   def Pi = SymPi()
   def E = SymE()
-  def X = SymVar('x)
+  def X = SymVar('X)
   def V(s: Symbol) = SymVar(s)
 }
 
@@ -33,6 +49,7 @@ trait Sym {
   
   def exprs: Seq[Sym]
   def mapExprs(f: Sym => Sym): Sym
+  def expand: Seq[Sym]
   
   def id: Any = this
   def ==(o: Sym) = this.id == o.id
@@ -46,11 +63,23 @@ trait Sym {
 }
 
 trait SymConstant extends Sym {
-  def exprs = Seq(this)
+  def exprs = Nil
   def mapExprs(f: Sym => Sym) = this
+  def expand = Seq(this)
 }
 
 trait SymUnordered extends Sym
+
+case class SymEquation(left: Sym = SymInt(0), right: Sym = SymInt(0)) extends Sym {
+  override def toString = left.toString + " = " + right.toString
+  def toLatex = left.toLatex + " = " + right.toLatex
+  def approx(implicit env: Env) = left.approx - right.approx
+  def exprs = Seq(left, right)
+  def mapExprs(f: Sym => Sym) = SymEquation(f(left), f(right))
+  
+  def expand = allCombos(left.expand, right.expand)
+    .map{l => SymEquation(l(0), l(1))}
+}
 
 //implicit class ImplicitSymVar(orig: Symbol) extends SymVar(orig)
 
@@ -60,14 +89,17 @@ case class SymDecimal(decimal: BigDecimal) extends SymConstant {
   def toLatex = decimal.toString
 }
 
-case class SymVar(symbol: Symbol = 'x) extends SymConstant {
+case class SymVar(symbol: Symbol = 'x) extends Sym {
   override def toString = symbol.name
+  def exprs = Nil
+  def mapExprs(f: Sym => Sym) = this
+  def expand = Seq(this)
   def s = this
-	
+  
   def toLatex = symbol.name.indexOf('/') match {
-		case -1 => symbol.name
-		case n => s"\\frac{${symbol.name.substring(0, n)}}{${symbol.name.substring(n+1)}}"
-	}
+    case -1 => symbol.name
+    case n => s"\\frac{${symbol.name.substring(0, n)}}{${symbol.name.substring(n+1)}}"
+  }
   
   def approx(implicit env: Env) = env.applyOrElse(symbol,
     { s: Symbol => throw new Exception(s"Variable $symbol not defined") ; 0 }
@@ -163,23 +195,30 @@ case class SymNegativeInfinity() extends SymR {
 case class SymSum(exprs: Sym*) extends SymUnordered {
   override def toString = f"(+ " + exprs.mkString(" ") + ")"
   def toLatex = if (exprs.isEmpty) "" else {
-    "\\left(" + exprs.map(_.toLatex).reduceLeft(_ + " + " + _) + "\\right)"
+    ("\\left(" + exprs.map(_.toLatex).map(noParens)
+      .reduceLeft(_ + " + " + _) + "\\right)")
+      .replace("+ \\pm", "\\pm")
   }
   
   override def id = (SymSum, toMultiset(exprs.map(_.id)))
   def approx(implicit env: Env) = exprs.map(_.approx).sum
   def mapExprs(f: Sym => Sym) = SymSum(exprs.map(f):_*)
+  def expand = allCombos({ exprs.map(_.expand) }:_*).map{l => SymSum(l:_*)}
 }
 
 case class SymProd(exprs: Sym*) extends SymUnordered {
   override def toString = f"(* " + exprs.mkString(" ") + ")"
-  def toLatex = if (exprs.isEmpty) "1" else {
+  
+  // Split the positive and negative powers into the numerator and denominator
+  def toLatex = if (exprs.isEmpty) "1" else if (exprs.length == 1) exprs(0).toLatex else {
     val part = exprs.partitionMap(_ match {
       case SymPow(b, SymInt(n)) if n.toInt == -1 => Right(b)
       case SymPow(b, SymInt(n)) if n < 0 => Right(SymPow(b, SymInt(-n)))
       case SymPow(b, SymProd(es @ _*)) => {
         val op = es.collect{case si @ SymInt(n) if n < 0 => si}.headOption;
-        val newEs = if (op.isEmpty) es else es.updated(es.indexOf(op.get), SymInt(-op.get.n))
+        val newEs = if (op.isEmpty) es else {
+          es.updated(es.indexOf(op.get), SymInt(-op.get.n)).filter(_ != SymInt(1))
+        }
         SymPow(b, SymProd(newEs:_*)).pipe(if (op.isEmpty) Left(_) else Right(_))
       }
       case e => Left(e)
@@ -189,48 +228,62 @@ case class SymProd(exprs: Sym*) extends SymUnordered {
       if (l.isEmpty) "1" else l.map(_.toLatex).reduceLeft(_ + " \\cdot " + _)
     }
     if (strs(1) == "1") s"\\left(${strs(0)}\\right)"
-		else s"\\frac{${strs(0)}}{${strs(1)}}"
+    else s"\\frac{${strs(0)}}{${strs(1)}}"
   }
   
   override def id = (SymProd, toMultiset(exprs.map(_.id)))
   def approx(implicit env: Env) = exprs.map(_.approx).product
   def mapExprs(f: Sym => Sym) = SymProd(exprs.map(f):_*)
+  def expand = allCombos({ exprs.map(_.expand) }:_*).map{l => SymProd(l:_*)}
 }
 
 case class SymPow(base: Sym = SymInt(1), expt: Sym = SymInt(1)) extends Sym {
   override def toString = f"(^ $base $expt)"
-  def toLatex = s"${base.toLatex}^{${expt.toLatex}}"
+  def toLatex = expt match {
+    case SymFrac(top, root) if top == 1 && root == 2 => s"\\sqrt{${noParens(base.toLatex)}}"
+    case SymFrac(top, root) if top == 1 => s"\\sqrt{${root.toInt}}{${noParens(base.toLatex)}}"
+    case _ => s"${base.toLatex}^{${expt.toLatex}}"
+  }
+  
   def approx(implicit env: Env) = Math.pow(base.approx, expt.approx)
   def exprs = Seq(base, expt)
   def mapExprs(f: Sym => Sym) = SymPow(f(base), f(expt))
+  def expand = allCombos(base.expand, expt.expand)
+    .map{l => SymPow(l(0), l(1))}
 }
 
 case class SymLog(pow: Sym = SymInt(1), base: Sym = SymE()) extends Sym {
   override def toString = if (base == SymE()) f"(ln $pow)" else f"(log $pow $base)"
   def toLatex =
-    if (base == SymE()) f"\\ln (${pow.toLatex})"
-    else f"\\log_{${pow.toLatex}} (${base.toLatex})"
-	
+    if (base == SymE()) f"\\ln \\left(${pow.toLatex}\\right)"
+    else f"\\log_{${pow.toLatex}} \\left(${base.toLatex}\\right)"
+  
   def approx(implicit env: Env) = Math.log(pow.approx) / Math.log(base.approx)
   def exprs = Seq(pow, base)
   def mapExprs(f: Sym => Sym) = SymLog(f(pow), f(base))
+  def expand = allCombos(pow.expand, base.expand)
+    .map{l => SymLog(l(0), l(1))}
 }
 
 case class SymPM(expr: Sym = SymInt(1)) extends Sym {
   override def toString = f"(+- $expr)"
-  def toLatex = f"\\pm${expr.toLatex}"
+  def toLatex = expr match {
+    case _: SymProd => s"\\pm${expr.toLatex.pipe{s => s.substring(6, s.length-7)}}"
+    case _ => s"\\pm${expr.toLatex}"
+  }
   def approx(implicit env: Env) = expr.approx
   def exprs = Seq(expr)
   def mapExprs(f: Sym => Sym) = SymPM(f(expr))
+  def expand = List(1, -1).flatMap{n => expr.expand.map(SymProd(SymInt(n), _))}
 }
 
 case class SymPi() extends SymConstant {
   override def toString = "Pi"
-	def toLatex = "\\pi"
+  def toLatex = "\\pi"
   def approx(implicit env: Env) = Math.PI
 }
 case class SymE() extends SymConstant {
   override def toString = "E"
-	def toLatex = "e"
+  def toLatex = "e"
   def approx(implicit env: Env) = Math.E
 }

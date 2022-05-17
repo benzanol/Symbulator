@@ -99,14 +99,12 @@ object Graph {
 		drawGraph
 	}
 	
-	private var expressions = Seq[Sym]()
-	private var functions = Seq[Double => Double]()
+	private var graphs = Seq[Sym]()
+	private val colors = Seq("#AA0000", "#0000AA", "#008800")
+	private val gridColor = "#AAAAAA"
 	
 	def setExpressions(exprs: Seq[Sym]): Unit = {
-		this.expressions = exprs
-		this.functions = exprs.map{ e: Sym =>
-			{ x: Double => e.approx(Map('x -> x)) }
-		}
+		this.graphs = exprs
 		drawGraph
 	}
 	
@@ -119,8 +117,14 @@ object Graph {
 		
 		
 		// Draw the functions on the main canvas
-		fctx.strokeStyle = "#AA0000"
-		functions.foreach(drawFunction(_)(fctx))
+		for (i <- 0 until graphs.length) {
+			fctx.strokeStyle = colors(i % colors.length)
+
+      for (expr <- graphs(i).expand) {
+			  val f: Double => Double = { x => expr.approx(Map('x -> x)) }
+			  drawFunction(f)(fctx)
+      }
+		}
 		
 		// Remove any of the function lines that went into the margin
 		fctx.clearRect(0, 0, marginX, fc.height)
@@ -129,7 +133,7 @@ object Graph {
 		
 		// Draw the grid on the background canvas
 		gctx.font = "14px Serif"
-		gctx.strokeStyle = "#AAAAAA"
+		gctx.strokeStyle = gridColor
 		drawGrid(gctx)
 	}
 	
