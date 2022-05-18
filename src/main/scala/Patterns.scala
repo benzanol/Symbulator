@@ -88,6 +88,8 @@ object Pattern {
 import Pattern._
 
 trait Pattern {
+  def category: String
+  
   /* The list of possible ways to bind the variables contained in a pattern to
    * match the given expression
    * If it returns an empty list, the pattern does not match the expression
@@ -128,16 +130,19 @@ trait Pattern {
 }
 
 case class PatternVar(symbol: Symbol) extends Pattern {
+  def category = "any"
   def matches(e: Sym) = Seq(Map(this.symbol -> e))
   def @@(p: Pattern) = Bind(this.symbol, p)
 }
 //implicit class ImplicitPatternVar(_s: Symbol) extends PatternVar(_s)
 
 case class AnyP() extends Pattern {
+  def category = "any"
   def matches(e: Sym) = Seq(Map())
 }
 
 case class ConstP() extends Pattern {
+  def category = "contant"
   def matches(e: Sym) = e match {
     case c: SymConstant => Seq(Map())
     case _ => Seq()
@@ -145,10 +150,13 @@ case class ConstP() extends Pattern {
 }
 
 case class SymP(c: Sym) extends Pattern {
+  def category = c.category
   def matches(e: Sym) = if (e == c) Seq(Map()) else Seq()
 }
 
 case class Bind(v: Symbol, p: Pattern) extends Pattern {
+  def category = p.category
+  
   // tryCombinations will add the variable to the already existing binding,
   // while also making sure that there are no conflicts
   def matches(e: Sym): Seq[Binding] =
@@ -163,6 +171,8 @@ case class Bind(v: Symbol, p: Pattern) extends Pattern {
 }
 
 case class With(p: Pattern, v: Symbol, bind: Any) extends Pattern {
+  def category = p.category
+  
   def matches(e: Sym): Seq[Binding] =
     tryCombinations(p.matches(e), Seq(Map(v -> bind)))
   
@@ -174,6 +184,8 @@ case class With(p: Pattern, v: Symbol, bind: Any) extends Pattern {
 }
 
 case class RatP(n: Pattern = AnyP(), d: Pattern = AnyP()) extends Pattern {
+  def category = "constant"
+  
   def matches(e: Sym): Seq[Binding] = e match {
     case SymFrac(a, b) => matchSeveral((SymInt(a) -> n), (SymInt(b) -> d))
     case a: SymInt => matchSeveral((a -> n), (SymInt(1) -> d))
@@ -182,6 +194,8 @@ case class RatP(n: Pattern = AnyP(), d: Pattern = AnyP()) extends Pattern {
 }
 
 case class IntP(n: Pattern = AnyP()) extends Pattern {
+  def category = "constant"
+  
   def matches(e: Sym): Seq[Binding] = e match {
     case a: SymInt => matchSeveral((a -> n))
     case _ => Seq[Binding]()
@@ -189,6 +203,8 @@ case class IntP(n: Pattern = AnyP()) extends Pattern {
 }
 
 case class FracP(n: Pattern = AnyP(), d: Pattern = AnyP()) extends Pattern {
+  def category = "constant"
+  
   def matches(e: Sym): Seq[Binding] = e match {
     case SymFrac(a, b) => matchSeveral((SymInt(a) -> n), (SymInt(b) -> d))
     case _ => Seq[Binding]()
@@ -196,6 +212,8 @@ case class FracP(n: Pattern = AnyP(), d: Pattern = AnyP()) extends Pattern {
 }
 
 case class SumP(ps: Pattern*) extends Pattern {
+  def category = "sum"
+  
   def matches(e: Sym): Seq[Binding] = e match {
     case SymSum(exprs @ _*) => matchSeq(exprs, ps)
     case _ => Nil
@@ -203,6 +221,8 @@ case class SumP(ps: Pattern*) extends Pattern {
 }
 
 case class ProdP(ps: Pattern*) extends Pattern {
+  def category = "product"
+  
   def matches(e: Sym): Seq[Binding] = e match {
     case SymProd(exprs @ _*) => matchSeq(exprs, ps)
     case _ => Nil
@@ -210,6 +230,8 @@ case class ProdP(ps: Pattern*) extends Pattern {
 }
 
 case class PowP(base: Pattern = AnyP(), exp: Pattern = AnyP()) extends Pattern {
+  def category = "power"
+  
   def matches(e: Sym): Seq[Binding] = e match {
     case SymPow(a, b) => matchSeveral((a -> base), (b -> exp))
     case _ => Seq[Binding]()
@@ -217,6 +239,8 @@ case class PowP(base: Pattern = AnyP(), exp: Pattern = AnyP()) extends Pattern {
 }
 
 case class LogP(pow: Pattern = AnyP(), base: Pattern = AnyP()) extends Pattern {
+  def category = "log"
+  
   def matches(e: Sym): Seq[Binding] = e match {
     case SymLog(a, b) => matchSeveral((a -> pow), (b -> base))
     case _ => Seq[Binding]()
@@ -224,6 +248,8 @@ case class LogP(pow: Pattern = AnyP(), base: Pattern = AnyP()) extends Pattern {
 }
 
 case class PMP(pat: Pattern = AnyP()) extends Pattern {
+  def category = "pm"
+  
   def matches(e: Sym): Seq[Binding] = e match {
     case SymPM(a) => matchSeveral((a -> pat))
     case _ => Seq[Binding]()
@@ -231,6 +257,8 @@ case class PMP(pat: Pattern = AnyP()) extends Pattern {
 }
 
 case class EquationP(l: Pattern = AnyP(), r: Pattern = AnyP()) extends Pattern {
+  def category = "equation"
+  
   def matches(e: Sym): Seq[Binding] = e match {
     case SymEquation(a, b) => matchSeveral((a -> l), (b -> r)) ++ matchSeveral((a -> r), (b -> l))
     case _ => Seq[Binding]()
@@ -238,6 +266,8 @@ case class EquationP(l: Pattern = AnyP(), r: Pattern = AnyP()) extends Pattern {
 }
 
 case class Repeat(p: Pattern = AnyP(), min: Int = 0, max: Int = -1) extends Pattern {
+  def category = ""
+  
   // If matched against a single object, return nothing
   def matches(e: Sym) = Seq()
   
@@ -265,12 +295,16 @@ case class Repeat(p: Pattern = AnyP(), min: Int = 0, max: Int = -1) extends Patt
 }
 
 case class Guard(p: Pattern, guard: Any => Boolean) extends Pattern {
+  def category = p.category
+  
   // Run through each guard, and stop after one of them returns false
   def matches(e: Sym): Seq[Binding] =
     p.matches(e).filter{ b => callWithBind(b)(guard) }
 }
 
 case class Satisfies[T <: Sym](p: Pattern, f: T => Boolean) extends Pattern {
+  def category = p.category
+  
   def matches(e: Sym): Seq[Binding] = p.matches(e) match {
     case Nil => Nil
     case m => if (f(e.asInstanceOf[T])) m else Nil
@@ -278,6 +312,8 @@ case class Satisfies[T <: Sym](p: Pattern, f: T => Boolean) extends Pattern {
 }
 
 case class Or(ps: Pattern*) extends Pattern {
+  def category = "all"
+  
   def matches(e: Sym): Seq[Binding] =
     ps.map(_.matches(e)).reduceLeft(_ ++ _).distinct
   
@@ -297,6 +333,8 @@ case class Or(ps: Pattern*) extends Pattern {
 }
 
 case class First(ps: Pattern*) extends Pattern {
+  def category = "all"
+  
   // Return either the first nonempty binding list of ps, or Nil
   def matches(e: Sym): Seq[Binding] =
     LazyList(ps:_*).map(_.matches(e)).find(_.nonEmpty).getOrElse(Nil)
@@ -307,6 +345,8 @@ case class First(ps: Pattern*) extends Pattern {
 }
 
 case class And(ps: Pattern*) extends Pattern {
+  def category = "all"
+  
   def matches(e: Sym): Seq[Binding] =
     ps.map(_.matches(e)).reduceLeft(tryCombinations)
   
@@ -323,6 +363,8 @@ case class And(ps: Pattern*) extends Pattern {
 }
 
 case class AsSumP(ps: Pattern*) extends Pattern {
+  def category = "all"
+  
   def matches(e: Sym): Seq[Binding] = e match {
     case SymSum(exprs @ _*) => matchSeq(exprs, ps)
     case expr => matchSeq(Seq(expr), ps)
@@ -330,6 +372,8 @@ case class AsSumP(ps: Pattern*) extends Pattern {
 }
 
 case class AsProdP(ps: Pattern*) extends Pattern {
+  def category = "all"
+  
   def matches(e: Sym): Seq[Binding] = e match {
     case SymProd(exprs @ _*) => matchSeq(exprs, ps)
     case expr => matchSeq(Seq(expr), ps)
@@ -337,6 +381,8 @@ case class AsProdP(ps: Pattern*) extends Pattern {
 }
 
 case class AsPowP(base: Pattern = AnyP(), exp: Pattern = AnyP()) extends Pattern {
+  def category = "all"
+  
   def matches(e: Sym): Seq[Binding] = e match {
     case SymPow(a, b) => matchSeveral((a -> base), (b -> exp))
     case a => matchSeveral((a -> base), (SymInt(1) -> exp))
@@ -364,15 +410,14 @@ case class Rule(name: String, p: Pattern, f: Any => Sym) {
 }
 
 class Rules() {
-  val rules = scala.collection.mutable.Map[Sym, Seq[Rule]]()
-  def +(t: Sym)(n: String)(p: Pattern)(f: Any => Sym) =
-    rules(t) = rules.getOrElse(t, Nil) :+ new Rule(n, p, f)
+  val rules = scala.collection.mutable.Map[String, Seq[Rule]]()
+  def +(n: String)(p: Pattern)(f: Any => Sym) =
+    rules(p.category) = category(p.category) :+ new Rule(n, p, f)
+
+  def category(cat: String): Seq[Rule] = rules.getOrElse(cat, Nil)
   
-  def apply(sym: Sym): Seq[Rule] = {
-    rules.toList
-      .filter{ r => (r._1 == SymInt(0)) || (r._1.getClass.isInstance(sym)) }
-      .flatMap(_._2)
-  }
+  def apply(sym: Sym): Seq[Rule] =
+    category(sym.category) ++ category("all")
   
   def first(e: Sym): Option[Sym] =
     LazyList(apply(e):_*).flatMap(_.first(e)).headOption

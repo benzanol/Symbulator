@@ -9,17 +9,17 @@ import sympany.symbolics.Sym._
 import sympany.patterns._
 import sympany.patterns.Pattern._
 import sympany.math.Simplify.simplify
-import sympany.math.Derivative.derivative
+import sympany.math.Derivative.derive
 
 object Solve {
   val aRules = new Rules()
   
   def importantPoints(e: Sym, v: Symbol): Seq[Sym] = {
     e.exprs.map(importantPoints(_, v)).foldLeft(Seq[Sym]())(_ ++ _) ++
-    zero(derivative(e, v), v) ++
+    solve(derive(e, v), v) ++
     (e match {
-      case SymPow(b, SymFrac(p, root)) => zero(b, v)
-      case SymPow(b, SymInt(n)) if n < 0 => zero(b, v)
+      case SymPow(b, SymFrac(p, root)) => solve(b, v)
+      case SymPow(b, SymInt(n)) if n < 0 => solve(b, v)
       case _ => Nil
     })
   }
@@ -27,53 +27,53 @@ object Solve {
   def undefinedPoints(e: Sym, v: Symbol): Seq[Sym] = {
     e.exprs.map(undefinedPoints(_, v)).foldLeft(Seq[Sym]())(_ ++ _) ++
     (e match {
-      case SymLog(p, _) => zero(p, v)
+      case SymLog(p, _) => solve(p, v)
       case _ => Nil
     })
   }
   
-  @JSExportTopLevel("zero")
-  def zero(e: Sym, v: Symbol = X.symbol): Seq[Sym] =
+  @JSExportTopLevel("solve")
+  def solve(e: Sym, v: Symbol = X.symbol): Seq[Sym] =
     replaceExpr(e, SymVar(v), X)
-      .pipe{expr => zero(Seq(expr), Nil)}
+      .pipe{expr => solve(Seq(expr), Nil)}
       .map{solution => replaceExpr(solution, X, SymVar(v))}
   
-  def zero(es: Seq[Sym], old: Seq[Sym]): Seq[Sym] =
+  def solve(es: Seq[Sym], old: Seq[Sym]): Seq[Sym] =
     (es.flatMap(zRules.all) // Seq[Sym]
       .map(simplify) ++ {
         es.flatMap{ e => aRules.all(e)
           .filter(!old.contains(_))
           .filter(!es.contains(_))
-        }.pipe{ newEs => if (newEs.isEmpty) Nil else zero(newEs, old ++ es) }
+        }.pipe{ newEs => if (newEs.isEmpty) Nil else solve(newEs, old ++ es) }
       }).distinct
   
   val zRules = new Rules()
   
-  zRules.+(SymEquation())("Subtract from one side of equation"){
+  zRules.+("Subtract from one side of equation"){
     @?('whole) @@ EquationP(@?('l), @?('r))
   }{ case (l: Sym, r: Sym, whole: Sym) =>
-      zero(simplify(SymSum(l, SymProd(r, #=(-1))))).headOption.getOrElse(whole)
+      solve(simplify(SymSum(l, SymProd(r, #=(-1))))).headOption.getOrElse(whole)
   }
   
-  zRules.+(#=(0))("x^a = 0 >> 0"){ AsPowP(XP, __) }{ case () => #=(0) }
+  zRules.+("x^a = 0 >> 0"){ AsPowP(XP, __) }{ case () => #=(0) }
   
-  zRules.+(SymProd())("u * a = 0 >> u = 0"){
+  zRules.+("u * a = 0 >> u = 0"){
     @?('whole) @@ ProdP(@?('e) @@ hasxP(), __*)
   }{ case (e: Sym, whole: Sym) =>
-      zero(Seq(e), Seq(whole)).headOption.getOrElse(whole) }
+      solve(Seq(e), Seq(whole)).headOption.getOrElse(whole) }
   
-  zRules.+(SymSum())("ax + b = 0 >> -b/a"){
+  zRules.+("ax + b = 0 >> -b/a"){
     SumP(AsProdP(XP, @?('a) @@ Repeat(noxP())), @?('b) @@ Repeat(noxP()))
   }{ case (a: Seq[Sym], b: Seq[Sym]) =>
       SymProd(#=(-1), SymSum(b:_*), SymPow(SymProd(a:_*), #=(-1))) }
   
-  zRules.+(SymSum())("x^p + a => x +- (-a)^(1/p)"){
+  zRules.+("x^p + a => x +- (-a)^(1/p)"){
     AsSumP(PowP(XP, @?('p) @@ noxP()), @?('rest) @@ Repeat(noxP()))
   }{ case (SymInt(n), r: Seq[Sym]) if (n % 2 == 0) => SymPM(SymPow(SymProd(#=(-1), SymSum(r:_*)), SymR(1, n)))
     case (p: Sym, r: Seq[Sym]) => SymPow(SymProd(#=(-1), SymSum(r:_*)), SymPow(p, #=(-1)))
   }
   
-  zRules.+(SymSum())("Quadratic formula"){
+  zRules.+("Quadratic formula"){
     SumP(
       @?('as) @@ Repeat(AsProdP(PowP(XP, =#?(2)), Repeat(noxP())), min=1), // Any number of a*x^2
       @?('bs) @@ Repeat(AsProdP(XP, Repeat(noxP())), min=1), // Any number of b*x

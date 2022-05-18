@@ -50,6 +50,7 @@ trait Sym {
   def exprs: Seq[Sym]
   def mapExprs(f: Sym => Sym): Sym
   def expand: Seq[Sym]
+  def category: String
   
   def id: Any = this
   def ==(o: Sym) = this.id == o.id
@@ -63,6 +64,7 @@ trait Sym {
 }
 
 trait SymConstant extends Sym {
+  def category = "constant"
   def exprs = Nil
   def mapExprs(f: Sym => Sym) = this
   def expand = Seq(this)
@@ -71,6 +73,7 @@ trait SymConstant extends Sym {
 trait SymUnordered extends Sym
 
 case class SymEquation(left: Sym = SymInt(0), right: Sym = SymInt(0)) extends Sym {
+  def category = "equation"
   override def toString = left.toString + " = " + right.toString
   def toLatex = left.toLatex + " = " + right.toLatex
   def approx(implicit env: Env) = left.approx - right.approx
@@ -90,6 +93,7 @@ case class SymDecimal(decimal: BigDecimal) extends SymConstant {
 }
 
 case class SymVar(symbol: Symbol = 'x) extends Sym {
+  def category = "variable"
   override def toString = symbol.name
   def exprs = Nil
   def mapExprs(f: Sym => Sym) = this
@@ -193,6 +197,7 @@ case class SymNegativeInfinity() extends SymR {
 }
 
 case class SymSum(exprs: Sym*) extends SymUnordered {
+  def category = "sum"
   override def toString = f"(+ " + exprs.mkString(" ") + ")"
   def toLatex = if (exprs.isEmpty) "" else {
     ("\\left(" + exprs.map(_.toLatex).map(noParens)
@@ -207,6 +212,7 @@ case class SymSum(exprs: Sym*) extends SymUnordered {
 }
 
 case class SymProd(exprs: Sym*) extends SymUnordered {
+  def category = "product"
   override def toString = f"(* " + exprs.mkString(" ") + ")"
   
   // Split the positive and negative powers into the numerator and denominator
@@ -238,6 +244,7 @@ case class SymProd(exprs: Sym*) extends SymUnordered {
 }
 
 case class SymPow(base: Sym = SymInt(1), expt: Sym = SymInt(1)) extends Sym {
+  def category = "power"
   override def toString = f"(^ $base $expt)"
   def toLatex = expt match {
     case SymFrac(top, root) if top == 1 && root == 2 => s"\\sqrt{${noParens(base.toLatex)}}"
@@ -253,6 +260,7 @@ case class SymPow(base: Sym = SymInt(1), expt: Sym = SymInt(1)) extends Sym {
 }
 
 case class SymLog(pow: Sym = SymInt(1), base: Sym = SymE()) extends Sym {
+  def category = "log"
   override def toString = if (base == SymE()) f"(ln $pow)" else f"(log $pow $base)"
   def toLatex =
     if (base == SymE()) f"\\ln \\left(${pow.toLatex}\\right)"
@@ -266,6 +274,7 @@ case class SymLog(pow: Sym = SymInt(1), base: Sym = SymE()) extends Sym {
 }
 
 case class SymPM(expr: Sym = SymInt(1)) extends Sym {
+  def category = "pm"
   override def toString = f"(+- $expr)"
   def toLatex = expr match {
     case _: SymProd => s"\\pm${expr.toLatex.pipe{s => s.substring(6, s.length-7)}}"
@@ -282,6 +291,7 @@ case class SymPi() extends SymConstant {
   def toLatex = "\\pi"
   def approx(implicit env: Env) = Math.PI
 }
+
 case class SymE() extends SymConstant {
   override def toString = "E"
   def toLatex = "e"

@@ -209,19 +209,24 @@ object Graph {
     // Make sure to include important points on the curve (extremas, holes, etc)
     val tiny = (ctx.canvas.width * pos.xs) / 1000000.0
     
+    val s1 = System.nanoTime()
     val important = Solve.importantPoints(expr, 'x)
       .map(_.approx(Map())).flatMap{n => List(n - tiny, n, n + tiny)}
+    println(s"1) ${(System.nanoTime() - s1)/1000000}")
     
+    val s2 = System.nanoTime()
     val undefined = Solve.undefinedPoints(expr, 'x)
       .map(_.approx(Map())).flatMap{n => List(n - tiny, n + tiny)}
+    println(s"2) ${(System.nanoTime() - s2)/1000000}")
     
     // Calculate the function and derivative
     val f: Double => Double = { x => expr.approx(Map('x -> x)) }
-    val deriv = sympany.math.Derivative.derivative(expr, 'x)
+    val deriv = sympany.math.Derivative.derive(expr, 'x)
     val dfdx: Double => Double = { x => deriv.approx(Map('x -> x)) }
 		
 		val segments = functionSegments(f, dfdx, important ++ undefined)
 		
+    
     segments.foreach(connectWithCurves)
 		//connectWithLines(canvasPoints)(ctx)
 		
@@ -244,7 +249,7 @@ object Graph {
     val dist = width / 500.0;
     
     // The extras that haven't yet been used - remove any that are outside of the screen
-    var extrasLeft = extras.sortWith(_ < _).filter(_ > x)
+    var extrasLeft = extras.sortWith(_ < _).filter(_ > x).distinct
     
     // The list of points being made
 		var segments = List(List[(Double, Double)]())
@@ -260,6 +265,7 @@ object Graph {
         
         if (y.isFinite) segments = ((x, y) :: segments.head) :: segments.tail
         else throw new Exception
+        
       } catch {
 			  case _: Throwable =>
           if (segments.head.nonEmpty) segments = Nil :: segments
@@ -267,7 +273,7 @@ object Graph {
       
       x += dist
       
-      if (extrasLeft.nonEmpty && extrasLeft.head < x) {
+      if (extrasLeft.nonEmpty && extrasLeft.head <= x) {
         x = extrasLeft.head
         extrasLeft = extrasLeft.tail
       }

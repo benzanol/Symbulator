@@ -14,8 +14,8 @@ import sympany.ui.graph.Graph
 import sympany.parse.Parse.parseLatex
 import sympany.symbolics.Sym
 import sympany.math.Simplify.simplify
-import sympany.math.Derivative.derivative
-import sympany.math.Solve.zero
+import sympany.math.Derivative.derive
+import sympany.math.Solve.solve
 
 object Equations {
   // Detect when keys are pressed
@@ -134,7 +134,7 @@ object Equations {
       case None => infos(i).innerText = "\n" ; None
       case Some(e: Sym) => renderEquation(e, infos(i))
     }}
-    
+
     Graph.setExpressions(graphs)
     
     js.eval("formatStaticEquations();")
@@ -146,7 +146,7 @@ object Equations {
     var e = expr
 
     if (Sym.containsExpr(expr, SymVar('y))) {
-      val explicit = zero(e, 'y).headOption
+      val explicit = solve(e, 'y).headOption
       
       if (explicit.isDefined) {
         appendEquation(div, "p", "Explicit: \\quad y = " + explicit.get.toLatex.pipe(Sym.noParens))
@@ -155,17 +155,17 @@ object Equations {
       } else return None
     }
 
-    val deriv = derivative(e, 'x)
+    val deriv = derive(e, 'x)
     appendEquation(div, "p", "Derivative: \\quad " + deriv.toLatex.pipe(Sym.noParens))
     
-    val fZeros = zero(e, 'x)
+    val fZeros = solve(e, 'x)
       .map(Sym.replaceExpr(_, SymVar('y), SymInt(0)))
       .map(simplify).map(_.toLatex).map(Sym.noParens)
     
     if (fZeros.nonEmpty)
       appendEquation(div, "p", "Zeros: \\quad " + fZeros.reduceLeft(_ + ", \\quad " + _))
     
-    val extremas = zero(deriv, 'x).map(_.toLatex).map(Sym.noParens)
+    val extremas = solve(deriv, 'x).map(_.toLatex).map(Sym.noParens)
     if (extremas.nonEmpty)
       appendEquation(div, "p", "Extremas: \\quad " + extremas.reduceLeft(_ + ", \\quad " + _))
     
