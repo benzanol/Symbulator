@@ -4,10 +4,9 @@ import scala.util.chaining._
 
 import scala.scalajs.js.annotation.JSExportTopLevel
 
-import sympany.symbolics._
-import sympany.symbolics.Sym._
-import sympany.patterns._
-import sympany.patterns.Pattern._
+import sympany._
+import sympany.Sym._
+import sympany.Pattern._
 
 object Simplify {
   val sRules = new Rules()

@@ -10,6 +10,9 @@ libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "2.1.0"
 // This is an application with a main method
 scalaJSUseMainModuleInitializer := true
 
+logLevel := Level.Error
+
+/*
 lazy val hello = taskKey[Unit]("Prints 'Hello World'")
 hello := {
   import scala.sys.process._
@@ -18,3 +21,4 @@ hello := {
 }
 
 hello := hello.dependsOn(Compile / fastLinkJS).value
+ */

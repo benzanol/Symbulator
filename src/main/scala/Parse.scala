@@ -1,10 +1,10 @@
-package sympany.parse
+package sympany
 
 import scala.util.chaining._
 
 import scala.scalajs.js.annotation.JSExportTopLevel
 
-import sympany.symbolics._
+import sympany._
 import sympany.math.Simplify.simplify
 
 object Parse {
@@ -173,6 +173,12 @@ object Parse {
 			case "pi" => Some(SymPi() -> rest)
 			case "frac" => Some(SymProd(args(0), SymPow(args(1), SymInt(-1))) -> rest)
 			case "sqrt" => Some(SymPow(args(0), SymR(1, 2)) -> rest)
+			case "sin" => readExprPower(rest).map{
+				case (e, rest2) => (SymSin(e) -> rest2)
+			}
+			case "cos" => readExprPower(rest).map{
+				case (e, rest2) => (SymCos(e) -> rest2)
+			}
 			case "ln" => readExprPower(rest).map{
 				case (e, rest2) => (SymLog(e) -> rest2)
 			}

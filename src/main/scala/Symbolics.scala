@@ -1,4 +1,4 @@
-package sympany.symbolics
+package sympany
 
 import scala.util.chaining._
 
@@ -248,7 +248,7 @@ case class SymPow(base: Sym = SymInt(1), expt: Sym = SymInt(1)) extends Sym {
   override def toString = f"(^ $base $expt)"
   def toLatex = expt match {
     case SymFrac(top, root) if top == 1 && root == 2 => s"\\sqrt{${noParens(base.toLatex)}}"
-    case SymFrac(top, root) if top == 1 => s"\\sqrt{${root.toInt}}{${noParens(base.toLatex)}}"
+    case SymFrac(top, root) if top == 1 => s"\\sqrt[${root.toInt}]{${noParens(base.toLatex)}}"
     case _ => s"${base.toLatex}^{${expt.toLatex}}"
   }
   
@@ -277,13 +277,31 @@ case class SymPM(expr: Sym = SymInt(1)) extends Sym {
   def category = "pm"
   override def toString = f"(+- $expr)"
   def toLatex = expr match {
-    case _: SymProd => s"\\pm${expr.toLatex.pipe{s => s.substring(6, s.length-7)}}"
-    case _ => s"\\pm${expr.toLatex}"
+    case _: SymProd => s"\\pm ${expr.toLatex.pipe{s => s.substring(6, s.length-7)}}"
+    case _ => s"\\pm ${expr.toLatex}"
   }
   def approx(implicit env: Env) = expr.approx
   def exprs = Seq(expr)
   def mapExprs(f: Sym => Sym) = SymPM(f(expr))
   def expand = List(1, -1).flatMap{n => expr.expand.map(SymProd(SymInt(n), _))}
+}
+
+case class SymSin(expr: Sym) extends Sym {
+  def category = "sin"
+  def toLatex = f"sin${expr.toLatex}"
+  def approx(implicit env: Env) = Math.sin(expr.approx)
+  def exprs = Seq(expr)
+  def mapExprs(f: Sym => Sym) = SymSin(f(expr))
+  def expand = expr.expand.map(SymSin(_))
+}
+
+case class SymCos(expr: Sym) extends Sym {
+  def category = "cos"
+  def toLatex = f"cos${expr.toLatex}"
+  def approx(implicit env: Env) = Math.cos(expr.approx)
+  def exprs = Seq(expr)
+  def mapExprs(f: Sym => Sym) = SymCos(f(expr))
+  def expand = expr.expand.map(SymCos(_))
 }
 
 case class SymPi() extends SymConstant {

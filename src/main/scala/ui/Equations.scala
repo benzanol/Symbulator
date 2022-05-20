@@ -1,6 +1,7 @@
-package sympany.ui.equations
+package sympany.ui
 
 import scala.util.chaining._
+import scala.collection.mutable
 
 import org.scalajs.dom
 import org.scalajs.dom.document
@@ -8,176 +9,148 @@ import org.scalajs.dom.window
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSExportTopLevel
 
-import sympany.symbolics._
-import sympany.main.Main.jslog
-import sympany.ui.graph.Graph
-import sympany.parse.Parse.parseLatex
-import sympany.symbolics.Sym
-import sympany.math.Simplify.simplify
-import sympany.math.Derivative.derive
-import sympany.math.Solve.solve
+import sympany._
+import sympany.math._
+import sympany.ui._
+import sympany.Main.jslog
 
 object Equations {
-  // Detect when keys are pressed
-  document.addEventListener("keyup", (event: dom.KeyboardEvent) => {
-    event.keyCode match {
-      // If enter key pressed, add a new equation below the current one
-      case 13 => {
-        try {
-          val current = window.getSelection().anchorNode.parentNode
-          if (current.attributes("class").value.contains("mathquill"))
-            addEquation(current.attributes("id").value)
-        } catch {
-          case e: Throwable => addEquation()
+  var handlers = Seq[EquationHandler]()
+
+  // Update the layout of equations on the page based on the list of handlers
+  def updateEquations(): Unit = {
+    val parent = document.getElementById("equations")
+
+    // Remove the existing equations
+    parent.replaceChildren()
+
+    // Add the equation from each handler
+    handlers.foreach{ h => parent.appendChild(h.rootElem) }
+  }
+
+  // Whenever any equation changes, the graph screen needs to be updated
+  def updateGraphs: Unit =
+    Graph.setGraphs(handlers.flatMap(_.eqn))
+
+  // Create a new html element with various properties and return it
+  def makeElement(tag: String, props: (String, String)*): dom.Element = {
+    val e: dom.Element = document.createElement(tag)
+    props.foreach{
+      case ("innerHTML", html) => e.innerHTML = html
+      case ("innerText", text) => e.innerText = text
+      case (k, v) => e.setAttribute(k, v)
+    }
+    return e
+  }
+
+  // API (from JS) functions
+
+  // Create a new equation
+  @JSExportTopLevel("addEquation")
+  def addEquation(): Unit = {
+    val h = new EquationHandler()
+    handlers :+= h
+    updateEquations()
+
+    // Shift focus to the equation
+    js.eval(s"MQ(document.getElementById('eqn-${h.id}')).focus()")
+  }
+
+  // Update the handler that has the specified id to have a new equation
+  @JSExportTopLevel("updateLatex")
+  def updateLatex(id: String, latex: String): Unit = {
+    handlers.find(_.id == id) match {
+      case Some(h) => {
+        h.updateLatex(latex)
+        updateGraphs
+      }
+      case None => throw new Exception(s"Handler $id not found")
+    }
+  }
+}
+
+import Equations.makeElement
+
+class EquationHandler() {
+  val id = scala.util.Random.nextInt().abs.toString
+
+  val rootElem = makeElement("div", "class" -> "eqn-div",   "id" -> s"div-$id",  "hid" -> id)
+  val eqnElem  = makeElement("p", "class" -> "mq-dynamic",  "id" -> s"eqn-$id",  "hid" -> id)
+  val propElem = makeElement("div", "class" -> "eqn-props", "id" -> s"prop-$id", "hid" -> id)
+  rootElem.appendChild(eqnElem)
+  rootElem.appendChild(propElem)
+
+  js.Dynamic.global.formatEquation(eqnElem)
+
+  var latex: String = ""
+  var eqn: Option[SuperSym] = None
+
+  def updateLatex(newLatex: String): Unit = {
+    if (newLatex == this.latex) return
+
+    this.latex = newLatex
+    this.eqn = Parse.parseLatex(newLatex).map(SuperSym(_))
+
+    propElem.replaceChildren()
+
+    if (eqn.isDefined)
+      for (p <- eqn.get.props) {
+        // Create a div for the property and add it to the property list
+        val div = Equations.makeElement("div", "class" -> "eqn-prop")
+        propElem.appendChild(div)
+
+        // Add the description and equations of the property to the div
+        div.appendChild(makeElement("p", "class" -> "prop-name", "innerText" -> p._1))
+        for (i <- 0 until p._2.length) {
+          val text = p._2(i).toLatex + (if (i == p._2.length - 1) "" else ",")
+          val el = makeElement("p", "class" -> "mq-static", "innerText" -> text)
+          div.appendChild(el)
         }
       }
-        
-      //  Ctrl+shift+delete removes the current equation
-      case 8 if (event.ctrlKey && event.shiftKey) => {
-        val current = window.getSelection().anchorNode.parentNode
-        deleteEquation(current.attributes("id").value)
-      }
-        
-      // If control up or down is pressed, move in that direction
-      case 38 | 40 if (event.ctrlKey) => {
-        val current = window.getSelection().anchorNode.parentNode
-        val div = current.parentNode
-        val sibling = if (40 == event.keyCode) div.nextSibling else div.previousSibling
-        if (current.attributes("class").value.contains("mathquill") &&
-          sibling != null && sibling.hasChildNodes())
-          js.eval(s"focusEquation('${sibling.childNodes(1).attributes("id").value}')")
-      }
-        
-      case _ => ()
-    }
-  })
-  
-  @JSExportTopLevel("addEquation")
-  def addEquation(targetId: String = ""): Unit = {
-    // Create the mathquill equation element
-    val eqn = document.createElement("p")
-    val eqnId = s"eqn-${(new scala.util.Random).nextInt.abs}"
-    eqn.setAttribute("class", "mathquill")
-    eqn.setAttribute("id", eqnId)
-    
-    // Create the button that will remove the equation
-    val btn = document.createElement("button")
-    btn.setAttribute("class", "delete-equation-button")
-    btn.setAttribute("onclick", s"deleteEquation('$eqnId')")
-    btn.innerHTML = "×"
-    
-    // Create the div that will store the equation properties
-    val infoDiv = document.createElement("div")
-    infoDiv.setAttribute("class", "eqn-info")
-    
-    // Create the div that will store all elements of a single equation
-    val div = document.createElement("div")
-    div.setAttribute("class", "equation-div")
-    div.appendChild(btn)
-    div.appendChild(eqn)
-    div.appendChild(infoDiv)
-    div.appendChild(document.createElement("br"))
-    
-    // Add the equation div to the list of equations
-    if (targetId == "" || document.getElementById(targetId) == null)
-      document.getElementById("equations").appendChild(div)
-    else
-      // Has to use js.eval since scalajs is missing `parentElement`
-      js.eval(s"document.getElementById('$targetId').parentElement")
-        .asInstanceOf[dom.Element].after(div)
-    
-    // Call mathquill to make the new element an equation (defined in index.html)
-    js.eval("formatEquations()")
-    
-    js.eval(s"focusEquation('$eqnId')")
-  }
-  
-  @JSExportTopLevel("deleteEquation")
-  def deleteEquation(id: String): Unit = {
-    val eqns = document.getElementById("equations")
-    val eqnDiv = document.getElementById(id).parentNode
-    
-    try {
-      // Select the next equation if possible, or the previous equation if possible
-      val sibling =
-        if (eqnDiv.nextSibling == null) eqnDiv.previousSibling
-        else eqnDiv.nextSibling
-      
-      if (sibling != null && sibling.hasChildNodes())
-        js.eval(s"focusEquation('${sibling.childNodes(1).attributes("id").value}')")
-    } catch { case e: Error => () }
-    
-    
-    // Remove the previously selected node from the list
-    eqns.removeChild(eqnDiv)
-    
-    // Recalculate the equations and redraw the graph
-    
-    updateEquations
-    Graph.drawGraph
-  }
-  
-  @JSExportTopLevel("updateEquations")
-  def updateEquations() {
-    //val eqnDiv = document.getElementById(id).parentNode
-    //jslog(id)
-    val divs: Seq[dom.Element] = document.getElementsByClassName("equation-div").toSeq
-    val infos = divs.map{ e: dom.Element => e.querySelector(".eqn-info") }
-    
-    val eqns: Seq[String] = divs.map{ e: dom.Element =>
-      val id = e.querySelector(".mathquill").getAttribute("id")
-      js.eval(s"getLatexEquation('$id')").toString
-    }
-    val syms: Seq[Option[Sym]] = eqns.map(parseLatex)
-    
-    val graphs: Seq[Sym] = (0 until syms.length).flatMap{i => syms(i) match {
-      case None => infos(i).innerText = "\n" ; None
-      case Some(e: Sym) => renderEquation(e, infos(i))
-    }}
 
-    Graph.setExpressions(graphs)
-    
-    js.eval("formatStaticEquations();")
+    println(eqn.map(_.derivative))
+
+    // Format the static equations as latex with mathquill
+    js.Dynamic.global.formatStaticEquations()
   }
+}
+
+case class SuperSym(orig: Sym) {
+  lazy val sym = Simplify.simplify(orig)
   
-  def renderEquation(expr: Sym, div: dom.Element): Option[Sym] = {
-    div.replaceChildren()
-
-    var e = expr
-
-    if (Sym.containsExpr(expr, SymVar('y))) {
-      val explicit = solve(e, 'y).headOption
-      
-      if (explicit.isDefined) {
-        appendEquation(div, "p", "Explicit: \\quad y = " + explicit.get.toLatex.pipe(Sym.noParens))
-        e = explicit.get
-        
-      } else return None
-    }
-
-    val deriv = derive(e, 'x)
-    appendEquation(div, "p", "Derivative: \\quad " + deriv.toLatex.pipe(Sym.noParens))
-    
-    val fZeros = solve(e, 'x)
-      .map(Sym.replaceExpr(_, SymVar('y), SymInt(0)))
-      .map(simplify).map(_.toLatex).map(Sym.noParens)
-    
-    if (fZeros.nonEmpty)
-      appendEquation(div, "p", "Zeros: \\quad " + fZeros.reduceLeft(_ + ", \\quad " + _))
-    
-    val extremas = solve(deriv, 'x).map(_.toLatex).map(Sym.noParens)
-    if (extremas.nonEmpty)
-      appendEquation(div, "p", "Extremas: \\quad " + extremas.reduceLeft(_ + ", \\quad " + _))
-    
-    return Some(e)
-  }
+  lazy val explicit: Option[Sym] =
+    if (!Sym.containsExpr(sym, SymVar('y))) Some(sym)
+    else Solve.solve(sym, 'y).headOption
   
-  def appendEquation(existing: dom.Element, elem: String, text: String): Unit = {
-    val e = document.createElement(elem)
-    e.innerText = text
-    e.setAttribute("class", "mq-static")
-    
-    existing.appendChild(e)
-    existing.appendChild(document.createElement("br"))
+  lazy val solutions: Seq[Sym] = explicit.map(Solve.solve(_, 'x)).getOrElse(Nil)
+
+  lazy val derivative: Sym =
+    Derivative.derive(explicit.getOrElse(sym), 'x)
+
+  lazy val extremas: Seq[Sym] =
+    if (explicit.isEmpty) Nil
+    else Solve.solve(derivative, 'x)
+
+  lazy val importantPoints: Seq[Sym] =
+    all.flatMap{s => Solve.importantPoints(s.sym, 'x)}.flatMap(_.expand)
+
+  lazy val undefinedPoints: Seq[Sym] =
+    all.flatMap{s => Solve.undefinedPoints(s.sym, 'x)}.flatMap(_.expand)
+
+  lazy val function: Option[Double => Double] = explicit match {
+    case None => None
+    case Some(ex) => Some{ (x: Double) => ex.approx(Map('x -> x)) }
   }
+
+  lazy val all: Seq[SuperSym] =
+    if (explicit.isEmpty) Nil
+    else explicit.get.expand.map(SuperSym(_))
+
+  lazy val props: Seq[(String, Seq[Sym])] = Seq(
+    {if (explicit.isDefined && explicit.get != sym)
+      Some("Explicit" -> Seq(explicit.get)) else None},
+    Option.when(solutions.nonEmpty)("Zeros" -> solutions),
+    Option.when(extremas.nonEmpty)("Extremas" -> extremas),
+    Some("Derivative" -> Seq(derivative)),
+  ).flatten
 }

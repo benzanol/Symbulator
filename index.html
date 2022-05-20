@@ -17,24 +17,24 @@
          max-width: 400px;
      }
 
-     .eqn-info {
-         font-size: 14px;
+     .mq-dynamic {
          margin: 0px;
-         line-height: 0.0;
+         line-height: 1.0;
          padding: 0px 0px 0px 0px;
      }
 
-     .mq-static {
-         margin: 2px;
+     .mq-static, .mq-dynamic, .prop-name {
+         margin: 0px;
+         line-height: 1.1;
+         padding: 0px 0px 0px 0px;
      }
 
-     .mathquill {
-         font-size: 36px;
-         margin: 10px;
+     .prop-name {
+         margin-top: 10px;
      }
 
-     .mq-root-block {
-         margin: 50px;
+     .mq-dynamic {
+         margin-top: 25px;
      }
 
      .delete-equation-button {
@@ -79,12 +79,14 @@
 
     <body>
         <div id="page-container">
+
             <div id="equation-container">
                 <button onclick="addEquation()" class="add-equation-button">Add Equation</button>
                 <br>
                 <div id="equations">
                 </div>
             </div>
+
             <div class="vertical-line"></div>
 
             <div id="graph-container">
@@ -95,6 +97,7 @@
                         style="background-color: transparent;" style="z-index: 1;">
                 </canvas>
             </div>
+
         </div>
     </body>
 
@@ -115,16 +118,18 @@
     <script>
      const MQ = MathQuill.getInterface(2);
 
-     function formatEquations() {
-         var spans = [...document.getElementsByClassName('mathquill')];
-
-         for (let i = 0; i < spans.length; i++) {
-             MQ.MathField(spans[i], {
-                 handlers: { edit: ( (field) => updateEquations() ) }
-             });
-         }
+     function formatEquation(eqn) {
+         MQ.MathField(eqn, {
+             handlers: {
+                 edit: (field) => {
+                     const elem = field.__controller.container.context;
+                     updateLatex(elem.getAttribute('hid'), MQ(elem).latex());
+                 }
+             }
+         });
      }
 
+     // Format all elements with class 'mq-static' as latex equations
      function formatStaticEquations() {
          var spans = document.getElementsByClassName('mq-static');
          for (let i = 0; i < spans.length; i++) {
@@ -132,60 +137,6 @@
          }
      }
 
-     function focusEquation(id) {
-         MQ(document.getElementById(id)).focus();
-     }
-
-     function getLatexEquations() {
-         let elements = document.getElementsByClassName("mathquill");
-         var latexes = [];
-
-         for (var i = 0; i < elements.length; i++) {
-             latexes.push(MQ(elements[i]).latex());
-         }
-
-         return latexes
-     }
-
-     function getLatexEquation(id) {
-         let element = document.getElementById(id);
-         return MQ(element).latex()
-     }
-
-     function getFunctions() {
-         let eqns = document.getElementsByClassName("mathquill");
-         var functions = [];
-
-         for (var i = 0; i < eqns.length; i++) {
-             let latex = MQ(eqns[i]).latex();
-             try {
-                 let parsed = evaluatex(latex, {latex: true})
-                 let func = (arg) => parsed({x: arg})
-                 functions.push(func);
-             } catch (error) {}
-         }
-
-         return functions;
-     }
-
-     // This is never actually used, since the javascript function can be
-     // called natively from within scala
-     function getPoints(start, end, inc) {
-         let funcs = getFunctions()
-         var pointses = []
-
-         funcs.map((f) => {
-             var points = [];
-             for (var x = start; x <= end; x += inc) {
-                 try {
-                     points.push(f(x));
-                 } catch (error) {}
-             }
-             pointses.push(points);
-         });
-
-         return pointses
-     }
     </script>
 
     <!-- Scala.js code -->

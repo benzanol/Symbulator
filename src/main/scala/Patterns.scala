@@ -1,9 +1,9 @@
-package sympany.patterns
+package sympany
 
 import scala.util.chaining._
 
-import sympany.symbolics._
-import sympany.symbolics.Sym._
+import sympany._
+import sympany.Sym._
 
 // Define functions used by the pattern matching system
 object Pattern {

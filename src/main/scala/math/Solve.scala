@@ -4,18 +4,18 @@ import scala.util.chaining._
 
 import scala.scalajs.js.annotation.JSExportTopLevel
 
-import sympany.symbolics._
-import sympany.symbolics.Sym._
-import sympany.patterns._
-import sympany.patterns.Pattern._
+import sympany._
 import sympany.math.Simplify.simplify
 import sympany.math.Derivative.derive
+import sympany.Sym._
+import sympany.Pattern._
 
 object Solve {
   val aRules = new Rules()
   
   def importantPoints(e: Sym, v: Symbol): Seq[Sym] = {
     e.exprs.map(importantPoints(_, v)).foldLeft(Seq[Sym]())(_ ++ _) ++
+    undefinedPoints(derive(e, v), v) ++
     solve(derive(e, v), v) ++
     (e match {
       case SymPow(b, SymFrac(p, root)) => solve(b, v)
@@ -28,6 +28,7 @@ object Solve {
     e.exprs.map(undefinedPoints(_, v)).foldLeft(Seq[Sym]())(_ ++ _) ++
     (e match {
       case SymLog(p, _) => solve(p, v)
+      case SymPow(b, p: SymR) if (p.n*p.d) < 0 => solve(b, v)
       case _ => Nil
     })
   }
@@ -55,22 +56,13 @@ object Solve {
       solve(simplify(SymSum(l, SymProd(r, #=(-1))))).headOption.getOrElse(whole)
   }
   
-  zRules.+("x^a = 0 >> 0"){ AsPowP(XP, __) }{ case () => #=(0) }
-  
-  zRules.+("u * a = 0 >> u = 0"){
-    @?('whole) @@ ProdP(@?('e) @@ hasxP(), __*)
-  }{ case (e: Sym, whole: Sym) =>
-      solve(Seq(e), Seq(whole)).headOption.getOrElse(whole) }
-  
-  zRules.+("ax + b = 0 >> -b/a"){
-    SumP(AsProdP(XP, @?('a) @@ Repeat(noxP())), @?('b) @@ Repeat(noxP()))
-  }{ case (a: Seq[Sym], b: Seq[Sym]) =>
-      SymProd(#=(-1), SymSum(b:_*), SymPow(SymProd(a:_*), #=(-1))) }
-  
-  zRules.+("x^p + a => x +- (-a)^(1/p)"){
-    AsSumP(PowP(XP, @?('p) @@ noxP()), @?('rest) @@ Repeat(noxP()))
-  }{ case (SymInt(n), r: Seq[Sym]) if (n % 2 == 0) => SymPM(SymPow(SymProd(#=(-1), SymSum(r:_*)), SymR(1, n)))
-    case (p: Sym, r: Seq[Sym]) => SymPow(SymProd(#=(-1), SymSum(r:_*)), SymPow(p, #=(-1)))
+  // Good luck trying to understand this mess lol
+  zRules.+("ax^p + b => x +- (-b/a)^(1/p)"){
+    AsSumP(AsProdP(AsPowP(XP, @?('p) @@ noxP()), @?('a) @@ Repeat(noxP())), @?('rest) @@ Repeat(noxP()))
+  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) => SymPM(SymPow(SymProd(#=(-1), SymSum(r:_*),
+        if (a.isEmpty) #=(1) else SymPow(SymSum(a:_*), #=(-1))), SymR(1, n)))
+    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) => SymPow(SymProd(#=(-1), SymSum(r:_*),
+        if (a.isEmpty) #=(1) else SymPow(SymSum(a:_*), #=(-1))), SymPow(p, #=(-1)))
   }
   
   zRules.+("Quadratic formula"){
