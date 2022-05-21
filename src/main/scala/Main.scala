@@ -5,6 +5,7 @@ import org.scalajs.dom.document
 import scala.scalajs.js.annotation.JSExportTopLevel
 
 import sympany._
+import sympany.math.Simplify
 
 object Main {
   def main(args: Array[String]): Unit = {

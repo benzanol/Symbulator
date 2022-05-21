@@ -41,12 +41,12 @@ object Parse {
 				if (prod.isEmpty) return None
 				
 				str = str.tail
-				sum :+= SymProd(prod:_*)
+				sum :+= Sym.***(prod)
 				prod = List[Sym]()
 				
 			} else if (str(0) == '-') {
 				if (prod.isEmpty && sum.nonEmpty) return None
-				if (prod.nonEmpty) sum :+= SymProd(prod:_*)
+				if (prod.nonEmpty) sum :+= Sym.***(prod)
 				
 				str = str.tail
 				prod = List[Sym](SymInt(-1))
@@ -64,9 +64,9 @@ object Parse {
 			}
 		
 		if (prod.isEmpty) return None
-		else sum :+= SymProd(prod:_*)
+		else sum :+= Sym.***(prod)
 		
-		val simplified = simplify(SymSum(sum:_*))
+		val simplified = simplify(Sym.+++(sum))
 		Some(simplified)
 	} catch {
 		case error: Throwable => None
@@ -171,7 +171,7 @@ object Parse {
 		// Create a symbolic expression based on the command
 		cmd match {
 			case "pi" => Some(SymPi() -> rest)
-			case "frac" => Some(SymProd(args(0), SymPow(args(1), SymInt(-1))) -> rest)
+			case "frac" => Some(Sym.**(args(0), SymPow(args(1), SymInt(-1))) -> rest)
 			case "sqrt" => Some(SymPow(args(0), SymR(1, 2)) -> rest)
 			case "sin" => readExprPower(rest).map{
 				case (e, rest2) => (SymSin(e) -> rest2)

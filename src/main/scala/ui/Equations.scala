@@ -120,7 +120,7 @@ case class SuperSym(orig: Sym) {
   
   lazy val explicit: Option[Sym] =
     if (!Sym.containsExpr(sym, SymVar('y))) Some(sym)
-    else Solve.solve(sym, 'y).headOption
+    else Solve.solve(sym, 'y).map(Simplify.simplify).headOption
   
   lazy val solutions: Seq[Sym] = explicit.map(Solve.solve(_, 'x)).getOrElse(Nil)
 
@@ -139,7 +139,7 @@ case class SuperSym(orig: Sym) {
 
   lazy val function: Option[Double => Double] = explicit match {
     case None => None
-    case Some(ex) => Some{ (x: Double) => ex.approx(Map('x -> x)) }
+    case Some(ex) => Some{ (x: Double) => ex.approx('x -> x).head }
   }
 
   lazy val all: Seq[SuperSym] =
@@ -147,6 +147,7 @@ case class SuperSym(orig: Sym) {
     else explicit.get.expand.map(SuperSym(_))
 
   lazy val props: Seq[(String, Seq[Sym])] = Seq(
+    Some("Simplified" -> Seq(sym)),
     {if (explicit.isDefined && explicit.get != sym)
       Some("Explicit" -> Seq(explicit.get)) else None},
     Option.when(solutions.nonEmpty)("Zeros" -> solutions),

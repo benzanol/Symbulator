@@ -213,14 +213,14 @@ object Graph {
     val tiny = (ctx.canvas.width * pos.xs) / 1000000.0
     
     val important = expr.importantPoints
-      .map(_.approx(Map())).flatMap{n => List(n - tiny, n, n + tiny)}
+      .flatMap(_.approx()).flatMap{n => List(n - tiny, n, n + tiny)}
     
     val undefined = expr.undefinedPoints
-      .map(_.approx(Map())).flatMap{n => List(n - tiny, n + tiny)}
+      .flatMap(_.approx()).flatMap{n => List(n - tiny, n + tiny)}
     
     // Calculate the function and derivative
     val f: Double => Double = expr.function.get
-    val dfdx: Double => Double = { x => expr.derivative.approx(Map('x -> x)) }
+    val dfdx: Double => Double = { x => expr.derivative.approx('x -> x).head }
 	
 	val segments = functionSegments(f, dfdx, important ++ undefined)
 	
