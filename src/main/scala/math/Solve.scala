@@ -38,7 +38,7 @@ object Solve {
     replaceExpr(e, SymVar(v), X)
       .pipe{expr => zRules.first(expr)}
       .map{solution => replaceExpr(solution, X, SymVar(v))}
-      .toSeq
+      .map(_.simple).toSeq
 
 
   //def solve(e: Sym, v: Symbol = X.symbol): Seq[Sym] =
@@ -74,9 +74,9 @@ object Solve {
       if (a.isEmpty) S(1) else ^(+++(a), S(-1))), ^(p, S(-1)))
   }
 
-//  zRules.+("a^p => a = 0"){
-//    @?('whole) @@ PowP( @?('b), RatP( @?('p) |> { p: SymR => p.value > 0 } ) )
-//  }{ case (b: Sym, p: SymR, whole: Sym) => solve(b).headOption.getOrElse(whole) }
+  //  zRules.+("a^p => a = 0"){
+  //    @?('whole) @@ PowP( @?('b), RatP( @?('p) |> { p: SymR => p.value > 0 } ) )
+  //  }{ case (b: Sym, p: SymR, whole: Sym) => solve(b).headOption.getOrElse(whole) }
 
   zRules.+("Quadratic formula"){
     SumP(

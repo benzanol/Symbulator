@@ -2,12 +2,8 @@ package sympany
 
 import scala.util.chaining._
 
+/// Helpful functions
 object Sym {
-  def toMultiset[T](seq: Seq[T]): Map[T, Int] =
-    seq.groupBy(identity).toList
-      .map{ case (identity, list) => (identity, list.length) }
-      .toMap
-  
   def replaceExpr(expr: Sym, target: Sym, replacement: Sym): Sym =
     if (expr == target) replacement
     else expr.mapExprs(replaceExpr(_, target, replacement))
@@ -42,8 +38,6 @@ object Sym {
   def V(s: Symbol) = SymVar(s)
 }
 
-import Sym._
-
 object Multiset {
   def toSeq[T](map: Map[T, Int]): Seq[T] =
     map.flatMap{ case (a, n) => Seq.fill(n)(a) }.toSeq
@@ -52,9 +46,94 @@ object Multiset {
     seq.groupBy(identity).map{ case (k, vs) => (k, vs.length) }.toMap
 }
 
+import Sym._
 
+
+/// To Latex
+object Latex {
+  def isNegative(e: Sym): Option[Sym] = e match {
+    case r: SymR if r.n < 0 => Some(SymR(-r.n, r.d))
+    case p: SymProd => {
+      val op = p.exprs.collect{ case r: SymR => r }.find(_.n < 0)
+      if (op.isEmpty) None
+      else Some( p.exprs.updated(p.exprs.indexOf(op.get), op.get.negative).pipe(Sym.***) )
+    }
+    case _ => None
+  }
+
+  def wrappedLatex(e: Sym, pow: Boolean = false): String = e match {
+    case SymSum(_) | SymProd(_) => "\\left(" + toLatex(e) + "\\right)"
+    case _: SymLog | _: SymPM if pow => "\\left(" + toLatex(e) + "\\right)"
+    case _ => toLatex(e)
+  }
+
+  def toLatex(e: Sym): String = e.simple match {
+    case SymFrac(n, d) if n < 0 => s"- \\frac{${-n}}{$d}"
+    case SymFrac(n, d) => s"\\frac{$n}{$d}"
+    case SymInt(n) => n.toString
+    case SymPositiveInfinity() => "\\infty"
+    case SymNegativeInfinity() => "-\\infty"
+    case SymUndefined() => "\\NaN"
+    case SymE() => "e"
+    case SymPi() => "\\pi"
+    case SymEquation(l, r) => s"${toLatex(l)} = ${toLatex(r)}"
+    case SymVar(s) if s.name contains '/' =>
+      s.name.split("/").pipe{ case Array(dy, dx) => s"\\frac{$dy}{$dx}" }
+    case SymVar(s) => s.name
+
+    case s: SymSum if isNegative(s.exprs(1)).isDefined =>
+      s"${toLatex(s.exprs.head)} ${toLatex(Sym.+++(s.exprs.tail))}"
+    case s: SymSum if s.exprs(1).isInstanceOf[SymPM] =>
+      s"${toLatex(s.exprs.head)} ${toLatex(Sym.+++(s.exprs.tail))}"
+    case s: SymSum => s"${toLatex(s.exprs.head)} + ${toLatex(Sym.+++(s.exprs.tail))}"
+
+    case p: SymProd =>
+      p.exprs.flatMap{
+        case SymFrac(n, d) if n == 1 => Seq( ^(S(d), S(-1)) )
+        case SymFrac(n, d) if d == 1 => Seq( S(n) )
+        case SymFrac(n, d) => Seq( ^(S(d), S(-1)), S(n) )
+        case other => Seq(other)
+      }.partitionMap{
+        case SymPow(b, p) if isNegative(p).isDefined =>
+          Right(SymPow(b, isNegative(p).get))
+        case other => Left(other)
+      }.pipe{ case (ns: List[Sym], ds: List[Sym]) => List[List[Sym]](ns, ds) }
+        .map{ es => if (es contains SymInt(-1)) ("- ", es.filter(_ != SymInt(-1))) else ("", es) }
+        .map{ case (str, es) => es match {
+          case List() => str + "1"
+          case _ => str + ***(es).exprs.map{
+            case e: SymSum => s"\\left( ${toLatex(e)} \\right)"
+            case e => toLatex(e)
+          }.mkString(" ")
+        }}.pipe{
+          case List(n: String, "1") => n
+          case List(n: String, "- 1") => "- " + n
+          case List(n: String, d: String) => s"\\frac{$n}{$d}"
+        }
+
+    case SymPow(SymSin(expr), expt) => s"\\sin^{$expt} ${wrappedLatex(expr)}"
+    case SymPow(SymCos(expr), expt) => s"\\cos^{$expt} ${wrappedLatex(expr)}"
+
+    case SymPow(base, expt) if isNegative(expt).isDefined =>
+      s"\\frac{1}{${toLatex(SymPow(base, isNegative(expt).get))}}"
+    case SymPow(base, SymFrac(p, r)) =>
+      if (r == 2) s"\\sqrt{${toLatex(SymPow(base, S(p)))}}"
+      else s"\\sqrt[$r]{${toLatex(SymPow(base, S(p)))}}"
+    case SymPow(base, expt) => s"${wrappedLatex(base, true)}^{${toLatex(expt)}}"
+
+    case SymLog(pow, base) => base match {
+      case _: SymE => s"\\ln ${wrappedLatex(pow)}"
+      case _ => s"\\log_{${toLatex(base)}} ${wrappedLatex(pow)}"
+    }
+    case SymSin(expr) => s"\\sin ${wrappedLatex(expr)}"
+    case SymCos(expr) => s"\\cos ${wrappedLatex(expr)}"
+    case SymPM(expr) => s"\\pm ${wrappedLatex(expr)}"
+  }
+}
+
+/// Symbolic trait
 trait Sym {
-  def toLatex: String
+  def toLatex: String = Latex.toLatex(this)
 
   def exprs: Seq[Sym]
   def instance(args: Sym*): Sym
@@ -73,6 +152,11 @@ trait Sym {
   def approx(env: Bind*): Seq[Double] = Nil
 
 
+  lazy val simple: Sym = math.Simplify.simplify(this)
+  lazy val derive: Sym = math.Derivative.derive(this, 'x)
+  lazy val solve: Seq[Sym] = math.Solve.solve(this, 'x)
+
+
   //def allHoles: Set[Sym] = exprHoles ++ extraHoles
   //def exprHoles: Set[Sym] = Set()
   //var extraHoles = Set[Sym] = Set()
@@ -81,6 +165,7 @@ trait Sym {
   //def zeros: Set[Sym] = Set()
 }
 
+/// Special traits
 trait SymConstant extends Sym {
   lazy val exprs = Nil
   def instance(args: Sym*) = this
@@ -88,6 +173,7 @@ trait SymConstant extends Sym {
   override def approx(env: Bind*) = Seq(value)
   def value: Double
 }
+
 
 trait SymOp extends Sym {
   def operation(vs: Double*): Double
@@ -99,23 +185,16 @@ trait SymOp extends Sym {
       }.map{ds => this.operation(ds:_*)}
 }
 
-
+/// Equation
 case class SymEquation(left: Sym = SymInt(0), right: Sym = SymInt(0)) extends Sym {
   lazy val exprs = Seq(left, right)
   def instance(args: Sym*) = SymEquation(args(0), args(1))
 
   override def toString = left.toString + " = " + right.toString
-  def toLatex = left.toLatex + " = " + right.toLatex
 }
 
+/// Variables
 //implicit class ImplicitSymVar(orig: Symbol) extends SymVar(orig)
-
-case class SymDecimal(decimal: BigDecimal) extends SymConstant {
-  override def toString = decimal.toString
-  def toLatex = decimal.toString
-
-  lazy val value = decimal.toDouble
-}
 
 case class SymVar(symbol: Symbol = 'x) extends Sym {
   lazy val exprs = Nil
@@ -124,13 +203,28 @@ case class SymVar(symbol: Symbol = 'x) extends Sym {
   override def approx(env: Bind*) = env.find(_._1 == symbol).map(_._2).toSeq
 
   override def toString = symbol.name
-  
-  def toLatex = symbol.name.indexOf('/') match {
-    case -1 => symbol.name
-    case n => s"\\frac{${symbol.name.substring(0, n)}}{${symbol.name.substring(n+1)}}"
-  }
 }
 
+/// Constants
+case class SymDecimal(decimal: BigDecimal) extends SymConstant {
+  override def toString = decimal.toString
+
+  lazy val value = decimal.toDouble
+}
+
+case class SymPi() extends SymConstant {
+  override def toString = "Pi"
+
+  lazy val value = Math.PI
+}
+
+case class SymE() extends SymConstant {
+  override def toString = "E"
+
+  lazy val value = Math.E
+}
+
+/// Rational Constants
 object SymR {
   def apply(n: BigInt = 1, d: BigInt = 1): SymR = {
     if (d == 0 && n == 0) return SymUndefined()
@@ -163,16 +257,13 @@ trait SymR extends SymConstant {
   def ^(o: SymInt): SymR = SymR(n.pow(o.n.toInt))
 }
 
-case class SymFrac(n: BigInt = 1, d: BigInt = 1) extends SymR {
-  def toLatex = s"\\frac{${n.toString}}{${d.toString}}"
-}
+case class SymFrac(n: BigInt = 1, d: BigInt = 1) extends SymR
 
 //implicit class ImplicitSymBigInt(original: BigInt) extends SymInt(original)
 //implicit class ImplicitSymInt(original: Int) extends SymInt(BigInt(original))
 
 case class SymInt(n: BigInt = 1) extends SymR {
   override def toString = n.toString
-  def toLatex = n.toString
   def d = BigInt(1)
   def s = this
   def ~(o: SymInt) = SymR(n, o.n)
@@ -199,23 +290,21 @@ case class SymInt(n: BigInt = 1) extends SymR {
 
 case class SymUndefined() extends SymR {
   override def toString = "NaN"
-  def toLatex = "\\NaN"
   def n = 0
   def d = 0
 }
 case class SymPositiveInfinity() extends SymR {
   override def toString = "Inf"
-  def toLatex = "\\infty"
   def n = 1
   def d = 0
 }
 case class SymNegativeInfinity() extends SymR {
   override def toString = "-Inf"
-  def toLatex = "-\\infty"
   def n = -1
   def d = 0
 }
 
+/// Operations
 case class SymSum(mset: Map[Sym, Int]) extends SymOp {
   lazy val exprs = Multiset.toSeq(mset)
   def instance(args: Sym*) = SymSum(Multiset.fromSeq(args))
@@ -223,43 +312,23 @@ case class SymSum(mset: Map[Sym, Int]) extends SymOp {
   def operation(vs: Double*) = vs.sum
 
   override def toString = f"(+ " + exprs.mkString(" ") + ")"
-  def toLatex = if (exprs.isEmpty) "" else {
-    ("\\left(" + exprs.map(_.toLatex).map(noParens)
-      .reduceLeft(_ + " + " + _) + "\\right)")
-      .replace("+ \\pm", "\\pm")
-  }
 }
 
 case class SymProd(mset: Map[Sym, Int]) extends SymOp {
   lazy val exprs = Multiset.toSeq(mset)
+    .groupBy{ _ match {
+      case _: SymR => 1
+      case _: SymConstant => 2
+      case _: SymVar => 3
+      case _ => 4
+    }}.toList.sortWith{ (a, b) => a._1 < b._1 }
+    .map(_._2).flatten.toSeq
+
   def instance(args: Sym*) = SymProd(Multiset.fromSeq(args))
 
   def operation(vs: Double*) = vs.product
 
   override def toString = f"(* " + exprs.mkString(" ") + ")"
-  
-  // Split the positive and negative powers into the numerator and denominator
-  def toLatex = if (exprs.isEmpty) "1" else if (exprs.length == 1) exprs(0).toLatex else {
-    val part = exprs.partitionMap(_ match {
-      case SymPow(b, SymInt(n)) if n.toInt == -1 => Right(b)
-      case SymPow(b, SymInt(n)) if n < 0 => Right(SymPow(b, SymInt(-n)))
-      case SymPow(b, p: SymProd) => {
-        val es = p.exprs
-        val op = es.collect{case si @ SymInt(n) if n < 0 => si}.headOption;
-        val newEs = if (op.isEmpty) es else {
-          es.updated(es.indexOf(op.get), SymInt(-op.get.n)).filter(_ != SymInt(1))
-        }
-        ^(b, ***(newEs)).pipe(if (op.isEmpty) Left(_) else Right(_))
-      }
-      case e => Left(e)
-    })
-    val strs = part.productIterator.toList.map{ in =>
-      val l = in.asInstanceOf[Seq[Sym]]
-      if (l.isEmpty) "1" else l.map(_.toLatex).reduceLeft(_ + " \\cdot " + _)
-    }
-    if (strs(1) == "1") s"\\left(${strs(0)}\\right)"
-    else s"\\frac{${strs(0)}}{${strs(1)}}"
-  }
 }
 
 case class SymPow(base: Sym = SymInt(1), expt: Sym = SymInt(1)) extends SymOp {
@@ -269,11 +338,6 @@ case class SymPow(base: Sym = SymInt(1), expt: Sym = SymInt(1)) extends SymOp {
   def operation(vs: Double*) = Math.pow(vs(0), vs(1))
 
   override def toString = f"(^ $base $expt)"
-  def toLatex = expt match {
-    case SymFrac(top, root) if top == 1 && root == 2 => s"\\sqrt{${noParens(base.toLatex)}}"
-    case SymFrac(top, root) if top == 1 => s"\\sqrt[${root.toInt}]{${noParens(base.toLatex)}}"
-    case _ => s"${base.toLatex}^{${expt.toLatex}}"
-  }
 }
 
 case class SymLog(pow: Sym = SymInt(1), base: Sym = SymE()) extends SymOp {
@@ -283,9 +347,6 @@ case class SymLog(pow: Sym = SymInt(1), base: Sym = SymE()) extends SymOp {
   def operation(vs: Double*) = Math.log(vs(0)) / Math.log(vs(1))
 
   override def toString = if (base == SymE()) f"(ln $pow)" else f"(log $pow $base)"
-  def toLatex =
-    if (base == SymE()) f"\\ln \\left(${pow.toLatex}\\right)"
-    else f"\\log_{${pow.toLatex}} \\left(${base.toLatex}\\right)"
 }
 
 case class SymPM(expr: Sym = SymInt(1)) extends Sym {
@@ -299,10 +360,6 @@ case class SymPM(expr: Sym = SymInt(1)) extends Sym {
     List(1, -1).flatMap{ n => expr.approx(env:_*).map(_ * n) }
 
   override def toString = f"(+- $expr)"
-  def toLatex = expr match {
-    case _: SymProd => s"\\pm ${expr.toLatex.pipe{s => s.substring(6, s.length-7)}}"
-    case _ => s"\\pm ${expr.toLatex}"
-  }
 }
 
 case class SymSin(expr: Sym) extends SymOp {
@@ -310,8 +367,6 @@ case class SymSin(expr: Sym) extends SymOp {
   def instance(args: Sym*) = SymSin(args.head)
 
   def operation(vs: Double*) = Math.sin(vs.head)
-
-  def toLatex = f"sin${expr.toLatex}"
 }
 
 case class SymCos(expr: Sym) extends Sym {
@@ -319,20 +374,5 @@ case class SymCos(expr: Sym) extends Sym {
   def instance(args: Sym*) = SymCos(args.head)
 
   def operation(vs: Double*) = Math.cos(vs.head)
-
-  def toLatex = f"cos${expr.toLatex}"
 }
 
-case class SymPi() extends SymConstant {
-  override def toString = "Pi"
-  def toLatex = "\\pi"
-
-  lazy val value = Math.PI
-}
-
-case class SymE() extends SymConstant {
-  override def toString = "E"
-  def toLatex = "e"
-
-  lazy val value = Math.E
-}

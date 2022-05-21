@@ -24,7 +24,7 @@ object Simplify {
     ( base.primeFactors.toList.foldLeft(S(1)){ (a, t) => a * (t._1 ^ SymInt(t._2.n / root.n)) },
       base.primeFactors.toList.foldLeft(S(1)){ (a, t) => a * (t._1 ^ SymInt(t._2.n % root.n)) }
     )
-  
+
   sRules.+("x^0 = 1"){
     PowP(__, =#?(0))
   }{ case () => S(1) }
@@ -196,6 +196,47 @@ object Simplify {
     ProdP(PMP(@?('e)), @?('rest) @@ __*)
   }{ case (e: Sym, rest: Seq[Sym]) =>
       SymPM( ***(e +: rest) )
+  }
+
+  // Simplifying infinities
+  sRules.+("Anything with an undefined is undefined"){
+    AnyP() |> {e: Sym => Sym.containsExpr(e, SymUndefined())}
+  }{ case () => SymUndefined() }
+
+  sRules.+("Infinity minus infinity is undefined"){
+    SumP( SymP(SymPositiveInfinity()), SymP(SymNegativeInfinity()), __* )
+  }{ case () => SymUndefined() }
+
+  sRules.+("Infinity times a number"){
+    ProdP( SymP(SymPositiveInfinity()), @?('a) @@ RatP(), @?('r) @@ __* )
+  }{ case (a: SymR, r: Seq[SymR]) =>
+      if (a.n > 0) +++( SymPositiveInfinity() +: r )
+      else if (a.n < 0) +++( SymNegativeInfinity() +: r )
+      else SymUndefined()
+  }
+
+  sRules.+("Negative infinity times a number"){
+    ProdP( SymP(SymNegativeInfinity()), @?('a) @@ RatP(), @?('r) @@ __* )
+  }{ case (a: SymR, r: Seq[SymR]) =>
+      if (a.value > 0) +++( SymNegativeInfinity() +: r )
+      else if (a.value < 0) +++( SymPositiveInfinity() +: r )
+      else SymUndefined()
+  }
+
+  sRules.+("Infinity to a power"){
+    PowP( SymP(SymPositiveInfinity()), @?('e) @@ RatP() )
+  }{ case (e: SymR) =>
+      if (e.value > 0) SymPositiveInfinity()
+      else if (e.value < 0) S(0)
+      else SymUndefined()
+  }
+
+sRules.+("Negative infinity to a power"){
+    PowP( SymP(SymNegativeInfinity()), @?('e) @@ RatP() )
+  }{ case (e: SymR) =>
+      if (e.value > 0) SymNegativeInfinity()
+      else if (e.value < 0) S(0)
+      else SymUndefined()
   }
 
   // Controversial
