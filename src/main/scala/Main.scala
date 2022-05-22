@@ -16,7 +16,7 @@ object Main {
   def jslog(arg: Any): Unit =
     scalajs.js.Dynamic.global.console.log(arg.asInstanceOf[scalajs.js.Any])
   
-  def time[R](str: String, block: => R): R = {
+  def time[R](str: String)(block: => R): R = {
     val t0 = System.nanoTime()
     val result = block
     val t1 = System.nanoTime()

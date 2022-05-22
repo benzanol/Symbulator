@@ -24,8 +24,6 @@ object Derivative {
             **(e.exprs.head, derive(***(e.exprs.tail), v)) )
         case SymPow(base, expt: SymR) =>
           **(expt, derive(base, v), ^(base, expt - S(1)))
-        case SymPow(base, expt) if sympany.Pattern.noX(expt) =>
-          **(derive(base, v), **(base, ++(expt, S(-1))))
 		case SymPow(base, expt) => **(^(base, expt), derive(**(expt, log(base)), v))
 		case SymLog(u, SymE()) => **(derive(u, v), ^(u, S(-1)))
 		case SymLog(pow, base) => derive(**(log(pow), ^(log(base), S(-1))), v)

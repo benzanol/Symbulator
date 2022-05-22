@@ -187,6 +187,8 @@ object Simplify {
   }
   
   sRules.+("Plus/minus 0 is 0"){ SymP(SymPM(SymInt(0))) }{ case () => S(0) }
+
+  sRules.+("Remove nested plus/minus"){ PMP(PMP(@?('e))) }{ case e: Sym => SymPM(e) }
   
   sRules.+("Plus/minus -x is +-x"){
     PMP(@?('a) @@ RatP() |>[SymR] {a: SymR => (a.n*a.d) < 0})

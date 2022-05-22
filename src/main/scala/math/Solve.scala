@@ -22,7 +22,7 @@ object Solve {
       case SymPow(b, SymInt(n)) if n < 0 => solve(b, v)
       case _ => Nil
     })
-  }
+  }.distinct
   
   def undefinedPoints(e: Sym, v: Symbol): Seq[Sym] = {
     e.exprs.map(undefinedPoints(_, v)).foldLeft(Seq[Sym]())(_ ++ _) ++
@@ -31,14 +31,14 @@ object Solve {
       case SymPow(b, p: SymR) if (p.n*p.d) < 0 => solve(b, v)
       case _ => Nil
     })
-  }
+  }.distinct
   
   @JSExportTopLevel("solve")
   def solve(e: Sym, v: Symbol = X.symbol): Seq[Sym] = 
     replaceExpr(e.simple, SymVar(v), X)
       .pipe{expr => zRules.first(expr)}
       .map{solution => replaceExpr(solution, X, SymVar(v))}
-      .map(_.simple).toSeq
+      .map(_.simple).toSeq.distinct
 
 
   //def solve(e: Sym, v: Symbol = X.symbol): Seq[Sym] =

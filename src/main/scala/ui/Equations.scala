@@ -56,6 +56,12 @@ object Equations {
     js.eval(s"MQ(document.getElementById('eqn-${h.id}')).focus()")
   }
 
+  @JSExportTopLevel("deleteEquation")
+  def deleteEquation(id: String): Unit = {
+    handlers = handlers.filter(_.id != id)
+    updateEquations()
+  }
+
   // Update the handler that has the specified id to have a new equation
   @JSExportTopLevel("updateLatex")
   def updateLatex(id: String, latex: String): Unit = {
@@ -67,6 +73,18 @@ object Equations {
       case None => throw new Exception(s"Handler $id not found")
     }
   }
+
+  // Get the list of properties that should be displayed below an equation
+  def expressionProperties(sym: Sym): Seq[(String, Seq[Sym])] = Seq(
+    Some("Simplified" -> Seq(sym)),
+    {if (sym.explicit.isDefined && sym.explicit.get != sym.simple)
+      Some("Explicit" -> Seq(sym.explicit.get)) else None},
+    Some("Zeros" -> sym.zeros),
+    Some("Extremas" -> sym.extremas),
+    Some("Derivative" -> Seq(sym.derivative)),
+    Some("Undefined" -> sym.undefined),
+    Some("Important" -> sym.important),
+  ).flatten.filter(_._2.nonEmpty)
 }
 
 import Equations.makeElement
@@ -75,6 +93,12 @@ class EquationHandler() {
   val id = scala.util.Random.nextInt().abs.toString
 
   val rootElem = makeElement("div", "class" -> "eqn-div",   "id" -> s"div-$id",  "hid" -> id)
+
+  val delButton = makeElement("button", "innerText" -> "×",
+    "class" -> "delete-equation-button", "id" -> s"btn-$id",
+    "onclick" -> s"deleteEquation('$id')")
+  rootElem.appendChild(delButton)
+
   val eqnElem  = makeElement("p", "class" -> "mq-dynamic",  "id" -> s"eqn-$id",  "hid" -> id)
   val propElem = makeElement("div", "class" -> "eqn-props", "id" -> s"prop-$id", "hid" -> id)
   rootElem.appendChild(eqnElem)
@@ -83,18 +107,18 @@ class EquationHandler() {
   js.Dynamic.global.formatEquation(eqnElem)
 
   var latex: String = ""
-  var eqn: Option[SuperSym] = None
+  var eqn: Option[Sym] = None
 
   def updateLatex(newLatex: String): Unit = {
     if (newLatex == this.latex) return
 
     this.latex = newLatex
-    this.eqn = Parse.parseLatex(newLatex).map(SuperSym(_))
+    this.eqn = Parse.parseLatex(newLatex)
 
     propElem.replaceChildren()
 
     if (eqn.isDefined)
-      for (p <- eqn.get.props) {
+      for (p <- Equations.expressionProperties(eqn.get)) {
         // Create a div for the property and add it to the property list
         val div = Equations.makeElement("div", "class" -> "eqn-prop")
         propElem.appendChild(div)
@@ -143,13 +167,4 @@ case class SuperSym(orig: Sym) {
   lazy val all: Seq[SuperSym] =
     if (explicit.isEmpty) Nil
     else explicit.get.expand.map(SuperSym(_))
-
-  lazy val props: Seq[(String, Seq[Sym])] = Seq(
-    Some("Simplified" -> Seq(sym)),
-    {if (explicit.isDefined && explicit.get != sym)
-      Some("Explicit" -> Seq(explicit.get)) else None},
-    Option.when(solutions.nonEmpty)("Zeros" -> solutions),
-    Option.when(extremas.nonEmpty)("Extremas" -> extremas),
-    Some("Derivative" -> Seq(derivative)),
-  ).flatten
 }

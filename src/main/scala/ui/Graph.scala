@@ -11,7 +11,6 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 import sympany.Main.jslog
 import sympany.Parse.parseLatex
 import sympany.Sym.replaceExpr
-import sympany.ui.SuperSym
 import sympany._
 import sympany.math._
 
@@ -105,12 +104,14 @@ object Graph {
 
   // Draw the graph
 
-  private var graphs = Seq[SuperSym]()
+  private var graphs = Seq[Sym]()
+  private var points = Seq[Seq[(Double, Double)]]()
   private val colors = Seq("#AA0000", "#0000AA", "#008800")
   private val gridColor = "#AAAAAA"
   
-  def setGraphs(exprs: Seq[SuperSym]): Unit = {
+  def setGraphs(exprs: Seq[Sym]): Unit = {
 	this.graphs = exprs
+    this.points = exprs.map{e => e.zeros.flatMap(_.approx())}.map(_.map(_ -> 0))
 	draw
   }
   
@@ -125,9 +126,14 @@ object Graph {
 	// Draw the functions on the main canvas
 	for (i <- 0 until graphs.length) {
 	  fctx.strokeStyle = colors(i % colors.length)
-      
-      graphs(i).all.foreach(drawExpression(_)(fctx))
+      drawExpression(graphs(i))(fctx)
 	}
+
+    // Draw the points on the main canvas
+    for (i <- 0 until points.length) {
+	  val color = colors(i % colors.length)
+      points(i).foreach{ p => drawPoint(p._1, p._2, color)(fctx) }
+    }
 	
 	// Remove any of the function lines that went into the margin
 	fctx.clearRect(0, 0, marginX, fc.height)
@@ -205,47 +211,63 @@ object Graph {
   }
   
   // Drawing the actual function
-  private def drawExpression(expr: SuperSym)(implicit ctx: JsContext): Unit = {
-	ctx.beginPath();
-	ctx.lineWidth = 5
-    
+  private def drawExpression(sym: Sym)(implicit ctx: JsContext): Unit = {
     // Make sure to include important points on the curve (extremas, holes, etc)
     val tiny = (ctx.canvas.width * pos.xs) / 1000000.0
     
-    val important = expr.importantPoints
+    val important = sym.important
       .flatMap(_.approx()).flatMap{n => List(n - tiny, n, n + tiny)}
     
-    val undefined = expr.undefinedPoints
+    val undefined = sym.undefined
       .flatMap(_.approx()).flatMap{n => List(n - tiny, n + tiny)}
     
     // Calculate the function and derivative
-    val f: Double => Double = expr.function.get
-    val dfdx: Double => Double = { x => expr.derivative.approx('x -> x).head }
-	
-	val segments = functionSegments(f, dfdx, important ++ undefined)
-	
-    
-    segments.foreach(connectWithCurves)
-	//connectWithLines(canvasPoints)(ctx)
-	
+    for (f <- sym.functions) {
+      val segments = functionSegments(f, important ++ undefined)
+      
+      segments.foreach(connectWithCurves)
+    }
+  }
+
+  // Drawing special points
+  private def drawPoint(x: Double, y: Double, color: String)(implicit ctx: JsContext): Unit = {
+    val cx = marginX + ((x - pos.x) / pos.xs).toInt
+    val cy = ctx.canvas.height - marginY - ((y - pos.y) / pos.ys).toInt
+
+    ctx.beginPath()
+
+    ctx.lineWidth = 4
+    ctx.strokeStyle = color
+    ctx.fillStyle = "white"
+    ctx.arc(cx, cy, 5, 0, 2 * Math.PI)
+
+    ctx.fill()
     ctx.stroke()
   }
   
   // Get a distrobution of points with higher density of points where there is a steeper derivative
-  private def functionSegments(f: Double => Double, dfdx: Double => Double, extras: Seq[Double] = Nil):
+  private def functionSegments(f: Double => Option[Double], extras: Seq[Double] = Nil):
       Seq[Seq[(Double, Double)]] = {
-    
-    // The x position of the current point (starts slightly to the left of the screen)
-	var x = pos.x
     
     val minY = pos.y
     val maxY = pos.y + (fc.height - marginY) * pos.ys
     def inRange(y: Double) = (y >= minY) && (y <= maxY)
-    
+
+    // The total width of the screen in units
     val width = (fc.width - marginX) * pos.xs
-    val max = x + width;
-    val dist = width / 500.0;
+
+    // The distance between calculated points will be a power of 1.5
+    val dist = Math.pow(1.5, Math.round(Math.log(width / 100.0) / Math.log(1.5)))
+
+    // The x position of the current point (starts slightly to the left of the screen)
+	var x = pos.x - dist - (pos.x % dist)
+
+    // When using an extra point, remember, where we were before
+    var lastMultiple = x
     
+    // The largest x value on the screen
+    val max = pos.x + width + dist;
+
     // The extras that haven't yet been used - remove any that are outside of the screen
     var extrasLeft = extras.sortWith(_ < _).filter(_ > x).distinct
     
@@ -254,7 +276,7 @@ object Graph {
     
     while (x < max) {
       try {
-        val y = f(x)
+        val y: Double = f(x).getOrElse{throw new ArithmeticException ; 0}
         
         // If the current, last, and last last were out of range, remove the last one
         if (segments.head.length >= 2 && !inRange(y) &&
@@ -269,11 +291,13 @@ object Graph {
           if (segments.head.nonEmpty) segments = Nil :: segments
       }
       
-      x += dist
+      x = lastMultiple + dist
       
       if (extrasLeft.nonEmpty && extrasLeft.head <= x) {
         x = extrasLeft.head
         extrasLeft = extrasLeft.tail
+      } else {
+        lastMultiple = x
       }
     }
 	
@@ -282,6 +306,9 @@ object Graph {
   
   private def connectWithCurves(points: Seq[(Double, Double)])
     (implicit ctx: JsContext): Unit = {
+	ctx.beginPath()
+	ctx.lineWidth = 5
+
 	if (points.length < 2) return
       
     val ps = points.map{ t => (canvasX(t._1), canvasY(t._2)) }
@@ -298,22 +325,10 @@ object Graph {
       ctx.quadraticCurveTo(ps(i)._1, ps(i)._2, xc, yc);
     }
     
-    
     // Curve through the last two ps
     ctx.quadraticCurveTo(
 	  ps(ps.length - 2)._1, ps(ps.length - 2)._2, ps.last._1, ps.last._2);
-  }
-  
-  private def connectWithLines(points: Seq[(Int, Int)])
-    (implicit ctx: JsContext): Unit = {
-    if (points.length < 2) return
-	  
-	ctx.moveTo(points.head._1, points.head._1)
-	for (i <- 1 to points.length - 2) {
-      val p = points(i)
-	  ctx.lineTo(p._1, p._2)
-	  ctx.moveTo(p._1, p._2)
-	}
-	ctx.lineTo(points.last._1, points.last._2)
+
+    ctx.stroke()
   }
 }

@@ -1,6 +1,9 @@
 package sympany
 
 import scala.util.chaining._
+import scala.collection.mutable
+
+import sympany.math._
 
 /// Helpful functions
 object Sym {
@@ -11,7 +14,7 @@ object Sym {
   def containsExpr(expr: Sym, target: Sym): Boolean =
     if (expr == target) true
     else expr.exprs.map(containsExpr(_, target)).contains(true)
-  
+
   def noParens(str: String): String =
     if (str.startsWith("\\left(")) str.substring(6, str.length - 7)
     else if (str.head == '(') str.substring(1, str.length - 1)
@@ -81,14 +84,14 @@ object Latex {
       s.name.split("/").pipe{ case Array(dy, dx) => s"\\frac{$dy}{$dx}" }
     case SymVar(s) => s.name
 
-    case s: SymSum if isNegative(s.exprs(1)).isDefined =>
-      s"${toLatex(s.exprs.head)} ${toLatex(Sym.+++(s.exprs.tail))}"
-    case s: SymSum if s.exprs(1).isInstanceOf[SymPM] =>
-      s"${toLatex(s.exprs.head)} ${toLatex(Sym.+++(s.exprs.tail))}"
-    case s: SymSum => s"${toLatex(s.exprs.head)} + ${toLatex(Sym.+++(s.exprs.tail))}"
+    case s: SymSum if isNegative(s.sortedExprs(1)).isDefined =>
+      s"${toLatex(s.sortedExprs.head)} ${toLatex(Sym.+++(s.sortedExprs.tail))}"
+    case s: SymSum if s.sortedExprs(1).isInstanceOf[SymPM] =>
+      s"${toLatex(s.sortedExprs.head)} ${toLatex(Sym.+++(s.sortedExprs.tail))}"
+    case s: SymSum => s"${toLatex(s.sortedExprs.head)} + ${toLatex(Sym.+++(s.sortedExprs.tail))}"
 
     case p: SymProd =>
-      p.exprs.flatMap{
+      p.sortedExprs.flatMap{
         case SymFrac(n, d) if n == 1 => Seq( ^(S(d), S(-1)) )
         case SymFrac(n, d) if d == 1 => Seq( S(n) )
         case SymFrac(n, d) => Seq( ^(S(d), S(-1)), S(n) )
@@ -101,14 +104,16 @@ object Latex {
         .map{ es => if (es contains SymInt(-1)) ("- ", es.filter(_ != SymInt(-1))) else ("", es) }
         .map{ case (str, es) => es match {
           case List() => str + "1"
-          case _ => str + ***(es).exprs.map{
+          case _ => str + ***(es).sortedExprs.map{
             case e: SymSum => s"\\left( ${toLatex(e)} \\right)"
             case e => toLatex(e)
           }.mkString(" ")
         }}.pipe{
           case List(n: String, "1") => n
           case List(n: String, "- 1") => "- " + n
-          case List(n: String, d: String) => s"\\frac{$n}{$d}"
+          case List(n: String, d: String) =>
+            if (n.startsWith("-")) s"- \\frac{${n.tail}}{$d}"
+            else s"\\frac{$n}{$d}"
         }
 
     case SymPow(SymSin(expr), expt) => s"\\sin^{$expt} ${wrappedLatex(expr)}"
@@ -151,11 +156,30 @@ trait Sym {
   type Bind = (Symbol, Double)
   def approx(env: Bind*): Seq[Double] = Nil
 
+  def solve(v: Symbol): Seq[Sym] = Solve.solve(this, v)
 
-  lazy val simple: Sym = math.Simplify.simplify(this)
-  lazy val derive: Sym = math.Derivative.derive(this, 'x)
-  lazy val solve: Seq[Sym] = math.Solve.solve(this, 'x)
+  lazy val simple: Sym = Simplify.simplify(this)
+  lazy val derivative: Sym = Derivative.derive(this, 'x)
+  lazy val zeros: Seq[Sym] = this.solve('x)
+  lazy val important: Seq[Sym] = Solve.importantPoints(simple, 'x)
+  lazy val undefined: Seq[Sym] = Solve.undefinedPoints(simple, 'x)
 
+  lazy val explicit: Option[Sym] =
+    if (!containsExpr(simple, SymVar('y))) Some(simple)
+    else simple.solve('y).headOption
+
+  lazy val extremas: Seq[Sym] =
+    if (explicit.isEmpty) Nil
+    else derivative.zeros
+
+  val pointCache = mutable.Map[Double, Seq[Double]]()
+  def at(x: Double): Seq[Double] = if (explicit.isEmpty) Nil else {
+    if (!pointCache.contains(x)) pointCache(x) = explicit.get.approx('x -> x)
+    return pointCache(x)
+  }
+  lazy val functions: Seq[Double => Option[Double]] =
+    if (expand.length <= 1) Seq{ x: Double => this.at(x).headOption }
+    else expand.flatMap(_.functions)
 
   //def allHoles: Set[Sym] = exprHoles ++ extraHoles
   //def exprHoles: Set[Sym] = Set()
@@ -307,6 +331,7 @@ case class SymNegativeInfinity() extends SymR {
 /// Operations
 case class SymSum(mset: Map[Sym, Int]) extends SymOp {
   lazy val exprs = Multiset.toSeq(mset)
+  lazy val sortedExprs = exprs.sortWith{ (a, b) => Latex.isNegative(a).isEmpty }
   def instance(args: Sym*) = SymSum(Multiset.fromSeq(args))
 
   def operation(vs: Double*) = vs.sum
@@ -316,12 +341,14 @@ case class SymSum(mset: Map[Sym, Int]) extends SymOp {
 
 case class SymProd(mset: Map[Sym, Int]) extends SymOp {
   lazy val exprs = Multiset.toSeq(mset)
-    .groupBy{ _ match {
-      case _: SymR => 1
-      case _: SymConstant => 2
-      case _: SymVar => 3
-      case _ => 4
-    }}.toList.sortWith{ (a, b) => a._1 < b._1 }
+  lazy val sortedExprs = exprs.groupBy{ _ match {
+    case _: SymR => 1
+    case _: SymConstant => 2
+    case _: SymVar => 3
+    case _: SymPow => 4
+    case _: SymSum | _: SymProd => 6
+    case _ => 5
+  }}.toList.sortWith{ (a, b) => a._1 < b._1 }
     .map(_._2).flatten.toSeq
 
   def instance(args: Sym*) = SymProd(Multiset.fromSeq(args))
