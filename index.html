@@ -69,6 +69,17 @@
          background-color: gray;
          width: 1px;
      }
+
+     #point-box {
+         position: absolute;
+         z-index: 100;
+         background-color: white;
+         border-style: solid;
+         border-width: 2px;
+         border-radius: 4px;
+         padding: 2px;
+     }
+     
     </style>
 
     <head>
@@ -78,6 +89,8 @@
     </head>
 
     <body>
+        <p id="point-box" style="display:none;"></p>
+
         <div id="page-container">
 
             <div id="equation-container">

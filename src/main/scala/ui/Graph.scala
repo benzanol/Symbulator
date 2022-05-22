@@ -23,6 +23,9 @@ object Graph {
 	fc.addEventListener("mousedown", { (e: Any) => mouseDown = true  })
 	fc.addEventListener("mouseup",   { (e: Any) => mouseDown = false })
 	fc.addEventListener("mouseout",  { (e: Any) => mouseDown = false })
+
+	fc.addEventListener("mousemove", highlightPoints)
+	fc.addEventListener("mouseout",  { (e: Any) => hidePointBox() })
 	
 	window.addEventListener("resize", { (e: Any) => draw })
 	
@@ -102,20 +105,57 @@ object Graph {
   }
 
 
+  // Display important points when the mouse hovers over them
+  @JSExportTopLevel("highlightPoints")
+  def highlightPoints(event: dom.MouseEvent) {
+    val rect = fc.getBoundingClientRect()
+
+    val mx = (event.clientX - rect.left - marginX)   * pos.xs + pos.x
+    val my = (rect.bottom - event.clientY - marginY) * pos.ys + pos.y
+
+    val minPixelDist = 20
+    val minDist = minPixelDist * pos.xs
+
+    for (p <- points.flatten ; x <- p._1.approx ; y <- p._2.approx)
+      // Find the first point that is less than the min distance from the cursor
+      if (Math.sqrt( (x-mx)*(x-mx) + (y-my)*(y-my) ) < minDist) {
+
+        // Set the text of the point box and move it to the cursor
+        val box = document.getElementById("point-box")
+        box.innerText = s"\\left( ${p._1.toLatex}, \\quad ${p._2.toLatex} \\right)"
+        box.setAttribute("style", s"left:${event.clientX}px; top:${event.clientY}px; display:block;")
+
+        // Format the point as a latex equation
+        js.eval("MQ.StaticMath(document.getElementById('point-box'));")
+
+        return
+      }
+
+    // If no points were found, make sure the box is hidden
+    hidePointBox()
+  }
+
+  @JSExportTopLevel("hidePointBox")
+  def hidePointBox() {
+    val box = document.getElementById("point-box")
+    box.setAttribute("style", "display:none;")
+  }
+
+
   // Draw the graph
 
   private var graphs = Seq[Sym]()
-  private var points = Seq[Seq[(Double, Double)]]()
+  private var points = Seq[Seq[(Sym, Sym)]]()
   private val colors = Seq("#AA0000", "#0000AA", "#008800")
   private val gridColor = "#AAAAAA"
   
-  def setGraphs(exprs: Seq[Sym]): Unit = {
+  def setGraphs(exprs: Seq[Sym]) {
 	this.graphs = exprs
-    this.points = exprs.map{e => e.zeros.flatMap(_.approx())}.map(_.map(_ -> 0))
+    this.points = exprs.map(_.zeros.flatMap(_.expand).map(_.simple -> SymInt(0)))
 	draw
   }
   
-  def draw: Unit = {
+  def draw {
 	// Make the canvas dimensions match their pixel dimensions
 	fc.width = fc.clientWidth
 	fc.height = fc.clientHeight
@@ -146,7 +186,7 @@ object Graph {
 	drawGrid(gctx)
   }
   
-  private def drawGrid(implicit ctx: JsContext): Unit = {
+  private def drawGrid(implicit ctx: JsContext) {
 	// Loop through the same code twice for the horizontal and vertical lines
 	for (horizontal <- List(true, false)) {
 	  val (start, size) =
@@ -211,7 +251,7 @@ object Graph {
   }
   
   // Drawing the actual function
-  private def drawExpression(sym: Sym)(implicit ctx: JsContext): Unit = {
+  private def drawExpression(sym: Sym)(implicit ctx: JsContext) {
     // Make sure to include important points on the curve (extremas, holes, etc)
     val tiny = (ctx.canvas.width * pos.xs) / 1000000.0
     
@@ -230,19 +270,21 @@ object Graph {
   }
 
   // Drawing special points
-  private def drawPoint(x: Double, y: Double, color: String)(implicit ctx: JsContext): Unit = {
-    val cx = marginX + ((x - pos.x) / pos.xs).toInt
-    val cy = ctx.canvas.height - marginY - ((y - pos.y) / pos.ys).toInt
+  private def drawPoint(xe: Sym, ye: Sym, color: String)(implicit ctx: JsContext) {
+    for (x <- xe.approx() ; y <- ye.approx()) {
+      val cx = marginX + ((x - pos.x) / pos.xs).toInt
+      val cy = ctx.canvas.height - marginY - ((y - pos.y) / pos.ys).toInt
 
-    ctx.beginPath()
+      ctx.beginPath()
 
-    ctx.lineWidth = 4
-    ctx.strokeStyle = color
-    ctx.fillStyle = "white"
-    ctx.arc(cx, cy, 5, 0, 2 * Math.PI)
+      ctx.lineWidth = 4
+      ctx.strokeStyle = color
+      ctx.fillStyle = "white"
+      ctx.arc(cx, cy, 5, 0, 2 * Math.PI)
 
-    ctx.fill()
-    ctx.stroke()
+      ctx.fill()
+      ctx.stroke()
+    }
   }
   
   // Get a distrobution of points with higher density of points where there is a steeper derivative
@@ -304,8 +346,7 @@ object Graph {
 	return segments
   }
   
-  private def connectWithCurves(points: Seq[(Double, Double)])
-    (implicit ctx: JsContext): Unit = {
+  private def connectWithCurves(points: Seq[(Double, Double)])(implicit ctx: JsContext) {
 	ctx.beginPath()
 	ctx.lineWidth = 5
 

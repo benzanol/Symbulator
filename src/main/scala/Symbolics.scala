@@ -151,10 +151,12 @@ trait Sym {
       .foldLeft(Seq(Seq[Sym]())){ (acc, seq: Seq[Sym]) =>
         acc.flatMap{a => seq.map{b => a :+ b}}
       }.map{es => this.instance(es:_*)}
+      .map(Simplify.simplify)
 
 
   type Bind = (Symbol, Double)
   def approx(env: Bind*): Seq[Double] = Nil
+  lazy val approx: Seq[Double] = approx()
 
   def solve(v: Symbol): Seq[Sym] = Solve.solve(this, v)
 
@@ -194,8 +196,8 @@ trait SymConstant extends Sym {
   lazy val exprs = Nil
   def instance(args: Sym*) = this
 
-  override def approx(env: Bind*) = Seq(value)
-  def value: Double
+  override def approx(env: Bind*) = Seq(constant)
+  def constant: Double
 }
 
 
@@ -233,19 +235,19 @@ case class SymVar(symbol: Symbol = 'x) extends Sym {
 case class SymDecimal(decimal: BigDecimal) extends SymConstant {
   override def toString = decimal.toString
 
-  lazy val value = decimal.toDouble
+  lazy val constant = decimal.toDouble
 }
 
 case class SymPi() extends SymConstant {
   override def toString = "Pi"
 
-  lazy val value = Math.PI
+  lazy val constant = Math.PI
 }
 
 case class SymE() extends SymConstant {
   override def toString = "E"
 
-  lazy val value = Math.E
+  lazy val constant = Math.E
 }
 
 /// Rational Constants
@@ -270,7 +272,7 @@ trait SymR extends SymConstant {
 
   override def toString = f"$n/$d"
 
-  lazy val value = n.toDouble / d.toDouble
+  lazy val constant = n.toDouble / d.toDouble
   
   def inverse: SymR = SymR(d, n)
   def negative: SymR = SymR(-n, d)

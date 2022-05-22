@@ -220,24 +220,24 @@ object Simplify {
   sRules.+("Negative infinity times a number"){
     ProdP( SymP(SymNegativeInfinity()), @?('a) @@ RatP(), @?('r) @@ __* )
   }{ case (a: SymR, r: Seq[SymR]) =>
-      if (a.value > 0) +++( SymNegativeInfinity() +: r )
-      else if (a.value < 0) +++( SymPositiveInfinity() +: r )
+      if (a.constant > 0) +++( SymNegativeInfinity() +: r )
+      else if (a.constant < 0) +++( SymPositiveInfinity() +: r )
       else SymUndefined()
   }
 
   sRules.+("Infinity to a power"){
     PowP( SymP(SymPositiveInfinity()), @?('e) @@ RatP() )
   }{ case (e: SymR) =>
-      if (e.value > 0) SymPositiveInfinity()
-      else if (e.value < 0) S(0)
+      if (e.constant > 0) SymPositiveInfinity()
+      else if (e.constant < 0) S(0)
       else SymUndefined()
   }
 
 sRules.+("Negative infinity to a power"){
     PowP( SymP(SymNegativeInfinity()), @?('e) @@ RatP() )
   }{ case (e: SymR) =>
-      if (e.value > 0) SymNegativeInfinity()
-      else if (e.value < 0) S(0)
+      if (e.constant > 0) SymNegativeInfinity()
+      else if (e.constant < 0) S(0)
       else SymUndefined()
   }
 
