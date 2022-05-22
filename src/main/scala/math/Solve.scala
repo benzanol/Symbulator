@@ -34,8 +34,8 @@ object Solve {
   }
   
   @JSExportTopLevel("solve")
-  def solve(e: Sym, v: Symbol = X.symbol): Seq[Sym] =
-    replaceExpr(e, SymVar(v), X)
+  def solve(e: Sym, v: Symbol = X.symbol): Seq[Sym] = 
+    replaceExpr(e.simple, SymVar(v), X)
       .pipe{expr => zRules.first(expr)}
       .map{solution => replaceExpr(solution, X, SymVar(v))}
       .map(_.simple).toSeq
@@ -73,6 +73,10 @@ object Solve {
     case (a: Seq[Sym], p: Sym, r: Seq[Sym]) => ^(**(S(-1), +++(r),
       if (a.isEmpty) S(1) else ^(+++(a), S(-1))), ^(p, S(-1)))
   }
+
+  zRules.+("log 1 = 0"){
+    @?('whole) @@ LogP(@?('a) @@ hasxP(), __)
+  }{ case (a: Sym, w: Sym) => solve( ++(a, S(-1)) ).headOption.getOrElse(w) }
 
   //  zRules.+("a^p => a = 0"){
   //    @?('whole) @@ PowP( @?('b), RatP( @?('p) |> { p: SymR => p.value > 0 } ) )

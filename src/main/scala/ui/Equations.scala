@@ -108,8 +108,6 @@ class EquationHandler() {
         }
       }
 
-    println(eqn.map(_.derivative))
-
     // Format the static equations as latex with mathquill
     js.Dynamic.global.formatStaticEquations()
   }
