@@ -16,9 +16,10 @@ import sympany.math._
 
 object Graph {
   // Set up the graph when it is loaded for the first time
-  def setup: Unit = {
+  def setup {
 	fc.addEventListener("mousemove", panGraph)
 	fc.addEventListener("wheel", zoomGraph)
+	fc.addEventListener("mousemove", detectMouseAxes)
 	
 	fc.addEventListener("mousedown", { (e: Any) => mouseDown = true  })
 	fc.addEventListener("mouseup",   { (e: Any) => mouseDown = false })
@@ -62,6 +63,7 @@ object Graph {
   // Remember the position of the graph
   private case class GraphPos(x: Double, y: Double, xs: Double, ys: Double)
   private var pos: GraphPos = GraphPos(0, 0, 0.01, 0.01)
+  private var (onXAxis, onYAxis) = (false, false)
   
   // Margins as variables are necessary because they need to be adjusted
   private def marginX = Math.log10(pos.x.abs max (fc.height * pos.ys)).abs.toInt * 11 + 35
@@ -73,21 +75,23 @@ object Graph {
   
 
   // Figure out how to move the graph
-  @JSExportTopLevel("panGraph")
   def panGraph(event: dom.MouseEvent) {
+    // Only pan the graph if the mouse is down
 	if (!mouseDown) return
 	  
     val dx = event.movementX * pos.xs
     val dy = -event.movementY * pos.ys
 	pos = GraphPos(pos.x - dx, pos.y - dy, pos.xs, pos.ys)
 	draw
+
   }
   
-  @JSExportTopLevel("zoomGraph")
   def zoomGraph(event: dom.WheelEvent) {
 	val scale = Math.pow(1.0008, event.deltaY);
 	
     val (w, h) = (fc.width * pos.xs, fc.height * pos.ys)
+
+    // Don't do anything if the scale is already too small or too large
     if (scale > 1 && (w*10 > Double.MaxValue || h*10 > Double.MaxValue)) return
     if (scale < 1 && (w/10 < Double.MinValue || h/10 < Double.MinValue)) return
 	  
@@ -98,17 +102,35 @@ object Graph {
 	// Calculate the change in x and y
 	val dx = pos.xs * (mouseX - marginX) * (1 - scale)
 	val dy = pos.ys * (fc.clientHeight - mouseY - marginY) * (1 - scale)
-	
-	// Update the position value
-	pos = GraphPos(pos.x + dx, pos.y + dy, pos.xs * scale, pos.ys * scale)
+
+    // Only change one scale if the cursor is on one of the axes
+    this.pos =
+      if (onXAxis && !onYAxis) GraphPos(pos.x + dx, pos.y, pos.xs * scale, pos.ys)
+      else if (onYAxis && !onXAxis) GraphPos(pos.x, pos.y + dy, pos.xs, pos.ys * scale)
+      else GraphPos(pos.x + dx, pos.y + dy, pos.xs * scale, pos.ys * scale)
 	
 	// Redraw the graph
 	draw
   }
 
+  def detectMouseAxes(event: dom.MouseEvent) {
+    // zoomGraph needs to know if the cursor is on the x or y axis,
+    // and this needs to be calculated when moving the mouse
+
+    // Figure out the position of the mouse and canvas
+    val rect = fc.getBoundingClientRect
+	val (mouseX, mouseY) = (event.clientX - rect.left, event.clientY - rect.top)
+
+    // Figure out the position of the axes on the canvas
+    val xAxisY = rect.height - marginY + pos.y/pos.ys
+    val yAxisX = marginX - pos.x/pos.xs
+
+    this.onXAxis = (xAxisY - mouseY).abs < 5
+    this.onYAxis = (yAxisX - mouseX).abs < 5
+  }
+
 
   // Display important points when the mouse hovers over them
-  @JSExportTopLevel("highlightPoints")
   def highlightPoints(event: dom.MouseEvent) {
     val rect = fc.getBoundingClientRect()
 
@@ -136,7 +158,6 @@ object Graph {
     hidePointBox()
   }
 
-  @JSExportTopLevel("hidePointBox")
   def hidePointBox() {
     val box = document.getElementById("point-box")
     box.setAttribute("style", "display:none;")
