@@ -148,7 +148,7 @@ object Simplify {
   
   sRules.+("0 in a sum goes away"){
     SumP(=#?(0), @?('rest) @@ __*)
-  }{ case rest: Seq[Sym] => ***(rest) }
+  }{ case rest: Seq[Sym] => +++(rest) }
   
   sRules.+("Merge nested sums"){
     SumP(@?('sum) @@ SumP(__*), @?('rest) @@ __*)
@@ -156,7 +156,7 @@ object Simplify {
       +++(sum.exprs ++ rest)
   }
   
-  sRules.+("x*a? + x*b? = (a+b)*x"){
+  sRules.+("3x + 2x = 5x"){
     SumP(
       First(ProdP(@?('f1) @@ RatP(), @?('u)), @?('u) &@ 'f1 -> S(1)),
       First(ProdP(@?('f2) @@ RatP(), @?('u)), @?('u) &@ 'f2 -> S(1)),
@@ -165,7 +165,7 @@ object Simplify {
       +++(**(f1 + f2, u) +: rest)
   }
   
-  sRules.+("x*y*a? + x*y*b? = (a+b)*x*y"){
+  sRules.+("3xy + 2xy = 5xy"){
     SumP(
       ProdP(First(@?('f1) @@ RatP(), ~~ &@ 'f1 -> S(1)), @?('us) @@ __*),
       ProdP(First(@?('f2) @@ RatP(), ~~ &@ 'f2 -> S(1)), @?('us) @@ __*),
@@ -177,6 +177,8 @@ object Simplify {
   sRules.+("Add rationals or similar products of rationals"){
     SumP(AsProdP(@?('a) @@ %?(), @?('r) @@ __*), AsProdP(@?('b) @@ %?(), @?('r) @@ __*), @?('rest) @@ __*)
   }{ case (a: SymR, b: SymR, r: Seq[Sym], rest: Seq[Sym]) =>
+      //println(s"$a, $b, $r, $rest")
+      //println(+++( ***((a + b) +: r) +: rest ))
       +++( ***((a + b) +: r) +: rest )
   }
   
@@ -233,7 +235,7 @@ object Simplify {
       else SymUndefined()
   }
 
-sRules.+("Negative infinity to a power"){
+  sRules.+("Negative infinity to a power"){
     PowP( SymP(SymNegativeInfinity()), @?('e) @@ RatP() )
   }{ case (e: SymR) =>
       if (e.constant > 0) SymNegativeInfinity()

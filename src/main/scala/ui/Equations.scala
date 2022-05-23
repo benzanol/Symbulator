@@ -60,6 +60,7 @@ object Equations {
   def deleteEquation(id: String): Unit = {
     handlers = handlers.filter(_.id != id)
     updateEquations()
+    updateGraphs
   }
 
   // Update the handler that has the specified id to have a new equation

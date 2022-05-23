@@ -67,6 +67,8 @@ object Graph {
   private def marginX = Math.log10(pos.x.abs max (fc.height * pos.ys)).abs.toInt * 11 + 35
   private def marginY = 20
 
+  val pointRadius = 5
+
   private var mouseDown = false
   
 
@@ -75,8 +77,8 @@ object Graph {
   def panGraph(event: dom.MouseEvent) {
 	if (!mouseDown) return
 	  
-	val (cxs, cys) = (fc.width.toDouble / fc.clientWidth, fc.height.toDouble / fc.clientHeight)
-	val (dx, dy) = (event.movementX*cxs * pos.xs, -event.movementY*cys * pos.ys)
+    val dx = event.movementX * pos.xs
+    val dy = -event.movementY * pos.ys
 	pos = GraphPos(pos.x - dx, pos.y - dy, pos.xs, pos.ys)
 	draw
   }
@@ -113,8 +115,7 @@ object Graph {
     val mx = (event.clientX - rect.left - marginX)   * pos.xs + pos.x
     val my = (rect.bottom - event.clientY - marginY) * pos.ys + pos.y
 
-    val minPixelDist = 20
-    val minDist = minPixelDist * pos.xs
+    val minDist = pointRadius * pos.xs
 
     for (p <- points.flatten ; x <- p._1.approx ; y <- p._2.approx)
       // Find the first point that is less than the min distance from the cursor
@@ -151,11 +152,38 @@ object Graph {
   
   def setGraphs(exprs: Seq[Sym]) {
 	this.graphs = exprs
-    this.points = exprs.map(_.zeros.flatMap(_.expand).map(_.simple -> SymInt(0)))
+
+    val zeros = exprs.map(_.zeros.flatMap(_.expand).map(_.simple -> SymInt(0)))
+
+    val intersections =
+      exprs.map{ a => exprs.filter(_ != a).flatMap{ b =>
+        Sym.++(a, Sym.**(b, SymInt(-1))).zeros.flatMap(_.expand).distinct
+          .map{ x => (x, Sym.replaceExpr(a, SymVar('x), x).simple) }
+      }}
+
+    val extremas = exprs.map{ e =>
+      e.extremas.flatMap(_.expand).map(_.simple).distinct
+        .map{ x => (x, replaceExpr(e, SymVar('x), x).simple) }
+    }
+
+    val inflections = exprs.map{ e =>
+      e.derivative.extremas.flatMap(_.expand).map(_.simple).distinct
+        .map{ x => (x, replaceExpr(e, SymVar('x), x).simple) }
+    }
+
+    val pointLists = List(zeros, intersections, extremas, inflections)
+
+    this.points = pointLists.reduceLeft{ (a, b) => a.zip(b).map{ t => t._1 ++ t._2 } }
+
+    println(points)
+
 	draw
   }
   
   def draw {
+    // Hide the point box so that a point from a past function doesn't remain
+    hidePointBox()
+
 	// Make the canvas dimensions match their pixel dimensions
 	fc.width = fc.clientWidth
 	fc.height = fc.clientHeight
@@ -271,7 +299,7 @@ object Graph {
 
   // Drawing special points
   private def drawPoint(xe: Sym, ye: Sym, color: String)(implicit ctx: JsContext) {
-    for (x <- xe.approx() ; y <- ye.approx()) {
+    for (x <- xe.approx() ; y <- ye.approx() if x.isFinite && y.isFinite) {
       val cx = marginX + ((x - pos.x) / pos.xs).toInt
       val cy = ctx.canvas.height - marginY - ((y - pos.y) / pos.ys).toInt
 
@@ -280,7 +308,7 @@ object Graph {
       ctx.lineWidth = 4
       ctx.strokeStyle = color
       ctx.fillStyle = "white"
-      ctx.arc(cx, cy, 5, 0, 2 * Math.PI)
+      ctx.arc(cx, cy, pointRadius, 0, 2 * Math.PI)
 
       ctx.fill()
       ctx.stroke()

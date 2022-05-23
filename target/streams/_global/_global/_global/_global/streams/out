@@ -4606,3 +4606,740 @@
 [0m[[0m[0minfo[0m] [0m[0m410. Monitoring source files for calculator/fastLinkJS...[0m
 [0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
 [0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 3 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(ffe360e4768ff1759a2ffa14c324b4c15bfd988d), current stamp: Hash(965c87f6215a5ecc2b80700afe6a246d632bdb66))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:07:10.201 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:07:10.201 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m411. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 5 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(965c87f6215a5ecc2b80700afe6a246d632bdb66), current stamp: Hash(f913ef57d7d4bf50a888ca7550a37b859e52864a))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:08:49.532 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:08:49.532 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m412. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 5 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(f913ef57d7d4bf50a888ca7550a37b859e52864a), current stamp: Hash(a46bd935b1cd29c0de3fa9d5dffb0efdfce4dabd))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:08:55.316 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:08:55.316 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m413. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 3 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(a46bd935b1cd29c0de3fa9d5dffb0efdfce4dabd), current stamp: Hash(19bb83ece47a16c0e1f15efaac94e7cc42396052))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:09:00.522 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:09:00.522 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m414. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(19bb83ece47a16c0e1f15efaac94e7cc42396052), current stamp: Hash(aa558480d0f20173f3c46487e763b1521d41f43b))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:09:06.351 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:09:06.351 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m415. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 3 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(aa558480d0f20173f3c46487e763b1521d41f43b), current stamp: Hash(b6d7a0819da6b19c51b6ddc2c0c96dc6a145a404))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:10:02.955 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:10:02.955 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m416. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 6 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(b6d7a0819da6b19c51b6ddc2c0c96dc6a145a404), current stamp: Hash(2374553d0fca422b39763b3462c2039ce2143905))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:12:10.387 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:12:10.387 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m417. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 5 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(46242885f66b19a22d73e3a06e72bb89155bcdea), current stamp: Hash(8a5b2ee868e3c9860d19b1cea74e3f55ff628f3a))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:14:06.052 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:14:06.052 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m418. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(8a5b2ee868e3c9860d19b1cea74e3f55ff628f3a), current stamp: Hash(46242885f66b19a22d73e3a06e72bb89155bcdea))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:14:52.556 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:14:52.556 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m419. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala (previous stamp: Hash(7b207a8a9e5c224c44cdbf5d544d3d912c5161e2), current stamp: Hash(1a95abd33d24417c12e3356a73b15fe3a835a210))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala, 2022-May-22 16:15:17.318 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala, 2022-May-22 16:15:17.318 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m420. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(2374553d0fca422b39763b3462c2039ce2143905), current stamp: Hash(b9b0692a06ecd72da237cb04b9a432cedf2976d7))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:17:17.170 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:17:17.170 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m421. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(b9b0692a06ecd72da237cb04b9a432cedf2976d7), current stamp: Hash(97e2d1e82f7af502e46a2a87861249fed807ea96))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:17:53.291 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:17:53.291 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m422. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 4 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala (previous stamp: Hash(e2c9f3e86454014c77093ad605e34d879bbd4a33), current stamp: Hash(8c2cb5aa07e41c77f82d28a627b58f9199e25e0f))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala, 2022-May-22 16:18:38.878 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala, 2022-May-22 16:18:38.878 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m423. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala (previous stamp: Hash(8c2cb5aa07e41c77f82d28a627b58f9199e25e0f), current stamp: Hash(fdac55b646629919db95bab7b359391b38855b49))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala, 2022-May-22 16:20:07.005 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala, 2022-May-22 16:20:07.005 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m424. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala. This event occurred 4 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala (previous stamp: Hash(fdac55b646629919db95bab7b359391b38855b49), current stamp: Hash(65ab343284c9c3e57413ceb0facd09b2a28f42ee))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala, 2022-May-22 16:20:29.051 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala, 2022-May-22 16:20:29.051 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m425. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala. This event occurred 5 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala (previous stamp: Hash(65ab343284c9c3e57413ceb0facd09b2a28f42ee), current stamp: Hash(9d6558c48db420156a285b371176e0f276cdd809))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala, 2022-May-22 16:21:44.923 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala, 2022-May-22 16:21:44.923 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m426. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala. This event occurred 6 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala (previous stamp: Hash(9d6558c48db420156a285b371176e0f276cdd809), current stamp: Hash(6381faf47da6faf8cdb2748c57f00ec99ec33b79))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala, 2022-May-22 16:22:18.467 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala, 2022-May-22 16:22:18.467 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m427. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala (previous stamp: Hash(6381faf47da6faf8cdb2748c57f00ec99ec33b79), current stamp: Hash(1b1a1385054406b28d955847ec9fc7d1c5423b1d))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala, 2022-May-22 16:22:32.401 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala, 2022-May-22 16:22:32.401 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m428. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Symbolics.scala. This event occurred 4 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(46242885f66b19a22d73e3a06e72bb89155bcdea), current stamp: Hash(e0526635dc9db8d21dae88ed0f1a2cfd8b44792d))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:23:01.028 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:23:01.028 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m429. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(e0526635dc9db8d21dae88ed0f1a2cfd8b44792d), current stamp: Hash(fe305f2f2d4625284701fa3210fd735d3c03c3d6))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:23:25.729 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:23:25.729 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m430. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(97e2d1e82f7af502e46a2a87861249fed807ea96), current stamp: Hash(2374553d0fca422b39763b3462c2039ce2143905))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:24:20.041 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:24:20.041 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m431. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 3 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(fe305f2f2d4625284701fa3210fd735d3c03c3d6), current stamp: Hash(f1acf068bb5eb3fb67fe783bfa52e97504cf0d8a))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:24:40.989 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:24:40.989 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m432. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(f1acf068bb5eb3fb67fe783bfa52e97504cf0d8a), current stamp: Hash(feb47c634ebeaf8580815f21823db54d09f7513d))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:24:57.159 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:24:57.159 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m433. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(feb47c634ebeaf8580815f21823db54d09f7513d), current stamp: Hash(6934c3883bdf9b430335d983a92ca71f0f39cdf1))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:25:13.863 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:25:13.863 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m434. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(6934c3883bdf9b430335d983a92ca71f0f39cdf1), current stamp: Hash(190088f68c27cae840abe3290be459b589b5cc88))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:25:37.666 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:25:37.666 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m435. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(190088f68c27cae840abe3290be459b589b5cc88), current stamp: Hash(6934c3883bdf9b430335d983a92ca71f0f39cdf1))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:25:44.828 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:25:44.828 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m436. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(6934c3883bdf9b430335d983a92ca71f0f39cdf1), current stamp: Hash(a6de85545882a438d635244d5b1f90fe7bad0d63))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:26:11.140 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:26:11.140 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m437. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala (previous stamp: Hash(ecf1e368b3f64ca1e7f57434aff1cfaf6a62cd66), current stamp: Hash(cff3231d05b9b32e931b7236e33d135700218a82))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala, 2022-May-22 16:28:40.622 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala, 2022-May-22 16:28:40.622 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m438. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(a6de85545882a438d635244d5b1f90fe7bad0d63), current stamp: Hash(dc4a09730d7955143b99a1a2f1c811819fdcb8b5))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:28:57.631 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:28:57.631 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m439. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala (previous stamp: Hash(cff3231d05b9b32e931b7236e33d135700218a82), current stamp: Hash(558c958cde7d90adc48a44333996bbb5bdaadce9))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala, 2022-May-22 16:30:22.845 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala, 2022-May-22 16:30:22.845 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m440. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(dc4a09730d7955143b99a1a2f1c811819fdcb8b5), current stamp: Hash(05e947613de7fd0454b73be16ab4a6e0cec20837))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:30:38.833 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:30:38.833 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m441. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(05e947613de7fd0454b73be16ab4a6e0cec20837), current stamp: Hash(3599dbd6e5f18df6ad2f29e9e296ab0e6a08044f))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:30:43.746 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:30:43.746 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m442. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(3599dbd6e5f18df6ad2f29e9e296ab0e6a08044f), current stamp: Hash(341ee66ebd4f760006374439158889b23e32755d))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:30:55.111 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:30:55.111 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m443. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala (previous stamp: Hash(8e52245329932462bfb367a1b4dcf881ed3dbfc3), current stamp: Hash(57d27807ae0eca7c19f107f8b9d424453910dc83))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala, 2022-May-22 16:33:36.680 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala, 2022-May-22 16:33:36.680 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m444. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala. This event occurred 5 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala (previous stamp: Hash(57d27807ae0eca7c19f107f8b9d424453910dc83), current stamp: Hash(c725afe00f7ba751902971652b570c326ad473e4))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala, 2022-May-22 16:33:47.841 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala, 2022-May-22 16:33:47.841 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m445. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala. This event occurred 6 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(341ee66ebd4f760006374439158889b23e32755d), current stamp: Hash(3599dbd6e5f18df6ad2f29e9e296ab0e6a08044f))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:34:05.599 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:34:05.599 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m446. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala (previous stamp: Hash(c725afe00f7ba751902971652b570c326ad473e4), current stamp: Hash(8ac01c1831354c31d51ac32253652b4c0a55f3d8))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala, 2022-May-22 16:34:45.135 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala, 2022-May-22 16:34:45.135 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m447. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala. This event occurred 4 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala (previous stamp: Hash(558c958cde7d90adc48a44333996bbb5bdaadce9), current stamp: Hash(5023d411d1c831050ac36fc524c87c33b89a7c24))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala, 2022-May-22 16:35:11.306 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Simplification.scala, 2022-May-22 16:35:11.306 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m448. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala (previous stamp: Hash(8ac01c1831354c31d51ac32253652b4c0a55f3d8), current stamp: Hash(3e3c7b906356cbf41096d5dee7c3f290713f6e63))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala, 2022-May-22 16:35:32.672 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala, 2022-May-22 16:35:32.672 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m449. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala. This event occurred 5 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala (previous stamp: Hash(3599dbd6e5f18df6ad2f29e9e296ab0e6a08044f), current stamp: Hash(46242885f66b19a22d73e3a06e72bb89155bcdea))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:36:18.754 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala, 2022-May-22 16:36:18.754 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m450. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(2374553d0fca422b39763b3462c2039ce2143905), current stamp: Hash(59059922db728d7e8eb2bbfbd81dec8b66fe2299))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:37:39.248 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:37:39.248 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m451. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 13 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(59059922db728d7e8eb2bbfbd81dec8b66fe2299), current stamp: Hash(dfa5f88c3e7d240208d65b7211a0e6edd40a2004))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:38:20.096 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:38:20.096 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m452. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 5 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(dfa5f88c3e7d240208d65b7211a0e6edd40a2004), current stamp: Hash(49f0dcbc9cbdf75e44991f41035d3f55e18f4ae9))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:38:37.039 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:38:37.039 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m453. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 5 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(49f0dcbc9cbdf75e44991f41035d3f55e18f4ae9), current stamp: Hash(271782ce0a70d8b209969ddb4a1ff8bc838fb252))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:40:18.172 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:40:18.172 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m454. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 3 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(271782ce0a70d8b209969ddb4a1ff8bc838fb252), current stamp: Hash(5b75d2903475282016d95307d83d38ed8305f709))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:40:21.661 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:40:21.661 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m455. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(5b75d2903475282016d95307d83d38ed8305f709), current stamp: Hash(2518ab071610916c22be1b0d9282f44ecb0fe3ea))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:42:57.905 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:42:57.905 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m456. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Equations.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Equations.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Equations.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Equations.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Equations.scala (previous stamp: Hash(8b63c200712d444c5ef877f9dc8d205e967ac2a4), current stamp: Hash(6506a087a8ed3a231b5fe96fb609029d237bd290))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Equations.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Equations.scala, 2022-May-22 16:47:19.281 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Equations.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Equations.scala, 2022-May-22 16:47:19.281 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m457. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(2518ab071610916c22be1b0d9282f44ecb0fe3ea), current stamp: Hash(4b966047b21a71c0f612a59a7142670c5942d4c2))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:49:35.752 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:49:35.752 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m458. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(4b966047b21a71c0f612a59a7142670c5942d4c2), current stamp: Hash(dc6e4e4ca3d91f9598b26f5fa2f1bacda71e5094))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:50:45.554 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 16:50:45.554 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m459. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 6 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(dc6e4e4ca3d91f9598b26f5fa2f1bacda71e5094), current stamp: Hash(f7f7a5f674fc714ff14a0d7d3a166958d36e3a90))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 19:53:15.768 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 19:53:15.768 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m460. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 6 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(f7f7a5f674fc714ff14a0d7d3a166958d36e3a90), current stamp: Hash(9bfc00641c18b7f70132fe5e4978a9878508c467))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 19:53:59.794 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 19:53:59.794 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m461. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 4 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(9bfc00641c18b7f70132fe5e4978a9878508c467), current stamp: Hash(d4a712f99d145a17ff2935ac74d3d97c1041627a))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 19:54:33.017 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 19:54:33.017 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m462. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 4 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mDropping event for unmodified path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 3 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(d4a712f99d145a17ff2935ac74d3d97c1041627a), current stamp: Hash(59824b2b8f3ffbe361449942db90b709bfbc7590))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 19:56:54.685 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 19:56:54.685 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m463. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 4 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(59824b2b8f3ffbe361449942db90b709bfbc7590), current stamp: Hash(cc31c3609e97de9ac482de83e751ec0915b18cdb))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 19:57:27.861 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 19:57:27.861 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m464. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 4 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(cc31c3609e97de9ac482de83e751ec0915b18cdb), current stamp: Hash(13a064f044624a2750aa6dd13d63a930a3f7507b))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 19:57:49.132 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 19:57:49.132 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m465. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 4 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(13a064f044624a2750aa6dd13d63a930a3f7507b), current stamp: Hash(8c2211bfb14bafd4b256228e672cde7f469f95fa))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:53:51.087 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:53:51.087 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m466. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 4 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(8c2211bfb14bafd4b256228e672cde7f469f95fa), current stamp: Hash(c72136f0c32a9af5141f32e16ebe8e9cde236247))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:55:24.428 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:55:24.428 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m467. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 4 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(c72136f0c32a9af5141f32e16ebe8e9cde236247), current stamp: Hash(8d6eaefd67a0fc312530423835bdb0881470a666))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:56:46.538 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:56:46.538 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m468. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 5 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(8d6eaefd67a0fc312530423835bdb0881470a666), current stamp: Hash(30f89ac59e6a4ef650b54ede1c10e9ba6968d87a))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:57:11.764 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:57:11.764 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m469. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(30f89ac59e6a4ef650b54ede1c10e9ba6968d87a), current stamp: Hash(cc98610b910c0ddce7ef2e12b379b06d3635145b))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:57:27.285 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:57:27.285 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m470. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 6 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(cc98610b910c0ddce7ef2e12b379b06d3635145b), current stamp: Hash(e3e5f961eb401fce530f47973c35448b29c195a2))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:57:41.857 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:57:41.857 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m471. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 4 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(e3e5f961eb401fce530f47973c35448b29c195a2), current stamp: Hash(2269f3c7bb545f78261dbdae6eb29e44ea9deada))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:57:54.478 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:57:54.478 ET).[0m
+[0m[[0m[0minfo[0m] [0m[0m472. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala (previous stamp: Hash(2269f3c7bb545f78261dbdae6eb29e44ea9deada), current stamp: Hash(b035fe8f856c47cc46f684b0ac2ee12dc8e5141a))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:58:08.738 ET),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala, 2022-May-22 20:58:08.738 ET).[0m
+[0m[[0m[0mdebug[0m] [0m[0mcalculator / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m473. Monitoring source files for calculator/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala. This event occurred 4 ms since the last event for this path.[0m

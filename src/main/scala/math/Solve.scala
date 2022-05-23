@@ -86,7 +86,7 @@ object Solve {
     SumP(
       @?('as) @@ Repeat(AsProdP(PowP(XP, =#?(2)), Repeat(noxP())), min=1), // Any number of a*x^2
       @?('bs) @@ Repeat(AsProdP(XP, Repeat(noxP())), min=1), // Any number of b*x
-      @?('cs) @@ Repeat(noxP(), min=1) // Any number of c
+      @?('cs) @@ Repeat(noxP()) // Any number of c
     )
   }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
       quadraticFormula(aS, bS, cS)

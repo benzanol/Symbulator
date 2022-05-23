@@ -333,7 +333,9 @@ case class SymNegativeInfinity() extends SymR {
 /// Operations
 case class SymSum(mset: Map[Sym, Int]) extends SymOp {
   lazy val exprs = Multiset.toSeq(mset)
-  lazy val sortedExprs = exprs.sortWith{ (a, b) => Latex.isNegative(a).isEmpty }
+  lazy val sortedExprs = exprs.sortWith{ (a, b) =>
+    Latex.isNegative(a).isEmpty && !a.isInstanceOf[SymPM]
+  }
   def instance(args: Sym*) = SymSum(Multiset.fromSeq(args))
 
   def operation(vs: Double*) = vs.sum
@@ -381,12 +383,12 @@ case class SymLog(pow: Sym = SymInt(1), base: Sym = SymE()) extends SymOp {
 case class SymPM(expr: Sym = SymInt(1)) extends Sym {
   lazy val exprs = Seq(expr)
   def instance(args: Sym*) = SymPM(args.head)
-  override lazy val expand = Seq( SymInt(1), SymInt(-1) ).flatMap{ n =>
-    expr.expand.map{ e: Sym => **(n, e) }
-  }
 
   override def approx(env: Bind*) =
     List(1, -1).flatMap{ n => expr.approx(env:_*).map(_ * n) }
+
+  override lazy val expand =
+    List(1, -1).flatMap{ n => expr.expand.map(**(_, S(n)).simple) }
 
   override def toString = f"(+- $expr)"
 }

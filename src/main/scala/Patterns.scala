@@ -374,7 +374,11 @@ class Rules() {
     rules +:= new Rule(n, p, f)
 
   def first(e: Sym): Option[Sym] =
-    LazyList(rules:_*).flatMap(_.first(e)).headOption
+    LazyList(rules:_*).flatMap{r => r.first(e) match {
+      case None => None
+      //case Some(a) => println(s"${r.name} -> $a") ; Some(a)
+      case Some(a) => Some(a)
+    }}.headOption
   
   def all(e: Sym): Seq[Sym] =
     rules.foldLeft(Seq[Sym]()){ (acc, r) => acc ++ r.all(e) }
