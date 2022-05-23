@@ -134,14 +134,12 @@ object Graph {
   def highlightPoints(event: dom.MouseEvent) {
     val rect = fc.getBoundingClientRect()
 
-    val mx = (event.clientX - rect.left - marginX)   * pos.xs + pos.x
-    val my = (rect.bottom - event.clientY - marginY) * pos.ys + pos.y
-
-    val minDist = pointRadius * pos.xs
+    val mx = event.clientX - rect.left
+    val my = event.clientY - rect.top
 
     for (p <- points.flatten ; x <- p._1.approx ; y <- p._2.approx)
       // Find the first point that is less than the min distance from the cursor
-      if (Math.sqrt( (x-mx)*(x-mx) + (y-my)*(y-my) ) < minDist) {
+      if (Math.sqrt( Math.pow(canvasX(x)-mx, 2) + Math.pow(canvasY(y)-my, 2) ) < pointRadius) {
 
         // Set the text of the point box and move it to the cursor
         val box = document.getElementById("point-box")
@@ -245,7 +243,7 @@ object Graph {
 	  // The minimum pixel distance for grid lines is constant,
 	  // so calculate the minimum unit distance based on it
 	  val pixMin = 15
-	  val min = pixMin * (if (horizontal) pos.xs else pos.ys)
+	  val min = pixMin * (if (horizontal) pos.ys else pos.xs)
 	  val textPixMin = 100
 	  
 	  // Calculate all distances to draw grid lines at,

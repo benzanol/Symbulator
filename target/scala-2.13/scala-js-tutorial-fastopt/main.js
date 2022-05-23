@@ -14258,7 +14258,7 @@ function $p_Lsympany_ui_Graph$__drawGrid__Lorg_scalajs_dom_CanvasRenderingContex
     };
     var start = x1___1$mcD$sp;
     var size = x1___2$mcD$sp;
-    var min = (15.0 * (horizontal ? $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_xs : $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_ys));
+    var min = (15.0 * (horizontal ? $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_ys : $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_xs));
     $m_sci_List$();
     var this$6 = $m_s_package$().BigDecimal__s_math_BigDecimal$();
     var $$x1 = this$6.apply__I__Ljava_math_MathContext__s_math_BigDecimal(10, this$6.s_math_BigDecimal$__f_defaultMathContext);
@@ -14728,31 +14728,33 @@ $c_Lsympany_ui_Graph$.prototype.highlightPoints__Lorg_scalajs_dom_MouseEvent__V 
   var nonLocalReturnKey1 = $ct_O__(new $c_O());
   try {
     var rect = this.Lsympany_ui_Graph$__f_fc.getBoundingClientRect();
-    var mx = (((($uD(event.clientX) - $uD(rect.left)) - $p_Lsympany_ui_Graph$__marginX__I(this)) * this.Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_xs) + this.Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_x);
-    var my = (((($uD(rect.bottom) - $uD(event.clientY)) - 20.0) * this.Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_ys) + this.Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_y);
-    var minDist = (this.Lsympany_ui_Graph$__f_pointRadius * this.Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_xs);
+    var mx = ($uD(event.clientX) - $uD(rect.left));
+    var my = ($uD(event.clientY) - $uD(rect.top));
     var $$x1 = this.Lsympany_ui_Graph$__f_points;
     var this$2 = $m_s_$less$colon$less$();
-    $as_sc_IterableOnceOps($$x1.flatten__F1__O(this$2.s_$less$colon$less$__f_singleton)).foreach__F1__V(new $c_sjsr_AnonFunction1(((mx$1, my$1, minDist$1, event$1, nonLocalReturnKey1$1) => ((p$2) => {
+    $as_sc_IterableOnceOps($$x1.flatten__F1__O(this$2.s_$less$colon$less$__f_singleton)).foreach__F1__V(new $c_sjsr_AnonFunction1(((mx$1, my$1, event$1, nonLocalReturnKey1$1) => ((p$2) => {
       var p = $as_T2(p$2);
-      $as_Lsympany_Sym(p._1__O()).approx__sci_Seq().foreach__F1__V(new $c_sjsr_AnonFunction1(((p$1, mx$1$1, my$1$1, minDist$1$1, event$1$1, nonLocalReturnKey1$1$1) => ((x$2) => {
+      $as_Lsympany_Sym(p._1__O()).approx__sci_Seq().foreach__F1__V(new $c_sjsr_AnonFunction1(((p$1, mx$1$1, my$1$1, event$1$1, nonLocalReturnKey1$1$1) => ((x$2) => {
         var x = $uD(x$2);
-        $as_Lsympany_Sym(p$1._2__O()).approx__sci_Seq().foreach__F1__V(new $c_sjsr_AnonFunction1(((x$1, mx$1$2, my$1$2, minDist$1$2, p$1$1, event$1$2, nonLocalReturnKey1$1$2) => ((y$2) => {
+        $as_Lsympany_Sym(p$1._2__O()).approx__sci_Seq().foreach__F1__V(new $c_sjsr_AnonFunction1(((x$1, mx$1$2, my$1$2, p$1$1, event$1$2, nonLocalReturnKey1$1$2) => ((y$2) => {
           var y = $uD(y$2);
-          var a = (((x$1 - mx$1$2) * (x$1 - mx$1$2)) + ((y - my$1$2) * (y - my$1$2)));
-          if (($uD(Math.sqrt(a)) < minDist$1$2)) {
+          var a = ($p_Lsympany_ui_Graph$__canvasX__D__I($m_Lsympany_ui_Graph$(), x$1) - mx$1$2);
+          var $$x2 = $uD(Math.pow(a, 2.0));
+          var a$1 = ($p_Lsympany_ui_Graph$__canvasY__D__I($m_Lsympany_ui_Graph$(), y) - my$1$2);
+          var a$2 = ($$x2 + $uD(Math.pow(a$1, 2.0)));
+          if (($uD(Math.sqrt(a$2)) < $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_pointRadius)) {
             var box = document.getElementById("point-box");
-            var this$7 = $as_Lsympany_Sym(p$1$1._1__O());
-            var $$x2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$7);
-            var this$8 = $as_Lsympany_Sym(p$1$1._2__O());
-            box.innerText = (((("\\left( " + $$x2) + ", \\quad ") + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$8)) + " \\right)");
+            var this$9 = $as_Lsympany_Sym(p$1$1._1__O());
+            var $$x3 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$9);
+            var this$10 = $as_Lsympany_Sym(p$1$1._2__O());
+            box.innerText = (((("\\left( " + $$x3) + ", \\quad ") + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$10)) + " \\right)");
             box.setAttribute("style", (((("left:" + $uD(event$1$2.clientX)) + "px; top:") + $uD(event$1$2.clientY)) + "px; display:block;"));
             (0, eval)("MQ.StaticMath(document.getElementById('point-box'));");
             throw new $c_sr_NonLocalReturnControl$mcV$sp(nonLocalReturnKey1$1$2, (void 0))
           }
-        }))(x, mx$1$1, my$1$1, minDist$1$1, p$1, event$1$1, nonLocalReturnKey1$1$1)))
-      }))(p, mx$1, my$1, minDist$1, event$1, nonLocalReturnKey1$1)))
-    }))(mx, my, minDist, event, nonLocalReturnKey1)));
+        }))(x, mx$1$1, my$1$1, p$1, event$1$1, nonLocalReturnKey1$1$1)))
+      }))(p, mx$1, my$1, event$1, nonLocalReturnKey1$1)))
+    }))(mx, my, event, nonLocalReturnKey1)));
     this.hidePointBox__V()
   } catch (e) {
     if ((e instanceof $c_sr_NonLocalReturnControl)) {
