@@ -46,8 +46,7 @@ object Main {
     //println(integrate(SymIntegral(e)))
     //println(SymIntegral(SymSin(V('x))).simple)
     //showEquation(SymIntegral(**(SymVar('y))))
-
-    showEquation( **(S(2), ^(V('x), S(2)), SymSin(V('x)) ).integral.get )
+    //showEquation( **(S(2), ^(V('x), S(2)), SymSin(V('x)) ).integral.get )
 
   }
   

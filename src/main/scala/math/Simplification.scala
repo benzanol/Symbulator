@@ -258,6 +258,12 @@ object Simplify {
       **(c, math.Integral.SymIntegral(***(rest)))
   }
 
+  sRules.+("Integral of a sum is a sum of integrals"){
+    IntegralP( @?('s) @@ SumP(__*) )
+  }{ case s: SymSum =>
+      +++( s.exprs.map(Integral.SymIntegral(_)) )
+  }
+
   /// Controversial
 
   def distribute(l1: Seq[Sym], l2: Seq[Sym]): Seq[Sym] =
