@@ -12,13 +12,17 @@ object Simplify {
   val sRules = new Rules()
   
   @JSExportTopLevel("simplify")
-  def simplify(expr: Sym): Sym =
-    expr.mapExprs(simplify).pipe{e =>
+  def simplify(expr: Sym): Sym = expr match {
+    case in @ Integral.SymIntegral(sub) =>
+      IntegralRules.basicIntegration(in)
+        .getOrElse(Integral.SymIntegral(simplify(sub)))
+    case _ => expr.mapExprs(simplify).pipe{e =>
       sRules.first(e) match {
         case Some(simpler) => simplify(simpler)
         case None => e
       }
     }
+  }
   
   def separateRoot(base: SymInt, root: SymInt): (SymInt, SymInt) =
     ( base.primeFactors.toList.foldLeft(S(1)){ (a, t) => a * (t._1 ^ SymInt(t._2.n / root.n)) },

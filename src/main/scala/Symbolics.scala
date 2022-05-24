@@ -37,7 +37,7 @@ object Sym {
   def S(n: BigInt, d: BigInt) = SymR(n, d)
   def Pi = SymPi()
   def E = SymE()
-  def X = SymVar('X)
+  def X = SymVar('*)
   def V(s: Symbol) = SymVar(s)
 }
 
@@ -133,6 +133,8 @@ object Latex {
     case SymSin(expr) => s"\\sin ${wrappedLatex(expr)}"
     case SymCos(expr) => s"\\cos ${wrappedLatex(expr)}"
     case SymPM(expr) => s"\\pm ${wrappedLatex(expr)}"
+
+    case Integral.SymIntegral(sub) => s"\\int_{0}^{1} ${wrappedLatex(sub)}"
   }
 }
 
@@ -145,6 +147,8 @@ trait Sym {
 
   def mapExprs(f: Sym => Sym): Sym =
     instance(exprs.map(f):_*)
+
+  def replaceExpr(t: Sym, r: Sym) = Sym.replaceExpr(this, t, r)
 
   lazy val expand: Seq[Sym] =
     exprs.map(_.expand)

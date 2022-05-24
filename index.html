@@ -11,10 +11,13 @@
          height: 95vh;
      }
 
-     #equation-container {
+     #sidebar {
          font-size: 20px;
          width: 40%;
          max-width: 400px;
+     }
+
+     #equation-sidebar {
      }
 
      .mq-dynamic {
@@ -93,10 +96,12 @@
 
         <div id="page-container">
 
-            <div id="equation-container">
-                <button onclick="addEquation()" class="add-equation-button">Add Equation</button>
-                <br>
-                <div id="equations">
+            <div id="sidebar">
+                <div id="equation-sidebar">
+                    <button onclick="addEquation()" class="add-equation-button">Add Equation</button>
+                    <br>
+                    <div id="equations">
+                    </div>
                 </div>
             </div>
 
