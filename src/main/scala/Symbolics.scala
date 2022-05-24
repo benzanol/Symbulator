@@ -134,7 +134,7 @@ object Latex {
     case SymCos(expr) => s"\\cos ${wrappedLatex(expr)}"
     case SymPM(expr) => s"\\pm ${wrappedLatex(expr)}"
 
-    case Integral.SymIntegral(sub) => s"\\int_{0}^{1} ${wrappedLatex(sub)}"
+    case Integral.SymIntegral(sub) => s"\\integral ${wrappedLatex(sub)}"
   }
 }
 
@@ -169,6 +169,7 @@ trait Sym {
   lazy val zeros: Seq[Sym] = this.solve('x)
   lazy val important: Seq[Sym] = Solve.importantPoints(simple, 'x)
   lazy val undefined: Seq[Sym] = Solve.undefinedPoints(simple, 'x)
+  lazy val integral: Option[Sym] = Integral.integrate(Integral.SymIntegral(simple))
 
   lazy val explicit: Option[Sym] =
     if (!containsExpr(simple, SymVar('y))) Some(simple)

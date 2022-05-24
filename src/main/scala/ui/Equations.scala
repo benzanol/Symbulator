@@ -82,9 +82,10 @@ object Equations {
       Some("Explicit" -> Seq(sym.explicit.get)) else None},
     Some("Zeros" -> sym.zeros),
     Some("Extremas" -> sym.extremas),
+    //Some("Undefined" -> sym.undefined),
+    //Some("Important" -> sym.important),
     Some("Derivative" -> Seq(sym.derivative)),
-    Some("Undefined" -> sym.undefined),
-    Some("Important" -> sym.important),
+    sym.integral.map("Integral" -> Seq(_)),
   ).flatten.filter(_._2.nonEmpty)
 }
 
@@ -136,36 +137,4 @@ class EquationHandler() {
     // Format the static equations as latex with mathquill
     js.Dynamic.global.formatStaticEquations()
   }
-}
-
-case class SuperSym(orig: Sym) {
-  lazy val sym = Simplify.simplify(orig)
-  
-  lazy val explicit: Option[Sym] =
-    if (!Sym.containsExpr(sym, SymVar('y))) Some(sym)
-    else Solve.solve(sym, 'y).map(Simplify.simplify).headOption
-  
-  lazy val solutions: Seq[Sym] = explicit.map(Solve.solve(_, 'x)).getOrElse(Nil)
-
-  lazy val derivative: Sym =
-    Derivative.derive(explicit.getOrElse(sym), 'x)
-
-  lazy val extremas: Seq[Sym] =
-    if (explicit.isEmpty) Nil
-    else Solve.solve(derivative, 'x)
-
-  lazy val importantPoints: Seq[Sym] =
-    all.flatMap{s => Solve.importantPoints(s.sym, 'x)}.flatMap(_.expand)
-
-  lazy val undefinedPoints: Seq[Sym] =
-    all.flatMap{s => Solve.undefinedPoints(s.sym, 'x)}.flatMap(_.expand)
-
-  lazy val function: Option[Double => Double] = explicit match {
-    case None => None
-    case Some(ex) => Some{ (x: Double) => ex.approx('x -> x).head }
-  }
-
-  lazy val all: Seq[SuperSym] =
-    if (explicit.isEmpty) Nil
-    else explicit.get.expand.map(SuperSym(_))
 }

@@ -12,17 +12,13 @@ object Simplify {
   val sRules = new Rules()
   
   @JSExportTopLevel("simplify")
-  def simplify(expr: Sym): Sym = expr match {
-    case in @ Integral.SymIntegral(sub) =>
-      IntegralRules.basicIntegration(in)
-        .getOrElse(Integral.SymIntegral(simplify(sub)))
-    case _ => expr.mapExprs(simplify).pipe{e =>
+  def simplify(expr: Sym): Sym =
+    expr.mapExprs(simplify).pipe{e =>
       sRules.first(e) match {
         case Some(simpler) => simplify(simpler)
         case None => e
       }
     }
-  }
   
   def separateRoot(base: SymInt, root: SymInt): (SymInt, SymInt) =
     ( base.primeFactors.toList.foldLeft(S(1)){ (a, t) => a * (t._1 ^ SymInt(t._2.n / root.n)) },
@@ -206,7 +202,8 @@ object Simplify {
       SymPM( ***(e +: rest) )
   }
 
-  // Simplifying infinities
+  /// Simplifying infinities
+
   sRules.+("Anything with an undefined is undefined"){
     AnyP() |> {e: Sym => Sym.containsExpr(e, SymUndefined())}
   }{ case () => SymUndefined() }
@@ -247,7 +244,21 @@ object Simplify {
       else SymUndefined()
   }
 
-  // Controversial
+  /// Integral rules
+
+  sRules.+("Basic Integrals"){
+    @?('i) @@ IntegralP()
+  }{ case i: Integral.SymIntegral =>
+      IntegralRules.basicIntegration(i).getOrElse(i)
+  }
+
+  sRules.+("Integral of a product is a product with an integral"){
+    IntegralP( ProdP( ConstP(@?('c)), @?('rest) @@ __* ) )
+  }{ case (c: SymConstant, rest: Seq[Sym]) =>
+      **(c, math.Integral.SymIntegral(***(rest)))
+  }
+
+  /// Controversial
 
   def distribute(l1: Seq[Sym], l2: Seq[Sym]): Seq[Sym] =
     l1.flatMap{ a => l2.map{ b => **(a, b) } }

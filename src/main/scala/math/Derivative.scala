@@ -30,6 +30,7 @@ object Derivative {
         case SymPM(e) => SymPM(derive(e, v))
         case SymSin(e) => **(derive(e, v), SymCos(e))
         case SymCos(e) => **(derive(e, v), S(-1), SymSin(e))
+        case Integral.SymIntegral(sub) => sub
 	  }
 	)
   

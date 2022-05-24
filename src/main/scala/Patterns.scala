@@ -137,10 +137,10 @@ case class AnyP() extends Pattern {
   def matches(e: Sym) = Seq(Map())
 }
 
-case class ConstP() extends Pattern {
-  def matches(e: Sym) = e match {
-    case c: SymConstant => Seq(Map())
-    case _ => Seq()
+case class ConstP(p: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case a: SymConstant => matchSeveral((a -> p))
+    case _ => Seq[Binding]()
   }
 }
 
@@ -171,6 +171,13 @@ case class With(p: Pattern, v: Symbol, bind: Any) extends Pattern {
       SeqMatch(m = m, rest = rest,
         binds = tryCombinations(binds, Seq(Map(v -> bind))))
     }
+}
+
+case class IntegralP(p: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case math.Integral.SymIntegral(sub) => matchSeveral((sub -> p))
+    case _ => Seq[Binding]()
+  }
 }
 
 case class VarP(n: Pattern = AnyP()) extends Pattern {

@@ -7,6 +7,7 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 
 import sympany._
 import sympany.math.IntegralRules
+import sympany.math.Simplify
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -38,10 +39,16 @@ object Main {
     import Sym._
     import math.Integral._
     import math.IntegralRules._
+    import Pattern._
+    import Sym._
 
-    val e = **( V('x), SymSin(V('x)) )
-    println(integrate(SymIntegral(e)))
+    //val e = **( V('x), SymSin(V('x)) )
+    //println(integrate(SymIntegral(e)))
     //println(SymIntegral(SymSin(V('x))).simple)
+    //showEquation(SymIntegral(**(SymVar('y))))
+
+    showEquation( **(S(2), ^(V('x), S(2)), SymSin(V('x)) ).integral.get )
+
   }
   
 }

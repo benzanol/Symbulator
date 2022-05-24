@@ -64,6 +64,7 @@ object Integral {
     while (queue.nonEmpty) {
       // Get the first element of the queue, and remove it
       val q = queue.head
+      println(s"Queue: $q")
       queue = queue.tail
       
       // Add the new integrals to the end of the queue
@@ -88,11 +89,24 @@ object Integral {
     // If this integral has already been solved, no need to calculate it
     if (actor.solution.isDefined) return Nil
 
-    val ints: Seq[SymIntegral] = List[SymIntegral]()
+
+    // First check if it is a basic integral
+    IntegralRules.basicIntegration(base) match {
+      case Some(solution) => actor.solve(solution) ; return Nil
+      case _ => ()
+    }
+
+
+    // Use rules to calculate equivalent integrals and expressions
+    val rawInts: Seq[SymIntegral] = List[SymIntegral]()
     val rawExprs: Seq[Sym] = base.expr match {
       case p: SymProd => integrationByParts(p)
       case _ => Nil
     }
+
+
+    // Simplify all of the new integrals
+    val ints = rawInts.map{ i => SymIntegral(i.expr.simple) }
 
 
     // Replace any already solved integrals within the expressions
@@ -142,7 +156,7 @@ object IntegralRules {
 
   def basicIntegration(integral: SymIntegral): Option[Sym] =
     Some(integral.expr).collect{
-      case c: SymConstant => **(c, X)
+      case c: SymConstant => **(c, SymVar('x))
       case x @ SymVar('x) => **(S(1, 2), ^(x, S(2)))
       case SymPow(x @ SymVar('x), p: SymConstant) =>
         **(^(++(p, S(1)), S(-1)), ^(x, ++(p, S(1))))
