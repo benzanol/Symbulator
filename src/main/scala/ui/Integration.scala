@@ -72,7 +72,7 @@ object Integration {
     // Display the points
     for ((p, i) <- Seq(p1 -> 1, p2 -> 2))
       if (p.isDefined) setText(s"p${i}",
-        s"p_$i = \\quad (${p.get.x.toLatex}, ${p.get.y.toLatex})")
+        s"p_$i = \\quad (${p.get.x.toLatex}, \\quad ${p.get.y.toLatex})")
       else setText(s"p${i}" , s"p_$i =")
 
     // Display the equations

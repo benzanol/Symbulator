@@ -15972,7 +15972,7 @@ $c_Lsympany_ui_Integration$.prototype.updateUi__V = (function() {
         var this$9 = $as_Lsympany_ui_Graph$IntersectionPoint(p.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_x;
         var $$x3 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$9);
         var this$10 = $as_Lsympany_ui_Graph$IntersectionPoint(p.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_y;
-        $p_Lsympany_ui_Integration$__setText$1__T__T__V(this$2$1, ("p" + i), (((((("p_" + i) + " = \\quad (") + $$x3) + ", ") + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$10)) + ")"))
+        $p_Lsympany_ui_Integration$__setText$1__T__T__V(this$2$1, ("p" + i), (((((("p_" + i) + " = \\quad (") + $$x3) + ", \\quad ") + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$10)) + ")"))
       } else {
         $p_Lsympany_ui_Integration$__setText$1__T__T__V(this$2$1, ("p" + i), (("p_" + i) + " ="))
       }
