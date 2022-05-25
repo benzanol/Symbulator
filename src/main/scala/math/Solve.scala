@@ -34,9 +34,9 @@ object Solve {
   }.distinct
   
   @JSExportTopLevel("solve")
-  def solve(e: Sym, v: Symbol = X.symbol): Seq[Sym] = 
+  def solve(e: Sym, v: Symbol = X.symbol): Seq[Sym] =
     replaceExpr(e.simple, SymVar(v), X)
-      .pipe{expr => zRules.first(expr)}
+      .pipe{expr => zRules.all(expr)}
       .map{solution => replaceExpr(solution, X, SymVar(v))}
       .map(_.simple).toSeq.distinct//.filter(_.isDefined)
 
@@ -55,28 +55,49 @@ object Solve {
   //      }.pipe{ newEs => if (newEs.isEmpty) Nil else solve(newEs, old ++ es) }
   //    }).distinct
   
-  val zRules = new Rules()
+  val zRules = new SeqRules()
   
   zRules.+("Subtract from one side of equation"){
     @?('whole) @@ EquationP(@?('l), @?('r))
   }{ case (l: Sym, r: Sym, whole: Sym) =>
-      solve(simplify(++(l, **(r, S(-1))))).headOption.getOrElse(whole)
+      solve(simplify(++(l, **(r, S(-1)))))
   }
 
-  zRules.+("Plus Minus"){ PMP(@?('e)) }{ case e: Sym => solve(e).headOption.getOrElse(+-(e)) }
+  zRules.+("x^3 + x^2 = x^2(x + 1)"){
+    's @@ SumP(Repeat( AsProdP( AsPowP(XP, __), __*) ))
+  }{ case s: SymSum =>
+
+      val minExpt = s.exprs.flatMap{ e =>
+        AsProdP( AsPowP(XP, 'p), __*).matches(e)
+          .headOption.map(_.apply('p).asInstanceOf[SymInt].toInt)
+      }.min
+
+      val rule = new Rule("", AsProdP( AsPowP(XP, 'p), 'r @@ __*), {
+        case (p: Sym, r: Seq[Sym]) =>
+          ***( ^(X, ++(p, SymInt(-minExpt))) +: r ).simple
+      })
+
+      val divided = +++( s.exprs.map(rule.first(_).get) )
+      println("Divided: ", divided)
+
+      if (minExpt > 0) SymInt(0) +: solve( divided )
+      else Nil
+  }
+
+  zRules.+("Plus Minus"){ PMP(@?('e)) }{ case e: Sym => solve(e) }
 
   // Good luck trying to understand this mess lol
   zRules.+("ax^p + b => x +- (-b/a)^(1/p)"){
     AsSumP(AsProdP(AsPowP(XP, @?('p) @@ noxP()), @?('a) @@ Repeat(noxP())), @?('rest) @@ Repeat(noxP()))
-  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) => +-(^(**(S(-1), +++(r),
-    if (a.isEmpty) S(1) else ^(+++(a), S(-1))), S(1, n)))
-    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) => ^(**(S(-1), +++(r),
-      if (a.isEmpty) S(1) else ^(+++(a), S(-1))), ^(p, S(-1)))
+  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) => Seq(+-(^(**(S(-1), +++(r),
+    if (a.isEmpty) S(1) else ^(+++(a), S(-1))), S(1, n))))
+    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) => Seq(^(**(S(-1), +++(r),
+      if (a.isEmpty) S(1) else ^(+++(a), S(-1))), ^(p, S(-1))))
   }
 
   zRules.+("log 1 = 0"){
-    @?('whole) @@ LogP(@?('a) @@ hasxP(), __)
-  }{ case (a: Sym, w: Sym) => solve( ++(a, S(-1)) ).headOption.getOrElse(w) }
+    LogP(@?('a) @@ hasxP(), __)
+  }{ case a: Sym => solve( ++(a, S(-1)) ) }
 
   //  zRules.+("a^p => a = 0"){
   //    @?('whole) @@ PowP( @?('b), RatP( @?('p) |> { p: SymR => p.value > 0 } ) )
@@ -89,9 +110,9 @@ object Solve {
       @?('cs) @@ Repeat(noxP()) // Any number of c
     )
   }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
-      quadraticFormula(aS, bS, cS)
+      Seq(quadraticFormula(aS, bS, cS))
   }
-  
+
   def quadraticFormula(aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]): Sym = {
     val List(a, b, c) = List(aS, bS, cS).map{ es: Seq[Sym] =>
       val realEs = es.map(_ match {

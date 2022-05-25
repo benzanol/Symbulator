@@ -391,3 +391,26 @@ class Rules() {
   def all(e: Sym): Seq[Sym] =
     rules.foldLeft(Seq[Sym]()){ (acc, r) => acc ++ r.all(e) }
 }
+
+
+case class SeqRule(name: String, p: Pattern, f: Any => Seq[Sym]) {
+  def all(e: Sym): Seq[Sym] =
+    try {
+      p.matches(e)
+        .flatMap(callWithBind[Seq[Sym]](_)(f))
+        .filter(_ != e)
+    } catch {
+      case err: Throwable =>
+        println(f"Rule `$name` threw error `$err`") ; Nil
+    }
+}
+
+class SeqRules() {
+  private var rules = List[SeqRule]()
+
+  def +(n: String)(p: Pattern)(f: Any => Seq[Sym]) =
+    rules :+= new SeqRule(n, p, f)
+
+  def all(e: Sym): Seq[Sym] =
+    rules.foldLeft(Seq[Sym]()){ (acc, r) => acc ++ r.all(e) }
+}

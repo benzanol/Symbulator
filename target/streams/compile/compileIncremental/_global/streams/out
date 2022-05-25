@@ -2,31 +2,76 @@
 [0m[[0m[0mdebug[0m] [0m[0mInitial source changes: [0m
 [0m[[0m[0mdebug[0m] [0m[0m	removed:Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	added: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala, /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala)[0m
 [0m[[0m[0mdebug[0m] [0m[0mInvalidated products: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mExternal API changes: API Changes: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(sympany.Main)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(sympany.PMP, sympany.And, sympany.PatternVar, sympany.With, sympany.EquationP, sympany.IntegralP, sympany.Rules, sympany.Pattern.SeqMatch, sympany.math.Solve, sympany.SumP, sympany.Pattern.ImplicitPatternVar, sympany.PowP, sympany.AsProdP, sympany.Bind, sympany.AsPowP, sympany.ConstP, sympany.LogP, sympany.IntP, sympany.Rule, sympany.Satisfies, sympany.ProdP, sympany.Guard, sympany.Repeat, sympany.Or, sympany.First, sympany.AnyP, sympany.Pattern, sympany.RatP, sympany.FracP, sympany.AsSumP, sympany.SymP, sympany.VarP)[0m
 [0m[[0m[0mdebug[0m] [0m[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0mSources indirectly invalidated by:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	product: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	external source: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(sympany.Main)[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Main.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.Main[0m
-[0m[[0m[0minfo[0m] [0m[0mCompiling 1 Scala source to /home/quaviq/Documents/Programming/Scala/Calculator/target/scala-2.13/classes ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(sympany.PMP, sympany.And, sympany.PatternVar, sympany.With, sympany.EquationP, sympany.IntegralP, sympany.Rules, sympany.Pattern.SeqMatch, sympany.math.Solve, sympany.SumP, sympany.Pattern.ImplicitPatternVar, sympany.PowP, sympany.AsProdP, sympany.Bind, sympany.AsPowP, sympany.ConstP, sympany.LogP, sympany.IntP, sympany.Rule, sympany.Satisfies, sympany.ProdP, sympany.Guard, sympany.Repeat, sympany.Or, sympany.First, sympany.AnyP, sympany.Pattern, sympany.RatP, sympany.FracP, sympany.AsSumP, sympany.SymP, sympany.VarP)[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala, /home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/Patterns.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.PMP, sympany.And, sympany.PatternVar, sympany.With, sympany.EquationP, sympany.IntegralP, sympany.Rules, sympany.Pattern.SeqMatch, sympany.math.Solve, sympany.SumP, sympany.Pattern.ImplicitPatternVar, sympany.PowP, sympany.AsProdP, sympany.Bind, sympany.AsPowP, sympany.ConstP, sympany.LogP, sympany.IntP, sympany.Rule, sympany.Satisfies, sympany.ProdP, sympany.Guard, sympany.Repeat, sympany.Or, sympany.First, sympany.AnyP, sympany.Pattern, sympany.RatP, sympany.FracP, sympany.AsSumP, sympany.SymP, sympany.VarP[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.Pattern.ImplicitPatternVar by sympany.PatternVar[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.RatP by sympany.Pattern[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.FracP by sympany.Pattern[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.AsSumP by sympany.Pattern[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymP by sympany.Pattern[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.VarP by sympany.Pattern[0m
+[0m[[0m[0minfo[0m] [0m[0mCompiling 2 Scala sources to /home/quaviq/Documents/Programming/Scala/Calculator/target/scala-2.13/classes ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.13:1.3.2:compile for Scala 2.13.1[0m
 [0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.13:1.3.2:compile for Scala 2.13.1[0m
-[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 6fb53af2 for Scala compiler version 2.13.1[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 5a10f109 for Scala compiler version 2.13.1[0m
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-Xplugin:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-compiler_2.13.1/1.10.0/scalajs-compiler_2.13.1-1.10.0.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.1/scala-library-2.13.1.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/home/quaviq/Documents/Programming/Scala/Calculator/target/scala-2.13/classes:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-dom_sjs1_2.13/2.1.0/scalajs-dom_sjs1_2.13-2.1.0.jar:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-library_2.13/1.10.0/scalajs-library_2.13-1.10.0.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 0.289968489 s[0m
+[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 1.696199245 s[0m
 [0m[[0m[0mdebug[0m] [0m[0mDone compiling.[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.IntP...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.IntP[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.IntP)[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Simplify. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.IntP,ModifiedNames(changes = UsedName(finalize,[Default]))) invalidates 1 classes due to The sympany.IntP has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(finalize,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.IntP)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m        [0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.Solve...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.Solve[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.Solve)[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.Sym. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.Solve,ModifiedNames(changes = UsedName(finalize,[Default]), UsedName(zRules,[Default]))) invalidates 1 classes due to The sympany.math.Solve has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(finalize,[Default]), UsedName(zRules,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.Solve)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m        [0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.SeqRules...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.SeqRules[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.SeqRules)[0m
+[0m[[0m[0mdebug[0m] [0m[0mThe following modified names cause invalidation of sympany.math.Solve: Set(UsedName(SeqRules,[Default]), UsedName(sympany;SeqRules;init;,[Default]), UsedName(+,[Default]), UsedName(==,[Default]), UsedName(all,[Default]), UsedName(asInstanceOf,[Default]))[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.SeqRules,ModifiedNames(changes = UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(notify,[Default]), UsedName(getClass,[Default]), UsedName(wait,[Default]), UsedName(synchronized,[Default]), UsedName(isInstanceOf,[Default]), UsedName(eq,[Default]), UsedName(SeqRules,[Default]), UsedName(sympany;SeqRules;init;,[Default]), UsedName(+,[Default]), UsedName(clone,[Default]), UsedName(!=,[Default]), UsedName(notifyAll,[Default]), UsedName(hashCode,[Default]), UsedName(##,[Default]), UsedName(==,[Default]), UsedName($asInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(ne,[Default]), UsedName(all,[Default]), UsedName(equals,[Default]), UsedName(asInstanceOf,[Default]))) invalidates 2 classes due to The sympany.SeqRules has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(notify,[Default]), UsedName(getClass,[Default]), UsedName(wait,[Default]), UsedName(synchronized,[Default]), UsedName(isInstanceOf,[Default]), UsedName(eq,[Default]), UsedName(SeqRules,[Default]), UsedName(sympany;SeqRules;init;,[Default]), UsedName(+,[Default]), UsedName(clone,[Default]), UsedName(!=,[Default]), UsedName(notifyAll,[Default]), UsedName(hashCode,[Default]), UsedName(##,[Default]), UsedName(==,[Default]), UsedName($asInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(ne,[Default]), UsedName(all,[Default]), UsedName(equals,[Default]), UsedName(asInstanceOf,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.SeqRules)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by member reference: Set(sympany.math.Solve)[0m
+[0m[[0m[0mdebug[0m] [0m[0m        [0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.SeqRule...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.SeqRule[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.SeqRule)[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.SeqRule,ModifiedNames(changes = UsedName(finalize,[Default]), UsedName(productPrefix,[Default]), UsedName($isInstanceOf,[Default]), UsedName(notify,[Default]), UsedName(productElementNames,[Default]), UsedName(SeqRule,[Default]), UsedName(getClass,[Default]), UsedName(copy$default$1,[Default]), UsedName(name,[Default]), UsedName(wait,[Default]), UsedName(productIterator,[Default]), UsedName(apply,[Default]), UsedName(synchronized,[Default]), UsedName(sympany;SeqRule;init;,[Default]), UsedName(isInstanceOf,[Default]), UsedName(eq,[Default]), UsedName(copy$default$3,[Default]), UsedName(copy$default$2,[Default]), UsedName(clone,[Default]), UsedName(p,[Default]), UsedName(productElement,[Default]), UsedName(!=,[Default]), UsedName(canEqual,[Default]), UsedName(curried,[Default]), UsedName(notifyAll,[Default]), UsedName(hashCode,[Default]), UsedName(##,[Default]), UsedName(productArity,[Default]), UsedName(==,[Default]), UsedName($asInstanceOf,[Default]), UsedName(unapply,[Default]), UsedName(copy,[Default]), UsedName(productElementName,[Default]), UsedName(tupled,[Default]), UsedName(toString,[Default]), UsedName(ne,[Default]), UsedName(all,[Default]), UsedName(equals,[Default]), UsedName(asInstanceOf,[Default]), UsedName(f,[Default]), UsedName($init$,[Default]))) invalidates 1 classes due to The sympany.SeqRule has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(finalize,[Default]), UsedName(productPrefix,[Default]), UsedName($isInstanceOf,[Default]), UsedName(notify,[Default]), UsedName(productElementNames,[Default]), UsedName(SeqRule,[Default]), UsedName(getClass,[Default]), UsedName(copy$default$1,[Default]), UsedName(name,[Default]), UsedName(wait,[Default]), UsedName(productIterator,[Default]), UsedName(apply,[Default]), UsedName(synchronized,[Default]), UsedName(sympany;SeqRule;init;,[Default]), UsedName(isInstanceOf,[Default]), UsedName(eq,[Default]), UsedName(copy$default$3,[Default]), UsedName(copy$default$2,[Default]), UsedName(clone,[Default]), UsedName(p,[Default]), UsedName(productElement,[Default]), UsedName(!=,[Default]), UsedName(canEqual,[Default]), UsedName(curried,[Default]), UsedName(notifyAll,[Default]), UsedName(hashCode,[Default]), UsedName(##,[Default]), UsedName(productArity,[Default]), UsedName(==,[Default]), UsedName($asInstanceOf,[Default]), UsedName(unapply,[Default]), UsedName(copy,[Default]), UsedName(productElementName,[Default]), UsedName(tupled,[Default]), UsedName(toString,[Default]), UsedName(ne,[Default]), UsedName(all,[Default]), UsedName(equals,[Default]), UsedName(asInstanceOf,[Default]), UsedName(f,[Default]), UsedName($init$,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.SeqRule)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m        [0m
 [0m[[0m[0mdebug[0m] [0m[0mNew invalidations:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: [0m

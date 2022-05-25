@@ -1,2 +1,26 @@
-[0m[[0m[33mwarn[0m] [0m[0mthere were two deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
-[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala:76:26: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m        case (p: Sym, r: Seq[Sym]) =>[0m
+[0m[[0m[33mwarn[0m] [0m[0m                         ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala:92:15: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) => Seq(+-(^(**(S(-1), +++(r),[0m
+[0m[[0m[33mwarn[0m] [0m[0m              ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala:92:39: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) => Seq(+-(^(**(S(-1), +++(r),[0m
+[0m[[0m[33mwarn[0m] [0m[0m                                      ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala:94:14: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) => Seq(^(**(S(-1), +++(r),[0m
+[0m[[0m[33mwarn[0m] [0m[0m             ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala:94:35: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) => Seq(^(**(S(-1), +++(r),[0m
+[0m[[0m[33mwarn[0m] [0m[0m                                  ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala:112:16: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>[0m
+[0m[[0m[33mwarn[0m] [0m[0m               ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala:112:30: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>[0m
+[0m[[0m[33mwarn[0m] [0m[0m                             ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/math/Solve.scala:112:44: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>[0m
+[0m[[0m[33mwarn[0m] [0m[0m                                           ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mthere were 20 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m[[0m[33mwarn[0m] [0m[0m9 warnings found[0m

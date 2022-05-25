@@ -43,6 +43,10 @@ object Main {
     import Pattern._
     import Sym._
 
+    //'p @@ ProdP(Repeat( AsProdP( AsPowP(XP, __), __*) ))
+
+    println(++(^('x, 3), 'x).solve('x))
+
   }
   
 }
