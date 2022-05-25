@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
     <style>
+     button {
+         background-color: transparent;
+         border-style: solid;
+         border-radius: 4px;
+         font-size: 16px;
+         padding: 4px;
+     }
+
      .flex {
          display: flex;
      }
@@ -102,6 +110,23 @@
                     <br>
                     <div id="equations">
                     </div>
+                </div>
+
+                <div id="integral-sidebar" style="display:none">
+                    <button onclick="exitIntegralSidebar()">← Back to equations</button>
+                    <br/><br/>
+                    <p id="integral-p1"  class="mq-static"></p><br/>
+                    <p id="integral-p1a" class="mq-static"></p><br/>
+                    <p id="integral-p1b" class="mq-static"></p><br/>
+                    <br/>
+                    <p id="integral-p2"  class="mq-static"></p><br/>
+                    <p id="integral-p2a" class="mq-static"></p><br/>
+                    <p id="integral-p2b" class="mq-static"></p><br/>
+
+                    <p class="mq-static">\text{Solution:}</p><br/>
+                    <p id="integral-solution1" class="mq-static"></p>
+                    <p id="integral-solution2" class="mq-static"></p>
+                    <p id="integral-solution3" class="mq-static"></p>
                 </div>
             </div>
 

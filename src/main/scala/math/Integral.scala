@@ -99,10 +99,16 @@ object Integral {
 
     // Use rules to calculate equivalent integrals and expressions
     val rawInts: Seq[SymIntegral] = List[SymIntegral]()
-    val rawExprs: Seq[Sym] = base.expr match {
+
+    val parts: Seq[Sym] = base.expr match {
       case p: SymProd => integrationByParts(p)
       case _ => Nil
     }
+    val splitSum: Seq[Sym] = base.expr.simple match {
+      case s: SymSum => Seq(Sym.+++(s.exprs.map(SymIntegral)))
+      case _ => Nil
+    }
+    val rawExprs = parts ++ splitSum
 
 
     // Simplify all of the new integrals

@@ -43,19 +43,6 @@ object Main {
     import Pattern._
     import Sym._
 
-    println(PowP(=#?(1), __).matches(^(1, 1~2)))
-    println(Simplify.sRules.first(^(1, 1~2)))
-
-    //println(1.simple)
-    //println(**(1, ^(1, 1~2)).simple)
-    //println(^(1, 1~2).simple)
-
-    //val e = **( V('x), SymSin(V('x)) )
-    //println(integrate(SymIntegral(e)))
-    //println(SymIntegral(SymSin(V('x))).simple)
-    //showEquation(SymIntegral(**(SymVar('y))))
-    //showEquation( **(S(2), ^(V('x), S(2)), SymSin(V('x)) ).integral.get )
-
   }
   
 }

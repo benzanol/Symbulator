@@ -155,9 +155,6 @@ trait Sym {
 
   def replaceExpr(t: Sym, r: Sym) = Sym.replaceExpr(this, t, r)
 
-  // Forces an implicit object to be the symbolic version of that object
-  def s = this
-
   lazy val expand: Seq[Sym] =
     exprs.map(_.expand)
       .foldLeft(Seq(Seq[Sym]())){ (acc, seq: Seq[Sym]) =>
@@ -243,6 +240,8 @@ case class SymVar(symbol: Symbol = 'x) extends Sym {
   override lazy val expand = Seq(this)
   override def approx(env: Bind*) = env.find(_._1 == symbol).map(_._2).toSeq
 
+  def s = this
+
   override def toString = symbol.name
 }
 
@@ -304,6 +303,8 @@ case class SymInt(n: BigInt = 1) extends SymR {
   override def toString = n.toString
   def d = BigInt(1)
   def ~(o: SymInt) = SymR(n, o.n)
+  def s = this
+
   
   lazy val primeFactors: Map[SymInt, SymInt] = {
     var num = n.abs

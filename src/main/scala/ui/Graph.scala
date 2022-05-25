@@ -13,6 +13,7 @@ import sympany.Parse.parseLatex
 import sympany._
 import sympany.math._
 import sympany.Sym._
+import javax.lang.model.`type`.IntersectionType
 
 object Graph {
   // Set up the graph when it is loaded for the first time
@@ -27,6 +28,7 @@ object Graph {
 
 	fc.addEventListener("mousemove", highlightPoints)
 	fc.addEventListener("mouseout",  { (e: Any) => hidePointBox() })
+	fc.addEventListener("mousedown", maybeClickPoint)
 	
 	window.addEventListener("resize", { (e: Any) => draw })
 	
@@ -131,6 +133,8 @@ object Graph {
 
 
   // Display important points when the mouse hovers over them
+  var currentPoint: Option[IntersectionPoint] = None
+
   def highlightPoints(event: dom.MouseEvent) {
     val rect = fc.getBoundingClientRect()
 
@@ -140,6 +144,9 @@ object Graph {
     for (p <- points ; x <- p.x.approx ; y <- p.y.approx)
       // Find the first point that is less than the min distance from the cursor
       if (Math.sqrt( Math.pow(canvasX(x)-mx, 2) + Math.pow(canvasY(y)-my, 2) ) < pointRadius) {
+
+        // Set the current point
+        this.currentPoint = Some(p)
 
         // Set the text of the point box and move it to the cursor
         val box = document.getElementById("point-box")
@@ -154,6 +161,7 @@ object Graph {
 
     // If no points were found, make sure the box is hidden
     hidePointBox()
+    this.currentPoint = None
   }
 
   def hidePointBox() {
@@ -161,6 +169,11 @@ object Graph {
     box.setAttribute("style", "display:none;")
   }
 
+  def maybeClickPoint(event: dom.MouseEvent) =
+    this.currentPoint match {
+      case Some(p) => Integration.clickPoint(p)
+      case None => ()
+    }
 
   // Draw the graph
 

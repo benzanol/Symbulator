@@ -23,8 +23,8 @@ object Simplify {
   }
   
   def separateRoot(base: SymInt, root: SymInt): (SymInt, SymInt) =
-    ( base.primeFactors.toList.foldLeft(SymInt(1)){ (a, t) => a * (t._1 ^ SymInt(t._2.n / root.n)) },
-      base.primeFactors.toList.foldLeft(SymInt(1)){ (a, t) => a * (t._1 ^ SymInt(t._2.n % root.n)) }
+    ( base.primeFactors.toList.foldLeft(1.s){ (a, t) => a * (t._1 ^ SymInt(t._2.n / root.n)) },
+      base.primeFactors.toList.foldLeft(1.s){ (a, t) => a * (t._1 ^ SymInt(t._2.n % root.n)) }
     )
 
   sRules.+("x^0 = 1"){
@@ -59,7 +59,7 @@ object Simplify {
     PowP(RatP('n, 'd), RatP('p |> { (_:SymInt) != 1.s }, 'root))
   }{ case (d: SymInt, n: SymInt, p: SymInt, root: SymInt) =>
       if (p.n > 0) ^((n ^ p) / (d ^ p), 1~root)
-      else ^((d ^ (0 - p)) / (n ^ (0 - p)), 1~root)
+      else ^((d ^ (0.s - p)) / (n ^ (0.s - p)), 1~root)
   }
   
   // (a^p1)^p2 = a^(p1*p2)
@@ -160,8 +160,8 @@ object Simplify {
   
   sRules.+("3x + 2x = 5x"){
     SumP(
-      First(ProdP('f1 @@ RatP(), 'u), 'u &@ 'f1 -> 1),
-      First(ProdP('f2 @@ RatP(), 'u), 'u &@ 'f2 -> 1),
+      First(ProdP('f1 @@ RatP(), 'u), 'u &@ 'f1 -> 1.s),
+      First(ProdP('f2 @@ RatP(), 'u), 'u &@ 'f2 -> 1.s),
       'rest @@ __*)
   }{ case (f1: SymR, f2: SymR, rest: Seq[SymR], u: Sym) =>
       +++(**(f1 + f2, u) +: rest)
@@ -169,8 +169,8 @@ object Simplify {
   
   sRules.+("3xy + 2xy = 5xy"){
     SumP(
-      ProdP(First('f1 @@ RatP(), ~~ &@ 'f1 -> 1), 'us @@ __*),
-      ProdP(First('f2 @@ RatP(), ~~ &@ 'f2 -> 1), 'us @@ __*),
+      ProdP(First('f1 @@ RatP(), ~~ &@ 'f1 -> 1.s), 'us @@ __*),
+      ProdP(First('f2 @@ RatP(), ~~ &@ 'f2 -> 1.s), 'us @@ __*),
       'rest @@ __*)
   }{ case (f1: SymR, f2: SymR, rest: Seq[SymR], us: Seq[Sym]) =>
       +++( **({ (f1 + f2) +: us }:_*) +: rest )
@@ -190,7 +190,7 @@ object Simplify {
       ***( +++( terms.map{ e => **(e, n) } ) +: rest )
   }
   
-  sRules.+("Plus/minus 0 is 0"){ SymP(SymPM(SymInt(0))) }{ case () => 0 }
+  sRules.+("Plus/minus 0 is 0"){ SymP(SymPM(0)) }{ case () => 0 }
 
   sRules.+("Remove nested plus/minus"){ PMP(PMP('e)) }{ case e: Sym => SymPM(e) }
   
@@ -267,6 +267,12 @@ object Simplify {
   }
 
   /// Controversial
+
+  sRules.+("Expand binomials"){
+    PowP( 's @@ SumP( RatP('r), 'o @@ ProdP(PowP(RatP(), RatP()), RatP()) ), IntP('p) )
+  }{ case (p: SymInt, s: SymSum) =>
+      (2 until p.n.toInt).foldLeft(s.exprs){ (acc, n) => distribute(acc, s.exprs) }.pipe(+++)
+  }
 
   def distribute(l1: Seq[Sym], l2: Seq[Sym]): Seq[Sym] =
     l1.flatMap{ a => l2.map{ b => **(a, b) } }
