@@ -38,7 +38,7 @@ object Solve {
     replaceExpr(e.simple, SymVar(v), X)
       .pipe{expr => zRules.first(expr)}
       .map{solution => replaceExpr(solution, X, SymVar(v))}
-      .map(_.simple).toSeq.distinct
+      .map(_.simple).toSeq.distinct//.filter(_.isDefined)
 
 
   //def solve(e: Sym, v: Symbol = X.symbol): Seq[Sym] =

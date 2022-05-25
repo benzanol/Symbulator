@@ -39,6 +39,11 @@ object Sym {
   def E = SymE()
   def X = SymVar('*)
   def V(s: Symbol) = SymVar(s)
+
+  implicit class ImplicitSymBigInt(_b: BigInt) extends SymInt(_b)
+  implicit class ImplicitSymInt(_i: Int) extends SymInt(BigInt(_i))
+
+  implicit class ImplicitSymVar(_s: Symbol) extends SymVar(_s)
 }
 
 object Multiset {
@@ -150,6 +155,9 @@ trait Sym {
 
   def replaceExpr(t: Sym, r: Sym) = Sym.replaceExpr(this, t, r)
 
+  // Forces an implicit object to be the symbolic version of that object
+  def s = this
+
   lazy val expand: Seq[Sym] =
     exprs.map(_.expand)
       .foldLeft(Seq(Seq[Sym]())){ (acc, seq: Seq[Sym]) =>
@@ -188,6 +196,9 @@ trait Sym {
     if (expand.length <= 1) Seq{ x: Double => this.at(x).headOption }
     else expand.flatMap(_.functions)
 
+
+  def isDefined: Boolean = true
+
   //def allHoles: Set[Sym] = exprHoles ++ extraHoles
   //def exprHoles: Set[Sym] = Set()
   //var extraHoles = Set[Sym] = Set()
@@ -225,7 +236,6 @@ case class SymEquation(left: Sym = SymInt(0), right: Sym = SymInt(0)) extends Sy
 }
 
 /// Variables
-//implicit class ImplicitSymVar(orig: Symbol) extends SymVar(orig)
 
 case class SymVar(symbol: Symbol = 'x) extends Sym {
   lazy val exprs = Nil
@@ -290,13 +300,9 @@ trait SymR extends SymConstant {
 
 case class SymFrac(n: BigInt = 1, d: BigInt = 1) extends SymR
 
-//implicit class ImplicitSymBigInt(original: BigInt) extends SymInt(original)
-//implicit class ImplicitSymInt(original: Int) extends SymInt(BigInt(original))
-
 case class SymInt(n: BigInt = 1) extends SymR {
   override def toString = n.toString
   def d = BigInt(1)
-  def s = this
   def ~(o: SymInt) = SymR(n, o.n)
   
   lazy val primeFactors: Map[SymInt, SymInt] = {
@@ -323,16 +329,19 @@ case class SymUndefined() extends SymR {
   override def toString = "NaN"
   def n = 0
   def d = 0
+  override def isDefined = false
 }
 case class SymPositiveInfinity() extends SymR {
   override def toString = "Inf"
   def n = 1
   def d = 0
+  override def isDefined = false
 }
 case class SymNegativeInfinity() extends SymR {
   override def toString = "-Inf"
   def n = -1
   def d = 0
+  override def isDefined = false
 }
 
 /// Operations

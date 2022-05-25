@@ -10,9 +10,9 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 
 import sympany.Main.jslog
 import sympany.Parse.parseLatex
-import sympany.Sym.replaceExpr
 import sympany._
 import sympany.math._
+import sympany.Sym._
 
 object Graph {
   // Set up the graph when it is loaded for the first time
@@ -137,13 +137,13 @@ object Graph {
     val mx = event.clientX - rect.left
     val my = event.clientY - rect.top
 
-    for (p <- points.flatten ; x <- p._1.approx ; y <- p._2.approx)
+    for (p <- points ; x <- p.x.approx ; y <- p.y.approx)
       // Find the first point that is less than the min distance from the cursor
       if (Math.sqrt( Math.pow(canvasX(x)-mx, 2) + Math.pow(canvasY(y)-my, 2) ) < pointRadius) {
 
         // Set the text of the point box and move it to the cursor
         val box = document.getElementById("point-box")
-        box.innerText = s"\\left( ${p._1.toLatex}, \\quad ${p._2.toLatex} \\right)"
+        box.innerText = s"\\left( ${p.x.toLatex}, \\quad ${p.y.toLatex} \\right)"
         box.setAttribute("style", s"left:${event.clientX}px; top:${event.clientY}px; display:block;")
 
         // Format the point as a latex equation
@@ -165,80 +165,71 @@ object Graph {
   // Draw the graph
 
   private var graphs = Seq[Sym]()
-  private var points = Seq[Seq[(Sym, Sym)]]()
+  private var points = Seq[IntersectionPoint]()
   private val colors = Seq("#AA0000", "#0000AA", "#008800")
   private val gridColor = "#AAAAAA"
   
+  case class IntersectionPoint(funcs: Seq[Sym], x: Sym, y: Sym, color: String)
+
   def setGraphs(exprs: Seq[Sym]) {
 	this.graphs = exprs
 
-    val zeros = exprs.map(_.zeros.flatMap(_.expand).map(_.simple -> SymInt(0)))
+    val expanded = exprs.map(_.expand)
+    val allExprs: Seq[(Sym, String)] = (0 until expanded.length)
+      .flatMap{ i => expanded(i).map(_ -> colors(i % colors.length)) }
 
-    val intersections =
-      exprs.map{ a => exprs.filter(_ != a).flatMap{ b =>
-        Sym.++(a, Sym.**(b, SymInt(-1))).zeros.flatMap(_.expand).distinct
-          .map{ x => (x, Sym.replaceExpr(a, SymVar('x), x).simple) }
-      }}
+    this.points = {
+      for ((a, col) <- allExprs ; (b, _) <- (allExprs :+ (0.s -> "")) if a != b)
+      yield ++(a, **(b, -1)).zeros.flatMap(_.expand).map{ x =>
+        IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col)
+      }
+    }.flatten.groupBy{ p => (p.x, p.y) }
+      .map{ case (p: (Sym, Sym), is: Seq[IntersectionPoint]) =>
+        IntersectionPoint(is.flatMap(_.funcs).distinct, p._1, p._2, is.head.color)
+      }.toSeq
 
-    val extremas = exprs.map{ e =>
-      e.extremas.flatMap(_.expand).map(_.simple).distinct
-        .map{ x => (x, replaceExpr(e, SymVar('x), x).simple) }
-    }
+    println("Points", points)
 
-    val inflections = exprs.map{ e =>
-      e.derivative.extremas.flatMap(_.expand).map(_.simple).distinct
-        .map{ x => (x, replaceExpr(e, SymVar('x), x).simple) }
-    }
-
-    val pointLists = List(zeros, intersections, extremas, inflections)
-
-    this.points = pointLists.reduceLeft{ (a, b) => a.zip(b).map{ t => t._1 ++ t._2 } }
-
-    println(points)
-
-	draw
+    draw
   }
-  
+
   def draw {
     // Hide the point box so that a point from a past function doesn't remain
     hidePointBox()
 
-	// Make the canvas dimensions match their pixel dimensions
-	fc.width = fc.clientWidth
-	fc.height = fc.clientHeight
-	gc.width = gc.clientWidth
-	gc.height = gc.clientHeight
-	
-	
-	// Draw the functions on the main canvas
-	for (i <- 0 until graphs.length) {
+    // Make the canvas dimensions match their pixel dimensions
+    fc.width = fc.clientWidth
+    fc.height = fc.clientHeight
+    gc.width = gc.clientWidth
+    gc.height = gc.clientHeight
+    
+    
+    // Draw the functions on the main canvas
+    for (i <- 0 until graphs.length) {
 	  fctx.strokeStyle = colors(i % colors.length)
       drawExpression(graphs(i))(fctx)
-	}
+    }
 
     // Draw the points on the main canvas
-    for (i <- 0 until points.length) {
-	  val color = colors(i % colors.length)
-      points(i).foreach{ p => drawPoint(p._1, p._2, color)(fctx) }
-    }
-	
-	// Remove any of the function lines that went into the margin
-	fctx.clearRect(0, 0, marginX, fc.height)
-	fctx.clearRect(0, fc.height - marginY, fc.width, fc.height)
-	
-	
-	// Draw the grid on the background canvas
-	gctx.font = "14px Serif"
-	gctx.strokeStyle = gridColor
-	drawGrid(gctx)
+    points.foreach{ p => drawPoint(p.x, p.y, p.color)(fctx) }
+    
+    // Remove any of the function lines that went into the margin
+    fctx.clearRect(0, 0, marginX, fc.height)
+    fctx.clearRect(0, fc.height - marginY, fc.width, fc.height)
+    
+    
+    // Draw the grid on the background canvas
+    gctx.font = "14px Serif"
+    gctx.strokeStyle = gridColor
+    drawGrid(gctx)
   }
-  
+
   private def drawGrid(implicit ctx: JsContext) {
-	// Loop through the same code twice for the horizontal and vertical lines
-	for (horizontal <- List(true, false)) {
+    // Loop through the same code twice for the horizontal and vertical lines
+    for (horizontal <- List(true, false)) {
 	  val (start, size) =
-		if (horizontal) (pos.y, (ctx.canvas.height - marginY) * pos.ys)
-		else (pos.x, (ctx.canvas.width - marginX) * pos.xs)
+	    if (horizontal) (pos.y, (ctx.canvas.height - marginY) * pos.ys)
+	    else (pos.x, (ctx.canvas.width - marginX) * pos.xs)
 	  
 	  // The minimum pixel distance for grid lines is constant,
 	  // so calculate the minimum unit distance based on it
@@ -250,13 +241,13 @@ object Graph {
 	  // with the larger distanced grid lines being thicker than the closer ones
 	  var dists = List[BigDecimal](BigDecimal(10).pow(Math.ceil(Math.log10(size)).toInt))
 	  while (dists.head > min)
-		dists = (
+	    dists = (
 		  if (Math.log10(dists.head.toDouble) % 1 != 0) BigDecimal(0) :: dists
 		  else if (0.1*dists.head >= min) (dists.head * 0.1) :: dists
 		  else if (0.2*dists.head >= min) (dists.head * 0.2) :: dists
 		  else if (0.5*dists.head >= min) (dists.head * 0.5) :: dists
 		  else BigDecimal(0) :: dists
-		)
+	    )
 	  
 	  // Remove the first element, because it is too small,
 	  // and then put the list in descending order
@@ -264,39 +255,39 @@ object Graph {
 	  
 	  // Keep shortening the distance until it gets too low
 	  for (i <- 0 until dists.length) {
-		val dist: BigDecimal = dists(i)
-		val pixDist: Double = (dist / (if (horizontal) -pos.ys else pos.xs)).toDouble
-		
-		// The x or y position of the current line being drawn
+	    val dist: BigDecimal = dists(i)
+	    val pixDist: Double = (dist / (if (horizontal) -pos.ys else pos.xs)).toDouble
+	    
+	    // The x or y position of the current line being drawn
         // The pixel width needs to be a double to prevent getting progressively more inaccurate
-		var cur: BigDecimal = dist * Math.ceil(start / dist.toDouble).toInt
-		var pix: Double = cur.toDouble.pipe(if (horizontal) canvasY else canvasX)
-		
-		val thickness = dists.length - i
-		
-		// Calculate when to display text
-		val textAll = pixDist.abs > textPixMin
-		val powOf10 = textAll || Math.log10(dist.toDouble) % 1 == 0
-		val text2s = textAll || (powOf10 && (pixDist.abs * 2) > textPixMin)
-		val text5s = textAll || (!text2s && powOf10 && (pixDist.abs * 5) > textPixMin)
-		
-		// Draw each line for the current distance
-		while (cur < start + size) {
+	    var cur: BigDecimal = dist * Math.ceil(start / dist.toDouble).toInt
+	    var pix: Double = cur.toDouble.pipe(if (horizontal) canvasY else canvasX)
+	    
+	    val thickness = dists.length - i
+	    
+	    // Calculate when to display text
+	    val textAll = pixDist.abs > textPixMin
+	    val powOf10 = textAll || Math.log10(dist.toDouble) % 1 == 0
+	    val text2s = textAll || (powOf10 && (pixDist.abs * 2) > textPixMin)
+	    val text5s = textAll || (!text2s && powOf10 && (pixDist.abs * 5) > textPixMin)
+	    
+	    // Draw each line for the current distance
+	    while (cur < start + size) {
           val pixInt = pix.toInt
 		  if (horizontal) drawLine(marginX, pixInt, ctx.canvas.width, pixInt, thickness)
 		  else drawLine(pixInt, 0, pixInt, ctx.canvas.height - marginY, thickness)
 		  
 		  if (textAll || (text2s && cur % (dist*2) == 0) || (text5s && cur % (dist*5) == 0))
-			if (horizontal) ctx.fillText(cur.toString, 5, pixInt + 5)
-			else ctx.fillText(cur.toString, pixInt - 10, ctx.canvas.height - 5)
+		    if (horizontal) ctx.fillText(cur.toString, 5, pixInt + 5)
+		    else ctx.fillText(cur.toString, pixInt - 10, ctx.canvas.height - 5)
 		  
 		  cur += dist
 		  pix += pixDist
-		}
+	    }
 	  }
-	}
+    }
   }
-  
+
   // Drawing the actual function
   private def drawExpression(sym: Sym)(implicit ctx: JsContext) {
     // Make sure to include important points on the curve (extremas, holes, etc)
@@ -333,7 +324,7 @@ object Graph {
       ctx.stroke()
     }
   }
-  
+
   // Get a distrobution of points with higher density of points where there is a steeper derivative
   private def functionSegments(f: Double => Option[Double], extras: Seq[Double] = Nil):
       Seq[Seq[(Double, Double)]] = {
@@ -349,7 +340,7 @@ object Graph {
     val dist = Math.pow(1.5, Math.round(Math.log(width / 100.0) / Math.log(1.5)))
 
     // The x position of the current point (starts slightly to the left of the screen)
-	var x = pos.x - dist - (pos.x % dist)
+    var x = pos.x - dist - (pos.x % dist)
 
     // When using an extra point, remember, where we were before
     var lastMultiple = x
@@ -361,7 +352,7 @@ object Graph {
     var extrasLeft = extras.sortWith(_ < _).filter(_ > x).distinct
     
     // The list of points being made
-	var segments = List(List[(Double, Double)]())
+    var segments = List(List[(Double, Double)]())
     
     while (x < max) {
       try {
@@ -376,7 +367,7 @@ object Graph {
         else throw new Exception
         
       } catch {
-		case _: Throwable =>
+	    case _: Throwable =>
           if (segments.head.nonEmpty) segments = Nil :: segments
       }
       
@@ -389,23 +380,23 @@ object Graph {
         lastMultiple = x
       }
     }
-	
-	return segments
+    
+    return segments
   }
-  
-  private def connectWithCurves(points: Seq[(Double, Double)])(implicit ctx: JsContext) {
-	ctx.beginPath()
-	ctx.lineWidth = 5
 
-	if (points.length < 2) return
+  private def connectWithCurves(points: Seq[(Double, Double)])(implicit ctx: JsContext) {
+    ctx.beginPath()
+    ctx.lineWidth = 5
+
+    if (points.length < 2) return
       
     val ps = points.map{ t => (canvasX(t._1), canvasY(t._2)) }
     
     val height = ctx.canvas.height - marginY
     def inRange(y: Double) = (y >= 0) && (y <= height)
-	
+    
     // Draw the points (algorithm from stack overflow)
-	ctx.moveTo(ps(0)._1, ps(0)._2);
+    ctx.moveTo(ps(0)._1, ps(0)._2);
     for (i <- 1 to ps.length - 3) {
       //if (i > ps.length - 5 || inRange(ps(i)._2) || inRange(ps(i+1)._2)) {
       val xc = (ps(i)._1 + ps(i + 1)._1) / 2;

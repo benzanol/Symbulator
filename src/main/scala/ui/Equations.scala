@@ -85,7 +85,7 @@ object Equations {
     //Some("Undefined" -> sym.undefined),
     //Some("Important" -> sym.important),
     Some("Derivative" -> Seq(sym.derivative)),
-    sym.integral.map("Integral" -> Seq(_)),
+    //sym.integral.map("Integral" -> Seq(_)),
   ).flatten.filter(_._2.nonEmpty)
 }
 

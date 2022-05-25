@@ -83,6 +83,8 @@ object Pattern {
   
   def hasxP(p: Pattern = __) = Satisfies(p, hasX)
   def noxP(p: Pattern = __) = Satisfies(p, noX)
+
+  implicit class ImplicitPatternVar(_s: Symbol) extends PatternVar(_s)
 }
 
 import Pattern._
@@ -131,7 +133,6 @@ case class PatternVar(symbol: Symbol) extends Pattern {
   def matches(e: Sym) = Seq(Map(this.symbol -> e))
   def @@(p: Pattern) = Bind(this.symbol, p)
 }
-//implicit class ImplicitPatternVar(_s: Symbol) extends PatternVar(_s)
 
 case class AnyP() extends Pattern {
   def matches(e: Sym) = Seq(Map())
@@ -378,7 +379,7 @@ class Rules() {
   private var rules = List[Rule]()
 
   def +(n: String)(p: Pattern)(f: Any => Sym) =
-    rules +:= new Rule(n, p, f)
+    rules :+= new Rule(n, p, f)
 
   def first(e: Sym): Option[Sym] =
     LazyList(rules:_*).flatMap{r => r.first(e) match {

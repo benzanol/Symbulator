@@ -155,14 +155,12 @@ object IntegralRules {
   import Integral._
 
   def basicIntegration(integral: SymIntegral): Option[Sym] =
-    Some(integral.expr).collect{
-      case c: SymConstant => **(c, SymVar('x))
-      case x @ SymVar('x) => **(S(1, 2), ^(x, S(2)))
-      case SymPow(x @ SymVar('x), p: SymConstant) =>
-        **(^(++(p, S(1)), S(-1)), ^(x, ++(p, S(1))))
-      case SymSin(x @ SymVar('x)) => **(S(-1), SymCos(x))
-      case SymCos(x @ SymVar('x)) => SymSin(x)
-    }.map{ e: Sym => e.simple }
+    integral.expr match {
+      case c: SymConstant => Some(**(c, SymVar('x)).simple)
+      case SymPow(SymVar('x), p: SymConstant) =>
+        Some( **(^(++(p, 1), -1), ^('x, ++(p, 1))).simple )
+      case e => basicIntegrals.get(e)
+    }
 
   def integrationByParts(integrate: SymProd): Seq[Sym] =
     integrate.simple.exprs.toSet
@@ -176,4 +174,9 @@ object IntegralRules {
         ++(**(u, v), **(S(-1), SymIntegral(**(v, du)))).simple
       }.toSeq
 
+  val basicIntegrals = Map[Sym, Sym](
+    'x.s -> **(1~2, ^('x, 2)),
+    SymSin('x) -> **(S(-1), SymCos('x)),
+    SymCos('x) -> SymSin('x),
+  )
 }

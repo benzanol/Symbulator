@@ -10,6 +10,7 @@ import sympany.math.IntegralRules
 import sympany.math.Simplify
 
 object Main {
+
   def main(args: Array[String]): Unit = {
     sympany.ui.Graph.setup
     sympany.ui.Equations.addEquation()
@@ -41,6 +42,13 @@ object Main {
     import math.IntegralRules._
     import Pattern._
     import Sym._
+
+    println(PowP(=#?(1), __).matches(^(1, 1~2)))
+    println(Simplify.sRules.first(^(1, 1~2)))
+
+    //println(1.simple)
+    //println(**(1, ^(1, 1~2)).simple)
+    //println(^(1, 1~2).simple)
 
     //val e = **( V('x), SymSin(V('x)) )
     //println(integrate(SymIntegral(e)))
