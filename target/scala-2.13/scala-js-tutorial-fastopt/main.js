@@ -14220,42 +14220,34 @@ function $c_Lsympany_math_Simplify$() {
   $m_Lsympany_Pattern$();
   var this$542 = $m_s_Symbol$();
   var _s$83 = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$542, "s"));
-  var this$562 = new $c_Lsympany_Pattern$ImplicitPatternVar(_s$83);
-  $m_Lsympany_Pattern$();
-  var this$544 = $m_s_Symbol$();
-  var _s$84 = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$544, "r"));
-  var $$x120 = new $c_Lsympany_RatP(new $c_Lsympany_Pattern$ImplicitPatternVar(_s$84), new $c_Lsympany_AnyP());
-  $m_Lsympany_Pattern$();
-  var this$547 = $m_s_Symbol$();
-  var _s$85 = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$547, "o"));
-  var this$558 = new $c_Lsympany_Pattern$ImplicitPatternVar(_s$85);
+  var this$558 = new $c_Lsympany_Pattern$ImplicitPatternVar(_s$83);
+  var $$x120 = new $c_Lsympany_RatP(new $c_Lsympany_AnyP(), new $c_Lsympany_AnyP());
   var array$44 = [new $c_Lsympany_PowP(new $c_Lsympany_RatP(new $c_Lsympany_AnyP(), new $c_Lsympany_AnyP()), new $c_Lsympany_RatP(new $c_Lsympany_AnyP(), new $c_Lsympany_AnyP())), new $c_Lsympany_RatP(new $c_Lsympany_AnyP(), new $c_Lsympany_AnyP())];
-  var p$52 = new $c_Lsympany_ProdP($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$44));
-  var array$45 = [$$x120, new $c_Lsympany_Bind(this$558.Lsympany_PatternVar__f_symbol, p$52)];
-  var p$53 = new $c_Lsympany_SumP($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$45));
-  var $$x121 = new $c_Lsympany_Bind(this$562.Lsympany_PatternVar__f_symbol, p$53);
+  var array$45 = [$$x120, new $c_Lsympany_ProdP($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$44))];
+  var p$52 = new $c_Lsympany_SumP($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$45));
+  var $$x121 = new $c_Lsympany_Bind(this$558.Lsympany_PatternVar__f_symbol, p$52);
   $m_Lsympany_Pattern$();
-  var this$563 = $m_s_Symbol$();
-  var _s$86 = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$563, "p"));
-  $$x122.$plus__T__Lsympany_Pattern__F1__V("Expand binomials", new $c_Lsympany_PowP($$x121, new $c_Lsympany_IntP(new $c_Lsympany_Pattern$ImplicitPatternVar(_s$86))), new $c_sjsr_AnonFunction1(((x0$42$2) => {
+  var this$559 = $m_s_Symbol$();
+  var _s$84 = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$559, "p"));
+  $$x122.$plus__T__Lsympany_Pattern__F1__V("Expand binomials", new $c_Lsympany_PowP($$x121, new $c_Lsympany_IntP(new $c_Lsympany_Pattern$ImplicitPatternVar(_s$84))), new $c_sjsr_AnonFunction1(((x0$42$2) => {
     if ((x0$42$2 instanceof $c_T2)) {
       var x2$32 = $as_T2(x0$42$2);
-      var p$54 = x2$32._1__O();
+      var p$53 = x2$32._1__O();
       var s = x2$32._2__O();
-      if ((p$54 instanceof $c_Lsympany_SymInt)) {
-        var x3$19 = $as_Lsympany_SymInt(p$54);
+      if ((p$53 instanceof $c_Lsympany_SymInt)) {
+        var x3$19 = $as_Lsympany_SymInt(p$53);
         if ((s instanceof $c_Lsympany_SymSum)) {
           var x4$20 = $as_Lsympany_SymSum(s);
-          var this$566 = x3$19.Lsympany_SymInt__f_n;
-          var end = this$566.intValue__I();
-          var this$570 = new $c_sci_Range$Exclusive(2, end, 1);
+          var this$562 = x3$19.Lsympany_SymInt__f_n;
+          var end = this$562.intValue__I();
+          var this$566 = new $c_sci_Range$Inclusive(2, end, 1);
           var z = x4$20.exprs__sci_Seq();
           var op = new $c_sjsr_AnonFunction2(((x4$21) => ((acc$2, n$2$1) => {
             var acc = $as_sci_Seq(acc$2);
             $uI(n$2$1);
             return $m_Lsympany_math_Simplify$().distribute__sci_Seq__sci_Seq__sci_Seq(acc, x4$21.exprs__sci_Seq())
           }))(x4$20));
-          var a$6 = $f_sc_IterableOnceOps__foldLeft__O__F2__O(this$570, z, op);
+          var a$6 = $f_sc_IterableOnceOps__foldLeft__O__F2__O(this$566, z, op);
           var f = new $c_sjsr_AnonFunction1(((es$2) => {
             var es = $as_sci_Seq(es$2);
             return $m_Lsympany_Sym$().$plus$plus$plus__sci_Seq__Lsympany_SymSum(es)
@@ -14332,7 +14324,7 @@ $c_Lsympany_math_Simplify$.prototype.distribute__sci_Seq__sci_Seq__sci_Seq = (fu
       var b = $as_Lsympany_Sym(b$2);
       var $$x1 = $m_Lsympany_Sym$();
       var array = [a$1, b];
-      return $$x1.$times$times__sci_Seq__Lsympany_SymProd($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
+      return $$x1.$times$times__sci_Seq__Lsympany_SymProd($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array)).simple__Lsympany_Sym()
     }))(a))))
   }))(l2))))
 });

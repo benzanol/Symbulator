@@ -276,13 +276,13 @@ object Simplify {
   /// Controversial
 
   sRules.+("Expand binomials"){
-    PowP( 's @@ SumP( RatP('r), 'o @@ ProdP(PowP(RatP(), RatP()), RatP()) ), IntP('p) )
+    PowP( 's @@ SumP( RatP(), ProdP(PowP(RatP(), RatP()), RatP()) ), IntP('p) )
   }{ case (p: SymInt, s: SymSum) =>
-      (2 until p.n.toInt).foldLeft(s.exprs){ (acc, n) => distribute(acc, s.exprs) }.pipe(+++)
+      (2 to p.n.toInt).foldLeft(s.exprs){ (acc, n) => distribute(acc, s.exprs) }.pipe(+++)
   }
 
   def distribute(l1: Seq[Sym], l2: Seq[Sym]): Seq[Sym] =
-    l1.flatMap{ a => l2.map{ b => **(a, b) } }
+    l1.flatMap{ a => l2.map{ b => **(a, b).simple } }
 
   //sRules.+("Expand out powers of polynomials"){
   //  PowP('s @@ SumP(Repeat(Or( AsPowP(VarP(), RatP()), RatP() ))), 'p @@ IntP())
