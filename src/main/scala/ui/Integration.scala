@@ -30,6 +30,7 @@ object Integration {
   def exitIntegralSidebar() {
     integralMode = false
     document.getElementById("equation-sidebar").setAttribute("style", "")
+    document.getElementById("integral-sidebar").setAttribute("style", "display:none")
 
     p1 = None
     p2 = None
@@ -68,16 +69,20 @@ object Integration {
       document.getElementById(s"integral-$id").innerText = str
     }
     
+    // Display the points
     for ((p, i) <- Seq(p1 -> 1, p2 -> 2))
-      if (p.isDefined) {
-        setText(s"p${i}" , s"\\text{Point $i:} \\quad \\quad (${p.get.x.toLatex}, ${p.get.y.toLatex})")
-        setText(s"p${i}a", "y_1 = " + p.get.funcs(0).toLatex)
-        setText(s"p${i}b", "y_2 = " + p.get.funcs(1).toLatex)
-      } else {
-        setText(s"p${i}" , s"\\text{Point $i:}")
-        setText(s"p${i}a", "")
-        setText(s"p${i}b", "")
-      }
+      if (p.isDefined) setText(s"p${i}",
+        s"p_$i = \\quad (${p.get.x.toLatex}, ${p.get.y.toLatex})")
+      else setText(s"p${i}" , s"p_$i =")
+
+    // Display the equations
+    if (p1.isDefined) {
+      setText(s"e1", "y_1 = " + p1.get.funcs(0).toLatex)
+      setText(s"e2", "y_2 = " + p1.get.funcs(1).toLatex)
+    } else {
+      setText(s"e1", "y_1 =")
+      setText(s"e2", "y_2 =")
+    }
 
     for (i <- integral ; s <- solution) {
       val suScripts = s"_{${p1.get.x.toLatex}}^{${p2.get.x.toLatex}}"

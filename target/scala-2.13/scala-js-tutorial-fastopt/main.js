@@ -15880,6 +15880,7 @@ $c_Lsympany_ui_Integration$.prototype.enterIntegralSidebar__V = (function() {
 $c_Lsympany_ui_Integration$.prototype.exitIntegralSidebar__V = (function() {
   this.Lsympany_ui_Integration$__f_integralMode = false;
   document.getElementById("equation-sidebar").setAttribute("style", "");
+  document.getElementById("integral-sidebar").setAttribute("style", "display:none");
   this.Lsympany_ui_Integration$__f_p1 = $m_s_None$();
   this.Lsympany_ui_Integration$__f_p2 = $m_s_None$();
   this.Lsympany_ui_Integration$__f_function = $m_s_None$();
@@ -15971,38 +15972,42 @@ $c_Lsympany_ui_Integration$.prototype.updateUi__V = (function() {
         var this$9 = $as_Lsympany_ui_Graph$IntersectionPoint(p.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_x;
         var $$x3 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$9);
         var this$10 = $as_Lsympany_ui_Graph$IntersectionPoint(p.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_y;
-        $p_Lsympany_ui_Integration$__setText$1__T__T__V(this$2$1, ("p" + i), (((((("\\text{Point " + i) + ":} \\quad \\quad (") + $$x3) + ", ") + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$10)) + ")"));
-        var this$11 = $as_Lsympany_Sym($as_Lsympany_ui_Graph$IntersectionPoint(p.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_funcs.apply__I__O(0));
-        $p_Lsympany_ui_Integration$__setText$1__T__T__V(this$2$1, (("p" + i) + "a"), ("y_1 = " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$11)));
-        var this$12 = $as_Lsympany_Sym($as_Lsympany_ui_Graph$IntersectionPoint(p.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_funcs.apply__I__O(1));
-        $p_Lsympany_ui_Integration$__setText$1__T__T__V(this$2$1, (("p" + i) + "b"), ("y_2 = " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$12)))
+        $p_Lsympany_ui_Integration$__setText$1__T__T__V(this$2$1, ("p" + i), (((((("p_" + i) + " = \\quad (") + $$x3) + ", ") + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$10)) + ")"))
       } else {
-        $p_Lsympany_ui_Integration$__setText$1__T__T__V(this$2$1, ("p" + i), (("\\text{Point " + i) + ":}"));
-        $p_Lsympany_ui_Integration$__setText$1__T__T__V(this$2$1, (("p" + i) + "a"), "");
-        $p_Lsympany_ui_Integration$__setText$1__T__T__V(this$2$1, (("p" + i) + "b"), "")
+        $p_Lsympany_ui_Integration$__setText$1__T__T__V(this$2$1, ("p" + i), (("p_" + i) + " ="))
       }
     } else {
       throw new $c_s_MatchError(x$1)
     }
   }))(this)));
-  var this$13 = this.Lsympany_ui_Integration$__f_integral;
-  if ((!this$13.isEmpty__Z())) {
-    var arg1 = this$13.get__O();
+  var this$11 = this.Lsympany_ui_Integration$__f_p1;
+  if ((!this$11.isEmpty__Z())) {
+    var this$12 = $as_Lsympany_Sym($as_Lsympany_ui_Graph$IntersectionPoint(this.Lsympany_ui_Integration$__f_p1.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_funcs.apply__I__O(0));
+    $p_Lsympany_ui_Integration$__setText$1__T__T__V(this, "e1", ("y_1 = " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$12)));
+    var this$13 = $as_Lsympany_Sym($as_Lsympany_ui_Graph$IntersectionPoint(this.Lsympany_ui_Integration$__f_p1.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_funcs.apply__I__O(1));
+    $p_Lsympany_ui_Integration$__setText$1__T__T__V(this, "e2", ("y_2 = " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$13)))
+  } else {
+    $p_Lsympany_ui_Integration$__setText$1__T__T__V(this, "e1", "y_1 =");
+    $p_Lsympany_ui_Integration$__setText$1__T__T__V(this, "e2", "y_2 =")
+  };
+  var this$14 = this.Lsympany_ui_Integration$__f_integral;
+  if ((!this$14.isEmpty__Z())) {
+    var arg1 = this$14.get__O();
     $as_Lsympany_Sym(arg1);
-    var this$14 = $m_Lsympany_ui_Integration$().Lsympany_ui_Integration$__f_solution;
-    if ((!this$14.isEmpty__Z())) {
-      var arg1$1 = this$14.get__O();
+    var this$15 = $m_Lsympany_ui_Integration$().Lsympany_ui_Integration$__f_solution;
+    if ((!this$15.isEmpty__Z())) {
+      var arg1$1 = this$15.get__O();
       $as_Lsympany_Sym(arg1$1);
-      var this$15 = $as_Lsympany_ui_Graph$IntersectionPoint($m_Lsympany_ui_Integration$().Lsympany_ui_Integration$__f_p1.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_x;
-      var $$x4 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$15);
-      var this$16 = $as_Lsympany_ui_Graph$IntersectionPoint($m_Lsympany_ui_Integration$().Lsympany_ui_Integration$__f_p2.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_x;
-      var suScripts = (((("_{" + $$x4) + "}^{") + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$16)) + "}");
-      var this$17 = $as_Lsympany_Sym($m_Lsympany_ui_Integration$().Lsympany_ui_Integration$__f_function.get__O());
-      $p_Lsympany_ui_Integration$__setText$1__T__T__V(this, "solution1", ((("\\int" + suScripts) + " ") + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$17)));
-      var this$18 = $as_Lsympany_Sym($m_Lsympany_ui_Integration$().Lsympany_ui_Integration$__f_integral.get__O());
-      $p_Lsympany_ui_Integration$__setText$1__T__T__V(this, "solution2", (((" = \\left[ " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$18)) + " \\right]") + suScripts));
-      var this$19 = $as_Lsympany_Sym($m_Lsympany_ui_Integration$().Lsympany_ui_Integration$__f_solution.get__O());
-      $p_Lsympany_ui_Integration$__setText$1__T__T__V(this, "solution3", (" = " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$19)))
+      var this$16 = $as_Lsympany_ui_Graph$IntersectionPoint($m_Lsympany_ui_Integration$().Lsympany_ui_Integration$__f_p1.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_x;
+      var $$x4 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$16);
+      var this$17 = $as_Lsympany_ui_Graph$IntersectionPoint($m_Lsympany_ui_Integration$().Lsympany_ui_Integration$__f_p2.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_x;
+      var suScripts = (((("_{" + $$x4) + "}^{") + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$17)) + "}");
+      var this$18 = $as_Lsympany_Sym($m_Lsympany_ui_Integration$().Lsympany_ui_Integration$__f_function.get__O());
+      $p_Lsympany_ui_Integration$__setText$1__T__T__V(this, "solution1", ((("\\int" + suScripts) + " ") + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$18)));
+      var this$19 = $as_Lsympany_Sym($m_Lsympany_ui_Integration$().Lsympany_ui_Integration$__f_integral.get__O());
+      $p_Lsympany_ui_Integration$__setText$1__T__T__V(this, "solution2", (((" = \\left[ " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$19)) + " \\right]") + suScripts));
+      var this$20 = $as_Lsympany_Sym($m_Lsympany_ui_Integration$().Lsympany_ui_Integration$__f_solution.get__O());
+      $p_Lsympany_ui_Integration$__setText$1__T__T__V(this, "solution3", (" = " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$20)))
     }
   };
   (0, eval)("formatStaticEquations()")
