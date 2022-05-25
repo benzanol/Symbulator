@@ -15732,10 +15732,18 @@ $c_Lsympany_ui_Graph$.prototype.setGraphs__sci_Seq__V = (function(exprs) {
         var is = $as_sci_Seq(x0$1._2__O());
         if ((p$1 !== null)) {
           if ((is !== null)) {
-            var elem$2 = new $c_Lsympany_ui_Graph$IntersectionPoint($as_sci_Seq($as_sc_SeqOps(is.flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$11$2) => {
+            var this$35 = $as_sc_SeqOps($as_sc_SeqOps(is.flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$11$2) => {
               var x$11 = $as_Lsympany_ui_Graph$IntersectionPoint(x$11$2);
               return x$11.Lsympany_ui_Graph$IntersectionPoint__f_funcs
-            })))).distinct__O()), $as_Lsympany_Sym(p$1._1__O()), $as_Lsympany_Sym(p$1._2__O()), $as_Lsympany_ui_Graph$IntersectionPoint(is.head__O()).Lsympany_ui_Graph$IntersectionPoint__f_color);
+            })))).distinct__O());
+            var lt = new $c_sjsr_AnonFunction2(((a$2$1, b$2$1) => {
+              var a$3 = $as_Lsympany_Sym(a$2$1);
+              $as_Lsympany_Sym(b$2$1);
+              var this$34 = $m_s_math_BigInt$();
+              var x$2$1 = $ct_Lsympany_SymInt__s_math_BigInt__(new $c_Lsympany_SymInt(), this$34.apply__I__s_math_BigInt(0));
+              return (!((a$3 !== null) && a$3.equals__O__Z(x$2$1)))
+            }));
+            var elem$2 = new $c_Lsympany_ui_Graph$IntersectionPoint($as_sci_Seq($f_sc_SeqOps__sortWith__F2__O(this$35, lt)), $as_Lsympany_Sym(p$1._1__O()), $as_Lsympany_Sym(p$1._2__O()), $as_Lsympany_ui_Graph$IntersectionPoint(is.head__O()).Lsympany_ui_Graph$IntersectionPoint__f_color);
             break matchEnd5
           }
         }
@@ -15746,9 +15754,9 @@ $c_Lsympany_ui_Graph$.prototype.setGraphs__sci_Seq__V = (function(exprs) {
   };
   this.Lsympany_ui_Graph$__f_points = $as_sc_IterableOnceOps(b$4.result__O()).toSeq__sci_Seq();
   var x$1 = $ct_T2__O__O__(new $c_T2(), "Points", this.Lsympany_ui_Graph$__f_points);
-  var this$35 = $m_s_Console$();
-  var this$36 = this$35.out__Ljava_io_PrintStream();
-  this$36.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x$1 + "\n"));
+  var this$37 = $m_s_Console$();
+  var this$38 = this$37.out__Ljava_io_PrintStream();
+  this$38.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x$1 + "\n"));
   this.draw__V()
 });
 $c_Lsympany_ui_Graph$.prototype.draw__V = (function() {

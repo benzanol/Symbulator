@@ -191,14 +191,19 @@ object Graph {
     val allExprs: Seq[(Sym, String)] = (0 until expanded.length)
       .flatMap{ i => expanded(i).map(_ -> colors(i % colors.length)) }
 
+    // Generate the list of intersection points
     this.points = {
       for ((a, col) <- allExprs ; (b, _) <- (allExprs :+ (0.s -> "")) if a != b)
       yield ++(a, **(b, -1)).zeros.flatMap(_.expand).map{ x =>
         IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col)
       }
+      // Combine multiple functions that intersect at the same point
     }.flatten.groupBy{ p => (p.x, p.y) }
       .map{ case (p: (Sym, Sym), is: Seq[IntersectionPoint]) =>
-        IntersectionPoint(is.flatMap(_.funcs).distinct, p._1, p._2, is.head.color)
+        IntersectionPoint(
+        // Always deprioritize y=0 so it is at the end of the list
+          is.flatMap(_.funcs).distinct.sortWith{ (a, b) => a != SymInt(0) },
+          p._1, p._2, is.head.color)
       }.toSeq
 
     println("Points", points)
