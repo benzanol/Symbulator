@@ -42,6 +42,13 @@ object Simplify {
   sRules.+("1^x = 1"){
     PowP(=#?(1), __)
   }{ case () => 1 }
+
+  sRules.+("(-x)^2 = x^2"){
+    PowP(ProdP(=#?(-1), 'bs @@ __*), IntP('p))
+  }{ case (bs: Seq[Sym], p: SymInt) =>
+      if (p.toInt % 2 == 0) ^( ***(bs), p )
+      else **(-1, ^( ***(bs), p ))
+  }
   
   // Roots - simplifies if greatest power of a prime factor is >= the root
   sRules.+("Factor powers out of roots"){

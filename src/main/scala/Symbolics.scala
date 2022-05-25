@@ -304,7 +304,7 @@ case class SymInt(n: BigInt = 1) extends SymR {
   def d = BigInt(1)
   def ~(o: SymInt) = SymR(n, o.n)
   def s = this
-
+  def toInt = n.toInt
   
   lazy val primeFactors: Map[SymInt, SymInt] = {
     var num = n.abs
