@@ -87,6 +87,19 @@ object Solve {
 
   zRules.+("Plus Minus"){ PMP(@?('e)) }{ case e: Sym => solve(e) }
 
+  zRules.+("f(x)^a = 0 => f(x) = 0"){
+    PowP('a, ConstP())
+  }{ case a: Sym => solve(a) }
+
+  zRules.+("f(x)^a + b = 0 => f(x) + b^1/a = 0"){
+    SumP(PowP(hasxP('a), 'p @@ ConstP()), 'r @@ Repeat(__))
+  }{
+    case (a: Sym, p: SymInt, r: Seq[Sym]) if (p.toInt % 2 == 0) =>
+      solve(++(**(a, -1), SymPM(^(**(+++(r), -1), ^(p, -1)))).simple)
+    case (a: Sym, p: SymConstant, r: Seq[Sym]) =>
+      solve(++(**(a, -1), ^(**(+++(r), -1), ^(p, -1))).simple)
+  }
+
   // Good luck trying to understand this mess lol
   zRules.+("ax^p + b => x +- (-b/a)^(1/p)"){
     AsSumP(AsProdP(AsPowP(XP, @?('p) @@ noxP()), @?('a) @@ Repeat(noxP())), @?('rest) @@ Repeat(noxP()))

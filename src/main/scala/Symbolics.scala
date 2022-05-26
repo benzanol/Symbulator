@@ -178,7 +178,7 @@ trait Sym {
 
   lazy val explicit: Option[Sym] =
     if (!containsExpr(simple, SymVar('y))) Some(simple)
-    else simple.solve('y).headOption
+    else this.solve('y).headOption
 
   lazy val extremas: Seq[Sym] =
     if (explicit.isEmpty) Nil
