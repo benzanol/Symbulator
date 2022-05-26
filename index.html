@@ -12,30 +12,37 @@
         <p id="point-box" style="display:none;"></p>
 
         <div id="page-container">
-
             <div id="sidebar">
-                <div id="equation-sidebar">
+                <div id="equation-sidebar" style="display:block">
                     <button onclick="addEquation()" class="add-equation-button">Add Equation</button>
                     <br>
                     <div id="equations">
                     </div>
                 </div>
 
+                <div id="current-points" style="display:none">
+                    <button onclick="selectSidebar('equation')"> ← Back to equations </button>
+                    <br/><br/>
+                    <p class="mq-static p1"></p>
+                    <br/>
+                    <p class="mq-static p2"></p>
+                    <br/><br/>
+                    <p class="mq-static y1"></p>
+                    <br/>
+                    <p class="mq-static y2"></p>
+                    <br/><br/>
+                    <button onclick="selectSidebar('integral')">Integrate</button>
+                    <br/><br/><br/>
+                </div>
+
+                <div id="points-sidebar"></div>
+
                 <div id="integral-sidebar" style="display:none">
-                    <button onclick="exitIntegralSidebar()">← Back to equations</button>
-                    <br/><br/>
-                    <p id="integral-p1"  class="mq-static"></p>
-                    <br/>
-                    <p id="integral-p2"  class="mq-static"></p>
-                    <br/><br/>
-                    <p id="integral-e1"  class="mq-static"></p>
-                    <br/>
-                    <p id="integral-e2"  class="mq-static"></p>
-                    <br/><br/>
                     <p class="mq-static">\text{Solution:}</p><br/>
                     <p id="integral-solution1" class="mq-static"></p>
                     <p id="integral-solution2" class="mq-static"></p>
                     <p id="integral-solution3" class="mq-static"></p>
+                    <p id="integral-solution4" class="mq-static"></p>
                 </div>
             </div>
 

@@ -67,19 +67,20 @@ object Solve {
     's @@ SumP(Repeat( AsProdP( AsPowP(XP, __), __*) ))
   }{ case s: SymSum =>
 
+      // Figure out the smallest exponent of x, the power of x to divide by
       val minExpt = s.exprs.flatMap{ e =>
         AsProdP( AsPowP(XP, 'p), __*).matches(e)
           .headOption.map(_.apply('p).asInstanceOf[SymInt].toInt)
       }.min
 
+      // Subtract the min exponent from each power of x
       val rule = new Rule("", AsProdP( AsPowP(XP, 'p), 'r @@ __*), {
         case (p: Sym, r: Seq[Sym]) =>
           ***( ^(X, ++(p, SymInt(-minExpt))) +: r ).simple
       })
 
+      // Sum the newly divided powers and try to solve
       val divided = +++( s.exprs.map(rule.first(_).get) )
-      println("Divided: ", divided)
-
       if (minExpt > 0) SymInt(0) +: solve( divided )
       else Nil
   }

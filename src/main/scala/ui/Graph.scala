@@ -171,7 +171,7 @@ object Graph {
 
   def maybeClickPoint(event: dom.MouseEvent) =
     this.currentPoint match {
-      case Some(p) => Integration.clickPoint(p)
+      case Some(p) => Sidebar.clickPoint(p)
       case None => ()
     }
 
@@ -182,7 +182,9 @@ object Graph {
   private val colors = Seq("#AA0000", "#0000AA", "#008800")
   private val gridColor = "#AAAAAA"
   
-  case class IntersectionPoint(funcs: Seq[Sym], x: Sym, y: Sym, color: String)
+  case class IntersectionPoint(funcs: Seq[Sym], x: Sym, y: Sym, color: String) {
+    def toLatex: String = s"\\left( ${x.toLatex}, \\quad \\quad ${x.toLatex} \\right)"
+  }
 
   def setGraphs(exprs: Seq[Sym]) {
 	this.graphs = exprs
@@ -201,12 +203,10 @@ object Graph {
     }.flatten.groupBy{ p => (p.x, p.y) }
       .map{ case (p: (Sym, Sym), is: Seq[IntersectionPoint]) =>
         IntersectionPoint(
-        // Always deprioritize y=0 so it is at the end of the list
+          // Always deprioritize y=0 so it is at the end of the list
           is.flatMap(_.funcs).distinct.sortWith{ (a, b) => a != SymInt(0) },
           p._1, p._2, is.head.color)
       }.toSeq
-
-    println("Points", points)
 
     draw
   }
