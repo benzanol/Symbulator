@@ -7,9 +7,14 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 import sympany._
 import sympany.Sym._
 import sympany.ui.Graph.IntersectionPoint
+import sympany.ui.Graph.JsContext
 
 object Sidebar {
   var current: String = "equation"
+  var currentDraw: Option[JsContext => Unit] = None
+
+  val color = "#880088"
+
   def currentEl = document.getElementById(current + "-sidebar")
 
   var p1: Option[IntersectionPoint] = None
@@ -29,15 +34,24 @@ object Sidebar {
 
     document.getElementById("current-points").setAttribute("style", display(bar != "equation"))
 
-    bar match {
-      case "integral" => IntegralSidebar.select()
-      case _ => ()
+    if (bar == "equation") {
+      this.p1 = None
+      this.p2 = None
+      this.y1 = None
+      this.y2 = None
     }
+
+    this.currentDraw = bar match {
+      case "integral" => Some(IntegralSidebar.select())
+      case "tangent" => Some(TangentSidebar.select())
+      case _ => None
+    }
+
+    js.eval("formatStaticEquations()")
+    Graph.draw
   }
 
   def clickPoint(p: IntersectionPoint) {
-    if (current == "equation") selectSidebar("points")
-
     if (p1.isDefined && p1.get == p) p1 = None
     else if (p2.isDefined && p2.get == p) p2 = None
     else if (p1.isEmpty) p1 = Some(p)
@@ -56,6 +70,7 @@ object Sidebar {
       for (e <- document.getElementsByClassName(s"y$n"))
         e.innerText = y.map{y => s"y_$n = " + y.toLatex}.getOrElse("")
 
+    if (current == "equation") selectSidebar("points")
     js.eval("formatStaticEquations()")
   }
 }
@@ -63,12 +78,16 @@ object Sidebar {
 object IntegralSidebar {
   import Sidebar._
 
+  def setText(id: String, str: String) {
+    document.getElementById(s"integral-$id").innerText = str
+  }
+
   var function: Option[Sym] = None
   var integral: Option[Sym] = None
   var solution: Option[Sym] = None
 
-  def select() {
-    if (p1.isEmpty || p2.isEmpty) return
+  def select(): JsContext => Unit = {
+    if (p1.isEmpty || p2.isEmpty || y1.isEmpty || y2.isEmpty) return this.draw(_)
 
     this.function = Some(++(p1.get.funcs(0), **(-1, p1.get.funcs(1))))
     this.integral = function.get.integral
@@ -80,11 +99,6 @@ object IntegralSidebar {
           .simple
       )
 
-    def setText(id: String, str: String) {
-      println(id)
-      document.getElementById(s"integral-$id").innerText = str
-    }
-    
     for (i <- integral ; s <- solution) {
       val suScripts = s"_{${p1.get.x.toLatex}}^{${p2.get.x.toLatex}}"
       setText("solution1", s"\\int$suScripts ${function.get.toLatex}")
@@ -92,12 +106,53 @@ object IntegralSidebar {
       setText("solution3", " = " + solution.get.toLatex)
       setText("solution4", " ≈ " + solution.get.approx.head)
     }
+    return this.draw(_)
+  }
+
+  def draw(ctx: JsContext) {
+    
+  }
+}
+
+
+object TangentSidebar {
+  import Sidebar._
+
+  def setText(id: String, str: String) {
+    document.getElementById(s"tangent-$id").innerText = str
+  }
+
+  var function: Option[Sym] = None
+
+  def select(): JsContext => Unit = {
+    if (p1.isEmpty || y1.isEmpty) return this.draw(_)
+
+    val p = p1.get
+    val y = y1.get
+
+    val slope = y.derivative.simple.replaceExpr(SymVar('x), p.x).simple
+    val yint = ++(p.y, **(-1, slope, p.x)).simple
+
+    this.function = Some(++(**(slope, 'x), yint))
+
+    setText("equation", s"y = ${function.get.toLatex}")
 
     js.eval("formatStaticEquations()")
 
+    return this.draw(_)
   }
 
-  def draw() {
+  def draw(ctx: JsContext) {
+    import Graph._
+
+    ctx.strokeStyle = Sidebar.color
     
+    val maxX = pos.x + (ctx.canvas.width - marginX) * pos.xs
+    drawLine(
+      canvasX(pos.x),
+      canvasY(this.function.get.approx('x -> pos.x).head),
+      canvasX(maxX),
+      canvasY(this.function.get.approx('x -> maxX).head),
+    )(ctx)
   }
 }

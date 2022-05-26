@@ -38,7 +38,7 @@ object Graph {
   type JsCanvas = dom.HTMLCanvasElement
   type JsContext = dom.CanvasRenderingContext2D
 
-  private def drawLine(x1: Double, y1: Double, x2: Double, y2: Double, w: Int = -1)
+  def drawLine(x1: Int, y1: Int, x2: Int, y2: Int, w: Int = -1)
 	(implicit ctx: JsContext): Unit = {
 	
 	ctx.beginPath()
@@ -51,29 +51,29 @@ object Graph {
 	ctx.stroke()
   }
   
-  private def canvasX(x: Double): Int = (marginX + (x - pos.x) / pos.xs).toInt
-  private def canvasY(y: Double): Int = (fc.height - marginY - (y - pos.y) / pos.ys).toInt
+  def canvasX(x: Double): Int = (marginX + (x - pos.x) / pos.xs).toInt
+  def canvasY(y: Double): Int = (fc.height - marginY - (y - pos.y) / pos.ys).toInt
 
 
   // Variables
-  private val fc: JsCanvas = document.getElementById("graph-functions").asInstanceOf[JsCanvas]
-  private val fctx: JsContext = fc.getContext("2d").asInstanceOf[JsContext]
+  val fc: JsCanvas = document.getElementById("graph-functions").asInstanceOf[JsCanvas]
+  val fctx: JsContext = fc.getContext("2d").asInstanceOf[JsContext]
   
-  private val gc: JsCanvas = document.getElementById("graph-grid").asInstanceOf[JsCanvas]
-  private val gctx: JsContext = gc.getContext("2d").asInstanceOf[JsContext]
+  val gc: JsCanvas = document.getElementById("graph-grid").asInstanceOf[JsCanvas]
+  val gctx: JsContext = gc.getContext("2d").asInstanceOf[JsContext]
 
   // Remember the position of the graph
-  private case class GraphPos(x: Double, y: Double, xs: Double, ys: Double)
-  private var pos: GraphPos = GraphPos(0, 0, 0.01, 0.01)
-  private var (onXAxis, onYAxis) = (false, false)
+  case class GraphPos(x: Double, y: Double, xs: Double, ys: Double)
+  var pos: GraphPos = GraphPos(0, 0, 0.01, 0.01)
+  var (onXAxis, onYAxis) = (false, false)
   
   // Margins as variables are necessary because they need to be adjusted
-  private def marginX = Math.log10(pos.x.abs max (fc.height * pos.ys)).abs.toInt * 11 + 35
-  private def marginY = 20
+  def marginX = Math.log10(pos.x.abs max (fc.height * pos.ys)).abs.toInt * 11 + 35
+  def marginY = 20
 
   val pointRadius = 5
 
-  private var mouseDown = false
+  var mouseDown = false
   
 
   // Figure out how to move the graph
@@ -177,10 +177,10 @@ object Graph {
 
   // Draw the graph
 
-  private var graphs = Seq[Sym]()
-  private var points = Seq[IntersectionPoint]()
-  private val colors = Seq("#AA0000", "#0000AA", "#008800")
-  private val gridColor = "#AAAAAA"
+  var graphs = Seq[Sym]()
+  var points = Seq[IntersectionPoint]()
+  val colors = Seq("#AA0000", "#0000AA", "#008800")
+  val gridColor = "#AAAAAA"
   
   case class IntersectionPoint(funcs: Seq[Sym], x: Sym, y: Sym, color: String) {
     def toLatex: String = s"\\left( ${x.toLatex}, \\quad \\quad ${x.toLatex} \\right)"
@@ -230,6 +230,9 @@ object Graph {
 
     // Draw the points on the main canvas
     points.foreach{ p => drawPoint(p.x, p.y, p.color)(fctx) }
+
+    // Draw anything extra for the current sidebar
+    Sidebar.currentDraw.map(_.apply(fctx))
     
     // Remove any of the function lines that went into the margin
     fctx.clearRect(0, 0, marginX, fc.height)
@@ -242,7 +245,7 @@ object Graph {
     drawGrid(gctx)
   }
 
-  private def drawGrid(implicit ctx: JsContext) {
+  def drawGrid(implicit ctx: JsContext) {
     // Loop through the same code twice for the horizontal and vertical lines
     for (horizontal <- List(true, false)) {
 	  val (start, size) =
@@ -307,7 +310,7 @@ object Graph {
   }
 
   // Drawing the actual function
-  private def drawExpression(sym: Sym)(implicit ctx: JsContext) {
+  def drawExpression(sym: Sym)(implicit ctx: JsContext) {
     // Make sure to include important points on the curve (extremas, holes, etc)
     val tiny = (ctx.canvas.width * pos.xs) / 1000000.0
     
@@ -326,7 +329,7 @@ object Graph {
   }
 
   // Drawing special points
-  private def drawPoint(xe: Sym, ye: Sym, color: String)(implicit ctx: JsContext) {
+  def drawPoint(xe: Sym, ye: Sym, color: String)(implicit ctx: JsContext) {
     for (x <- xe.approx() ; y <- ye.approx() if x.isFinite && y.isFinite) {
       val cx = marginX + ((x - pos.x) / pos.xs).toInt
       val cy = ctx.canvas.height - marginY - ((y - pos.y) / pos.ys).toInt
@@ -344,7 +347,7 @@ object Graph {
   }
 
   // Get a distrobution of points with higher density of points where there is a steeper derivative
-  private def functionSegments(f: Double => Option[Double], extras: Seq[Double] = Nil):
+  def functionSegments(f: Double => Option[Double], extras: Seq[Double] = Nil):
       Seq[Seq[(Double, Double)]] = {
     
     val minY = pos.y
@@ -402,7 +405,7 @@ object Graph {
     return segments
   }
 
-  private def connectWithCurves(points: Seq[(Double, Double)])(implicit ctx: JsContext) {
+  def connectWithCurves(points: Seq[(Double, Double)])(implicit ctx: JsContext) {
     ctx.beginPath()
     ctx.lineWidth = 5
 
