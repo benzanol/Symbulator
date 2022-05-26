@@ -15077,9 +15077,12 @@ $c_Lsympany_ui_Equations$.prototype.updateEquations__V = (function() {
   }))(parent)))
 });
 $c_Lsympany_ui_Equations$.prototype.updateGraphs__V = (function() {
-  $m_Lsympany_ui_Graph$().setGraphs__sci_Seq__V($as_sci_Seq(this.Lsympany_ui_Equations$__f_handlers.flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$1$2) => {
+  $m_Lsympany_ui_Graph$().setGraphs__sci_Seq__V($as_sci_Seq($as_sc_IterableOps(this.Lsympany_ui_Equations$__f_handlers.flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$1$2) => {
     var x$1 = $as_Lsympany_ui_EquationHandler(x$1$2);
     return x$1.Lsympany_ui_EquationHandler__f_eqn
+  })))).flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$2$2) => {
+    var x$2 = $as_Lsympany_Sym(x$2$2);
+    return x$2.explicit__s_Option()
   })))))
 });
 $c_Lsympany_ui_Equations$.prototype.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element = (function(tag, props) {
@@ -15123,17 +15126,17 @@ $c_Lsympany_ui_Equations$.prototype.addEquation__V = (function() {
   (0, eval)(x)
 });
 $c_Lsympany_ui_Equations$.prototype.deleteEquation__T__V = (function(id) {
-  this.Lsympany_ui_Equations$__f_handlers = $as_sci_Seq(this.Lsympany_ui_Equations$__f_handlers.filter__F1__O(new $c_sjsr_AnonFunction1(((id$1) => ((x$2$2) => {
-    var x$2 = $as_Lsympany_ui_EquationHandler(x$2$2);
-    return (x$2.Lsympany_ui_EquationHandler__f_id !== id$1)
+  this.Lsympany_ui_Equations$__f_handlers = $as_sci_Seq(this.Lsympany_ui_Equations$__f_handlers.filter__F1__O(new $c_sjsr_AnonFunction1(((id$1) => ((x$3$2) => {
+    var x$3 = $as_Lsympany_ui_EquationHandler(x$3$2);
+    return (x$3.Lsympany_ui_EquationHandler__f_id !== id$1)
   }))(id))));
   this.updateEquations__V();
   this.updateGraphs__V()
 });
 $c_Lsympany_ui_Equations$.prototype.updateLatex__T__T__V = (function(id, latex) {
-  var x1 = this.Lsympany_ui_Equations$__f_handlers.find__F1__s_Option(new $c_sjsr_AnonFunction1(((id$1) => ((x$3$2) => {
-    var x$3 = $as_Lsympany_ui_EquationHandler(x$3$2);
-    return (x$3.Lsympany_ui_EquationHandler__f_id === id$1)
+  var x1 = this.Lsympany_ui_Equations$__f_handlers.find__F1__s_Option(new $c_sjsr_AnonFunction1(((id$1) => ((x$4$2) => {
+    var x$4 = $as_Lsympany_ui_EquationHandler(x$4$2);
+    return (x$4.Lsympany_ui_EquationHandler__f_id === id$1)
   }))(id)));
   if ((x1 instanceof $c_s_Some)) {
     var x2 = $as_s_Some(x1);
@@ -15181,9 +15184,9 @@ $c_Lsympany_ui_Equations$.prototype.expressionProperties__Lsympany_Sym__sci_Seq 
   var array$3 = [$$x8, $$x5, $$x4, $$x3, new $c_s_Some($ct_T2__O__O__(new $c_T2(), "Derivative", y$4))];
   var $$x1 = $$x10.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3));
   var this$25 = $m_s_$less$colon$less$();
-  return $as_sci_Seq($as_sc_IterableOps($$x1.flatten__F1__O(this$25.s_$less$colon$less$__f_singleton)).filter__F1__O(new $c_sjsr_AnonFunction1(((x$4$2) => {
-    var x$4 = $as_T2(x$4$2);
-    var this$27 = $as_sc_IterableOnceOps(x$4._2__O());
+  return $as_sci_Seq($as_sc_IterableOps($$x1.flatten__F1__O(this$25.s_$less$colon$less$__f_singleton)).filter__F1__O(new $c_sjsr_AnonFunction1(((x$5$2) => {
+    var x$5 = $as_T2(x$5$2);
+    var this$27 = $as_sc_IterableOnceOps(x$5._2__O());
     return (!this$27.isEmpty__Z())
   }))))
 });

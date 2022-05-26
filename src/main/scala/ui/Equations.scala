@@ -30,7 +30,7 @@ object Equations {
 
   // Whenever any equation changes, the graph screen needs to be updated
   def updateGraphs: Unit =
-    Graph.setGraphs(handlers.flatMap(_.eqn))
+    Graph.setGraphs(handlers.flatMap(_.eqn).flatMap(_.explicit))
 
   // Create a new html element with various properties and return it
   def makeElement(tag: String, props: (String, String)*): dom.Element = {
