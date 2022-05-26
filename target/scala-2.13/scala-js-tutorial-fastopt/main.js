@@ -1,4 +1,4 @@
-let selectSidebar,simplify,solve,addEquation,updateLatex,deleteEquation,derive,parseLatex;
+let selectSidebar,simplify,solve,insertEquation,addEquation,updateLatex,deleteEquation,derive,parseLatex;
 (function(){
 'use strict';
 var $linkingInfo = Object.freeze({
@@ -15144,13 +15144,33 @@ $c_Lsympany_ui_EquationHandler.prototype.updateLatex__T__V = (function(newLatex)
       if ((!isEmpty)) {
         var i = 0;
         while (true) {
-          var arg1 = i;
-          var this$20 = $as_Lsympany_Sym($as_sc_SeqOps(p._2__O()).apply__I__O(arg1));
-          var text = ($m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$20) + ((arg1 === (((-1) + $as_sc_SeqOps(p._2__O()).length__I()) | 0)) ? "" : ","));
+          var v1 = i;
+          var this$20 = $as_Lsympany_Sym($as_sc_SeqOps(p._2__O()).apply__I__O(v1));
+          var text = ($m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$20) + ((v1 === (((-1) + $as_sc_SeqOps(p._2__O()).length__I()) | 0)) ? "" : ","));
           var $$x4 = $m_Lsympany_ui_Equations$();
-          var array$2 = [$ct_T2__O__O__(new $c_T2(), "class", "mq-static"), $ct_T2__O__O__(new $c_T2(), "innerText", text)];
-          var el = $$x4.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2));
-          div.appendChild(el);
+          var array$2 = [$ct_T2__O__O__(new $c_T2(), "white-space", "nowrap"), $ct_T2__O__O__(new $c_T2(), "overflow", "hidden"), $ct_T2__O__O__(new $c_T2(), "text-overflow", "clip")];
+          var divv = $$x4.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2));
+          if (($as_sc_SeqOps(p._2__O()).length__I() === 1)) {
+            var txt = $as_T(text.split("\\").join("\\\\"));
+            var $$x7 = $m_Lsympany_ui_Equations$();
+            var $$x6 = $ct_T2__O__O__(new $c_T2(), "innerText", "+");
+            var $$x5 = $ct_T2__O__O__(new $c_T2(), "class", "plus-btn");
+            var y$1 = (("insertEquation('" + txt) + "')");
+            var array$3 = [$$x6, $$x5, $ct_T2__O__O__(new $c_T2(), "onclick", y$1)];
+            var btn = $$x7.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("button", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3));
+            divv.appendChild(btn);
+            var $$x8 = $m_Lsympany_ui_Equations$();
+            var array$4 = [$ct_T2__O__O__(new $c_T2(), "innerText", " ")];
+            divv.appendChild($$x8.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("span", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$4)))
+          };
+          var $$x9 = $m_Lsympany_ui_Equations$();
+          var array$5 = [$ct_T2__O__O__(new $c_T2(), "class", "mq-static"), $ct_T2__O__O__(new $c_T2(), "innerText", text)];
+          var el = $$x9.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$5));
+          divv.appendChild(el);
+          div.appendChild(divv);
+          var $$x10 = $m_Lsympany_ui_Equations$();
+          var array$6 = [];
+          $$x10.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$6));
           if ((i === scala$collection$immutable$Range$$lastElement)) {
             break
           };
@@ -15159,7 +15179,7 @@ $c_Lsympany_ui_EquationHandler.prototype.updateLatex__T__V = (function(newLatex)
       }
     }))(this)))
   };
-  formatStaticEquations()
+  (0, eval)("formatStaticEquations()")
 });
 function $as_Lsympany_ui_EquationHandler(obj) {
   return (((obj instanceof $c_Lsympany_ui_EquationHandler) || (obj === null)) ? obj : $throwClassCastException(obj, "sympany.ui.EquationHandler"))
@@ -15247,6 +15267,16 @@ $c_Lsympany_ui_Equations$.prototype.addEquation__V = (function() {
   var x = (("MQ(document.getElementById('eqn-" + h.Lsympany_ui_EquationHandler__f_id) + "')).focus()");
   (0, eval)(x)
 });
+$c_Lsympany_ui_Equations$.prototype.insertEquation__T__V = (function(s) {
+  var h = new $c_Lsympany_ui_EquationHandler();
+  h.Lsympany_ui_EquationHandler__f_eqnElem.innerText = s;
+  h.updateLatex__T__V(s);
+  var this$1 = this.Lsympany_ui_Equations$__f_handlers;
+  this.Lsympany_ui_Equations$__f_handlers = $as_sci_Seq(this$1.appended__O__O(h));
+  this.updateEquations__V();
+  this.updateGraphs__V();
+  (0, eval)("formatStaticEquations()")
+});
 $c_Lsympany_ui_Equations$.prototype.deleteEquation__T__V = (function(id) {
   this.Lsympany_ui_Equations$__f_handlers = $as_sci_Seq(this.Lsympany_ui_Equations$__f_handlers.filter__F1__O(new $c_sjsr_AnonFunction1(((id$1) => ((x$3$2) => {
     var x$3 = $as_Lsympany_ui_EquationHandler(x$3$2);
@@ -15277,7 +15307,7 @@ $c_Lsympany_ui_Equations$.prototype.updateLatex__T__T__V = (function(id, latex) 
 $c_Lsympany_ui_Equations$.prototype.expressionProperties__Lsympany_Sym__sci_Seq = (function(sym) {
   var $$x10 = $m_sci_Seq$();
   var $$x9 = $m_sci_Seq$();
-  var array = [sym];
+  var array = [sym.simple__Lsympany_Sym()];
   var y = $$x9.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
   var $$x8 = new $c_s_Some($ct_T2__O__O__(new $c_T2(), "Simplified", y));
   var this$6 = sym.explicit__s_Option();
@@ -63898,6 +63928,10 @@ solve = (function(arg, ...rest) {
   var prep0 = $as_Lsympany_Sym(arg);
   var prep1 = ((rest[0] === (void 0)) ? $m_Lsympany_math_Solve$().solve$default$2__s_Symbol() : $as_s_Symbol(rest[0]));
   return $m_Lsympany_math_Solve$().solve__Lsympany_Sym__s_Symbol__sci_Seq(prep0, prep1)
+});
+insertEquation = (function(arg) {
+  var prep0 = $as_T(arg);
+  $m_Lsympany_ui_Equations$().insertEquation__T__V(prep0)
 });
 addEquation = (function() {
   $m_Lsympany_ui_Equations$().addEquation__V()

@@ -47,7 +47,7 @@ object Equations {
 
   // Create a new equation
   @JSExportTopLevel("addEquation")
-  def addEquation(): Unit = {
+  def addEquation() {
     val h = new EquationHandler()
     handlers :+= h
     updateEquations()
@@ -56,8 +56,19 @@ object Equations {
     js.eval(s"MQ(document.getElementById('eqn-${h.id}')).focus()")
   }
 
+  @JSExportTopLevel("insertEquation")
+  def insertEquation(s: String) {
+    val h = new EquationHandler()
+    h.eqnElem.innerText = s
+    h.updateLatex(s)
+    handlers :+= h
+    updateEquations()
+    updateGraphs
+    js.eval("formatStaticEquations()")
+  }
+
   @JSExportTopLevel("deleteEquation")
-  def deleteEquation(id: String): Unit = {
+  def deleteEquation(id: String) {
     handlers = handlers.filter(_.id != id)
     updateEquations()
     updateGraphs
@@ -77,7 +88,7 @@ object Equations {
 
   // Get the list of properties that should be displayed below an equation
   def expressionProperties(sym: Sym): Seq[(String, Seq[Sym])] = Seq(
-    Some("Simplified" -> Seq(sym)),
+    Some("Simplified" -> Seq(sym.simple)),
     {if (sym.explicit.isDefined && sym.explicit.get != sym.simple)
       Some("Explicit" -> Seq(sym.explicit.get)) else None},
     Some("Zeros" -> sym.zeros),
@@ -129,12 +140,32 @@ class EquationHandler() {
         div.appendChild(makeElement("p", "class" -> "prop-name", "innerText" -> p._1))
         for (i <- 0 until p._2.length) {
           val text = p._2(i).toLatex + (if (i == p._2.length - 1) "" else ",")
+
+          val divv = makeElement("div",
+            "white-space" -> "nowrap",
+            "overflow" -> "hidden",
+            "text-overflow" -> "clip",
+          )
+
+          if (p._2.length == 1) {
+            val txt = text.replace("\\", "\\\\")
+            val btn = makeElement("button", "innerText" -> "+", "class" -> "plus-btn",
+              "onclick" -> s"insertEquation('$txt')")
+            divv.appendChild(btn)
+            divv.appendChild(makeElement("span", "innerText" -> " "))
+          }
+
           val el = makeElement("p", "class" -> "mq-static", "innerText" -> text)
-          div.appendChild(el)
+          divv.appendChild(el)
+
+          div.appendChild(divv)
+
+          val c = makeElement("p")
         }
       }
 
     // Format the static equations as latex with mathquill
-    js.Dynamic.global.formatStaticEquations()
+    js.eval("formatStaticEquations()")
+    //js.eval("setTimeout(formatStaticEquations, 0)")
   }
 }
