@@ -278,7 +278,9 @@ object Simplify {
   sRules.+("Expand binomials"){
     PowP( 's @@ SumP( RatP(), ProdP(PowP(RatP(), RatP()), RatP()) ), IntP('p) )
   }{ case (p: SymInt, s: SymSum) =>
-      (2 to p.n.toInt).foldLeft(s.exprs){ (acc, n) => distribute(acc, s.exprs) }.pipe(+++)
+      val a = (2 to p.n.toInt).foldLeft(s.exprs){ (acc, n) => distribute(acc, s.exprs) }.pipe(+++)
+      println("Simp", s, p, a)
+      a
   }
 
   def distribute(l1: Seq[Sym], l2: Seq[Sym]): Seq[Sym] =

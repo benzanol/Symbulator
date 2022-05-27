@@ -64,25 +64,28 @@ object Solve {
   }
 
   zRules.+("x^3 + x^2 = x^2(x + 1)"){
-    's @@ SumP(Repeat( AsProdP( AsPowP(XP, __), __*) ))
+    's @@ SumP(Repeat( AsProdP( AsPowP(XP, RatP()), __*) ))
   }{ case s: SymSum =>
-
       // Figure out the smallest exponent of x, the power of x to divide by
-      val minExpt = s.exprs.flatMap{ e =>
+      val minExpt: SymR = s.exprs.flatMap{ e =>
         AsProdP( AsPowP(XP, 'p), __*).matches(e)
-          .headOption.map(_.apply('p).asInstanceOf[SymInt].toInt)
-      }.min
+          .headOption.map(_.apply('p).asInstanceOf[SymR])
+      }.foldLeft(SymPositiveInfinity(): SymR)(_ min _)
 
-      // Subtract the min exponent from each power of x
-      val rule = new Rule("", AsProdP( AsPowP(XP, 'p), 'r @@ __*), {
-        case (p: Sym, r: Seq[Sym]) =>
-          ***( ^(X, ++(p, SymInt(-minExpt))) +: r ).simple
-      })
+      if (minExpt > 0.s && minExpt < SymPositiveInfinity()) {
+        // Subtract the min exponent from each power of x
+        val rule = new Rule("", AsProdP( AsPowP(XP, 'p @@ RatP()), 'r @@ __*), {
+          case (p: Sym, r: Seq[Sym]) =>
+            ***( ^(X, ++(p, minExpt.negative)) +: r ).simple
+        })
 
-      // Sum the newly divided powers and try to solve
-      val divided = +++( s.exprs.map(rule.first(_).get) )
-      if (minExpt > 0) SymInt(0) +: solve( divided )
-      else Nil
+        // Sum the newly divided powers and try to solve
+        val divided = +++( s.exprs.map(rule.first(_).get) )
+        println("Divided:", divided)
+
+        SymInt(0) +: solve( divided )
+
+      } else Nil
   }
 
   zRules.+("Plus Minus"){ PMP(@?('e)) }{ case e: Sym => solve(e) }
@@ -92,12 +95,13 @@ object Solve {
   }{ case a: Sym => solve(a) }
 
   zRules.+("f(x)^a + b = 0 => f(x) + b^1/a = 0"){
-    SumP(PowP(hasxP('a), 'p @@ ConstP()), 'r @@ Repeat(__))
+    SumP(PowP(hasxP('a), 'p @@ ConstP()), 'r @@ Repeat(noxP()))
   }{
     case (a: Sym, p: SymInt, r: Seq[Sym]) if (p.toInt % 2 == 0) =>
-      solve(++(**(a, -1), SymPM(^(**(+++(r), -1), ^(p, -1)))).simple)
+      solve(++(a, SymPM(^(**(+++(r), -1), ^(p, -1)))).simple)
+
     case (a: Sym, p: SymConstant, r: Seq[Sym]) =>
-      solve(++(**(a, -1), ^(**(+++(r), -1), ^(p, -1))).simple)
+      solve(++(a, **(-1, ^(**(+++(r), -1), ^(p, -1)))).simple)
   }
 
   // Good luck trying to understand this mess lol
@@ -136,6 +140,6 @@ object Solve {
       })
       +++(realEs).pipe(simplify)
     }
-    **( ++( **(S(-1), b), +-(^(++(^(b, S(2)), **(S(-4), a, c)), S(1, 2)))), ^(**(S(2), a), S(-1)))
+    **( ++( **(-1, b), +-{ ^(++(^(b, 2), **(-4, a, c)), 1~2) }), ^(**(2, a), -1)).simple
   }
 }

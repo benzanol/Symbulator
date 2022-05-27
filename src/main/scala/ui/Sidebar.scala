@@ -70,7 +70,7 @@ object Sidebar {
       for (e <- document.getElementsByClassName(s"y$n"))
         e.innerText = y.map{y => s"y_$n = " + y.toLatex}.getOrElse("")
 
-    if (current == "equation") selectSidebar("points")
+    selectSidebar("points")
 
     js.Dynamic.global.formatStaticEquations()
     Graph.draw

@@ -305,7 +305,14 @@ trait SymR extends SymConstant {
   def -(o: SymR): SymR = this + o.negative
   def *(o: SymR): SymR = SymR(n * o.n, d * o.d)
   def /(o: SymR): SymR = this * o.inverse
-  def ^(o: SymInt): SymR = SymR(n.pow(o.n.toInt))
+  def ^(o: SymInt): SymR = SymR(n.pow(o.n.toInt), d.pow(o.n.toInt))
+
+  def <(o: SymR): Boolean = (this.n*o.d) < (o.n*this.d)
+  def >(o: SymR): Boolean = (this.n*o.d) > (o.n*this.d)
+  def <=(o: SymR): Boolean = (this.n*o.d) <= (o.n*this.d)
+  def >=(o: SymR): Boolean = (this.n*o.d) >= (o.n*this.d)
+  def min(o: SymR): SymR = if (this > o) o else this
+  def max(o: SymR): SymR = if (this < o) o else this
 }
 
 case class SymFrac(n: BigInt = 1, d: BigInt = 1) extends SymR

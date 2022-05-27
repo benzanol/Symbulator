@@ -42,13 +42,6 @@ object Main {
     import math.IntegralRules._
     import Pattern._
     import Sym._
-
-    //'p @@ ProdP(Repeat( AsProdP( AsPowP(XP, __), __*) ))
-
-    println(++(^(++('y, 1), 3), ^(SymE(), 2)).solve('y))
-    println( ++('y, 2, ^(**(-1, ^(SymE(), 2)), 1~3)).solve('y) )
-    println(noxP().matches(^(SymE(), 2)))
-
   }
   
 }
