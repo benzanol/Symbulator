@@ -238,7 +238,8 @@ object Graph {
     }
 
     // Draw the points on the main canvas
-    points.foreach{ p => drawPoint(p.x, p.y, p.color)(fctx) }
+    val selectedPs = Sidebar.p1.toSeq ++ Sidebar.p2.toSeq
+    points.foreach{ p => drawPoint(p.x, p.y, p.color, selectedPs contains p)(fctx) }
 
     // Draw anything extra for the current sidebar
     Sidebar.currentDraw.map(_.apply(fctx))
@@ -343,7 +344,7 @@ object Graph {
   }
 
   // Drawing special points
-  def drawPoint(xe: Sym, ye: Sym, color: String)(implicit ctx: JsContext) {
+  def drawPoint(xe: Sym, ye: Sym, color: String, selected: Boolean = false)(implicit ctx: JsContext) {
     for (x <- xe.approx() ; y <- ye.approx() if x.isFinite && y.isFinite) {
       val cx = marginX + ((x - pos.x) / pos.xs).toInt
       val cy = ctx.canvas.height - marginY - ((y - pos.y) / pos.ys).toInt
@@ -351,8 +352,8 @@ object Graph {
       ctx.beginPath()
 
       ctx.lineWidth = 4
-      ctx.strokeStyle = color
-      ctx.fillStyle = "white"
+      ctx.strokeStyle = if (selected) "black" else color
+      ctx.fillStyle = if (selected) "black" else "white"
       ctx.arc(cx, cy, pointRadius, 0, 2 * Math.PI)
 
       ctx.fill()

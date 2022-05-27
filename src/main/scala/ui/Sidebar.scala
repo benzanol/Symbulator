@@ -71,7 +71,9 @@ object Sidebar {
         e.innerText = y.map{y => s"y_$n = " + y.toLatex}.getOrElse("")
 
     if (current == "equation") selectSidebar("points")
-    js.eval("formatStaticEquations()")
+
+    js.Dynamic.global.formatStaticEquations()
+    Graph.draw
   }
 }
 

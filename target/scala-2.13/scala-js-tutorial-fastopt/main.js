@@ -15828,13 +15828,16 @@ $c_Lsympany_ui_Graph$.prototype.draw__V = (function() {
       i = ((1 + i) | 0)
     }
   };
-  this.Lsympany_ui_Graph$__f_points.foreach__F1__V(new $c_sjsr_AnonFunction1(((p$2) => {
+  var this$7 = $m_s_Option$().option2Iterable__s_Option__sc_Iterable($m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_p1).toSeq__sci_Seq();
+  var suffix = $m_s_Option$().option2Iterable__s_Option__sc_Iterable($m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_p2).toSeq__sci_Seq();
+  var selectedPs = $as_sci_Seq(this$7.appendedAll__sc_IterableOnce__O(suffix));
+  this.Lsympany_ui_Graph$__f_points.foreach__F1__V(new $c_sjsr_AnonFunction1(((selectedPs$1) => ((p$2) => {
     var p = $as_Lsympany_ui_Graph$IntersectionPoint(p$2);
-    $m_Lsympany_ui_Graph$().drawPoint__Lsympany_Sym__Lsympany_Sym__T__Lorg_scalajs_dom_CanvasRenderingContext2D__V(p.Lsympany_ui_Graph$IntersectionPoint__f_x, p.Lsympany_ui_Graph$IntersectionPoint__f_y, p.Lsympany_ui_Graph$IntersectionPoint__f_color, $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_fctx)
-  })));
-  var this$7 = $m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_currentDraw;
-  if ((!this$7.isEmpty__Z())) {
-    var arg1 = this$7.get__O();
+    $m_Lsympany_ui_Graph$().drawPoint__Lsympany_Sym__Lsympany_Sym__T__Z__Lorg_scalajs_dom_CanvasRenderingContext2D__V(p.Lsympany_ui_Graph$IntersectionPoint__f_x, p.Lsympany_ui_Graph$IntersectionPoint__f_y, p.Lsympany_ui_Graph$IntersectionPoint__f_color, selectedPs$1.contains__O__Z(p), $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_fctx)
+  }))(selectedPs)));
+  var this$8 = $m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_currentDraw;
+  if ((!this$8.isEmpty__Z())) {
+    var arg1 = this$8.get__O();
     var x$12 = $as_F1(arg1);
     x$12.apply__O__O($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_fctx);
     new $c_s_Some((void 0))
@@ -16088,25 +16091,25 @@ $c_Lsympany_ui_Graph$.prototype.drawExpression__Lsympany_Sym__Lorg_scalajs_dom_C
     }))(important, undefined$1, ctx)))
   }
 });
-$c_Lsympany_ui_Graph$.prototype.drawPoint__Lsympany_Sym__Lsympany_Sym__T__Lorg_scalajs_dom_CanvasRenderingContext2D__V = (function(xe, ye, color, ctx) {
-  xe.approx__sci_Seq__sci_Seq($m_sci_Nil$()).foreach__F1__V(new $c_sjsr_AnonFunction1(((ye$1, ctx$1, color$1) => ((x$2) => {
+$c_Lsympany_ui_Graph$.prototype.drawPoint__Lsympany_Sym__Lsympany_Sym__T__Z__Lorg_scalajs_dom_CanvasRenderingContext2D__V = (function(xe, ye, color, selected, ctx) {
+  xe.approx__sci_Seq__sci_Seq($m_sci_Nil$()).foreach__F1__V(new $c_sjsr_AnonFunction1(((ye$1, ctx$1, selected$1, color$1) => ((x$2) => {
     var x = $uD(x$2);
     ye$1.approx__sci_Seq__sci_Seq($m_sci_Nil$()).withFilter__F1__sc_WithFilter(new $c_sjsr_AnonFunction1(((x$1) => ((y$2) => {
       var y = $uD(y$2);
       return (((x$1 === x$1) && (!((x$1 === Infinity) || (x$1 === (-Infinity))))) && ((y === y) && (!((y === Infinity) || (y === (-Infinity))))))
-    }))(x))).foreach__F1__V(new $c_sjsr_AnonFunction1(((x$3, ctx$3, color$1$1) => ((y$3$2) => {
+    }))(x))).foreach__F1__V(new $c_sjsr_AnonFunction1(((x$3, ctx$3, selected$1$1, color$1$1) => ((y$3$2) => {
       var y$3 = $uD(y$3$2);
       var cx = (($m_Lsympany_ui_Graph$().marginX__I() + $doubleToInt(((x$3 - $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_x) / $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_xs))) | 0);
       var cy = (((($uI(ctx$3.canvas.height) - ($m_Lsympany_ui_Graph$(), 20)) | 0) - $doubleToInt(((y$3 - $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_y) / $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_ys))) | 0);
       ctx$3.beginPath();
       ctx$3.lineWidth = 4.0;
-      ctx$3.strokeStyle = color$1$1;
-      ctx$3.fillStyle = "white";
+      ctx$3.strokeStyle = (selected$1$1 ? "black" : color$1$1);
+      ctx$3.fillStyle = (selected$1$1 ? "black" : "white");
       ctx$3.arc(cx, cy, $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_pointRadius, 0.0, 6.283185307179586);
       ctx$3.fill();
       ctx$3.stroke()
-    }))(x, ctx$1, color$1)))
-  }))(ye, ctx, color)))
+    }))(x, ctx$1, selected$1, color$1)))
+  }))(ye, ctx, selected, color)))
 });
 $c_Lsympany_ui_Graph$.prototype.functionSegments__F1__sci_Seq__sci_Seq = (function(f, extras) {
   $uI(this.Lsympany_ui_Graph$__f_fc.height);
@@ -16577,7 +16580,8 @@ $c_Lsympany_ui_Sidebar$.prototype.clickPoint__Lsympany_ui_Graph$IntersectionPoin
   if ((this.Lsympany_ui_Sidebar$__f_current === "equation")) {
     this.selectSidebar__T__V("points")
   };
-  (0, eval)("formatStaticEquations()")
+  formatStaticEquations();
+  $m_Lsympany_ui_Graph$().draw__V()
 });
 var $d_Lsympany_ui_Sidebar$ = new $TypeData().initClass({
   Lsympany_ui_Sidebar$: 0
