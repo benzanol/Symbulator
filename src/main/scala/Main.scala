@@ -43,5 +43,10 @@ object Main {
     import Pattern._
     import Sym._
   }
+
+  @JSExportTopLevel("simple")
+  def mainSimple(str: String) {
+    println(Parse.parseLatex(str).get.simple)
+  }
   
 }

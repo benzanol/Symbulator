@@ -185,7 +185,7 @@ object Graph {
   val gridColor = "#AAAAAA"
   
   case class IntersectionPoint(funcs: Seq[Sym], x: Sym, y: Sym, color: String) {
-    def toLatex: String = s"\\left( ${x.toLatex}, \\quad \\quad ${x.toLatex} \\right)"
+    def toLatex: String = s"\\left( ${x.toLatex}, \\quad \\quad ${y.toLatex} \\right)"
   }
 
   def setGraphs(exprs: Seq[Sym]) {
@@ -203,8 +203,8 @@ object Graph {
           case (SymVertical(x), b) => Seq(IntersectionPoint(Seq(a, b), x, b.replaceExpr('x, x).simple, col))
           case (a, SymVertical(x)) => Seq(IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col))
           case (SymVertical(x1), SymVertical(x2)) => Nil
-          case (a, b) if b == 0.s => ++(a, **(b, -1)).zeros.flatMap(_.expand).map{ x =>
-            IntersectionPoint(Seq(a, b), x, 0, col)
+          case (a, b) if b == 0.s => a.zeros.flatMap(_.expand).map{ x =>
+            IntersectionPoint(Seq(a, b), x, 0.s, col)
           }
           case (a, b) => ++(a, **(b, -1)).zeros.flatMap(_.expand).map{ x =>
             IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col)
