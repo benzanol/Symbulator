@@ -12251,29 +12251,56 @@ function $f_Lsympany_Sym__expand__sci_Seq($thiz) {
   }))))
 }
 function $f_Lsympany_Sym__derivative__Lsympany_Sym($thiz) {
-  var $$x1 = $m_Lsympany_math_Derivative$();
+  var $$x2 = $m_Lsympany_math_Derivative$();
+  var $$x1 = $thiz.maybeExplicit__Lsympany_Sym();
   var this$1 = $m_s_Symbol$();
-  return $$x1.derive__Lsympany_Sym__s_Symbol__Lsympany_Sym($thiz, $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$1, "x")))
+  return $$x2.derive__Lsympany_Sym__s_Symbol__Lsympany_Sym($$x1, $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$1, "x")))
 }
 function $f_Lsympany_Sym__zeros__sci_Seq($thiz) {
-  var this$1 = $m_s_Symbol$();
-  var v = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$1, "x"));
-  return $m_Lsympany_math_Solve$().solve__Lsympany_Sym__s_Symbol__sci_Seq($thiz, v)
+  var this$1 = $thiz.explicit__s_Option();
+  if (this$1.isEmpty__Z()) {
+    var this$3 = $m_s_None$()
+  } else {
+    var arg1 = this$1.get__O();
+    var x$6 = $as_Lsympany_Sym(arg1);
+    var this$2 = $m_s_Symbol$();
+    var v = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$2, "x"));
+    var this$3 = new $c_s_Some($m_Lsympany_math_Solve$().solve__Lsympany_Sym__s_Symbol__sci_Seq(x$6, v))
+  };
+  return $as_sci_Seq((this$3.isEmpty__Z() ? $m_sci_Nil$() : this$3.get__O()))
 }
 function $f_Lsympany_Sym__important__sci_Seq($thiz) {
-  var $$x2 = $m_Lsympany_math_Solve$();
-  var $$x1 = $thiz.simple__Lsympany_Sym();
-  var this$1 = $m_s_Symbol$();
-  return $$x2.importantPoints__Lsympany_Sym__s_Symbol__sci_Seq($$x1, $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$1, "x")))
+  var this$1 = $thiz.explicit__s_Option();
+  if (this$1.isEmpty__Z()) {
+    var this$3 = $m_s_None$()
+  } else {
+    var arg1 = this$1.get__O();
+    var x$7 = $as_Lsympany_Sym(arg1);
+    var $$x1 = $m_Lsympany_math_Solve$();
+    var this$2 = $m_s_Symbol$();
+    var this$3 = new $c_s_Some($$x1.importantPoints__Lsympany_Sym__s_Symbol__sci_Seq(x$7, $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$2, "x"))))
+  };
+  return $as_sci_Seq((this$3.isEmpty__Z() ? $m_sci_Nil$() : this$3.get__O()))
 }
 function $f_Lsympany_Sym__undefined__sci_Seq($thiz) {
-  var $$x2 = $m_Lsympany_math_Solve$();
-  var $$x1 = $thiz.simple__Lsympany_Sym();
-  var this$1 = $m_s_Symbol$();
-  return $$x2.undefinedPoints__Lsympany_Sym__s_Symbol__sci_Seq($$x1, $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$1, "x")))
+  var this$1 = $thiz.explicit__s_Option();
+  if (this$1.isEmpty__Z()) {
+    var this$3 = $m_s_None$()
+  } else {
+    var arg1 = this$1.get__O();
+    var x$8 = $as_Lsympany_Sym(arg1);
+    var $$x1 = $m_Lsympany_math_Solve$();
+    var this$2 = $m_s_Symbol$();
+    var this$3 = new $c_s_Some($$x1.undefinedPoints__Lsympany_Sym__s_Symbol__sci_Seq(x$8, $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$2, "x"))))
+  };
+  return $as_sci_Seq((this$3.isEmpty__Z() ? $m_sci_Nil$() : this$3.get__O()))
 }
 function $f_Lsympany_Sym__integral__s_Option($thiz) {
-  return $m_Lsympany_math_Integral$().integrate__Lsympany_math_Integral$SymIntegral__s_Option(new $c_Lsympany_math_Integral$SymIntegral($thiz.simple__Lsympany_Sym()))
+  return $m_Lsympany_math_Integral$().integrate__Lsympany_math_Integral$SymIntegral__s_Option(new $c_Lsympany_math_Integral$SymIntegral($thiz.maybeExplicit__Lsympany_Sym()))
+}
+function $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz) {
+  var this$1 = $thiz.explicit__s_Option();
+  return $as_Lsympany_Sym((this$1.isEmpty__Z() ? $thiz : this$1.get__O()))
 }
 function $f_Lsympany_Sym__explicit__s_Option($thiz) {
   var $$x2 = $m_Lsympany_Sym$();
@@ -12314,9 +12341,9 @@ function $f_Lsympany_Sym__functions__sci_Seq($thiz) {
     }))($thiz))];
     return $as_sci_Seq($$x1.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array)))
   } else {
-    return $as_sci_Seq($thiz.expand__sci_Seq().flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$6$2) => {
-      var x$6 = $as_Lsympany_Sym(x$6$2);
-      return x$6.functions__sci_Seq()
+    return $as_sci_Seq($thiz.expand__sci_Seq().flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$9$2) => {
+      var x$9 = $as_Lsympany_Sym(x$9$2);
+      return x$9.functions__sci_Seq()
     }))))
   }
 }
@@ -16343,7 +16370,16 @@ $c_Lsympany_ui_Graph$.prototype.functionSegments__F1__sci_Seq__sci_Seq = (functi
       x.sr_DoubleRef__f_elem = $uD(extrasLeft.head__O());
       extrasLeft = $as_sci_Seq(extrasLeft.tail__O())
     } else {
-      lastMultiple = x.sr_DoubleRef__f_elem
+      var a$2 = x.sr_DoubleRef__f_elem;
+      var $$x3 = $uD(Math.floor(a$2));
+      var a$3 = lastMultiple;
+      if ((($$x3 > $uD(Math.floor(a$3))) && (dist < 1.0))) {
+        var a$4 = x.sr_DoubleRef__f_elem;
+        x.sr_DoubleRef__f_elem = $uD(Math.floor(a$4));
+        lastMultiple = x.sr_DoubleRef__f_elem
+      } else {
+        lastMultiple = x.sr_DoubleRef__f_elem
+      }
     }
   };
   return segments
@@ -20289,9 +20325,9 @@ function $asArrayOf_Lsympany_SymConstant(obj, depth) {
   return (($isArrayOf_Lsympany_SymConstant(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lsympany.SymConstant;", depth))
 }
 function $f_Lsympany_SymOp__approx__sci_Seq__sci_Seq($thiz, env) {
-  var $$x2 = $as_sc_IterableOnceOps($thiz.exprs__sci_Seq().map__F1__O(new $c_sjsr_AnonFunction1(((env$1) => ((x$7$2) => {
-    var x$7 = $as_Lsympany_Sym(x$7$2);
-    return x$7.approx__sci_Seq__sci_Seq(env$1)
+  var $$x2 = $as_sc_IterableOnceOps($thiz.exprs__sci_Seq().map__F1__O(new $c_sjsr_AnonFunction1(((env$1) => ((x$10$2) => {
+    var x$10 = $as_Lsympany_Sym(x$10$2);
+    return x$10.approx__sci_Seq__sci_Seq(env$1)
   }))(env))));
   var $$x1 = $m_sci_Seq$();
   var array = [$as_sci_Seq($m_sci_Seq$().apply__sci_Seq__sc_SeqOps($m_sci_Nil$()))];
@@ -37413,24 +37449,31 @@ function $p_Lsympany_SymCos__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymCos__f_integral
 }
-function $p_Lsympany_SymCos__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymCos__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((512 & $thiz.Lsympany_SymCos__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymCos__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymCos__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymCos__f_bitmap$0 = (512 | $thiz.Lsympany_SymCos__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymCos__f_maybeExplicit
+}
+function $p_Lsympany_SymCos__explicit$lzycompute__s_Option($thiz) {
+  if (((1024 & $thiz.Lsympany_SymCos__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymCos__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymCos__f_bitmap$0 = (1024 | $thiz.Lsympany_SymCos__f_bitmap$0)
   };
   return $thiz.Lsympany_SymCos__f_explicit
 }
 function $p_Lsympany_SymCos__extremas$lzycompute__sci_Seq($thiz) {
-  if (((1024 & $thiz.Lsympany_SymCos__f_bitmap$0) === 0)) {
+  if (((2048 & $thiz.Lsympany_SymCos__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymCos__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymCos__f_bitmap$0 = (1024 | $thiz.Lsympany_SymCos__f_bitmap$0)
+    $thiz.Lsympany_SymCos__f_bitmap$0 = (2048 | $thiz.Lsympany_SymCos__f_bitmap$0)
   };
   return $thiz.Lsympany_SymCos__f_extremas
 }
 function $p_Lsympany_SymCos__functions$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymCos__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymCos__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymCos__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymCos__f_bitmap$0 = (2048 | $thiz.Lsympany_SymCos__f_bitmap$0)
+    $thiz.Lsympany_SymCos__f_bitmap$0 = (4096 | $thiz.Lsympany_SymCos__f_bitmap$0)
   };
   return $thiz.Lsympany_SymCos__f_functions
 }
@@ -37455,6 +37498,7 @@ function $c_Lsympany_SymCos(expr) {
   this.Lsympany_SymCos__f_important = null;
   this.Lsympany_SymCos__f_undefined = null;
   this.Lsympany_SymCos__f_integral = null;
+  this.Lsympany_SymCos__f_maybeExplicit = null;
   this.Lsympany_SymCos__f_explicit = null;
   this.Lsympany_SymCos__f_extremas = null;
   this.Lsympany_SymCos__f_pointCache = null;
@@ -37500,17 +37544,20 @@ $c_Lsympany_SymCos.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymCos.prototype.integral__s_Option = (function() {
   return (((256 & this.Lsympany_SymCos__f_bitmap$0) === 0) ? $p_Lsympany_SymCos__integral$lzycompute__s_Option(this) : this.Lsympany_SymCos__f_integral)
 });
+$c_Lsympany_SymCos.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((512 & this.Lsympany_SymCos__f_bitmap$0) === 0) ? $p_Lsympany_SymCos__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymCos__f_maybeExplicit)
+});
 $c_Lsympany_SymCos.prototype.explicit__s_Option = (function() {
-  return (((512 & this.Lsympany_SymCos__f_bitmap$0) === 0) ? $p_Lsympany_SymCos__explicit$lzycompute__s_Option(this) : this.Lsympany_SymCos__f_explicit)
+  return (((1024 & this.Lsympany_SymCos__f_bitmap$0) === 0) ? $p_Lsympany_SymCos__explicit$lzycompute__s_Option(this) : this.Lsympany_SymCos__f_explicit)
 });
 $c_Lsympany_SymCos.prototype.extremas__sci_Seq = (function() {
-  return (((1024 & this.Lsympany_SymCos__f_bitmap$0) === 0) ? $p_Lsympany_SymCos__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymCos__f_extremas)
+  return (((2048 & this.Lsympany_SymCos__f_bitmap$0) === 0) ? $p_Lsympany_SymCos__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymCos__f_extremas)
 });
 $c_Lsympany_SymCos.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymCos__f_pointCache
 });
 $c_Lsympany_SymCos.prototype.functions__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymCos__f_bitmap$0) === 0) ? $p_Lsympany_SymCos__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymCos__f_functions)
+  return (((4096 & this.Lsympany_SymCos__f_bitmap$0) === 0) ? $p_Lsympany_SymCos__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymCos__f_functions)
 });
 $c_Lsympany_SymCos.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymCos__f_pointCache = x$1
@@ -37628,24 +37675,31 @@ function $p_Lsympany_SymEquation__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymEquation__f_integral
 }
-function $p_Lsympany_SymEquation__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymEquation__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((512 & $thiz.Lsympany_SymEquation__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymEquation__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymEquation__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymEquation__f_bitmap$0 = (512 | $thiz.Lsympany_SymEquation__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymEquation__f_maybeExplicit
+}
+function $p_Lsympany_SymEquation__explicit$lzycompute__s_Option($thiz) {
+  if (((1024 & $thiz.Lsympany_SymEquation__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymEquation__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymEquation__f_bitmap$0 = (1024 | $thiz.Lsympany_SymEquation__f_bitmap$0)
   };
   return $thiz.Lsympany_SymEquation__f_explicit
 }
 function $p_Lsympany_SymEquation__extremas$lzycompute__sci_Seq($thiz) {
-  if (((1024 & $thiz.Lsympany_SymEquation__f_bitmap$0) === 0)) {
+  if (((2048 & $thiz.Lsympany_SymEquation__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymEquation__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymEquation__f_bitmap$0 = (1024 | $thiz.Lsympany_SymEquation__f_bitmap$0)
+    $thiz.Lsympany_SymEquation__f_bitmap$0 = (2048 | $thiz.Lsympany_SymEquation__f_bitmap$0)
   };
   return $thiz.Lsympany_SymEquation__f_extremas
 }
 function $p_Lsympany_SymEquation__functions$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymEquation__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymEquation__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymEquation__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymEquation__f_bitmap$0 = (2048 | $thiz.Lsympany_SymEquation__f_bitmap$0)
+    $thiz.Lsympany_SymEquation__f_bitmap$0 = (4096 | $thiz.Lsympany_SymEquation__f_bitmap$0)
   };
   return $thiz.Lsympany_SymEquation__f_functions
 }
@@ -37671,6 +37725,7 @@ function $c_Lsympany_SymEquation(left, right) {
   this.Lsympany_SymEquation__f_important = null;
   this.Lsympany_SymEquation__f_undefined = null;
   this.Lsympany_SymEquation__f_integral = null;
+  this.Lsympany_SymEquation__f_maybeExplicit = null;
   this.Lsympany_SymEquation__f_explicit = null;
   this.Lsympany_SymEquation__f_extremas = null;
   this.Lsympany_SymEquation__f_pointCache = null;
@@ -37717,17 +37772,20 @@ $c_Lsympany_SymEquation.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymEquation.prototype.integral__s_Option = (function() {
   return (((256 & this.Lsympany_SymEquation__f_bitmap$0) === 0) ? $p_Lsympany_SymEquation__integral$lzycompute__s_Option(this) : this.Lsympany_SymEquation__f_integral)
 });
+$c_Lsympany_SymEquation.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((512 & this.Lsympany_SymEquation__f_bitmap$0) === 0) ? $p_Lsympany_SymEquation__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymEquation__f_maybeExplicit)
+});
 $c_Lsympany_SymEquation.prototype.explicit__s_Option = (function() {
-  return (((512 & this.Lsympany_SymEquation__f_bitmap$0) === 0) ? $p_Lsympany_SymEquation__explicit$lzycompute__s_Option(this) : this.Lsympany_SymEquation__f_explicit)
+  return (((1024 & this.Lsympany_SymEquation__f_bitmap$0) === 0) ? $p_Lsympany_SymEquation__explicit$lzycompute__s_Option(this) : this.Lsympany_SymEquation__f_explicit)
 });
 $c_Lsympany_SymEquation.prototype.extremas__sci_Seq = (function() {
-  return (((1024 & this.Lsympany_SymEquation__f_bitmap$0) === 0) ? $p_Lsympany_SymEquation__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymEquation__f_extremas)
+  return (((2048 & this.Lsympany_SymEquation__f_bitmap$0) === 0) ? $p_Lsympany_SymEquation__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymEquation__f_extremas)
 });
 $c_Lsympany_SymEquation.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymEquation__f_pointCache
 });
 $c_Lsympany_SymEquation.prototype.functions__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymEquation__f_bitmap$0) === 0) ? $p_Lsympany_SymEquation__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymEquation__f_functions)
+  return (((4096 & this.Lsympany_SymEquation__f_bitmap$0) === 0) ? $p_Lsympany_SymEquation__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymEquation__f_functions)
 });
 $c_Lsympany_SymEquation.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymEquation__f_pointCache = x$1
@@ -37938,24 +37996,31 @@ function $p_Lsympany_SymPM__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymPM__f_integral
 }
-function $p_Lsympany_SymPM__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymPM__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((512 & $thiz.Lsympany_SymPM__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymPM__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymPM__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymPM__f_bitmap$0 = (512 | $thiz.Lsympany_SymPM__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymPM__f_maybeExplicit
+}
+function $p_Lsympany_SymPM__explicit$lzycompute__s_Option($thiz) {
+  if (((1024 & $thiz.Lsympany_SymPM__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymPM__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymPM__f_bitmap$0 = (1024 | $thiz.Lsympany_SymPM__f_bitmap$0)
   };
   return $thiz.Lsympany_SymPM__f_explicit
 }
 function $p_Lsympany_SymPM__extremas$lzycompute__sci_Seq($thiz) {
-  if (((1024 & $thiz.Lsympany_SymPM__f_bitmap$0) === 0)) {
+  if (((2048 & $thiz.Lsympany_SymPM__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymPM__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymPM__f_bitmap$0 = (1024 | $thiz.Lsympany_SymPM__f_bitmap$0)
+    $thiz.Lsympany_SymPM__f_bitmap$0 = (2048 | $thiz.Lsympany_SymPM__f_bitmap$0)
   };
   return $thiz.Lsympany_SymPM__f_extremas
 }
 function $p_Lsympany_SymPM__functions$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymPM__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymPM__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymPM__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymPM__f_bitmap$0 = (2048 | $thiz.Lsympany_SymPM__f_bitmap$0)
+    $thiz.Lsympany_SymPM__f_bitmap$0 = (4096 | $thiz.Lsympany_SymPM__f_bitmap$0)
   };
   return $thiz.Lsympany_SymPM__f_functions
 }
@@ -37980,12 +38045,12 @@ function $p_Lsympany_SymPM__expand$lzycompute__sci_List($thiz) {
     while ((rest !== $m_sci_Nil$())) {
       var arg1 = rest.head__O();
       var n = $uI(arg1);
-      var it = $as_sci_Seq($thiz.Lsympany_SymPM__f_expr.expand__sci_Seq().map__F1__O(new $c_sjsr_AnonFunction1(((n$1) => ((x$13$2) => {
-        var x$13 = $as_Lsympany_Sym(x$13$2);
+      var it = $as_sci_Seq($thiz.Lsympany_SymPM__f_expr.expand__sci_Seq().map__F1__O(new $c_sjsr_AnonFunction1(((n$1) => ((x$16$2) => {
+        var x$16 = $as_Lsympany_Sym(x$16$2);
         var $$x1 = $m_Lsympany_Sym$();
         var this$7 = $m_s_math_BigInt$();
         var i = this$7.apply__I__s_math_BigInt(n$1);
-        var array$1 = [x$13, $ct_Lsympany_SymInt__s_math_BigInt__(new $c_Lsympany_SymInt(), i)];
+        var array$1 = [x$16, $ct_Lsympany_SymInt__s_math_BigInt__(new $c_Lsympany_SymInt(), i)];
         return $$x1.$times$times__sci_Seq__Lsympany_SymProd($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1)).simple__Lsympany_Sym()
       }))(n)))).iterator__sc_Iterator();
       while (it.hasNext__Z()) {
@@ -38016,6 +38081,7 @@ function $c_Lsympany_SymPM(expr) {
   this.Lsympany_SymPM__f_important = null;
   this.Lsympany_SymPM__f_undefined = null;
   this.Lsympany_SymPM__f_integral = null;
+  this.Lsympany_SymPM__f_maybeExplicit = null;
   this.Lsympany_SymPM__f_explicit = null;
   this.Lsympany_SymPM__f_extremas = null;
   this.Lsympany_SymPM__f_pointCache = null;
@@ -38055,17 +38121,20 @@ $c_Lsympany_SymPM.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymPM.prototype.integral__s_Option = (function() {
   return (((256 & this.Lsympany_SymPM__f_bitmap$0) === 0) ? $p_Lsympany_SymPM__integral$lzycompute__s_Option(this) : this.Lsympany_SymPM__f_integral)
 });
+$c_Lsympany_SymPM.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((512 & this.Lsympany_SymPM__f_bitmap$0) === 0) ? $p_Lsympany_SymPM__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymPM__f_maybeExplicit)
+});
 $c_Lsympany_SymPM.prototype.explicit__s_Option = (function() {
-  return (((512 & this.Lsympany_SymPM__f_bitmap$0) === 0) ? $p_Lsympany_SymPM__explicit$lzycompute__s_Option(this) : this.Lsympany_SymPM__f_explicit)
+  return (((1024 & this.Lsympany_SymPM__f_bitmap$0) === 0) ? $p_Lsympany_SymPM__explicit$lzycompute__s_Option(this) : this.Lsympany_SymPM__f_explicit)
 });
 $c_Lsympany_SymPM.prototype.extremas__sci_Seq = (function() {
-  return (((1024 & this.Lsympany_SymPM__f_bitmap$0) === 0) ? $p_Lsympany_SymPM__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymPM__f_extremas)
+  return (((2048 & this.Lsympany_SymPM__f_bitmap$0) === 0) ? $p_Lsympany_SymPM__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymPM__f_extremas)
 });
 $c_Lsympany_SymPM.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymPM__f_pointCache
 });
 $c_Lsympany_SymPM.prototype.functions__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymPM__f_bitmap$0) === 0) ? $p_Lsympany_SymPM__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymPM__f_functions)
+  return (((4096 & this.Lsympany_SymPM__f_bitmap$0) === 0) ? $p_Lsympany_SymPM__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymPM__f_functions)
 });
 $c_Lsympany_SymPM.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymPM__f_pointCache = x$1
@@ -38084,9 +38153,9 @@ $c_Lsympany_SymPM.prototype.approx__sci_Seq__sci_List = (function(env) {
   while ((rest !== $m_sci_Nil$())) {
     var arg1 = rest.head__O();
     var n = $uI(arg1);
-    var it = $as_sci_Seq(this.Lsympany_SymPM__f_expr.approx__sci_Seq__sci_Seq(env).map__F1__O(new $c_sjsr_AnonFunction1(((n$1) => ((x$12$2) => {
-      var x$12 = $uD(x$12$2);
-      return (x$12 * n$1)
+    var it = $as_sci_Seq(this.Lsympany_SymPM__f_expr.approx__sci_Seq__sci_Seq(env).map__F1__O(new $c_sjsr_AnonFunction1(((n$1) => ((x$15$2) => {
+      var x$15 = $uD(x$15$2);
+      return (x$15 * n$1)
     }))(n)))).iterator__sc_Iterator();
     while (it.hasNext__Z()) {
       var nx = new $c_sci_$colon$colon(it.next__O(), $m_sci_Nil$());
@@ -38216,24 +38285,31 @@ function $p_Lsympany_SymVar__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymVar__f_integral
 }
-function $p_Lsympany_SymVar__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymVar__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((512 & $thiz.Lsympany_SymVar__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymVar__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymVar__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymVar__f_bitmap$0 = (512 | $thiz.Lsympany_SymVar__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymVar__f_maybeExplicit
+}
+function $p_Lsympany_SymVar__explicit$lzycompute__s_Option($thiz) {
+  if (((1024 & $thiz.Lsympany_SymVar__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymVar__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymVar__f_bitmap$0 = (1024 | $thiz.Lsympany_SymVar__f_bitmap$0)
   };
   return $thiz.Lsympany_SymVar__f_explicit
 }
 function $p_Lsympany_SymVar__extremas$lzycompute__sci_Seq($thiz) {
-  if (((1024 & $thiz.Lsympany_SymVar__f_bitmap$0) === 0)) {
+  if (((2048 & $thiz.Lsympany_SymVar__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymVar__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymVar__f_bitmap$0 = (1024 | $thiz.Lsympany_SymVar__f_bitmap$0)
+    $thiz.Lsympany_SymVar__f_bitmap$0 = (2048 | $thiz.Lsympany_SymVar__f_bitmap$0)
   };
   return $thiz.Lsympany_SymVar__f_extremas
 }
 function $p_Lsympany_SymVar__functions$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymVar__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymVar__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymVar__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymVar__f_bitmap$0 = (2048 | $thiz.Lsympany_SymVar__f_bitmap$0)
+    $thiz.Lsympany_SymVar__f_bitmap$0 = (4096 | $thiz.Lsympany_SymVar__f_bitmap$0)
   };
   return $thiz.Lsympany_SymVar__f_functions
 }
@@ -38270,6 +38346,7 @@ function $c_Lsympany_SymVar() {
   this.Lsympany_SymVar__f_important = null;
   this.Lsympany_SymVar__f_undefined = null;
   this.Lsympany_SymVar__f_integral = null;
+  this.Lsympany_SymVar__f_maybeExplicit = null;
   this.Lsympany_SymVar__f_explicit = null;
   this.Lsympany_SymVar__f_extremas = null;
   this.Lsympany_SymVar__f_pointCache = null;
@@ -38307,17 +38384,20 @@ $c_Lsympany_SymVar.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymVar.prototype.integral__s_Option = (function() {
   return (((256 & this.Lsympany_SymVar__f_bitmap$0) === 0) ? $p_Lsympany_SymVar__integral$lzycompute__s_Option(this) : this.Lsympany_SymVar__f_integral)
 });
+$c_Lsympany_SymVar.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((512 & this.Lsympany_SymVar__f_bitmap$0) === 0) ? $p_Lsympany_SymVar__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymVar__f_maybeExplicit)
+});
 $c_Lsympany_SymVar.prototype.explicit__s_Option = (function() {
-  return (((512 & this.Lsympany_SymVar__f_bitmap$0) === 0) ? $p_Lsympany_SymVar__explicit$lzycompute__s_Option(this) : this.Lsympany_SymVar__f_explicit)
+  return (((1024 & this.Lsympany_SymVar__f_bitmap$0) === 0) ? $p_Lsympany_SymVar__explicit$lzycompute__s_Option(this) : this.Lsympany_SymVar__f_explicit)
 });
 $c_Lsympany_SymVar.prototype.extremas__sci_Seq = (function() {
-  return (((1024 & this.Lsympany_SymVar__f_bitmap$0) === 0) ? $p_Lsympany_SymVar__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymVar__f_extremas)
+  return (((2048 & this.Lsympany_SymVar__f_bitmap$0) === 0) ? $p_Lsympany_SymVar__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymVar__f_extremas)
 });
 $c_Lsympany_SymVar.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymVar__f_pointCache
 });
 $c_Lsympany_SymVar.prototype.functions__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymVar__f_bitmap$0) === 0) ? $p_Lsympany_SymVar__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymVar__f_functions)
+  return (((4096 & this.Lsympany_SymVar__f_bitmap$0) === 0) ? $p_Lsympany_SymVar__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymVar__f_functions)
 });
 $c_Lsympany_SymVar.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymVar__f_pointCache = x$1
@@ -38330,9 +38410,9 @@ $c_Lsympany_SymVar.prototype.expand__sci_Seq = (function() {
 });
 $c_Lsympany_SymVar.prototype.approx__sci_Seq__sci_Seq = (function(env) {
   var $$x2 = $m_s_Option$();
-  var this$2 = env.find__F1__s_Option(new $c_sjsr_AnonFunction1(((this$1) => ((x$8$2) => {
-    var x$8 = $as_T2(x$8$2);
-    var x = x$8._1__O();
+  var this$2 = env.find__F1__s_Option(new $c_sjsr_AnonFunction1(((this$1) => ((x$11$2) => {
+    var x$11 = $as_T2(x$11$2);
+    var x = x$11._1__O();
     var x$2 = this$1.Lsympany_SymVar__f_symbol;
     return ((x === null) ? (x$2 === null) : $dp_equals__O__Z(x, x$2))
   }))(this)));
@@ -38340,8 +38420,8 @@ $c_Lsympany_SymVar.prototype.approx__sci_Seq__sci_Seq = (function(env) {
     var $$x1 = $m_s_None$()
   } else {
     var arg1 = this$2.get__O();
-    var x$9 = $as_T2(arg1);
-    var $$x1 = new $c_s_Some(x$9._2$mcD$sp__D())
+    var x$12 = $as_T2(arg1);
+    var $$x1 = new $c_s_Some(x$12._2$mcD$sp__D())
   };
   return $$x2.option2Iterable__s_Option__sc_Iterable($$x1).toSeq__sci_Seq()
 });
@@ -38458,24 +38538,31 @@ function $p_Lsympany_SymVertical__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymVertical__f_integral
 }
-function $p_Lsympany_SymVertical__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymVertical__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((512 & $thiz.Lsympany_SymVertical__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymVertical__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymVertical__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymVertical__f_bitmap$0 = (512 | $thiz.Lsympany_SymVertical__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymVertical__f_maybeExplicit
+}
+function $p_Lsympany_SymVertical__explicit$lzycompute__s_Option($thiz) {
+  if (((1024 & $thiz.Lsympany_SymVertical__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymVertical__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymVertical__f_bitmap$0 = (1024 | $thiz.Lsympany_SymVertical__f_bitmap$0)
   };
   return $thiz.Lsympany_SymVertical__f_explicit
 }
 function $p_Lsympany_SymVertical__extremas$lzycompute__sci_Seq($thiz) {
-  if (((1024 & $thiz.Lsympany_SymVertical__f_bitmap$0) === 0)) {
+  if (((2048 & $thiz.Lsympany_SymVertical__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymVertical__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymVertical__f_bitmap$0 = (1024 | $thiz.Lsympany_SymVertical__f_bitmap$0)
+    $thiz.Lsympany_SymVertical__f_bitmap$0 = (2048 | $thiz.Lsympany_SymVertical__f_bitmap$0)
   };
   return $thiz.Lsympany_SymVertical__f_extremas
 }
 function $p_Lsympany_SymVertical__functions$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymVertical__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymVertical__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymVertical__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymVertical__f_bitmap$0 = (2048 | $thiz.Lsympany_SymVertical__f_bitmap$0)
+    $thiz.Lsympany_SymVertical__f_bitmap$0 = (4096 | $thiz.Lsympany_SymVertical__f_bitmap$0)
   };
   return $thiz.Lsympany_SymVertical__f_functions
 }
@@ -38500,6 +38587,7 @@ function $c_Lsympany_SymVertical(x) {
   this.Lsympany_SymVertical__f_important = null;
   this.Lsympany_SymVertical__f_undefined = null;
   this.Lsympany_SymVertical__f_integral = null;
+  this.Lsympany_SymVertical__f_maybeExplicit = null;
   this.Lsympany_SymVertical__f_explicit = null;
   this.Lsympany_SymVertical__f_extremas = null;
   this.Lsympany_SymVertical__f_pointCache = null;
@@ -38545,17 +38633,20 @@ $c_Lsympany_SymVertical.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymVertical.prototype.integral__s_Option = (function() {
   return (((256 & this.Lsympany_SymVertical__f_bitmap$0) === 0) ? $p_Lsympany_SymVertical__integral$lzycompute__s_Option(this) : this.Lsympany_SymVertical__f_integral)
 });
+$c_Lsympany_SymVertical.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((512 & this.Lsympany_SymVertical__f_bitmap$0) === 0) ? $p_Lsympany_SymVertical__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymVertical__f_maybeExplicit)
+});
 $c_Lsympany_SymVertical.prototype.explicit__s_Option = (function() {
-  return (((512 & this.Lsympany_SymVertical__f_bitmap$0) === 0) ? $p_Lsympany_SymVertical__explicit$lzycompute__s_Option(this) : this.Lsympany_SymVertical__f_explicit)
+  return (((1024 & this.Lsympany_SymVertical__f_bitmap$0) === 0) ? $p_Lsympany_SymVertical__explicit$lzycompute__s_Option(this) : this.Lsympany_SymVertical__f_explicit)
 });
 $c_Lsympany_SymVertical.prototype.extremas__sci_Seq = (function() {
-  return (((1024 & this.Lsympany_SymVertical__f_bitmap$0) === 0) ? $p_Lsympany_SymVertical__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymVertical__f_extremas)
+  return (((2048 & this.Lsympany_SymVertical__f_bitmap$0) === 0) ? $p_Lsympany_SymVertical__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymVertical__f_extremas)
 });
 $c_Lsympany_SymVertical.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymVertical__f_pointCache
 });
 $c_Lsympany_SymVertical.prototype.functions__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymVertical__f_bitmap$0) === 0) ? $p_Lsympany_SymVertical__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymVertical__f_functions)
+  return (((4096 & this.Lsympany_SymVertical__f_bitmap$0) === 0) ? $p_Lsympany_SymVertical__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymVertical__f_functions)
 });
 $c_Lsympany_SymVertical.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymVertical__f_pointCache = x$1
@@ -38802,24 +38893,31 @@ function $p_Lsympany_math_Integral$SymIntegral__integral$lzycompute__s_Option($t
   };
   return $thiz.Lsympany_math_Integral$SymIntegral__f_integral
 }
-function $p_Lsympany_math_Integral$SymIntegral__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_math_Integral$SymIntegral__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((256 & $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_math_Integral$SymIntegral__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_math_Integral$SymIntegral__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0 = (256 | $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0)
+  };
+  return $thiz.Lsympany_math_Integral$SymIntegral__f_maybeExplicit
+}
+function $p_Lsympany_math_Integral$SymIntegral__explicit$lzycompute__s_Option($thiz) {
+  if (((512 & $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_math_Integral$SymIntegral__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0 = (512 | $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0)
   };
   return $thiz.Lsympany_math_Integral$SymIntegral__f_explicit
 }
 function $p_Lsympany_math_Integral$SymIntegral__extremas$lzycompute__sci_Seq($thiz) {
-  if (((512 & $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0) === 0)) {
+  if (((1024 & $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0) === 0)) {
     $thiz.Lsympany_math_Integral$SymIntegral__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0 = (512 | $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0)
+    $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0 = (1024 | $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0)
   };
   return $thiz.Lsympany_math_Integral$SymIntegral__f_extremas
 }
 function $p_Lsympany_math_Integral$SymIntegral__functions$lzycompute__sci_Seq($thiz) {
-  if (((1024 & $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0) === 0)) {
+  if (((2048 & $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0) === 0)) {
     $thiz.Lsympany_math_Integral$SymIntegral__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0 = (1024 | $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0)
+    $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0 = (2048 | $thiz.Lsympany_math_Integral$SymIntegral__f_bitmap$0)
   };
   return $thiz.Lsympany_math_Integral$SymIntegral__f_functions
 }
@@ -38834,6 +38932,7 @@ function $c_Lsympany_math_Integral$SymIntegral(expr) {
   this.Lsympany_math_Integral$SymIntegral__f_important = null;
   this.Lsympany_math_Integral$SymIntegral__f_undefined = null;
   this.Lsympany_math_Integral$SymIntegral__f_integral = null;
+  this.Lsympany_math_Integral$SymIntegral__f_maybeExplicit = null;
   this.Lsympany_math_Integral$SymIntegral__f_explicit = null;
   this.Lsympany_math_Integral$SymIntegral__f_extremas = null;
   this.Lsympany_math_Integral$SymIntegral__f_pointCache = null;
@@ -38879,17 +38978,20 @@ $c_Lsympany_math_Integral$SymIntegral.prototype.undefined__sci_Seq = (function()
 $c_Lsympany_math_Integral$SymIntegral.prototype.integral__s_Option = (function() {
   return (((128 & this.Lsympany_math_Integral$SymIntegral__f_bitmap$0) === 0) ? $p_Lsympany_math_Integral$SymIntegral__integral$lzycompute__s_Option(this) : this.Lsympany_math_Integral$SymIntegral__f_integral)
 });
+$c_Lsympany_math_Integral$SymIntegral.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((256 & this.Lsympany_math_Integral$SymIntegral__f_bitmap$0) === 0) ? $p_Lsympany_math_Integral$SymIntegral__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_math_Integral$SymIntegral__f_maybeExplicit)
+});
 $c_Lsympany_math_Integral$SymIntegral.prototype.explicit__s_Option = (function() {
-  return (((256 & this.Lsympany_math_Integral$SymIntegral__f_bitmap$0) === 0) ? $p_Lsympany_math_Integral$SymIntegral__explicit$lzycompute__s_Option(this) : this.Lsympany_math_Integral$SymIntegral__f_explicit)
+  return (((512 & this.Lsympany_math_Integral$SymIntegral__f_bitmap$0) === 0) ? $p_Lsympany_math_Integral$SymIntegral__explicit$lzycompute__s_Option(this) : this.Lsympany_math_Integral$SymIntegral__f_explicit)
 });
 $c_Lsympany_math_Integral$SymIntegral.prototype.extremas__sci_Seq = (function() {
-  return (((512 & this.Lsympany_math_Integral$SymIntegral__f_bitmap$0) === 0) ? $p_Lsympany_math_Integral$SymIntegral__extremas$lzycompute__sci_Seq(this) : this.Lsympany_math_Integral$SymIntegral__f_extremas)
+  return (((1024 & this.Lsympany_math_Integral$SymIntegral__f_bitmap$0) === 0) ? $p_Lsympany_math_Integral$SymIntegral__extremas$lzycompute__sci_Seq(this) : this.Lsympany_math_Integral$SymIntegral__f_extremas)
 });
 $c_Lsympany_math_Integral$SymIntegral.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_math_Integral$SymIntegral__f_pointCache
 });
 $c_Lsympany_math_Integral$SymIntegral.prototype.functions__sci_Seq = (function() {
-  return (((1024 & this.Lsympany_math_Integral$SymIntegral__f_bitmap$0) === 0) ? $p_Lsympany_math_Integral$SymIntegral__functions$lzycompute__sci_Seq(this) : this.Lsympany_math_Integral$SymIntegral__f_functions)
+  return (((2048 & this.Lsympany_math_Integral$SymIntegral__f_bitmap$0) === 0) ? $p_Lsympany_math_Integral$SymIntegral__functions$lzycompute__sci_Seq(this) : this.Lsympany_math_Integral$SymIntegral__f_functions)
 });
 $c_Lsympany_math_Integral$SymIntegral.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_math_Integral$SymIntegral__f_pointCache = x$1
@@ -41134,6 +41236,7 @@ function $c_Lsympany_Sym$ImplicitSymVar(_s) {
   this.Lsympany_SymVar__f_important = null;
   this.Lsympany_SymVar__f_undefined = null;
   this.Lsympany_SymVar__f_integral = null;
+  this.Lsympany_SymVar__f_maybeExplicit = null;
   this.Lsympany_SymVar__f_explicit = null;
   this.Lsympany_SymVar__f_extremas = null;
   this.Lsympany_SymVar__f_pointCache = null;
@@ -41224,24 +41327,31 @@ function $p_Lsympany_SymE__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymE__f_integral
 }
-function $p_Lsympany_SymE__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymE__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((1024 & $thiz.Lsympany_SymE__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymE__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymE__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymE__f_bitmap$0 = (1024 | $thiz.Lsympany_SymE__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymE__f_maybeExplicit
+}
+function $p_Lsympany_SymE__explicit$lzycompute__s_Option($thiz) {
+  if (((2048 & $thiz.Lsympany_SymE__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymE__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymE__f_bitmap$0 = (2048 | $thiz.Lsympany_SymE__f_bitmap$0)
   };
   return $thiz.Lsympany_SymE__f_explicit
 }
 function $p_Lsympany_SymE__extremas$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymE__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymE__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymE__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymE__f_bitmap$0 = (2048 | $thiz.Lsympany_SymE__f_bitmap$0)
+    $thiz.Lsympany_SymE__f_bitmap$0 = (4096 | $thiz.Lsympany_SymE__f_bitmap$0)
   };
   return $thiz.Lsympany_SymE__f_extremas
 }
 function $p_Lsympany_SymE__functions$lzycompute__sci_Seq($thiz) {
-  if (((4096 & $thiz.Lsympany_SymE__f_bitmap$0) === 0)) {
+  if (((8192 & $thiz.Lsympany_SymE__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymE__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymE__f_bitmap$0 = (4096 | $thiz.Lsympany_SymE__f_bitmap$0)
+    $thiz.Lsympany_SymE__f_bitmap$0 = (8192 | $thiz.Lsympany_SymE__f_bitmap$0)
   };
   return $thiz.Lsympany_SymE__f_functions
 }
@@ -41264,6 +41374,7 @@ function $c_Lsympany_SymE() {
   this.Lsympany_SymE__f_important = null;
   this.Lsympany_SymE__f_undefined = null;
   this.Lsympany_SymE__f_integral = null;
+  this.Lsympany_SymE__f_maybeExplicit = null;
   this.Lsympany_SymE__f_explicit = null;
   this.Lsympany_SymE__f_extremas = null;
   this.Lsympany_SymE__f_pointCache = null;
@@ -41311,17 +41422,20 @@ $c_Lsympany_SymE.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymE.prototype.integral__s_Option = (function() {
   return (((512 & this.Lsympany_SymE__f_bitmap$0) === 0) ? $p_Lsympany_SymE__integral$lzycompute__s_Option(this) : this.Lsympany_SymE__f_integral)
 });
+$c_Lsympany_SymE.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((1024 & this.Lsympany_SymE__f_bitmap$0) === 0) ? $p_Lsympany_SymE__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymE__f_maybeExplicit)
+});
 $c_Lsympany_SymE.prototype.explicit__s_Option = (function() {
-  return (((1024 & this.Lsympany_SymE__f_bitmap$0) === 0) ? $p_Lsympany_SymE__explicit$lzycompute__s_Option(this) : this.Lsympany_SymE__f_explicit)
+  return (((2048 & this.Lsympany_SymE__f_bitmap$0) === 0) ? $p_Lsympany_SymE__explicit$lzycompute__s_Option(this) : this.Lsympany_SymE__f_explicit)
 });
 $c_Lsympany_SymE.prototype.extremas__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymE__f_bitmap$0) === 0) ? $p_Lsympany_SymE__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymE__f_extremas)
+  return (((4096 & this.Lsympany_SymE__f_bitmap$0) === 0) ? $p_Lsympany_SymE__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymE__f_extremas)
 });
 $c_Lsympany_SymE.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymE__f_pointCache
 });
 $c_Lsympany_SymE.prototype.functions__sci_Seq = (function() {
-  return (((4096 & this.Lsympany_SymE__f_bitmap$0) === 0) ? $p_Lsympany_SymE__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymE__f_functions)
+  return (((8192 & this.Lsympany_SymE__f_bitmap$0) === 0) ? $p_Lsympany_SymE__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymE__f_functions)
 });
 $c_Lsympany_SymE.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymE__f_pointCache = x$1
@@ -41435,24 +41549,31 @@ function $p_Lsympany_SymLog__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymLog__f_integral
 }
-function $p_Lsympany_SymLog__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymLog__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((512 & $thiz.Lsympany_SymLog__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymLog__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymLog__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymLog__f_bitmap$0 = (512 | $thiz.Lsympany_SymLog__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymLog__f_maybeExplicit
+}
+function $p_Lsympany_SymLog__explicit$lzycompute__s_Option($thiz) {
+  if (((1024 & $thiz.Lsympany_SymLog__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymLog__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymLog__f_bitmap$0 = (1024 | $thiz.Lsympany_SymLog__f_bitmap$0)
   };
   return $thiz.Lsympany_SymLog__f_explicit
 }
 function $p_Lsympany_SymLog__extremas$lzycompute__sci_Seq($thiz) {
-  if (((1024 & $thiz.Lsympany_SymLog__f_bitmap$0) === 0)) {
+  if (((2048 & $thiz.Lsympany_SymLog__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymLog__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymLog__f_bitmap$0 = (1024 | $thiz.Lsympany_SymLog__f_bitmap$0)
+    $thiz.Lsympany_SymLog__f_bitmap$0 = (2048 | $thiz.Lsympany_SymLog__f_bitmap$0)
   };
   return $thiz.Lsympany_SymLog__f_extremas
 }
 function $p_Lsympany_SymLog__functions$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymLog__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymLog__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymLog__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymLog__f_bitmap$0 = (2048 | $thiz.Lsympany_SymLog__f_bitmap$0)
+    $thiz.Lsympany_SymLog__f_bitmap$0 = (4096 | $thiz.Lsympany_SymLog__f_bitmap$0)
   };
   return $thiz.Lsympany_SymLog__f_functions
 }
@@ -41478,6 +41599,7 @@ function $c_Lsympany_SymLog(pow, base) {
   this.Lsympany_SymLog__f_important = null;
   this.Lsympany_SymLog__f_undefined = null;
   this.Lsympany_SymLog__f_integral = null;
+  this.Lsympany_SymLog__f_maybeExplicit = null;
   this.Lsympany_SymLog__f_explicit = null;
   this.Lsympany_SymLog__f_extremas = null;
   this.Lsympany_SymLog__f_pointCache = null;
@@ -41524,17 +41646,20 @@ $c_Lsympany_SymLog.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymLog.prototype.integral__s_Option = (function() {
   return (((256 & this.Lsympany_SymLog__f_bitmap$0) === 0) ? $p_Lsympany_SymLog__integral$lzycompute__s_Option(this) : this.Lsympany_SymLog__f_integral)
 });
+$c_Lsympany_SymLog.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((512 & this.Lsympany_SymLog__f_bitmap$0) === 0) ? $p_Lsympany_SymLog__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymLog__f_maybeExplicit)
+});
 $c_Lsympany_SymLog.prototype.explicit__s_Option = (function() {
-  return (((512 & this.Lsympany_SymLog__f_bitmap$0) === 0) ? $p_Lsympany_SymLog__explicit$lzycompute__s_Option(this) : this.Lsympany_SymLog__f_explicit)
+  return (((1024 & this.Lsympany_SymLog__f_bitmap$0) === 0) ? $p_Lsympany_SymLog__explicit$lzycompute__s_Option(this) : this.Lsympany_SymLog__f_explicit)
 });
 $c_Lsympany_SymLog.prototype.extremas__sci_Seq = (function() {
-  return (((1024 & this.Lsympany_SymLog__f_bitmap$0) === 0) ? $p_Lsympany_SymLog__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymLog__f_extremas)
+  return (((2048 & this.Lsympany_SymLog__f_bitmap$0) === 0) ? $p_Lsympany_SymLog__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymLog__f_extremas)
 });
 $c_Lsympany_SymLog.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymLog__f_pointCache
 });
 $c_Lsympany_SymLog.prototype.functions__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymLog__f_bitmap$0) === 0) ? $p_Lsympany_SymLog__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymLog__f_functions)
+  return (((4096 & this.Lsympany_SymLog__f_bitmap$0) === 0) ? $p_Lsympany_SymLog__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymLog__f_functions)
 });
 $c_Lsympany_SymLog.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymLog__f_pointCache = x$1
@@ -41701,24 +41826,31 @@ function $p_Lsympany_SymPi__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymPi__f_integral
 }
-function $p_Lsympany_SymPi__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymPi__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((1024 & $thiz.Lsympany_SymPi__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymPi__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymPi__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymPi__f_bitmap$0 = (1024 | $thiz.Lsympany_SymPi__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymPi__f_maybeExplicit
+}
+function $p_Lsympany_SymPi__explicit$lzycompute__s_Option($thiz) {
+  if (((2048 & $thiz.Lsympany_SymPi__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymPi__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymPi__f_bitmap$0 = (2048 | $thiz.Lsympany_SymPi__f_bitmap$0)
   };
   return $thiz.Lsympany_SymPi__f_explicit
 }
 function $p_Lsympany_SymPi__extremas$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymPi__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymPi__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymPi__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymPi__f_bitmap$0 = (2048 | $thiz.Lsympany_SymPi__f_bitmap$0)
+    $thiz.Lsympany_SymPi__f_bitmap$0 = (4096 | $thiz.Lsympany_SymPi__f_bitmap$0)
   };
   return $thiz.Lsympany_SymPi__f_extremas
 }
 function $p_Lsympany_SymPi__functions$lzycompute__sci_Seq($thiz) {
-  if (((4096 & $thiz.Lsympany_SymPi__f_bitmap$0) === 0)) {
+  if (((8192 & $thiz.Lsympany_SymPi__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymPi__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymPi__f_bitmap$0 = (4096 | $thiz.Lsympany_SymPi__f_bitmap$0)
+    $thiz.Lsympany_SymPi__f_bitmap$0 = (8192 | $thiz.Lsympany_SymPi__f_bitmap$0)
   };
   return $thiz.Lsympany_SymPi__f_functions
 }
@@ -41741,6 +41873,7 @@ function $c_Lsympany_SymPi() {
   this.Lsympany_SymPi__f_important = null;
   this.Lsympany_SymPi__f_undefined = null;
   this.Lsympany_SymPi__f_integral = null;
+  this.Lsympany_SymPi__f_maybeExplicit = null;
   this.Lsympany_SymPi__f_explicit = null;
   this.Lsympany_SymPi__f_extremas = null;
   this.Lsympany_SymPi__f_pointCache = null;
@@ -41788,17 +41921,20 @@ $c_Lsympany_SymPi.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymPi.prototype.integral__s_Option = (function() {
   return (((512 & this.Lsympany_SymPi__f_bitmap$0) === 0) ? $p_Lsympany_SymPi__integral$lzycompute__s_Option(this) : this.Lsympany_SymPi__f_integral)
 });
+$c_Lsympany_SymPi.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((1024 & this.Lsympany_SymPi__f_bitmap$0) === 0) ? $p_Lsympany_SymPi__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymPi__f_maybeExplicit)
+});
 $c_Lsympany_SymPi.prototype.explicit__s_Option = (function() {
-  return (((1024 & this.Lsympany_SymPi__f_bitmap$0) === 0) ? $p_Lsympany_SymPi__explicit$lzycompute__s_Option(this) : this.Lsympany_SymPi__f_explicit)
+  return (((2048 & this.Lsympany_SymPi__f_bitmap$0) === 0) ? $p_Lsympany_SymPi__explicit$lzycompute__s_Option(this) : this.Lsympany_SymPi__f_explicit)
 });
 $c_Lsympany_SymPi.prototype.extremas__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymPi__f_bitmap$0) === 0) ? $p_Lsympany_SymPi__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymPi__f_extremas)
+  return (((4096 & this.Lsympany_SymPi__f_bitmap$0) === 0) ? $p_Lsympany_SymPi__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymPi__f_extremas)
 });
 $c_Lsympany_SymPi.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymPi__f_pointCache
 });
 $c_Lsympany_SymPi.prototype.functions__sci_Seq = (function() {
-  return (((4096 & this.Lsympany_SymPi__f_bitmap$0) === 0) ? $p_Lsympany_SymPi__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymPi__f_functions)
+  return (((8192 & this.Lsympany_SymPi__f_bitmap$0) === 0) ? $p_Lsympany_SymPi__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymPi__f_functions)
 });
 $c_Lsympany_SymPi.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymPi__f_pointCache = x$1
@@ -41912,24 +42048,31 @@ function $p_Lsympany_SymPow__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymPow__f_integral
 }
-function $p_Lsympany_SymPow__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymPow__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((512 & $thiz.Lsympany_SymPow__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymPow__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymPow__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymPow__f_bitmap$0 = (512 | $thiz.Lsympany_SymPow__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymPow__f_maybeExplicit
+}
+function $p_Lsympany_SymPow__explicit$lzycompute__s_Option($thiz) {
+  if (((1024 & $thiz.Lsympany_SymPow__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymPow__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymPow__f_bitmap$0 = (1024 | $thiz.Lsympany_SymPow__f_bitmap$0)
   };
   return $thiz.Lsympany_SymPow__f_explicit
 }
 function $p_Lsympany_SymPow__extremas$lzycompute__sci_Seq($thiz) {
-  if (((1024 & $thiz.Lsympany_SymPow__f_bitmap$0) === 0)) {
+  if (((2048 & $thiz.Lsympany_SymPow__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymPow__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymPow__f_bitmap$0 = (1024 | $thiz.Lsympany_SymPow__f_bitmap$0)
+    $thiz.Lsympany_SymPow__f_bitmap$0 = (2048 | $thiz.Lsympany_SymPow__f_bitmap$0)
   };
   return $thiz.Lsympany_SymPow__f_extremas
 }
 function $p_Lsympany_SymPow__functions$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymPow__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymPow__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymPow__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymPow__f_bitmap$0 = (2048 | $thiz.Lsympany_SymPow__f_bitmap$0)
+    $thiz.Lsympany_SymPow__f_bitmap$0 = (4096 | $thiz.Lsympany_SymPow__f_bitmap$0)
   };
   return $thiz.Lsympany_SymPow__f_functions
 }
@@ -41955,6 +42098,7 @@ function $c_Lsympany_SymPow(base, expt) {
   this.Lsympany_SymPow__f_important = null;
   this.Lsympany_SymPow__f_undefined = null;
   this.Lsympany_SymPow__f_integral = null;
+  this.Lsympany_SymPow__f_maybeExplicit = null;
   this.Lsympany_SymPow__f_explicit = null;
   this.Lsympany_SymPow__f_extremas = null;
   this.Lsympany_SymPow__f_pointCache = null;
@@ -42001,17 +42145,20 @@ $c_Lsympany_SymPow.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymPow.prototype.integral__s_Option = (function() {
   return (((256 & this.Lsympany_SymPow__f_bitmap$0) === 0) ? $p_Lsympany_SymPow__integral$lzycompute__s_Option(this) : this.Lsympany_SymPow__f_integral)
 });
+$c_Lsympany_SymPow.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((512 & this.Lsympany_SymPow__f_bitmap$0) === 0) ? $p_Lsympany_SymPow__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymPow__f_maybeExplicit)
+});
 $c_Lsympany_SymPow.prototype.explicit__s_Option = (function() {
-  return (((512 & this.Lsympany_SymPow__f_bitmap$0) === 0) ? $p_Lsympany_SymPow__explicit$lzycompute__s_Option(this) : this.Lsympany_SymPow__f_explicit)
+  return (((1024 & this.Lsympany_SymPow__f_bitmap$0) === 0) ? $p_Lsympany_SymPow__explicit$lzycompute__s_Option(this) : this.Lsympany_SymPow__f_explicit)
 });
 $c_Lsympany_SymPow.prototype.extremas__sci_Seq = (function() {
-  return (((1024 & this.Lsympany_SymPow__f_bitmap$0) === 0) ? $p_Lsympany_SymPow__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymPow__f_extremas)
+  return (((2048 & this.Lsympany_SymPow__f_bitmap$0) === 0) ? $p_Lsympany_SymPow__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymPow__f_extremas)
 });
 $c_Lsympany_SymPow.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymPow__f_pointCache
 });
 $c_Lsympany_SymPow.prototype.functions__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymPow__f_bitmap$0) === 0) ? $p_Lsympany_SymPow__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymPow__f_functions)
+  return (((4096 & this.Lsympany_SymPow__f_bitmap$0) === 0) ? $p_Lsympany_SymPow__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymPow__f_functions)
 });
 $c_Lsympany_SymPow.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymPow__f_pointCache = x$1
@@ -42161,24 +42308,31 @@ function $p_Lsympany_SymProd__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymProd__f_integral
 }
-function $p_Lsympany_SymProd__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymProd__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((1024 & $thiz.Lsympany_SymProd__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymProd__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymProd__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymProd__f_bitmap$0 = (1024 | $thiz.Lsympany_SymProd__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymProd__f_maybeExplicit
+}
+function $p_Lsympany_SymProd__explicit$lzycompute__s_Option($thiz) {
+  if (((2048 & $thiz.Lsympany_SymProd__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymProd__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymProd__f_bitmap$0 = (2048 | $thiz.Lsympany_SymProd__f_bitmap$0)
   };
   return $thiz.Lsympany_SymProd__f_explicit
 }
 function $p_Lsympany_SymProd__extremas$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymProd__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymProd__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymProd__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymProd__f_bitmap$0 = (2048 | $thiz.Lsympany_SymProd__f_bitmap$0)
+    $thiz.Lsympany_SymProd__f_bitmap$0 = (4096 | $thiz.Lsympany_SymProd__f_bitmap$0)
   };
   return $thiz.Lsympany_SymProd__f_extremas
 }
 function $p_Lsympany_SymProd__functions$lzycompute__sci_Seq($thiz) {
-  if (((4096 & $thiz.Lsympany_SymProd__f_bitmap$0) === 0)) {
+  if (((8192 & $thiz.Lsympany_SymProd__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymProd__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymProd__f_bitmap$0 = (4096 | $thiz.Lsympany_SymProd__f_bitmap$0)
+    $thiz.Lsympany_SymProd__f_bitmap$0 = (8192 | $thiz.Lsympany_SymProd__f_bitmap$0)
   };
   return $thiz.Lsympany_SymProd__f_functions
 }
@@ -42196,8 +42350,8 @@ function $p_Lsympany_SymProd__sortedExprs$lzycompute__sci_List($thiz) {
     var it = this$1.iterator__sc_Iterator();
     while (it.hasNext__Z()) {
       var elem = it.next__O();
-      var x$10 = $as_Lsympany_Sym(elem);
-      var key = ($is_Lsympany_SymR(x$10) ? 1 : ($is_Lsympany_SymConstant(x$10) ? 2 : ((x$10 instanceof $c_Lsympany_SymVar) ? 3 : ((x$10 instanceof $c_Lsympany_SymPow) ? 4 : (((x$10 instanceof $c_Lsympany_SymSum) || (x$10 instanceof $c_Lsympany_SymProd)) ? 6 : 5)))));
+      var x$13 = $as_Lsympany_Sym(elem);
+      var key = ($is_Lsympany_SymR(x$13) ? 1 : ($is_Lsympany_SymConstant(x$13) ? 2 : ((x$13 instanceof $c_Lsympany_SymVar) ? 3 : ((x$13 instanceof $c_Lsympany_SymPow) ? 4 : (((x$13 instanceof $c_Lsympany_SymSum) || (x$13 instanceof $c_Lsympany_SymProd)) ? 6 : 5)))));
       var bldr = $as_scm_Builder(m.getOrElseUpdate__O__F0__O(key, new $c_sjsr_AnonFunction0(((this$2) => (() => this$2.newSpecificBuilder__scm_Builder()))(this$1))));
       bldr.addOne__O__scm_Growable(elem)
     };
@@ -42222,9 +42376,9 @@ function $p_Lsympany_SymProd__sortedExprs$lzycompute__sci_List($thiz) {
       return (a._1$mcI$sp__I() < b._1$mcI$sp__I())
     }));
     var this$7 = $as_sci_List($f_sc_SeqOps__sortWith__F2__O(this$6, lt));
-    var f = ((x$11$2) => {
-      var x$11 = $as_T2(x$11$2);
-      return $as_sci_Seq(x$11._2__O())
+    var f = ((x$14$2) => {
+      var x$14 = $as_T2(x$14$2);
+      return $as_sci_Seq(x$14._2__O())
     });
     if ((this$7 === $m_sci_Nil$())) {
       var this$10 = $m_sci_Nil$()
@@ -42263,6 +42417,7 @@ function $c_Lsympany_SymProd(mset) {
   this.Lsympany_SymProd__f_important = null;
   this.Lsympany_SymProd__f_undefined = null;
   this.Lsympany_SymProd__f_integral = null;
+  this.Lsympany_SymProd__f_maybeExplicit = null;
   this.Lsympany_SymProd__f_explicit = null;
   this.Lsympany_SymProd__f_extremas = null;
   this.Lsympany_SymProd__f_pointCache = null;
@@ -42308,17 +42463,20 @@ $c_Lsympany_SymProd.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymProd.prototype.integral__s_Option = (function() {
   return (((512 & this.Lsympany_SymProd__f_bitmap$0) === 0) ? $p_Lsympany_SymProd__integral$lzycompute__s_Option(this) : this.Lsympany_SymProd__f_integral)
 });
+$c_Lsympany_SymProd.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((1024 & this.Lsympany_SymProd__f_bitmap$0) === 0) ? $p_Lsympany_SymProd__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymProd__f_maybeExplicit)
+});
 $c_Lsympany_SymProd.prototype.explicit__s_Option = (function() {
-  return (((1024 & this.Lsympany_SymProd__f_bitmap$0) === 0) ? $p_Lsympany_SymProd__explicit$lzycompute__s_Option(this) : this.Lsympany_SymProd__f_explicit)
+  return (((2048 & this.Lsympany_SymProd__f_bitmap$0) === 0) ? $p_Lsympany_SymProd__explicit$lzycompute__s_Option(this) : this.Lsympany_SymProd__f_explicit)
 });
 $c_Lsympany_SymProd.prototype.extremas__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymProd__f_bitmap$0) === 0) ? $p_Lsympany_SymProd__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymProd__f_extremas)
+  return (((4096 & this.Lsympany_SymProd__f_bitmap$0) === 0) ? $p_Lsympany_SymProd__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymProd__f_extremas)
 });
 $c_Lsympany_SymProd.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymProd__f_pointCache
 });
 $c_Lsympany_SymProd.prototype.functions__sci_Seq = (function() {
-  return (((4096 & this.Lsympany_SymProd__f_bitmap$0) === 0) ? $p_Lsympany_SymProd__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymProd__f_functions)
+  return (((8192 & this.Lsympany_SymProd__f_bitmap$0) === 0) ? $p_Lsympany_SymProd__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymProd__f_functions)
 });
 $c_Lsympany_SymProd.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymProd__f_pointCache = x$1
@@ -42449,24 +42607,31 @@ function $p_Lsympany_SymSin__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymSin__f_integral
 }
-function $p_Lsympany_SymSin__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymSin__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((512 & $thiz.Lsympany_SymSin__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymSin__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymSin__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymSin__f_bitmap$0 = (512 | $thiz.Lsympany_SymSin__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymSin__f_maybeExplicit
+}
+function $p_Lsympany_SymSin__explicit$lzycompute__s_Option($thiz) {
+  if (((1024 & $thiz.Lsympany_SymSin__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymSin__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymSin__f_bitmap$0 = (1024 | $thiz.Lsympany_SymSin__f_bitmap$0)
   };
   return $thiz.Lsympany_SymSin__f_explicit
 }
 function $p_Lsympany_SymSin__extremas$lzycompute__sci_Seq($thiz) {
-  if (((1024 & $thiz.Lsympany_SymSin__f_bitmap$0) === 0)) {
+  if (((2048 & $thiz.Lsympany_SymSin__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymSin__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymSin__f_bitmap$0 = (1024 | $thiz.Lsympany_SymSin__f_bitmap$0)
+    $thiz.Lsympany_SymSin__f_bitmap$0 = (2048 | $thiz.Lsympany_SymSin__f_bitmap$0)
   };
   return $thiz.Lsympany_SymSin__f_extremas
 }
 function $p_Lsympany_SymSin__functions$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymSin__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymSin__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymSin__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymSin__f_bitmap$0 = (2048 | $thiz.Lsympany_SymSin__f_bitmap$0)
+    $thiz.Lsympany_SymSin__f_bitmap$0 = (4096 | $thiz.Lsympany_SymSin__f_bitmap$0)
   };
   return $thiz.Lsympany_SymSin__f_functions
 }
@@ -42491,6 +42656,7 @@ function $c_Lsympany_SymSin(expr) {
   this.Lsympany_SymSin__f_important = null;
   this.Lsympany_SymSin__f_undefined = null;
   this.Lsympany_SymSin__f_integral = null;
+  this.Lsympany_SymSin__f_maybeExplicit = null;
   this.Lsympany_SymSin__f_explicit = null;
   this.Lsympany_SymSin__f_extremas = null;
   this.Lsympany_SymSin__f_pointCache = null;
@@ -42536,17 +42702,20 @@ $c_Lsympany_SymSin.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymSin.prototype.integral__s_Option = (function() {
   return (((256 & this.Lsympany_SymSin__f_bitmap$0) === 0) ? $p_Lsympany_SymSin__integral$lzycompute__s_Option(this) : this.Lsympany_SymSin__f_integral)
 });
+$c_Lsympany_SymSin.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((512 & this.Lsympany_SymSin__f_bitmap$0) === 0) ? $p_Lsympany_SymSin__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymSin__f_maybeExplicit)
+});
 $c_Lsympany_SymSin.prototype.explicit__s_Option = (function() {
-  return (((512 & this.Lsympany_SymSin__f_bitmap$0) === 0) ? $p_Lsympany_SymSin__explicit$lzycompute__s_Option(this) : this.Lsympany_SymSin__f_explicit)
+  return (((1024 & this.Lsympany_SymSin__f_bitmap$0) === 0) ? $p_Lsympany_SymSin__explicit$lzycompute__s_Option(this) : this.Lsympany_SymSin__f_explicit)
 });
 $c_Lsympany_SymSin.prototype.extremas__sci_Seq = (function() {
-  return (((1024 & this.Lsympany_SymSin__f_bitmap$0) === 0) ? $p_Lsympany_SymSin__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymSin__f_extremas)
+  return (((2048 & this.Lsympany_SymSin__f_bitmap$0) === 0) ? $p_Lsympany_SymSin__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymSin__f_extremas)
 });
 $c_Lsympany_SymSin.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymSin__f_pointCache
 });
 $c_Lsympany_SymSin.prototype.functions__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymSin__f_bitmap$0) === 0) ? $p_Lsympany_SymSin__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymSin__f_functions)
+  return (((4096 & this.Lsympany_SymSin__f_bitmap$0) === 0) ? $p_Lsympany_SymSin__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymSin__f_functions)
 });
 $c_Lsympany_SymSin.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymSin__f_pointCache = x$1
@@ -42670,24 +42839,31 @@ function $p_Lsympany_SymSum__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymSum__f_integral
 }
-function $p_Lsympany_SymSum__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymSum__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((1024 & $thiz.Lsympany_SymSum__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymSum__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymSum__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymSum__f_bitmap$0 = (1024 | $thiz.Lsympany_SymSum__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymSum__f_maybeExplicit
+}
+function $p_Lsympany_SymSum__explicit$lzycompute__s_Option($thiz) {
+  if (((2048 & $thiz.Lsympany_SymSum__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymSum__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymSum__f_bitmap$0 = (2048 | $thiz.Lsympany_SymSum__f_bitmap$0)
   };
   return $thiz.Lsympany_SymSum__f_explicit
 }
 function $p_Lsympany_SymSum__extremas$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymSum__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymSum__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymSum__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymSum__f_bitmap$0 = (2048 | $thiz.Lsympany_SymSum__f_bitmap$0)
+    $thiz.Lsympany_SymSum__f_bitmap$0 = (4096 | $thiz.Lsympany_SymSum__f_bitmap$0)
   };
   return $thiz.Lsympany_SymSum__f_extremas
 }
 function $p_Lsympany_SymSum__functions$lzycompute__sci_Seq($thiz) {
-  if (((4096 & $thiz.Lsympany_SymSum__f_bitmap$0) === 0)) {
+  if (((8192 & $thiz.Lsympany_SymSum__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymSum__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymSum__f_bitmap$0 = (4096 | $thiz.Lsympany_SymSum__f_bitmap$0)
+    $thiz.Lsympany_SymSum__f_bitmap$0 = (8192 | $thiz.Lsympany_SymSum__f_bitmap$0)
   };
   return $thiz.Lsympany_SymSum__f_functions
 }
@@ -42724,6 +42900,7 @@ function $c_Lsympany_SymSum(mset) {
   this.Lsympany_SymSum__f_important = null;
   this.Lsympany_SymSum__f_undefined = null;
   this.Lsympany_SymSum__f_integral = null;
+  this.Lsympany_SymSum__f_maybeExplicit = null;
   this.Lsympany_SymSum__f_explicit = null;
   this.Lsympany_SymSum__f_extremas = null;
   this.Lsympany_SymSum__f_pointCache = null;
@@ -42769,17 +42946,20 @@ $c_Lsympany_SymSum.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymSum.prototype.integral__s_Option = (function() {
   return (((512 & this.Lsympany_SymSum__f_bitmap$0) === 0) ? $p_Lsympany_SymSum__integral$lzycompute__s_Option(this) : this.Lsympany_SymSum__f_integral)
 });
+$c_Lsympany_SymSum.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((1024 & this.Lsympany_SymSum__f_bitmap$0) === 0) ? $p_Lsympany_SymSum__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymSum__f_maybeExplicit)
+});
 $c_Lsympany_SymSum.prototype.explicit__s_Option = (function() {
-  return (((1024 & this.Lsympany_SymSum__f_bitmap$0) === 0) ? $p_Lsympany_SymSum__explicit$lzycompute__s_Option(this) : this.Lsympany_SymSum__f_explicit)
+  return (((2048 & this.Lsympany_SymSum__f_bitmap$0) === 0) ? $p_Lsympany_SymSum__explicit$lzycompute__s_Option(this) : this.Lsympany_SymSum__f_explicit)
 });
 $c_Lsympany_SymSum.prototype.extremas__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymSum__f_bitmap$0) === 0) ? $p_Lsympany_SymSum__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymSum__f_extremas)
+  return (((4096 & this.Lsympany_SymSum__f_bitmap$0) === 0) ? $p_Lsympany_SymSum__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymSum__f_extremas)
 });
 $c_Lsympany_SymSum.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymSum__f_pointCache
 });
 $c_Lsympany_SymSum.prototype.functions__sci_Seq = (function() {
-  return (((4096 & this.Lsympany_SymSum__f_bitmap$0) === 0) ? $p_Lsympany_SymSum__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymSum__f_functions)
+  return (((8192 & this.Lsympany_SymSum__f_bitmap$0) === 0) ? $p_Lsympany_SymSum__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymSum__f_functions)
 });
 $c_Lsympany_SymSum.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymSum__f_pointCache = x$1
@@ -44462,24 +44642,31 @@ function $p_Lsympany_SymFrac__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymFrac__f_integral
 }
-function $p_Lsympany_SymFrac__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymFrac__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((1024 & $thiz.Lsympany_SymFrac__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymFrac__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymFrac__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymFrac__f_bitmap$0 = (1024 | $thiz.Lsympany_SymFrac__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymFrac__f_maybeExplicit
+}
+function $p_Lsympany_SymFrac__explicit$lzycompute__s_Option($thiz) {
+  if (((2048 & $thiz.Lsympany_SymFrac__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymFrac__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymFrac__f_bitmap$0 = (2048 | $thiz.Lsympany_SymFrac__f_bitmap$0)
   };
   return $thiz.Lsympany_SymFrac__f_explicit
 }
 function $p_Lsympany_SymFrac__extremas$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymFrac__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymFrac__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymFrac__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymFrac__f_bitmap$0 = (2048 | $thiz.Lsympany_SymFrac__f_bitmap$0)
+    $thiz.Lsympany_SymFrac__f_bitmap$0 = (4096 | $thiz.Lsympany_SymFrac__f_bitmap$0)
   };
   return $thiz.Lsympany_SymFrac__f_extremas
 }
 function $p_Lsympany_SymFrac__functions$lzycompute__sci_Seq($thiz) {
-  if (((4096 & $thiz.Lsympany_SymFrac__f_bitmap$0) === 0)) {
+  if (((8192 & $thiz.Lsympany_SymFrac__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymFrac__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymFrac__f_bitmap$0 = (4096 | $thiz.Lsympany_SymFrac__f_bitmap$0)
+    $thiz.Lsympany_SymFrac__f_bitmap$0 = (8192 | $thiz.Lsympany_SymFrac__f_bitmap$0)
   };
   return $thiz.Lsympany_SymFrac__f_functions
 }
@@ -44497,6 +44684,7 @@ function $c_Lsympany_SymFrac(n, d) {
   this.Lsympany_SymFrac__f_important = null;
   this.Lsympany_SymFrac__f_undefined = null;
   this.Lsympany_SymFrac__f_integral = null;
+  this.Lsympany_SymFrac__f_maybeExplicit = null;
   this.Lsympany_SymFrac__f_explicit = null;
   this.Lsympany_SymFrac__f_extremas = null;
   this.Lsympany_SymFrac__f_pointCache = null;
@@ -44558,17 +44746,20 @@ $c_Lsympany_SymFrac.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymFrac.prototype.integral__s_Option = (function() {
   return (((512 & this.Lsympany_SymFrac__f_bitmap$0) === 0) ? $p_Lsympany_SymFrac__integral$lzycompute__s_Option(this) : this.Lsympany_SymFrac__f_integral)
 });
+$c_Lsympany_SymFrac.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((1024 & this.Lsympany_SymFrac__f_bitmap$0) === 0) ? $p_Lsympany_SymFrac__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymFrac__f_maybeExplicit)
+});
 $c_Lsympany_SymFrac.prototype.explicit__s_Option = (function() {
-  return (((1024 & this.Lsympany_SymFrac__f_bitmap$0) === 0) ? $p_Lsympany_SymFrac__explicit$lzycompute__s_Option(this) : this.Lsympany_SymFrac__f_explicit)
+  return (((2048 & this.Lsympany_SymFrac__f_bitmap$0) === 0) ? $p_Lsympany_SymFrac__explicit$lzycompute__s_Option(this) : this.Lsympany_SymFrac__f_explicit)
 });
 $c_Lsympany_SymFrac.prototype.extremas__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymFrac__f_bitmap$0) === 0) ? $p_Lsympany_SymFrac__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymFrac__f_extremas)
+  return (((4096 & this.Lsympany_SymFrac__f_bitmap$0) === 0) ? $p_Lsympany_SymFrac__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymFrac__f_extremas)
 });
 $c_Lsympany_SymFrac.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymFrac__f_pointCache
 });
 $c_Lsympany_SymFrac.prototype.functions__sci_Seq = (function() {
-  return (((4096 & this.Lsympany_SymFrac__f_bitmap$0) === 0) ? $p_Lsympany_SymFrac__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymFrac__f_functions)
+  return (((8192 & this.Lsympany_SymFrac__f_bitmap$0) === 0) ? $p_Lsympany_SymFrac__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymFrac__f_functions)
 });
 $c_Lsympany_SymFrac.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymFrac__f_pointCache = x$1
@@ -44724,24 +44915,31 @@ function $p_Lsympany_SymInt__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymInt__f_integral
 }
-function $p_Lsympany_SymInt__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymInt__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((2048 & $thiz.Lsympany_SymInt__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymInt__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymInt__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymInt__f_bitmap$0 = (2048 | $thiz.Lsympany_SymInt__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymInt__f_maybeExplicit
+}
+function $p_Lsympany_SymInt__explicit$lzycompute__s_Option($thiz) {
+  if (((4096 & $thiz.Lsympany_SymInt__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymInt__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymInt__f_bitmap$0 = (4096 | $thiz.Lsympany_SymInt__f_bitmap$0)
   };
   return $thiz.Lsympany_SymInt__f_explicit
 }
 function $p_Lsympany_SymInt__extremas$lzycompute__sci_Seq($thiz) {
-  if (((4096 & $thiz.Lsympany_SymInt__f_bitmap$0) === 0)) {
+  if (((8192 & $thiz.Lsympany_SymInt__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymInt__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymInt__f_bitmap$0 = (4096 | $thiz.Lsympany_SymInt__f_bitmap$0)
+    $thiz.Lsympany_SymInt__f_bitmap$0 = (8192 | $thiz.Lsympany_SymInt__f_bitmap$0)
   };
   return $thiz.Lsympany_SymInt__f_extremas
 }
 function $p_Lsympany_SymInt__functions$lzycompute__sci_Seq($thiz) {
-  if (((8192 & $thiz.Lsympany_SymInt__f_bitmap$0) === 0)) {
+  if (((16384 & $thiz.Lsympany_SymInt__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymInt__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymInt__f_bitmap$0 = (8192 | $thiz.Lsympany_SymInt__f_bitmap$0)
+    $thiz.Lsympany_SymInt__f_bitmap$0 = (16384 | $thiz.Lsympany_SymInt__f_bitmap$0)
   };
   return $thiz.Lsympany_SymInt__f_functions
 }
@@ -44811,6 +45009,7 @@ function $c_Lsympany_SymInt() {
   this.Lsympany_SymInt__f_important = null;
   this.Lsympany_SymInt__f_undefined = null;
   this.Lsympany_SymInt__f_integral = null;
+  this.Lsympany_SymInt__f_maybeExplicit = null;
   this.Lsympany_SymInt__f_explicit = null;
   this.Lsympany_SymInt__f_extremas = null;
   this.Lsympany_SymInt__f_pointCache = null;
@@ -44860,17 +45059,20 @@ $c_Lsympany_SymInt.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymInt.prototype.integral__s_Option = (function() {
   return (((1024 & this.Lsympany_SymInt__f_bitmap$0) === 0) ? $p_Lsympany_SymInt__integral$lzycompute__s_Option(this) : this.Lsympany_SymInt__f_integral)
 });
+$c_Lsympany_SymInt.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((2048 & this.Lsympany_SymInt__f_bitmap$0) === 0) ? $p_Lsympany_SymInt__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymInt__f_maybeExplicit)
+});
 $c_Lsympany_SymInt.prototype.explicit__s_Option = (function() {
-  return (((2048 & this.Lsympany_SymInt__f_bitmap$0) === 0) ? $p_Lsympany_SymInt__explicit$lzycompute__s_Option(this) : this.Lsympany_SymInt__f_explicit)
+  return (((4096 & this.Lsympany_SymInt__f_bitmap$0) === 0) ? $p_Lsympany_SymInt__explicit$lzycompute__s_Option(this) : this.Lsympany_SymInt__f_explicit)
 });
 $c_Lsympany_SymInt.prototype.extremas__sci_Seq = (function() {
-  return (((4096 & this.Lsympany_SymInt__f_bitmap$0) === 0) ? $p_Lsympany_SymInt__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymInt__f_extremas)
+  return (((8192 & this.Lsympany_SymInt__f_bitmap$0) === 0) ? $p_Lsympany_SymInt__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymInt__f_extremas)
 });
 $c_Lsympany_SymInt.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymInt__f_pointCache
 });
 $c_Lsympany_SymInt.prototype.functions__sci_Seq = (function() {
-  return (((8192 & this.Lsympany_SymInt__f_bitmap$0) === 0) ? $p_Lsympany_SymInt__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymInt__f_functions)
+  return (((16384 & this.Lsympany_SymInt__f_bitmap$0) === 0) ? $p_Lsympany_SymInt__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymInt__f_functions)
 });
 $c_Lsympany_SymInt.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymInt__f_pointCache = x$1
@@ -45034,24 +45236,31 @@ function $p_Lsympany_SymNegativeInfinity__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymNegativeInfinity__f_integral
 }
-function $p_Lsympany_SymNegativeInfinity__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymNegativeInfinity__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((1024 & $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymNegativeInfinity__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymNegativeInfinity__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0 = (1024 | $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymNegativeInfinity__f_maybeExplicit
+}
+function $p_Lsympany_SymNegativeInfinity__explicit$lzycompute__s_Option($thiz) {
+  if (((2048 & $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymNegativeInfinity__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0 = (2048 | $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0)
   };
   return $thiz.Lsympany_SymNegativeInfinity__f_explicit
 }
 function $p_Lsympany_SymNegativeInfinity__extremas$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymNegativeInfinity__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0 = (2048 | $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0)
+    $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0 = (4096 | $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0)
   };
   return $thiz.Lsympany_SymNegativeInfinity__f_extremas
 }
 function $p_Lsympany_SymNegativeInfinity__functions$lzycompute__sci_Seq($thiz) {
-  if (((4096 & $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0) === 0)) {
+  if (((8192 & $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymNegativeInfinity__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0 = (4096 | $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0)
+    $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0 = (8192 | $thiz.Lsympany_SymNegativeInfinity__f_bitmap$0)
   };
   return $thiz.Lsympany_SymNegativeInfinity__f_functions
 }
@@ -45067,6 +45276,7 @@ function $c_Lsympany_SymNegativeInfinity() {
   this.Lsympany_SymNegativeInfinity__f_important = null;
   this.Lsympany_SymNegativeInfinity__f_undefined = null;
   this.Lsympany_SymNegativeInfinity__f_integral = null;
+  this.Lsympany_SymNegativeInfinity__f_maybeExplicit = null;
   this.Lsympany_SymNegativeInfinity__f_explicit = null;
   this.Lsympany_SymNegativeInfinity__f_extremas = null;
   this.Lsympany_SymNegativeInfinity__f_pointCache = null;
@@ -45120,17 +45330,20 @@ $c_Lsympany_SymNegativeInfinity.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymNegativeInfinity.prototype.integral__s_Option = (function() {
   return (((512 & this.Lsympany_SymNegativeInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymNegativeInfinity__integral$lzycompute__s_Option(this) : this.Lsympany_SymNegativeInfinity__f_integral)
 });
+$c_Lsympany_SymNegativeInfinity.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((1024 & this.Lsympany_SymNegativeInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymNegativeInfinity__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymNegativeInfinity__f_maybeExplicit)
+});
 $c_Lsympany_SymNegativeInfinity.prototype.explicit__s_Option = (function() {
-  return (((1024 & this.Lsympany_SymNegativeInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymNegativeInfinity__explicit$lzycompute__s_Option(this) : this.Lsympany_SymNegativeInfinity__f_explicit)
+  return (((2048 & this.Lsympany_SymNegativeInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymNegativeInfinity__explicit$lzycompute__s_Option(this) : this.Lsympany_SymNegativeInfinity__f_explicit)
 });
 $c_Lsympany_SymNegativeInfinity.prototype.extremas__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymNegativeInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymNegativeInfinity__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymNegativeInfinity__f_extremas)
+  return (((4096 & this.Lsympany_SymNegativeInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymNegativeInfinity__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymNegativeInfinity__f_extremas)
 });
 $c_Lsympany_SymNegativeInfinity.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymNegativeInfinity__f_pointCache
 });
 $c_Lsympany_SymNegativeInfinity.prototype.functions__sci_Seq = (function() {
-  return (((4096 & this.Lsympany_SymNegativeInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymNegativeInfinity__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymNegativeInfinity__f_functions)
+  return (((8192 & this.Lsympany_SymNegativeInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymNegativeInfinity__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymNegativeInfinity__f_functions)
 });
 $c_Lsympany_SymNegativeInfinity.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymNegativeInfinity__f_pointCache = x$1
@@ -45267,24 +45480,31 @@ function $p_Lsympany_SymPositiveInfinity__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymPositiveInfinity__f_integral
 }
-function $p_Lsympany_SymPositiveInfinity__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymPositiveInfinity__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((1024 & $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymPositiveInfinity__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymPositiveInfinity__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0 = (1024 | $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymPositiveInfinity__f_maybeExplicit
+}
+function $p_Lsympany_SymPositiveInfinity__explicit$lzycompute__s_Option($thiz) {
+  if (((2048 & $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymPositiveInfinity__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0 = (2048 | $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0)
   };
   return $thiz.Lsympany_SymPositiveInfinity__f_explicit
 }
 function $p_Lsympany_SymPositiveInfinity__extremas$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymPositiveInfinity__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0 = (2048 | $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0)
+    $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0 = (4096 | $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0)
   };
   return $thiz.Lsympany_SymPositiveInfinity__f_extremas
 }
 function $p_Lsympany_SymPositiveInfinity__functions$lzycompute__sci_Seq($thiz) {
-  if (((4096 & $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0) === 0)) {
+  if (((8192 & $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymPositiveInfinity__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0 = (4096 | $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0)
+    $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0 = (8192 | $thiz.Lsympany_SymPositiveInfinity__f_bitmap$0)
   };
   return $thiz.Lsympany_SymPositiveInfinity__f_functions
 }
@@ -45300,6 +45520,7 @@ function $c_Lsympany_SymPositiveInfinity() {
   this.Lsympany_SymPositiveInfinity__f_important = null;
   this.Lsympany_SymPositiveInfinity__f_undefined = null;
   this.Lsympany_SymPositiveInfinity__f_integral = null;
+  this.Lsympany_SymPositiveInfinity__f_maybeExplicit = null;
   this.Lsympany_SymPositiveInfinity__f_explicit = null;
   this.Lsympany_SymPositiveInfinity__f_extremas = null;
   this.Lsympany_SymPositiveInfinity__f_pointCache = null;
@@ -45353,17 +45574,20 @@ $c_Lsympany_SymPositiveInfinity.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymPositiveInfinity.prototype.integral__s_Option = (function() {
   return (((512 & this.Lsympany_SymPositiveInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymPositiveInfinity__integral$lzycompute__s_Option(this) : this.Lsympany_SymPositiveInfinity__f_integral)
 });
+$c_Lsympany_SymPositiveInfinity.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((1024 & this.Lsympany_SymPositiveInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymPositiveInfinity__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymPositiveInfinity__f_maybeExplicit)
+});
 $c_Lsympany_SymPositiveInfinity.prototype.explicit__s_Option = (function() {
-  return (((1024 & this.Lsympany_SymPositiveInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymPositiveInfinity__explicit$lzycompute__s_Option(this) : this.Lsympany_SymPositiveInfinity__f_explicit)
+  return (((2048 & this.Lsympany_SymPositiveInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymPositiveInfinity__explicit$lzycompute__s_Option(this) : this.Lsympany_SymPositiveInfinity__f_explicit)
 });
 $c_Lsympany_SymPositiveInfinity.prototype.extremas__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymPositiveInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymPositiveInfinity__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymPositiveInfinity__f_extremas)
+  return (((4096 & this.Lsympany_SymPositiveInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymPositiveInfinity__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymPositiveInfinity__f_extremas)
 });
 $c_Lsympany_SymPositiveInfinity.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymPositiveInfinity__f_pointCache
 });
 $c_Lsympany_SymPositiveInfinity.prototype.functions__sci_Seq = (function() {
-  return (((4096 & this.Lsympany_SymPositiveInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymPositiveInfinity__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymPositiveInfinity__f_functions)
+  return (((8192 & this.Lsympany_SymPositiveInfinity__f_bitmap$0) === 0) ? $p_Lsympany_SymPositiveInfinity__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymPositiveInfinity__f_functions)
 });
 $c_Lsympany_SymPositiveInfinity.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymPositiveInfinity__f_pointCache = x$1
@@ -45500,24 +45724,31 @@ function $p_Lsympany_SymUndefined__integral$lzycompute__s_Option($thiz) {
   };
   return $thiz.Lsympany_SymUndefined__f_integral
 }
-function $p_Lsympany_SymUndefined__explicit$lzycompute__s_Option($thiz) {
+function $p_Lsympany_SymUndefined__maybeExplicit$lzycompute__Lsympany_Sym($thiz) {
   if (((1024 & $thiz.Lsympany_SymUndefined__f_bitmap$0) === 0)) {
-    $thiz.Lsympany_SymUndefined__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymUndefined__f_maybeExplicit = $f_Lsympany_Sym__maybeExplicit__Lsympany_Sym($thiz);
     $thiz.Lsympany_SymUndefined__f_bitmap$0 = (1024 | $thiz.Lsympany_SymUndefined__f_bitmap$0)
+  };
+  return $thiz.Lsympany_SymUndefined__f_maybeExplicit
+}
+function $p_Lsympany_SymUndefined__explicit$lzycompute__s_Option($thiz) {
+  if (((2048 & $thiz.Lsympany_SymUndefined__f_bitmap$0) === 0)) {
+    $thiz.Lsympany_SymUndefined__f_explicit = $f_Lsympany_Sym__explicit__s_Option($thiz);
+    $thiz.Lsympany_SymUndefined__f_bitmap$0 = (2048 | $thiz.Lsympany_SymUndefined__f_bitmap$0)
   };
   return $thiz.Lsympany_SymUndefined__f_explicit
 }
 function $p_Lsympany_SymUndefined__extremas$lzycompute__sci_Seq($thiz) {
-  if (((2048 & $thiz.Lsympany_SymUndefined__f_bitmap$0) === 0)) {
+  if (((4096 & $thiz.Lsympany_SymUndefined__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymUndefined__f_extremas = $f_Lsympany_Sym__extremas__sci_Seq($thiz);
-    $thiz.Lsympany_SymUndefined__f_bitmap$0 = (2048 | $thiz.Lsympany_SymUndefined__f_bitmap$0)
+    $thiz.Lsympany_SymUndefined__f_bitmap$0 = (4096 | $thiz.Lsympany_SymUndefined__f_bitmap$0)
   };
   return $thiz.Lsympany_SymUndefined__f_extremas
 }
 function $p_Lsympany_SymUndefined__functions$lzycompute__sci_Seq($thiz) {
-  if (((4096 & $thiz.Lsympany_SymUndefined__f_bitmap$0) === 0)) {
+  if (((8192 & $thiz.Lsympany_SymUndefined__f_bitmap$0) === 0)) {
     $thiz.Lsympany_SymUndefined__f_functions = $f_Lsympany_Sym__functions__sci_Seq($thiz);
-    $thiz.Lsympany_SymUndefined__f_bitmap$0 = (4096 | $thiz.Lsympany_SymUndefined__f_bitmap$0)
+    $thiz.Lsympany_SymUndefined__f_bitmap$0 = (8192 | $thiz.Lsympany_SymUndefined__f_bitmap$0)
   };
   return $thiz.Lsympany_SymUndefined__f_functions
 }
@@ -45533,6 +45764,7 @@ function $c_Lsympany_SymUndefined() {
   this.Lsympany_SymUndefined__f_important = null;
   this.Lsympany_SymUndefined__f_undefined = null;
   this.Lsympany_SymUndefined__f_integral = null;
+  this.Lsympany_SymUndefined__f_maybeExplicit = null;
   this.Lsympany_SymUndefined__f_explicit = null;
   this.Lsympany_SymUndefined__f_extremas = null;
   this.Lsympany_SymUndefined__f_pointCache = null;
@@ -45586,17 +45818,20 @@ $c_Lsympany_SymUndefined.prototype.undefined__sci_Seq = (function() {
 $c_Lsympany_SymUndefined.prototype.integral__s_Option = (function() {
   return (((512 & this.Lsympany_SymUndefined__f_bitmap$0) === 0) ? $p_Lsympany_SymUndefined__integral$lzycompute__s_Option(this) : this.Lsympany_SymUndefined__f_integral)
 });
+$c_Lsympany_SymUndefined.prototype.maybeExplicit__Lsympany_Sym = (function() {
+  return (((1024 & this.Lsympany_SymUndefined__f_bitmap$0) === 0) ? $p_Lsympany_SymUndefined__maybeExplicit$lzycompute__Lsympany_Sym(this) : this.Lsympany_SymUndefined__f_maybeExplicit)
+});
 $c_Lsympany_SymUndefined.prototype.explicit__s_Option = (function() {
-  return (((1024 & this.Lsympany_SymUndefined__f_bitmap$0) === 0) ? $p_Lsympany_SymUndefined__explicit$lzycompute__s_Option(this) : this.Lsympany_SymUndefined__f_explicit)
+  return (((2048 & this.Lsympany_SymUndefined__f_bitmap$0) === 0) ? $p_Lsympany_SymUndefined__explicit$lzycompute__s_Option(this) : this.Lsympany_SymUndefined__f_explicit)
 });
 $c_Lsympany_SymUndefined.prototype.extremas__sci_Seq = (function() {
-  return (((2048 & this.Lsympany_SymUndefined__f_bitmap$0) === 0) ? $p_Lsympany_SymUndefined__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymUndefined__f_extremas)
+  return (((4096 & this.Lsympany_SymUndefined__f_bitmap$0) === 0) ? $p_Lsympany_SymUndefined__extremas$lzycompute__sci_Seq(this) : this.Lsympany_SymUndefined__f_extremas)
 });
 $c_Lsympany_SymUndefined.prototype.pointCache__scm_Map = (function() {
   return this.Lsympany_SymUndefined__f_pointCache
 });
 $c_Lsympany_SymUndefined.prototype.functions__sci_Seq = (function() {
-  return (((4096 & this.Lsympany_SymUndefined__f_bitmap$0) === 0) ? $p_Lsympany_SymUndefined__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymUndefined__f_functions)
+  return (((8192 & this.Lsympany_SymUndefined__f_bitmap$0) === 0) ? $p_Lsympany_SymUndefined__functions$lzycompute__sci_Seq(this) : this.Lsympany_SymUndefined__f_functions)
 });
 $c_Lsympany_SymUndefined.prototype.sympany$Sym$_setter_$pointCache_$eq__scm_Map__V = (function(x$1) {
   this.Lsympany_SymUndefined__f_pointCache = x$1
@@ -47045,6 +47280,7 @@ function $c_Lsympany_Sym$ImplicitSymInt(_i) {
   this.Lsympany_SymInt__f_important = null;
   this.Lsympany_SymInt__f_undefined = null;
   this.Lsympany_SymInt__f_integral = null;
+  this.Lsympany_SymInt__f_maybeExplicit = null;
   this.Lsympany_SymInt__f_explicit = null;
   this.Lsympany_SymInt__f_extremas = null;
   this.Lsympany_SymInt__f_pointCache = null;

@@ -1,2 +1,5 @@
-[0m[[0m[33mwarn[0m] [0m[0mthere were 21 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
-[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala:205:54: unreachable code[0m
+[0m[[0m[33mwarn[0m] [0m[0m          case (SymVertical(x1), SymVertical(x2)) => Nil[0m
+[0m[[0m[33mwarn[0m] [0m[0m                                                     ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mthere were 14 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m[[0m[33mwarn[0m] [0m[0mtwo warnings found[0m

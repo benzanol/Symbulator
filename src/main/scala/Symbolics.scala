@@ -175,11 +175,13 @@ trait Sym {
   def solve(v: Symbol): Seq[Sym] = Solve.solve(this, v)
 
   lazy val simple: Sym = Simplify.simplify(this)
-  lazy val derivative: Sym = Derivative.derive(this, 'x)
-  lazy val zeros: Seq[Sym] = this.solve('x)
-  lazy val important: Seq[Sym] = Solve.importantPoints(simple, 'x)
-  lazy val undefined: Seq[Sym] = Solve.undefinedPoints(simple, 'x)
-  lazy val integral: Option[Sym] = Integral.integrate(Integral.SymIntegral(simple))
+  lazy val derivative: Sym = Derivative.derive(maybeExplicit, 'x)
+  lazy val zeros: Seq[Sym] = explicit.map{_.solve('x)}.getOrElse(Nil)
+  lazy val important: Seq[Sym] = explicit.map{Solve.importantPoints(_, 'x)}.getOrElse(Nil)
+  lazy val undefined: Seq[Sym] = explicit.map{Solve.undefinedPoints(_, 'x)}.getOrElse(Nil)
+  lazy val integral: Option[Sym] = Integral.integrate(Integral.SymIntegral(maybeExplicit))
+
+  lazy val maybeExplicit = explicit.getOrElse(this)
 
   lazy val explicit: Option[Sym] =
     if (!containsExpr(simple, SymVar('y))) Some(simple)

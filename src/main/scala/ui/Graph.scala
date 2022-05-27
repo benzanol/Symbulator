@@ -416,6 +416,9 @@ object Graph {
       if (extrasLeft.nonEmpty && extrasLeft.head <= x) {
         x = extrasLeft.head
         extrasLeft = extrasLeft.tail
+      } else if (Math.floor(x) > Math.floor(lastMultiple) && dist < 1) {
+        x = Math.floor(x)
+        lastMultiple = x
       } else {
         lastMultiple = x
       }
