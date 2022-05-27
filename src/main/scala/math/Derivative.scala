@@ -31,6 +31,7 @@ object Derivative {
         case SymSin(e) => **(derive(e, v), SymCos(e))
         case SymCos(e) => **(derive(e, v), S(-1), SymSin(e))
         case Integral.SymIntegral(sub) => sub
+        case SymVertical(_) => SymPositiveInfinity()
 	  }
 	)
   

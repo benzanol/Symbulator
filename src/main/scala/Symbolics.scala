@@ -84,7 +84,6 @@ object Latex {
     case SymUndefined() => "\\NaN"
     case SymE() => "e"
     case SymPi() => "\\pi"
-    case SymEquation(l, r) => s"${toLatex(l)} = ${toLatex(r)}"
     case SymVar(s) if s.name contains '/' =>
       s.name.split("/").pipe{ case Array(dy, dx) => s"\\frac{$dy}{$dx}" }
     case SymVar(s) => s.name
@@ -138,6 +137,9 @@ object Latex {
     case SymSin(expr) => s"\\sin ${wrappedLatex(expr)}"
     case SymCos(expr) => s"\\cos ${wrappedLatex(expr)}"
     case SymPM(expr) => s"\\pm ${wrappedLatex(expr)}"
+
+    case SymEquation(l, r) => s"${toLatex(l)} = ${toLatex(r)}"
+    case SymVertical(x) => s"x = ${toLatex(x)}"
 
     case Integral.SymIntegral(sub) => s"\\integral ${wrappedLatex(sub)}"
   }
@@ -224,12 +226,21 @@ trait SymOp extends Sym {
       }.map{ds => this.operation(ds:_*)}
 }
 
-/// Equation
+/// Special
+//// Equation
 case class SymEquation(left: Sym = SymInt(0), right: Sym = SymInt(0)) extends Sym {
   lazy val exprs = Seq(left, right)
   def instance(args: Sym*) = SymEquation(args(0), args(1))
 
   override def toString = left.toString + " = " + right.toString
+}
+
+//// Vertical Line
+case class SymVertical(x: Sym) extends Sym {
+  lazy val exprs = Seq(x)
+  def instance(args: Sym*) = SymVertical(args.head)
+
+  override def toString = "x = " + x.toString
 }
 
 /// Variables

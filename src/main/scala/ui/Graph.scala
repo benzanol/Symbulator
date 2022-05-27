@@ -180,6 +180,7 @@ object Graph {
   var graphs = Seq[Sym]()
   var points = Seq[IntersectionPoint]()
   val colors = Seq("#AA0000", "#0000AA", "#008800")
+  val graphThickness = 5
   val gridColor = "#AAAAAA"
   
   case class IntersectionPoint(funcs: Seq[Sym], x: Sym, y: Sym, color: String) {
@@ -310,21 +311,26 @@ object Graph {
   }
 
   // Drawing the actual function
-  def drawExpression(sym: Sym)(implicit ctx: JsContext) {
-    // Make sure to include important points on the curve (extremas, holes, etc)
-    val tiny = (ctx.canvas.width * pos.xs) / 1000000.0
-    
-    val important = sym.important
-      .flatMap(_.approx()).flatMap{n => List(n - tiny, n, n + tiny)}
-    
-    val undefined = sym.undefined
-      .flatMap(_.approx()).flatMap{n => List(n - tiny, n + tiny)}
-    
-    // Calculate the function and derivative
-    for (f <- sym.functions) {
-      val segments = functionSegments(f, important ++ undefined)
+  def drawExpression(sym: Sym)(implicit ctx: JsContext) = sym match {
+    case SymVertical(x) => canvasX(x.approx.head).pipe{ x =>
+      drawLine(x, 0, x, ctx.canvas.width, graphThickness)
+    }
+    case _ => {
+      // Make sure to include important points on the curve (extremas, holes, etc)
+      val tiny = (ctx.canvas.width * pos.xs) / 1000000.0
       
-      segments.foreach(connectWithCurves)
+      val important = sym.important
+        .flatMap(_.approx()).flatMap{n => List(n - tiny, n, n + tiny)}
+      
+      val undefined = sym.undefined
+        .flatMap(_.approx()).flatMap{n => List(n - tiny, n + tiny)}
+      
+      // Calculate the function and derivative
+      for (f <- sym.functions) {
+        val segments = functionSegments(f, important ++ undefined)
+        
+        segments.foreach(connectWithCurves)
+      }
     }
   }
 
@@ -408,7 +414,7 @@ object Graph {
 
   def connectWithCurves(points: Seq[(Double, Double)])(implicit ctx: JsContext) {
     ctx.beginPath()
-    ctx.lineWidth = 5
+    ctx.lineWidth = graphThickness
 
     if (points.length < 2) return
       

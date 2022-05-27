@@ -22,6 +22,11 @@ object Parse {
 	  .replaceAll("\\+ *\\-", "-")
 	  .replaceAll("\\- *\\+", "-")
 	  .replaceAll("\\+ *\\+", "+")
+
+    // Detect if it is a vertical line if it contains no y and only 1 x
+    if (str.replace(" ", "").startsWith("x=") && !str.contains('y') && str.count(_ == 'x') == 1) {
+      return parseLatex(str.substring(str.indexOf('=') + 1)).map(SymVertical)
+    }
     
     // If the expression contains a single equals sign, it is an equation
     val eqlCt = str.count(_ == '=')
