@@ -15489,6 +15489,7 @@ $c_Lsympany_ui_Graph$.prototype.setup__V = (function() {
     $m_Lsympany_ui_Graph$();
     $m_Lsympany_ui_Graph$().draw__V()
   }));
+  this.setGraphs__sci_Seq__V($m_sci_Nil$());
   this.draw__V()
 });
 $c_Lsympany_ui_Graph$.prototype.drawLine__I__I__I__I__I__Lorg_scalajs_dom_CanvasRenderingContext2D__V = (function(x1, y1, x2, y2, w, ctx) {
@@ -15636,7 +15637,10 @@ $c_Lsympany_ui_Graph$.prototype.setGraphs__sci_Seq__V = (function(exprs) {
     b.addAll__sc_IterableOnce__scm_Growable(xs)
   };
   var allExprs = $as_sci_Seq(b.result__O());
-  var $$x1 = $as_sc_IterableOps(allExprs.withFilter__F1__sc_WithFilter(new $c_sjsr_AnonFunction1(((check$ifrefutable$1$2) => {
+  var $$x2 = $m_sci_Seq$();
+  var array = [new $c_Lsympany_ui_Graph$IntersectionPoint($m_sci_Nil$(), new $c_Lsympany_Sym$ImplicitSymInt(0), new $c_Lsympany_Sym$ImplicitSymInt(0), this.Lsympany_ui_Graph$__f_gridColor)];
+  var rassoc$1 = $as_sci_Seq($$x2.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array)));
+  var this$48 = $as_sc_SeqOps(allExprs.withFilter__F1__sc_WithFilter(new $c_sjsr_AnonFunction1(((check$ifrefutable$1$2) => {
     var check$ifrefutable$1 = $as_T2(check$ifrefutable$1$2);
     return (check$ifrefutable$1 !== null)
   }))).flatMap__F1__O(new $c_sjsr_AnonFunction1(((allExprs$1) => ((x$10$2) => {
@@ -15664,46 +15668,46 @@ $c_Lsympany_ui_Graph$.prototype.setGraphs__sci_Seq__V = (function(exprs) {
           if ((a$2 instanceof $c_Lsympany_SymVertical)) {
             var x3 = $as_Lsympany_SymVertical(a$2);
             var x = x3.Lsympany_SymVertical__f_x;
+            var $$x5 = $m_sci_Seq$();
             var $$x4 = $m_sci_Seq$();
-            var $$x3 = $m_sci_Seq$();
-            var array = [a$2, b$2];
-            var $$x2 = $as_sci_Seq($$x3.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array)));
-            var this$17 = $m_s_Symbol$();
-            var _s = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$17, "x"));
+            var array$1 = [a$2, b$2];
+            var $$x3 = $as_sci_Seq($$x4.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1)));
+            var this$22 = $m_s_Symbol$();
+            var _s = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$22, "x"));
             var t = new $c_Lsympany_Sym$ImplicitSymVar(_s);
-            var array$1 = [new $c_Lsympany_ui_Graph$IntersectionPoint($$x2, x, $m_Lsympany_Sym$().replaceExpr__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym(b$2, t, x).simple__Lsympany_Sym(), col$1)];
-            return $as_sci_Seq($$x4.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1)))
+            var array$2 = [new $c_Lsympany_ui_Graph$IntersectionPoint($$x3, x, $m_Lsympany_Sym$().replaceExpr__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym(b$2, t, x).simple__Lsympany_Sym(), col$1)];
+            return $as_sci_Seq($$x5.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2)))
           } else if ((b$2 instanceof $c_Lsympany_SymVertical)) {
             var x5 = $as_Lsympany_SymVertical(b$2);
             var x$2 = x5.Lsympany_SymVertical__f_x;
+            var $$x8 = $m_sci_Seq$();
             var $$x7 = $m_sci_Seq$();
-            var $$x6 = $m_sci_Seq$();
-            var array$2 = [a$2, b$2];
-            var $$x5 = $as_sci_Seq($$x6.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2)));
-            var this$25 = $m_s_Symbol$();
-            var _s$1 = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$25, "x"));
+            var array$3 = [a$2, b$2];
+            var $$x6 = $as_sci_Seq($$x7.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3)));
+            var this$30 = $m_s_Symbol$();
+            var _s$1 = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$30, "x"));
             var t$1 = new $c_Lsympany_Sym$ImplicitSymVar(_s$1);
-            var array$3 = [new $c_Lsympany_ui_Graph$IntersectionPoint($$x5, x$2, $m_Lsympany_Sym$().replaceExpr__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym(a$2, t$1, x$2).simple__Lsympany_Sym(), col$1)];
-            return $as_sci_Seq($$x7.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3)))
+            var array$4 = [new $c_Lsympany_ui_Graph$IntersectionPoint($$x6, x$2, $m_Lsympany_Sym$().replaceExpr__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym(a$2, t$1, x$2).simple__Lsympany_Sym(), col$1)];
+            return $as_sci_Seq($$x8.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$4)))
           } else if (((a$2 instanceof $c_Lsympany_SymVertical) && (b$2 instanceof $c_Lsympany_SymVertical))) {
             return $m_sci_Nil$()
           } else {
+            var $$x10 = $m_Lsympany_Sym$();
             var $$x9 = $m_Lsympany_Sym$();
-            var $$x8 = $m_Lsympany_Sym$();
-            var array$4 = [b$2, new $c_Lsympany_Sym$ImplicitSymInt((-1))];
-            var array$5 = [a$2, $$x8.$times$times__sci_Seq__Lsympany_SymProd($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$4))];
-            return $as_sci_Seq($as_sc_IterableOps($$x9.$plus$plus__sci_Seq__Lsympany_SymSum($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$5)).zeros__sci_Seq().flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$7$2) => {
+            var array$5 = [b$2, new $c_Lsympany_Sym$ImplicitSymInt((-1))];
+            var array$6 = [a$2, $$x9.$times$times__sci_Seq__Lsympany_SymProd($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$5))];
+            return $as_sci_Seq($as_sc_IterableOps($$x10.$plus$plus__sci_Seq__Lsympany_SymSum($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$6)).zeros__sci_Seq().flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$7$2) => {
               var x$7 = $as_Lsympany_Sym(x$7$2);
               return x$7.expand__sci_Seq()
             })))).map__F1__O(new $c_sjsr_AnonFunction1(((a$2$1, b$3, col$1$1) => ((x$3$2) => {
               var x$3 = $as_Lsympany_Sym(x$3$2);
-              var $$x11 = $m_sci_Seq$();
-              var array$6 = [a$2$1, b$3];
-              var $$x10 = $as_sci_Seq($$x11.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$6)));
-              var this$41 = $m_s_Symbol$();
-              var _s$2 = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$41, "x"));
+              var $$x12 = $m_sci_Seq$();
+              var array$7 = [a$2$1, b$3];
+              var $$x11 = $as_sci_Seq($$x12.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$7)));
+              var this$46 = $m_s_Symbol$();
+              var _s$2 = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$46, "x"));
               var t$2 = new $c_Lsympany_Sym$ImplicitSymVar(_s$2);
-              return new $c_Lsympany_ui_Graph$IntersectionPoint($$x10, x$3, $m_Lsympany_Sym$().replaceExpr__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym(a$2$1, t$2, x$3).simple__Lsympany_Sym(), col$1$1)
+              return new $c_Lsympany_ui_Graph$IntersectionPoint($$x11, x$3, $m_Lsympany_Sym$().replaceExpr__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym(a$2$1, t$2, x$3).simple__Lsympany_Sym(), col$1$1)
             }))(a$2, b$2, col$1))))
           }
         } else {
@@ -15714,19 +15718,20 @@ $c_Lsympany_ui_Graph$.prototype.setGraphs__sci_Seq__V = (function(exprs) {
       throw new $c_s_MatchError(x$10)
     }
   }))(allExprs))));
-  var this$44 = $m_s_$less$colon$less$();
-  var this$45 = $as_sc_IterableOps($$x1.flatten__F1__O(this$44.s_$less$colon$less$__f_singleton));
+  var $$x1 = $as_sc_IterableOps(this$48.prepended__O__O(rassoc$1));
+  var this$50 = $m_s_$less$colon$less$();
+  var this$51 = $as_sc_IterableOps($$x1.flatten__F1__O(this$50.s_$less$colon$less$__f_singleton));
   var m = $as_scm_Map($m_scm_Map$().empty__O());
-  var it$1 = this$45.iterator__sc_Iterator();
+  var it$1 = this$51.iterator__sc_Iterator();
   while (it$1.hasNext__Z()) {
     var elem$1 = it$1.next__O();
     var p = $as_Lsympany_ui_Graph$IntersectionPoint(elem$1);
     var key = $ct_T2__O__O__(new $c_T2(), p.Lsympany_ui_Graph$IntersectionPoint__f_x, p.Lsympany_ui_Graph$IntersectionPoint__f_y);
-    var bldr = $as_scm_Builder(m.getOrElseUpdate__O__F0__O(key, new $c_sjsr_AnonFunction0(((this$46) => (() => this$46.newSpecificBuilder__scm_Builder()))(this$45))));
+    var bldr = $as_scm_Builder(m.getOrElseUpdate__O__F0__O(key, new $c_sjsr_AnonFunction0(((this$52) => (() => this$52.newSpecificBuilder__scm_Builder()))(this$51))));
     bldr.addOne__O__scm_Growable(elem$1)
   };
-  var this$47 = $m_sci_HashMap$();
-  var result = this$47.sci_HashMap$__f_EmptyMap;
+  var this$53 = $m_sci_HashMap$();
+  var result = this$53.sci_HashMap$__f_EmptyMap;
   var mapIt = m.iterator__sc_Iterator();
   while (mapIt.hasNext__Z()) {
     var x1 = $as_T2(mapIt.next__O());
@@ -15737,9 +15742,9 @@ $c_Lsympany_ui_Graph$.prototype.setGraphs__sci_Seq__V = (function(exprs) {
     var v = $as_scm_Builder(x1._2__O());
     result = result.updated__O__O__sci_HashMap(k, v.result__O())
   };
-  var this$48 = result;
+  var this$54 = result;
   var b$4 = $m_sci_Iterable$().newBuilder__scm_Builder();
-  var it$2 = this$48.iterator__sc_Iterator();
+  var it$2 = this$54.iterator__sc_Iterator();
   while (it$2.hasNext__Z()) {
     var arg1$1 = it$2.next__O();
     var x0$1 = $as_T2(arg1$1);
@@ -15750,18 +15755,18 @@ $c_Lsympany_ui_Graph$.prototype.setGraphs__sci_Seq__V = (function(exprs) {
         var is = $as_sci_Seq(x0$1._2__O());
         if ((p$1 !== null)) {
           if ((is !== null)) {
-            var this$51 = $as_sc_SeqOps($as_sc_SeqOps(is.flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$11$2) => {
+            var this$57 = $as_sc_SeqOps($as_sc_SeqOps(is.flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$11$2) => {
               var x$11 = $as_Lsympany_ui_Graph$IntersectionPoint(x$11$2);
               return x$11.Lsympany_ui_Graph$IntersectionPoint__f_funcs
             })))).distinct__O());
             var lt = new $c_sjsr_AnonFunction2(((a$2$2, b$2$1) => {
               var a$3 = $as_Lsympany_Sym(a$2$2);
               $as_Lsympany_Sym(b$2$1);
-              var this$50 = $m_s_math_BigInt$();
-              var x$2$1 = $ct_Lsympany_SymInt__s_math_BigInt__(new $c_Lsympany_SymInt(), this$50.apply__I__s_math_BigInt(0));
+              var this$56 = $m_s_math_BigInt$();
+              var x$2$1 = $ct_Lsympany_SymInt__s_math_BigInt__(new $c_Lsympany_SymInt(), this$56.apply__I__s_math_BigInt(0));
               return (!((a$3 !== null) && a$3.equals__O__Z(x$2$1)))
             }));
-            var elem$2 = new $c_Lsympany_ui_Graph$IntersectionPoint($as_sci_Seq($f_sc_SeqOps__sortWith__F2__O(this$51, lt)), $as_Lsympany_Sym(p$1._1__O()), $as_Lsympany_Sym(p$1._2__O()), $as_Lsympany_ui_Graph$IntersectionPoint(is.head__O()).Lsympany_ui_Graph$IntersectionPoint__f_color);
+            var elem$2 = new $c_Lsympany_ui_Graph$IntersectionPoint($as_sci_Seq($f_sc_SeqOps__sortWith__F2__O(this$57, lt)), $as_Lsympany_Sym(p$1._1__O()), $as_Lsympany_Sym(p$1._2__O()), $as_Lsympany_ui_Graph$IntersectionPoint(is.head__O()).Lsympany_ui_Graph$IntersectionPoint__f_color);
             break matchEnd5
           }
         }
@@ -15860,9 +15865,9 @@ $c_Lsympany_ui_Graph$.prototype.drawGrid__Lorg_scalajs_dom_CanvasRenderingContex
         var a$1 = this$16.doubleValue__D();
         if ((($uD(Math.log10(a$1)) % 1.0) !== 0.0)) {
           var this$18 = $m_s_package$().BigDecimal__s_math_BigDecimal$();
-          var rassoc$1 = this$18.apply__I__Ljava_math_MathContext__s_math_BigDecimal(0, this$18.s_math_BigDecimal$__f_defaultMathContext);
+          var rassoc$2 = this$18.apply__I__Ljava_math_MathContext__s_math_BigDecimal(0, this$18.s_math_BigDecimal$__f_defaultMathContext);
           var this$19 = $as_sci_List(elem$1);
-          elem$1 = new $c_sci_$colon$colon(rassoc$1, this$19)
+          elem$1 = new $c_sci_$colon$colon(rassoc$2, this$19)
         } else {
           var this$20 = $m_s_math_BigDecimal$();
           var this$22 = this$20.decimal__D__Ljava_math_MathContext__s_math_BigDecimal(0.1, this$20.s_math_BigDecimal$__f_defaultMathContext).$times__s_math_BigDecimal__s_math_BigDecimal($as_s_math_BigDecimal($as_sci_List(elem$1).head__O()));
@@ -15871,9 +15876,9 @@ $c_Lsympany_ui_Graph$.prototype.drawGrid__Lorg_scalajs_dom_CanvasRenderingContex
           if ($f_s_math_Ordered__$greater$eq__O__Z(this$22, that$1)) {
             var $$x2 = $as_s_math_BigDecimal($as_sci_List(elem$1).head__O());
             var this$23 = $m_s_math_BigDecimal$();
-            var rassoc$2 = $$x2.$times__s_math_BigDecimal__s_math_BigDecimal(this$23.decimal__D__Ljava_math_MathContext__s_math_BigDecimal(0.1, this$23.s_math_BigDecimal$__f_defaultMathContext));
+            var rassoc$3 = $$x2.$times__s_math_BigDecimal__s_math_BigDecimal(this$23.decimal__D__Ljava_math_MathContext__s_math_BigDecimal(0.1, this$23.s_math_BigDecimal$__f_defaultMathContext));
             var this$24 = $as_sci_List(elem$1);
-            elem$1 = new $c_sci_$colon$colon(rassoc$2, this$24)
+            elem$1 = new $c_sci_$colon$colon(rassoc$3, this$24)
           } else {
             var this$25 = $m_s_math_BigDecimal$();
             var this$27 = this$25.decimal__D__Ljava_math_MathContext__s_math_BigDecimal(0.2, this$25.s_math_BigDecimal$__f_defaultMathContext).$times__s_math_BigDecimal__s_math_BigDecimal($as_s_math_BigDecimal($as_sci_List(elem$1).head__O()));
@@ -15882,9 +15887,9 @@ $c_Lsympany_ui_Graph$.prototype.drawGrid__Lorg_scalajs_dom_CanvasRenderingContex
             if ($f_s_math_Ordered__$greater$eq__O__Z(this$27, that$2)) {
               var $$x3 = $as_s_math_BigDecimal($as_sci_List(elem$1).head__O());
               var this$28 = $m_s_math_BigDecimal$();
-              var rassoc$3 = $$x3.$times__s_math_BigDecimal__s_math_BigDecimal(this$28.decimal__D__Ljava_math_MathContext__s_math_BigDecimal(0.2, this$28.s_math_BigDecimal$__f_defaultMathContext));
+              var rassoc$4 = $$x3.$times__s_math_BigDecimal__s_math_BigDecimal(this$28.decimal__D__Ljava_math_MathContext__s_math_BigDecimal(0.2, this$28.s_math_BigDecimal$__f_defaultMathContext));
               var this$29 = $as_sci_List(elem$1);
-              elem$1 = new $c_sci_$colon$colon(rassoc$3, this$29)
+              elem$1 = new $c_sci_$colon$colon(rassoc$4, this$29)
             } else {
               var this$30 = $m_s_math_BigDecimal$();
               var this$32 = this$30.decimal__D__Ljava_math_MathContext__s_math_BigDecimal(0.5, this$30.s_math_BigDecimal$__f_defaultMathContext).$times__s_math_BigDecimal__s_math_BigDecimal($as_s_math_BigDecimal($as_sci_List(elem$1).head__O()));
@@ -15893,14 +15898,14 @@ $c_Lsympany_ui_Graph$.prototype.drawGrid__Lorg_scalajs_dom_CanvasRenderingContex
               if ($f_s_math_Ordered__$greater$eq__O__Z(this$32, that$3)) {
                 var $$x4 = $as_s_math_BigDecimal($as_sci_List(elem$1).head__O());
                 var this$33 = $m_s_math_BigDecimal$();
-                var rassoc$4 = $$x4.$times__s_math_BigDecimal__s_math_BigDecimal(this$33.decimal__D__Ljava_math_MathContext__s_math_BigDecimal(0.5, this$33.s_math_BigDecimal$__f_defaultMathContext));
+                var rassoc$5 = $$x4.$times__s_math_BigDecimal__s_math_BigDecimal(this$33.decimal__D__Ljava_math_MathContext__s_math_BigDecimal(0.5, this$33.s_math_BigDecimal$__f_defaultMathContext));
                 var this$34 = $as_sci_List(elem$1);
-                elem$1 = new $c_sci_$colon$colon(rassoc$4, this$34)
+                elem$1 = new $c_sci_$colon$colon(rassoc$5, this$34)
               } else {
                 var this$35 = $m_s_package$().BigDecimal__s_math_BigDecimal$();
-                var rassoc$5 = this$35.apply__I__Ljava_math_MathContext__s_math_BigDecimal(0, this$35.s_math_BigDecimal$__f_defaultMathContext);
+                var rassoc$6 = this$35.apply__I__Ljava_math_MathContext__s_math_BigDecimal(0, this$35.s_math_BigDecimal$__f_defaultMathContext);
                 var this$36 = $as_sci_List(elem$1);
-                elem$1 = new $c_sci_$colon$colon(rassoc$5, this$36)
+                elem$1 = new $c_sci_$colon$colon(rassoc$6, this$36)
               }
             }
           }
@@ -16126,16 +16131,16 @@ $c_Lsympany_ui_Graph$.prototype.functionSegments__F1__sci_Seq__sci_Seq = (functi
         var $$x1 = false
       };
       if ($$x1) {
-        var rassoc$6 = $as_sci_List($as_sc_IterableOps(segments.head__O()).tail__O());
+        var rassoc$7 = $as_sci_List($as_sc_IterableOps(segments.head__O()).tail__O());
         var this$15 = $as_sci_List(segments.tail__O());
-        segments = new $c_sci_$colon$colon(rassoc$6, this$15)
+        segments = new $c_sci_$colon$colon(rassoc$7, this$15)
       };
       if (((y === y) && (!((y === Infinity) || (y === (-Infinity)))))) {
-        var rassoc$7 = new $c_T2$mcDD$sp(x.sr_DoubleRef__f_elem, y);
+        var rassoc$8 = new $c_T2$mcDD$sp(x.sr_DoubleRef__f_elem, y);
         var this$19 = $as_sci_List(segments.head__O());
-        var rassoc$8 = new $c_sci_$colon$colon(rassoc$7, this$19);
+        var rassoc$9 = new $c_sci_$colon$colon(rassoc$8, this$19);
         var this$20 = $as_sci_List(segments.tail__O());
-        segments = new $c_sci_$colon$colon(rassoc$8, this$20)
+        segments = new $c_sci_$colon$colon(rassoc$9, this$20)
       } else {
         throw $m_sjsr_package$().unwrapJavaScriptException__jl_Throwable__O($ct_jl_Exception__(new $c_jl_Exception()))
       }
@@ -16144,9 +16149,9 @@ $c_Lsympany_ui_Graph$.prototype.functionSegments__F1__sci_Seq__sci_Seq = (functi
       if ((e$2 !== null)) {
         var this$21 = $as_sc_IterableOnceOps(segments.head__O());
         if ((!this$21.isEmpty__Z())) {
-          var rassoc$9 = $m_sci_Nil$();
+          var rassoc$10 = $m_sci_Nil$();
           var this$22 = segments;
-          segments = new $c_sci_$colon$colon(rassoc$9, this$22)
+          segments = new $c_sci_$colon$colon(rassoc$10, this$22)
         }
       } else {
         throw e
@@ -27536,6 +27541,9 @@ $c_sc_SeqFactory$Delegate.prototype.empty__O = (function() {
 $c_sc_SeqFactory$Delegate.prototype.apply__sci_Seq__O = (function(elems) {
   return this.apply__sci_Seq__sc_SeqOps(elems)
 });
+function $f_sc_SeqOps__prepended__O__O($thiz, elem) {
+  return $thiz.iterableFactory__sc_IterableFactory().from__sc_IterableOnce__O($ct_sc_View$Prepended__O__sc_IterableOps__(new $c_sc_View$Prepended(), elem, $thiz))
+}
 function $f_sc_SeqOps__appended__O__O($thiz, elem) {
   return $thiz.iterableFactory__sc_IterableFactory().from__sc_IterableOnce__O(new $c_sc_View$Appended($thiz, elem))
 }
@@ -30148,7 +30156,7 @@ function $m_sc_IndexedSeq$() {
   return $n_sc_IndexedSeq$
 }
 function $f_sc_IndexedSeqOps__prepended__O__O($thiz, elem) {
-  return $thiz.iterableFactory__sc_IterableFactory().from__sc_IterableOnce__O(new $c_sc_IndexedSeqView$Prepended(elem, $thiz))
+  return $thiz.iterableFactory__sc_IterableFactory().from__sc_IterableOnce__O($ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, $thiz))
 }
 function $f_sc_IndexedSeqOps__drop__I__O($thiz, n) {
   return $thiz.fromSpecific__sc_IterableOnce__O($ct_sc_IndexedSeqView$Drop__sc_IndexedSeqOps__I__(new $c_sc_IndexedSeqView$Drop(), $thiz, n))
@@ -47484,6 +47492,9 @@ $c_sc_SeqView$Sorted.prototype.fromSpecific__sc_IterableOnce__O = (function(coll
 $c_sc_SeqView$Sorted.prototype.drop__I__O = (function(n) {
   return $ct_sc_SeqView$Drop__sc_SeqOps__I__(new $c_sc_SeqView$Drop(), this, n)
 });
+$c_sc_SeqView$Sorted.prototype.prepended__O__O = (function(elem) {
+  return $ct_sc_SeqView$Prepended__O__sc_SeqOps__(new $c_sc_SeqView$Prepended(), elem, this)
+});
 $c_sc_SeqView$Sorted.prototype.map__F1__O = (function(f) {
   return $ct_sc_SeqView$Map__sc_SeqOps__F1__(new $c_sc_SeqView$Map(), this, f)
 });
@@ -47650,6 +47661,9 @@ $c_sc_SeqView$Sorted$ReverseSorted.prototype.fromSpecific__sc_IterableOnce__O = 
 });
 $c_sc_SeqView$Sorted$ReverseSorted.prototype.drop__I__O = (function(n) {
   return $ct_sc_SeqView$Drop__sc_SeqOps__I__(new $c_sc_SeqView$Drop(), this, n)
+});
+$c_sc_SeqView$Sorted$ReverseSorted.prototype.prepended__O__O = (function(elem) {
+  return $ct_sc_SeqView$Prepended__O__sc_SeqOps__(new $c_sc_SeqView$Prepended(), elem, this)
 });
 $c_sc_SeqView$Sorted$ReverseSorted.prototype.map__F1__O = (function(f) {
   return $ct_sc_SeqView$Map__sc_SeqOps__F1__(new $c_sc_SeqView$Map(), this, f)
@@ -48167,6 +48181,32 @@ function $h_sc_View$Prepended() {
   /*<skip>*/
 }
 $h_sc_View$Prepended.prototype = $c_sc_View$Prepended.prototype;
+$c_sc_View$Prepended.prototype.iterator__sc_Iterator = (function() {
+  return new $c_sc_View$Concat(new $c_sc_View$Single(this.sc_View$Prepended__f_elem), this.sc_View$Prepended__f_underlying).iterator__sc_Iterator()
+});
+$c_sc_View$Prepended.prototype.knownSize__I = (function() {
+  var size = this.sc_View$Prepended__f_underlying.knownSize__I();
+  return ((size >= 0) ? ((1 + size) | 0) : (-1))
+});
+$c_sc_View$Prepended.prototype.isEmpty__Z = (function() {
+  return false
+});
+var $d_sc_View$Prepended = new $TypeData().initClass({
+  sc_View$Prepended: 0
+}, false, "scala.collection.View$Prepended", {
+  sc_View$Prepended: 1,
+  sc_AbstractView: 1,
+  sc_AbstractIterable: 1,
+  O: 1,
+  sc_Iterable: 1,
+  sc_IterableOnce: 1,
+  sc_IterableOps: 1,
+  sc_IterableOnceOps: 1,
+  sc_IterableFactoryDefaults: 1,
+  sc_View: 1,
+  Ljava_io_Serializable: 1
+});
+$c_sc_View$Prepended.prototype.$classData = $d_sc_View$Prepended;
 /** @constructor */
 function $c_sc_View$Single(a) {
   this.sc_View$Single__f_a = null;
@@ -48916,6 +48956,9 @@ $c_Lorg_scalajs_dom_DOMList$DOMListSeq.prototype.hashCode__I = (function() {
 $c_Lorg_scalajs_dom_DOMList$DOMListSeq.prototype.toString__T = (function() {
   return $f_sc_Iterable__toString__T(this)
 });
+$c_Lorg_scalajs_dom_DOMList$DOMListSeq.prototype.prepended__O__O = (function(elem) {
+  return $f_sc_SeqOps__prepended__O__O(this, elem)
+});
 $c_Lorg_scalajs_dom_DOMList$DOMListSeq.prototype.concat__sc_IterableOnce__O = (function(suffix) {
   return $f_sc_IterableOps__concat__sc_IterableOnce__O(this, suffix)
 });
@@ -49332,6 +49375,9 @@ $h_sc_AbstractSeqView.prototype = $c_sc_AbstractSeqView.prototype;
 $c_sc_AbstractSeqView.prototype.map__F1__sc_SeqView = (function(f) {
   return $ct_sc_SeqView$Map__sc_SeqOps__F1__(new $c_sc_SeqView$Map(), this, f)
 });
+$c_sc_AbstractSeqView.prototype.prepended__O__sc_SeqView = (function(elem) {
+  return $ct_sc_SeqView$Prepended__O__sc_SeqOps__(new $c_sc_SeqView$Prepended(), elem, this)
+});
 $c_sc_AbstractSeqView.prototype.drop__I__sc_SeqView = (function(n) {
   return $ct_sc_SeqView$Drop__sc_SeqOps__I__(new $c_sc_SeqView$Drop(), this, n)
 });
@@ -49368,6 +49414,9 @@ $c_sc_AbstractSeqView.prototype.sorted__s_math_Ordering__O = (function(ord) {
 });
 $c_sc_AbstractSeqView.prototype.drop__I__O = (function(n) {
   return this.drop__I__sc_SeqView(n)
+});
+$c_sc_AbstractSeqView.prototype.prepended__O__O = (function(elem) {
+  return this.prepended__O__sc_SeqView(elem)
 });
 $c_sc_AbstractSeqView.prototype.map__F1__O = (function(f) {
   return this.map__F1__sc_SeqView(f)
@@ -49554,6 +49603,9 @@ $h_sc_SeqView$Drop.prototype = $c_sc_SeqView$Drop.prototype;
 $c_sc_SeqView$Drop.prototype.map__F1__sc_SeqView = (function(f) {
   return $ct_sc_SeqView$Map__sc_SeqOps__F1__(new $c_sc_SeqView$Map(), this, f)
 });
+$c_sc_SeqView$Drop.prototype.prepended__O__sc_SeqView = (function(elem) {
+  return $ct_sc_SeqView$Prepended__O__sc_SeqOps__(new $c_sc_SeqView$Prepended(), elem, this)
+});
 $c_sc_SeqView$Drop.prototype.stringPrefix__T = (function() {
   return "SeqView"
 });
@@ -49595,6 +49647,9 @@ $c_sc_SeqView$Drop.prototype.drop__I__sc_SeqView = (function(n) {
 });
 $c_sc_SeqView$Drop.prototype.sorted__s_math_Ordering__O = (function(ord) {
   return $ct_sc_SeqView$Sorted__sc_SeqOps__s_math_Ordering__(new $c_sc_SeqView$Sorted(), this, ord)
+});
+$c_sc_SeqView$Drop.prototype.prepended__O__O = (function(elem) {
+  return this.prepended__O__sc_SeqView(elem)
 });
 $c_sc_SeqView$Drop.prototype.map__F1__O = (function(f) {
   return this.map__F1__sc_SeqView(f)
@@ -49693,6 +49748,9 @@ $h_sc_SeqView$Map.prototype = $c_sc_SeqView$Map.prototype;
 $c_sc_SeqView$Map.prototype.map__F1__sc_SeqView = (function(f) {
   return $ct_sc_SeqView$Map__sc_SeqOps__F1__(new $c_sc_SeqView$Map(), this, f)
 });
+$c_sc_SeqView$Map.prototype.prepended__O__sc_SeqView = (function(elem) {
+  return $ct_sc_SeqView$Prepended__O__sc_SeqOps__(new $c_sc_SeqView$Prepended(), elem, this)
+});
 $c_sc_SeqView$Map.prototype.drop__I__sc_SeqView = (function(n) {
   return $ct_sc_SeqView$Drop__sc_SeqOps__I__(new $c_sc_SeqView$Drop(), this, n)
 });
@@ -49736,6 +49794,9 @@ $c_sc_SeqView$Map.prototype.sorted__s_math_Ordering__O = (function(ord) {
 $c_sc_SeqView$Map.prototype.drop__I__O = (function(n) {
   return this.drop__I__sc_SeqView(n)
 });
+$c_sc_SeqView$Map.prototype.prepended__O__O = (function(elem) {
+  return this.prepended__O__sc_SeqView(elem)
+});
 $c_sc_SeqView$Map.prototype.map__F1__O = (function(f) {
   return this.map__F1__sc_SeqView(f)
 });
@@ -49778,6 +49839,18 @@ function $h_sc_SeqView$Prepended() {
   /*<skip>*/
 }
 $h_sc_SeqView$Prepended.prototype = $c_sc_SeqView$Prepended.prototype;
+$c_sc_SeqView$Prepended.prototype.map__F1__sc_SeqView = (function(f) {
+  return $ct_sc_SeqView$Map__sc_SeqOps__F1__(new $c_sc_SeqView$Map(), this, f)
+});
+$c_sc_SeqView$Prepended.prototype.prepended__O__sc_SeqView = (function(elem) {
+  return $ct_sc_SeqView$Prepended__O__sc_SeqOps__(new $c_sc_SeqView$Prepended(), elem, this)
+});
+$c_sc_SeqView$Prepended.prototype.drop__I__sc_SeqView = (function(n) {
+  return $ct_sc_SeqView$Drop__sc_SeqOps__I__(new $c_sc_SeqView$Drop(), this, n)
+});
+$c_sc_SeqView$Prepended.prototype.stringPrefix__T = (function() {
+  return "SeqView"
+});
 $c_sc_SeqView$Prepended.prototype.concat__sc_IterableOnce__O = (function(suffix) {
   return $f_sc_IterableOps__concat__sc_IterableOnce__O(this, suffix)
 });
@@ -49787,12 +49860,18 @@ $c_sc_SeqView$Prepended.prototype.distinct__O = (function() {
 $c_sc_SeqView$Prepended.prototype.distinctBy__F1__O = (function(f) {
   return $f_sc_SeqOps__distinctBy__F1__O(this, f)
 });
+$c_sc_SeqView$Prepended.prototype.reverseIterator__sc_Iterator = (function() {
+  return this.reversed__sc_Iterable().iterator__sc_Iterator()
+});
 $c_sc_SeqView$Prepended.prototype.indexWhere__F1__I__I = (function(p, from) {
   var this$1 = this.iterator__sc_Iterator();
   return $f_sc_Iterator__indexWhere__F1__I__I(this$1, p, from)
 });
 $c_sc_SeqView$Prepended.prototype.contains__O__Z = (function(elem) {
   return $f_sc_SeqOps__contains__O__Z(this, elem)
+});
+$c_sc_SeqView$Prepended.prototype.lengthCompare__I__I = (function(len) {
+  return $f_sc_IterableOps__sizeCompare__I__I(this, len)
 });
 $c_sc_SeqView$Prepended.prototype.isEmpty__Z = (function() {
   return $f_sc_SeqOps__isEmpty__Z(this)
@@ -49806,6 +49885,34 @@ $c_sc_SeqView$Prepended.prototype.length__I = (function() {
 $c_sc_SeqView$Prepended.prototype.sorted__s_math_Ordering__O = (function(ord) {
   return $ct_sc_SeqView$Sorted__sc_SeqOps__s_math_Ordering__(new $c_sc_SeqView$Sorted(), this, ord)
 });
+$c_sc_SeqView$Prepended.prototype.drop__I__O = (function(n) {
+  return this.drop__I__sc_SeqView(n)
+});
+$c_sc_SeqView$Prepended.prototype.prepended__O__O = (function(elem) {
+  return this.prepended__O__sc_SeqView(elem)
+});
+$c_sc_SeqView$Prepended.prototype.map__F1__O = (function(f) {
+  return this.map__F1__sc_SeqView(f)
+});
+var $d_sc_SeqView$Prepended = new $TypeData().initClass({
+  sc_SeqView$Prepended: 0
+}, false, "scala.collection.SeqView$Prepended", {
+  sc_SeqView$Prepended: 1,
+  sc_View$Prepended: 1,
+  sc_AbstractView: 1,
+  sc_AbstractIterable: 1,
+  O: 1,
+  sc_Iterable: 1,
+  sc_IterableOnce: 1,
+  sc_IterableOps: 1,
+  sc_IterableOnceOps: 1,
+  sc_IterableFactoryDefaults: 1,
+  sc_View: 1,
+  Ljava_io_Serializable: 1,
+  sc_SeqView: 1,
+  sc_SeqOps: 1
+});
+$c_sc_SeqView$Prepended.prototype.$classData = $d_sc_SeqView$Prepended;
 function $ct_sc_SeqView$Reverse__sc_SeqOps__($thiz, underlying) {
   $thiz.sc_SeqView$Reverse__f_underlying = underlying;
   return $thiz
@@ -49914,6 +50021,9 @@ $c_sc_AbstractIndexedSeqView.prototype.iterator__sc_Iterator = (function() {
 $c_sc_AbstractIndexedSeqView.prototype.reverseIterator__sc_Iterator = (function() {
   return $ct_sc_IndexedSeqView$IndexedSeqViewReverseIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewReverseIterator(), this)
 });
+$c_sc_AbstractIndexedSeqView.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
+  return $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, this)
+});
 $c_sc_AbstractIndexedSeqView.prototype.drop__I__sc_IndexedSeqView = (function(n) {
   return $ct_sc_IndexedSeqView$Drop__sc_IndexedSeqOps__I__(new $c_sc_IndexedSeqView$Drop(), this, n)
 });
@@ -49947,6 +50057,12 @@ $c_sc_AbstractIndexedSeqView.prototype.drop__I__sc_SeqView = (function(n) {
 });
 $c_sc_AbstractIndexedSeqView.prototype.drop__I__O = (function(n) {
   return this.drop__I__sc_IndexedSeqView(n)
+});
+$c_sc_AbstractIndexedSeqView.prototype.prepended__O__sc_SeqView = (function(elem) {
+  return this.prepended__O__sc_IndexedSeqView(elem)
+});
+$c_sc_AbstractIndexedSeqView.prototype.prepended__O__O = (function(elem) {
+  return this.prepended__O__sc_IndexedSeqView(elem)
 });
 /** @constructor */
 function $c_sci_AbstractSet() {
@@ -49990,6 +50106,9 @@ $c_sc_IndexedSeqView$Drop.prototype.iterator__sc_Iterator = (function() {
 $c_sc_IndexedSeqView$Drop.prototype.reverseIterator__sc_Iterator = (function() {
   return $ct_sc_IndexedSeqView$IndexedSeqViewReverseIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewReverseIterator(), this)
 });
+$c_sc_IndexedSeqView$Drop.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
+  return $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, this)
+});
 $c_sc_IndexedSeqView$Drop.prototype.drop__I__sc_IndexedSeqView = (function(n) {
   return $ct_sc_IndexedSeqView$Drop__sc_IndexedSeqOps__I__(new $c_sc_IndexedSeqView$Drop(), this, n)
 });
@@ -50023,6 +50142,12 @@ $c_sc_IndexedSeqView$Drop.prototype.drop__I__sc_SeqView = (function(n) {
 });
 $c_sc_IndexedSeqView$Drop.prototype.drop__I__O = (function(n) {
   return this.drop__I__sc_IndexedSeqView(n)
+});
+$c_sc_IndexedSeqView$Drop.prototype.prepended__O__sc_SeqView = (function(elem) {
+  return this.prepended__O__sc_IndexedSeqView(elem)
+});
+$c_sc_IndexedSeqView$Drop.prototype.prepended__O__O = (function(elem) {
+  return this.prepended__O__sc_IndexedSeqView(elem)
 });
 var $d_sc_IndexedSeqView$Drop = new $TypeData().initClass({
   sc_IndexedSeqView$Drop: 0
@@ -50092,6 +50217,12 @@ $c_sc_IndexedSeqView$Id.prototype.drop__I__sc_SeqView = (function(n) {
 $c_sc_IndexedSeqView$Id.prototype.drop__I__O = (function(n) {
   return $ct_sc_IndexedSeqView$Drop__sc_IndexedSeqOps__I__(new $c_sc_IndexedSeqView$Drop(), this, n)
 });
+$c_sc_IndexedSeqView$Id.prototype.prepended__O__sc_SeqView = (function(elem) {
+  return $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, this)
+});
+$c_sc_IndexedSeqView$Id.prototype.prepended__O__O = (function(elem) {
+  return $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, this)
+});
 var $d_sc_IndexedSeqView$Id = new $TypeData().initClass({
   sc_IndexedSeqView$Id: 0
 }, false, "scala.collection.IndexedSeqView$Id", {
@@ -50138,6 +50269,9 @@ $c_sc_IndexedSeqView$Map.prototype.iterator__sc_Iterator = (function() {
 $c_sc_IndexedSeqView$Map.prototype.reverseIterator__sc_Iterator = (function() {
   return $ct_sc_IndexedSeqView$IndexedSeqViewReverseIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewReverseIterator(), this)
 });
+$c_sc_IndexedSeqView$Map.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
+  return $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, this)
+});
 $c_sc_IndexedSeqView$Map.prototype.drop__I__sc_IndexedSeqView = (function(n) {
   return $ct_sc_IndexedSeqView$Drop__sc_IndexedSeqOps__I__(new $c_sc_IndexedSeqView$Drop(), this, n)
 });
@@ -50172,6 +50306,12 @@ $c_sc_IndexedSeqView$Map.prototype.drop__I__sc_SeqView = (function(n) {
 $c_sc_IndexedSeqView$Map.prototype.drop__I__O = (function(n) {
   return this.drop__I__sc_IndexedSeqView(n)
 });
+$c_sc_IndexedSeqView$Map.prototype.prepended__O__sc_SeqView = (function(elem) {
+  return this.prepended__O__sc_IndexedSeqView(elem)
+});
+$c_sc_IndexedSeqView$Map.prototype.prepended__O__O = (function(elem) {
+  return this.prepended__O__sc_IndexedSeqView(elem)
+});
 var $d_sc_IndexedSeqView$Map = new $TypeData().initClass({
   sc_IndexedSeqView$Map: 0
 }, false, "scala.collection.IndexedSeqView$Map", {
@@ -50194,13 +50334,16 @@ var $d_sc_IndexedSeqView$Map = new $TypeData().initClass({
   sc_IndexedSeqOps: 1
 });
 $c_sc_IndexedSeqView$Map.prototype.$classData = $d_sc_IndexedSeqView$Map;
+function $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__($thiz, elem, underlying) {
+  $ct_sc_SeqView$Prepended__O__sc_SeqOps__($thiz, elem, underlying);
+  return $thiz
+}
 /** @constructor */
-function $c_sc_IndexedSeqView$Prepended(elem, underlying) {
+function $c_sc_IndexedSeqView$Prepended() {
   this.sc_View$Prepended__f_elem = null;
   this.sc_View$Prepended__f_underlying = null;
   this.sc_SeqView$Prepended__f_elem = null;
-  this.sc_SeqView$Prepended__f_underlying = null;
-  $ct_sc_SeqView$Prepended__O__sc_SeqOps__(this, elem, underlying)
+  this.sc_SeqView$Prepended__f_underlying = null
 }
 $c_sc_IndexedSeqView$Prepended.prototype = new $h_sc_SeqView$Prepended();
 $c_sc_IndexedSeqView$Prepended.prototype.constructor = $c_sc_IndexedSeqView$Prepended;
@@ -50215,6 +50358,9 @@ $c_sc_IndexedSeqView$Prepended.prototype.iterator__sc_Iterator = (function() {
 $c_sc_IndexedSeqView$Prepended.prototype.reverseIterator__sc_Iterator = (function() {
   return $ct_sc_IndexedSeqView$IndexedSeqViewReverseIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewReverseIterator(), this)
 });
+$c_sc_IndexedSeqView$Prepended.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
+  return $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, this)
+});
 $c_sc_IndexedSeqView$Prepended.prototype.drop__I__sc_IndexedSeqView = (function(n) {
   return $ct_sc_IndexedSeqView$Drop__sc_IndexedSeqOps__I__(new $c_sc_IndexedSeqView$Drop(), this, n)
 });
@@ -50223,6 +50369,9 @@ $c_sc_IndexedSeqView$Prepended.prototype.map__F1__sc_IndexedSeqView = (function(
 });
 $c_sc_IndexedSeqView$Prepended.prototype.stringPrefix__T = (function() {
   return "IndexedSeqView"
+});
+$c_sc_IndexedSeqView$Prepended.prototype.reversed__sc_Iterable = (function() {
+  return new $c_sc_IndexedSeqView$Reverse(this)
 });
 $c_sc_IndexedSeqView$Prepended.prototype.head__O = (function() {
   return this.apply__I__O(0)
@@ -50234,11 +50383,23 @@ $c_sc_IndexedSeqView$Prepended.prototype.lengthCompare__I__I = (function(len) {
 $c_sc_IndexedSeqView$Prepended.prototype.knownSize__I = (function() {
   return this.length__I()
 });
+$c_sc_IndexedSeqView$Prepended.prototype.map__F1__sc_SeqView = (function(f) {
+  return this.map__F1__sc_IndexedSeqView(f)
+});
 $c_sc_IndexedSeqView$Prepended.prototype.map__F1__O = (function(f) {
   return this.map__F1__sc_IndexedSeqView(f)
 });
+$c_sc_IndexedSeqView$Prepended.prototype.drop__I__sc_SeqView = (function(n) {
+  return this.drop__I__sc_IndexedSeqView(n)
+});
 $c_sc_IndexedSeqView$Prepended.prototype.drop__I__O = (function(n) {
   return this.drop__I__sc_IndexedSeqView(n)
+});
+$c_sc_IndexedSeqView$Prepended.prototype.prepended__O__sc_SeqView = (function(elem) {
+  return this.prepended__O__sc_IndexedSeqView(elem)
+});
+$c_sc_IndexedSeqView$Prepended.prototype.prepended__O__O = (function(elem) {
+  return this.prepended__O__sc_IndexedSeqView(elem)
 });
 var $d_sc_IndexedSeqView$Prepended = new $TypeData().initClass({
   sc_IndexedSeqView$Prepended: 0
@@ -50310,6 +50471,12 @@ $c_sc_IndexedSeqView$Reverse.prototype.drop__I__sc_SeqView = (function(n) {
 $c_sc_IndexedSeqView$Reverse.prototype.drop__I__O = (function(n) {
   return $ct_sc_IndexedSeqView$Drop__sc_IndexedSeqOps__I__(new $c_sc_IndexedSeqView$Drop(), this, n)
 });
+$c_sc_IndexedSeqView$Reverse.prototype.prepended__O__sc_SeqView = (function(elem) {
+  return $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, this)
+});
+$c_sc_IndexedSeqView$Reverse.prototype.prepended__O__O = (function(elem) {
+  return $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, this)
+});
 var $d_sc_IndexedSeqView$Reverse = new $TypeData().initClass({
   sc_IndexedSeqView$Reverse: 0
 }, false, "scala.collection.IndexedSeqView$Reverse", {
@@ -50376,6 +50543,9 @@ $c_scm_ArrayBufferView.prototype.iterator__sc_Iterator = (function() {
 $c_scm_ArrayBufferView.prototype.reverseIterator__sc_Iterator = (function() {
   return new $c_scm_CheckedIndexedSeqView$CheckedReverseIterator(this, this.scm_ArrayBufferView__f_mutationCount)
 });
+$c_scm_ArrayBufferView.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
+  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_ArrayBufferView__f_mutationCount)
+});
 $c_scm_ArrayBufferView.prototype.drop__I__sc_IndexedSeqView = (function(n) {
   return new $c_scm_CheckedIndexedSeqView$Drop(this, n, this.scm_ArrayBufferView__f_mutationCount)
 });
@@ -50393,6 +50563,12 @@ $c_scm_ArrayBufferView.prototype.drop__I__sc_SeqView = (function(n) {
 });
 $c_scm_ArrayBufferView.prototype.drop__I__O = (function(n) {
   return this.drop__I__sc_IndexedSeqView(n)
+});
+$c_scm_ArrayBufferView.prototype.prepended__O__sc_SeqView = (function(elem) {
+  return this.prepended__O__sc_IndexedSeqView(elem)
+});
+$c_scm_ArrayBufferView.prototype.prepended__O__O = (function(elem) {
+  return this.prepended__O__sc_IndexedSeqView(elem)
 });
 var $d_scm_ArrayBufferView = new $TypeData().initClass({
   scm_ArrayBufferView: 0
@@ -51305,6 +51481,9 @@ $c_scm_CheckedIndexedSeqView$Drop.prototype.iterator__sc_Iterator = (function() 
 $c_scm_CheckedIndexedSeqView$Drop.prototype.reverseIterator__sc_Iterator = (function() {
   return new $c_scm_CheckedIndexedSeqView$CheckedReverseIterator(this, this.scm_CheckedIndexedSeqView$Drop__f_mutationCount)
 });
+$c_scm_CheckedIndexedSeqView$Drop.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
+  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Drop__f_mutationCount)
+});
 $c_scm_CheckedIndexedSeqView$Drop.prototype.drop__I__sc_IndexedSeqView = (function(n) {
   return new $c_scm_CheckedIndexedSeqView$Drop(this, n, this.scm_CheckedIndexedSeqView$Drop__f_mutationCount)
 });
@@ -51322,6 +51501,12 @@ $c_scm_CheckedIndexedSeqView$Drop.prototype.drop__I__sc_SeqView = (function(n) {
 });
 $c_scm_CheckedIndexedSeqView$Drop.prototype.drop__I__O = (function(n) {
   return new $c_scm_CheckedIndexedSeqView$Drop(this, n, this.scm_CheckedIndexedSeqView$Drop__f_mutationCount)
+});
+$c_scm_CheckedIndexedSeqView$Drop.prototype.prepended__O__sc_SeqView = (function(elem) {
+  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Drop__f_mutationCount)
+});
+$c_scm_CheckedIndexedSeqView$Drop.prototype.prepended__O__O = (function(elem) {
+  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Drop__f_mutationCount)
 });
 var $d_scm_CheckedIndexedSeqView$Drop = new $TypeData().initClass({
   scm_CheckedIndexedSeqView$Drop: 0
@@ -51370,6 +51555,9 @@ $c_scm_CheckedIndexedSeqView$Map.prototype.iterator__sc_Iterator = (function() {
 $c_scm_CheckedIndexedSeqView$Map.prototype.reverseIterator__sc_Iterator = (function() {
   return new $c_scm_CheckedIndexedSeqView$CheckedReverseIterator(this, this.scm_CheckedIndexedSeqView$Map__f_mutationCount)
 });
+$c_scm_CheckedIndexedSeqView$Map.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
+  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Map__f_mutationCount)
+});
 $c_scm_CheckedIndexedSeqView$Map.prototype.drop__I__sc_IndexedSeqView = (function(n) {
   return new $c_scm_CheckedIndexedSeqView$Drop(this, n, this.scm_CheckedIndexedSeqView$Map__f_mutationCount)
 });
@@ -51387,6 +51575,12 @@ $c_scm_CheckedIndexedSeqView$Map.prototype.drop__I__sc_SeqView = (function(n) {
 });
 $c_scm_CheckedIndexedSeqView$Map.prototype.drop__I__O = (function(n) {
   return new $c_scm_CheckedIndexedSeqView$Drop(this, n, this.scm_CheckedIndexedSeqView$Map__f_mutationCount)
+});
+$c_scm_CheckedIndexedSeqView$Map.prototype.prepended__O__sc_SeqView = (function(elem) {
+  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Map__f_mutationCount)
+});
+$c_scm_CheckedIndexedSeqView$Map.prototype.prepended__O__O = (function(elem) {
+  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Map__f_mutationCount)
 });
 var $d_scm_CheckedIndexedSeqView$Map = new $TypeData().initClass({
   scm_CheckedIndexedSeqView$Map: 0
@@ -51412,6 +51606,80 @@ var $d_scm_CheckedIndexedSeqView$Map = new $TypeData().initClass({
   scm_CheckedIndexedSeqView: 1
 });
 $c_scm_CheckedIndexedSeqView$Map.prototype.$classData = $d_scm_CheckedIndexedSeqView$Map;
+/** @constructor */
+function $c_scm_CheckedIndexedSeqView$Prepended(elem, underlying, mutationCount) {
+  this.sc_View$Prepended__f_elem = null;
+  this.sc_View$Prepended__f_underlying = null;
+  this.sc_SeqView$Prepended__f_elem = null;
+  this.sc_SeqView$Prepended__f_underlying = null;
+  this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount = null;
+  this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount = mutationCount;
+  $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(this, elem, underlying)
+}
+$c_scm_CheckedIndexedSeqView$Prepended.prototype = new $h_sc_IndexedSeqView$Prepended();
+$c_scm_CheckedIndexedSeqView$Prepended.prototype.constructor = $c_scm_CheckedIndexedSeqView$Prepended;
+/** @constructor */
+function $h_scm_CheckedIndexedSeqView$Prepended() {
+  /*<skip>*/
+}
+$h_scm_CheckedIndexedSeqView$Prepended.prototype = $c_scm_CheckedIndexedSeqView$Prepended.prototype;
+$c_scm_CheckedIndexedSeqView$Prepended.prototype.iterator__sc_Iterator = (function() {
+  return new $c_scm_CheckedIndexedSeqView$CheckedIterator(this, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount)
+});
+$c_scm_CheckedIndexedSeqView$Prepended.prototype.reverseIterator__sc_Iterator = (function() {
+  return new $c_scm_CheckedIndexedSeqView$CheckedReverseIterator(this, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount)
+});
+$c_scm_CheckedIndexedSeqView$Prepended.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
+  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount)
+});
+$c_scm_CheckedIndexedSeqView$Prepended.prototype.drop__I__sc_IndexedSeqView = (function(n) {
+  return new $c_scm_CheckedIndexedSeqView$Drop(this, n, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount)
+});
+$c_scm_CheckedIndexedSeqView$Prepended.prototype.map__F1__sc_IndexedSeqView = (function(f) {
+  return new $c_scm_CheckedIndexedSeqView$Map(this, f, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount)
+});
+$c_scm_CheckedIndexedSeqView$Prepended.prototype.map__F1__sc_SeqView = (function(f) {
+  return new $c_scm_CheckedIndexedSeqView$Map(this, f, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount)
+});
+$c_scm_CheckedIndexedSeqView$Prepended.prototype.map__F1__O = (function(f) {
+  return new $c_scm_CheckedIndexedSeqView$Map(this, f, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount)
+});
+$c_scm_CheckedIndexedSeqView$Prepended.prototype.drop__I__sc_SeqView = (function(n) {
+  return new $c_scm_CheckedIndexedSeqView$Drop(this, n, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount)
+});
+$c_scm_CheckedIndexedSeqView$Prepended.prototype.drop__I__O = (function(n) {
+  return new $c_scm_CheckedIndexedSeqView$Drop(this, n, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount)
+});
+$c_scm_CheckedIndexedSeqView$Prepended.prototype.prepended__O__sc_SeqView = (function(elem) {
+  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount)
+});
+$c_scm_CheckedIndexedSeqView$Prepended.prototype.prepended__O__O = (function(elem) {
+  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount)
+});
+var $d_scm_CheckedIndexedSeqView$Prepended = new $TypeData().initClass({
+  scm_CheckedIndexedSeqView$Prepended: 0
+}, false, "scala.collection.mutable.CheckedIndexedSeqView$Prepended", {
+  scm_CheckedIndexedSeqView$Prepended: 1,
+  sc_IndexedSeqView$Prepended: 1,
+  sc_SeqView$Prepended: 1,
+  sc_View$Prepended: 1,
+  sc_AbstractView: 1,
+  sc_AbstractIterable: 1,
+  O: 1,
+  sc_Iterable: 1,
+  sc_IterableOnce: 1,
+  sc_IterableOps: 1,
+  sc_IterableOnceOps: 1,
+  sc_IterableFactoryDefaults: 1,
+  sc_View: 1,
+  Ljava_io_Serializable: 1,
+  sc_SeqView: 1,
+  sc_SeqOps: 1,
+  sc_IndexedSeqView: 1,
+  sc_IndexedSeqOps: 1,
+  scm_CheckedIndexedSeqView: 1
+});
+$c_scm_CheckedIndexedSeqView$Prepended.prototype.$classData = $d_scm_CheckedIndexedSeqView$Prepended;
 /** @constructor */
 function $c_sci_Map$EmptyMap$() {
   /*<skip>*/
@@ -56520,6 +56788,9 @@ function $h_scm_ArraySeq() {
 $h_scm_ArraySeq.prototype = $c_scm_ArraySeq.prototype;
 $c_scm_ArraySeq.prototype.distinctBy__F1__O = (function(f) {
   return $f_sc_StrictOptimizedSeqOps__distinctBy__F1__O(this, f)
+});
+$c_scm_ArraySeq.prototype.prepended__O__O = (function(elem) {
+  return $f_sc_StrictOptimizedSeqOps__prepended__O__O(this, elem)
 });
 $c_scm_ArraySeq.prototype.appendedAll__sc_IterableOnce__O = (function(suffix) {
   return $f_sc_StrictOptimizedSeqOps__appendedAll__sc_IterableOnce__O(this, suffix)
@@ -63192,6 +63463,9 @@ $c_scm_StringBuilder.prototype.reverseIterator__sc_Iterator = (function() {
 $c_scm_StringBuilder.prototype.reversed__sc_Iterable = (function() {
   return new $c_sc_IndexedSeqView$Reverse(this)
 });
+$c_scm_StringBuilder.prototype.prepended__O__O = (function(elem) {
+  return $f_sc_IndexedSeqOps__prepended__O__O(this, elem)
+});
 $c_scm_StringBuilder.prototype.drop__I__O = (function(n) {
   return $f_sc_IndexedSeqOps__drop__I__O(this, n)
 });
@@ -63386,6 +63660,9 @@ $c_scm_ListBuffer.prototype.sizeHint__I__V = (function(size) {
 $c_scm_ListBuffer.prototype.distinctBy__F1__O = (function(f) {
   return $f_sc_StrictOptimizedSeqOps__distinctBy__F1__O(this, f)
 });
+$c_scm_ListBuffer.prototype.prepended__O__O = (function(elem) {
+  return $f_sc_StrictOptimizedSeqOps__prepended__O__O(this, elem)
+});
 $c_scm_ListBuffer.prototype.appendedAll__sc_IterableOnce__O = (function(suffix) {
   return $f_sc_StrictOptimizedSeqOps__appendedAll__sc_IterableOnce__O(this, suffix)
 });
@@ -63570,6 +63847,9 @@ function $h_scm_ArrayBuffer() {
 $h_scm_ArrayBuffer.prototype = $c_scm_ArrayBuffer.prototype;
 $c_scm_ArrayBuffer.prototype.distinctBy__F1__O = (function(f) {
   return $f_sc_StrictOptimizedSeqOps__distinctBy__F1__O(this, f)
+});
+$c_scm_ArrayBuffer.prototype.prepended__O__O = (function(elem) {
+  return $f_sc_StrictOptimizedSeqOps__prepended__O__O(this, elem)
 });
 $c_scm_ArrayBuffer.prototype.appendedAll__sc_IterableOnce__O = (function(suffix) {
   return $f_sc_StrictOptimizedSeqOps__appendedAll__sc_IterableOnce__O(this, suffix)
@@ -63778,6 +64058,9 @@ $c_sjs_js_WrappedArray.prototype.reverseIterator__sc_Iterator = (function() {
 $c_sjs_js_WrappedArray.prototype.reversed__sc_Iterable = (function() {
   return new $c_sc_IndexedSeqView$Reverse(this)
 });
+$c_sjs_js_WrappedArray.prototype.prepended__O__O = (function(elem) {
+  return $f_sc_IndexedSeqOps__prepended__O__O(this, elem)
+});
 $c_sjs_js_WrappedArray.prototype.drop__I__O = (function(n) {
   return $f_sc_IndexedSeqOps__drop__I__O(this, n)
 });
@@ -63929,6 +64212,9 @@ function $h_scm_ArrayDeque() {
 $h_scm_ArrayDeque.prototype = $c_scm_ArrayDeque.prototype;
 $c_scm_ArrayDeque.prototype.distinctBy__F1__O = (function(f) {
   return $f_sc_StrictOptimizedSeqOps__distinctBy__F1__O(this, f)
+});
+$c_scm_ArrayDeque.prototype.prepended__O__O = (function(elem) {
+  return $f_sc_StrictOptimizedSeqOps__prepended__O__O(this, elem)
 });
 $c_scm_ArrayDeque.prototype.appendedAll__sc_IterableOnce__O = (function(suffix) {
   return $f_sc_StrictOptimizedSeqOps__appendedAll__sc_IterableOnce__O(this, suffix)

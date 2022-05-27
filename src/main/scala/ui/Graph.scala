@@ -32,6 +32,7 @@ object Graph {
 	
 	window.addEventListener("resize", { (e: Any) => draw })
 	
+    setGraphs(Nil)
 	draw
   }
 
@@ -196,15 +197,17 @@ object Graph {
 
     // Generate the list of intersection points
     this.points = {
-      for ((a, col) <- allExprs ; (b, _) <- (allExprs :+ (0.s -> "")) if a != b)
-      yield (a, b) match {
-        case (SymVertical(x), b) => Seq(IntersectionPoint(Seq(a, b), x, b.replaceExpr('x, x).simple, col))
-        case (a, SymVertical(x)) => Seq(IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col))
-        case (SymVertical(x1), SymVertical(x2)) => Nil
-        case (a, b) => ++(a, **(b, -1)).zeros.flatMap(_.expand).map{ x =>
-          IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col)
+      Seq(IntersectionPoint(Nil, 0.s, 0.s, gridColor)) +: (
+        for ((a, col) <- allExprs ; (b, _) <- (allExprs :+ (0.s -> "")) if a != b)
+        yield (a, b) match {
+          case (SymVertical(x), b) => Seq(IntersectionPoint(Seq(a, b), x, b.replaceExpr('x, x).simple, col))
+          case (a, SymVertical(x)) => Seq(IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col))
+          case (SymVertical(x1), SymVertical(x2)) => Nil
+          case (a, b) => ++(a, **(b, -1)).zeros.flatMap(_.expand).map{ x =>
+            IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col)
+          }
         }
-      }
+      )
       // Combine multiple functions that intersect at the same point
     }.flatten.groupBy{ p => (p.x, p.y) }
       .map{ case (p: (Sym, Sym), is: Seq[IntersectionPoint]) =>
