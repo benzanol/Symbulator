@@ -197,8 +197,13 @@ object Graph {
     // Generate the list of intersection points
     this.points = {
       for ((a, col) <- allExprs ; (b, _) <- (allExprs :+ (0.s -> "")) if a != b)
-      yield ++(a, **(b, -1)).zeros.flatMap(_.expand).map{ x =>
-        IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col)
+      yield (a, b) match {
+        case (SymVertical(x), b) => Seq(IntersectionPoint(Seq(a, b), x, b.replaceExpr('x, x).simple, col))
+        case (a, SymVertical(x)) => Seq(IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col))
+        case (SymVertical(x1), SymVertical(x2)) => Nil
+        case (a, b) => ++(a, **(b, -1)).zeros.flatMap(_.expand).map{ x =>
+          IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col)
+        }
       }
       // Combine multiple functions that intersect at the same point
     }.flatten.groupBy{ p => (p.x, p.y) }
@@ -365,7 +370,7 @@ object Graph {
     val width = (fc.width - marginX) * pos.xs
 
     // The distance between calculated points will be a power of 1.5
-    val dist = Math.pow(1.1, Math.round(Math.log(width / 500.0) / Math.log(1.5)))
+    val dist = Math.pow(1.1, Math.round(Math.log(width / 500.0) / Math.log(1.1)))
 
     // The x position of the current point (starts slightly to the left of the screen)
     var x = pos.x - dist - (pos.x % dist)
