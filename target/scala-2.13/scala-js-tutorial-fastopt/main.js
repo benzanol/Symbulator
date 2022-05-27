@@ -15745,6 +15745,9 @@ $c_Lsympany_ui_Graph$.prototype.detectMouseAxes__Lorg_scalajs_dom_MouseEvent__V 
   var x$1 = (yAxisX - _1$mcD$sp);
   this.Lsympany_ui_Graph$__f_onYAxis = ($uD(Math.abs(x$1)) < 5.0)
 });
+$c_Lsympany_ui_Graph$.prototype.setPointer__Z__V = (function(pointer) {
+  document.getElementById("graph-container").setAttribute("style", (pointer ? "cursor:pointer" : ""))
+});
 $c_Lsympany_ui_Graph$.prototype.highlightPoints__Lorg_scalajs_dom_MouseEvent__V = (function(event) {
   var nonLocalReturnKey1 = $ct_O__(new $c_O());
   try {
@@ -15763,6 +15766,7 @@ $c_Lsympany_ui_Graph$.prototype.highlightPoints__Lorg_scalajs_dom_MouseEvent__V 
           var a$2 = ($$x1 + $uD(Math.pow(a$1, 2.0)));
           if (($uD(Math.sqrt(a$2)) < $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_pointRadius)) {
             $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_currentPoint = new $c_s_Some(p$1$1);
+            $m_Lsympany_ui_Graph$().setPointer__Z__V(true);
             var box = document.getElementById("point-box");
             var this$7 = p$1$1.Lsympany_ui_Graph$IntersectionPoint__f_x;
             var $$x2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$7);
@@ -15776,6 +15780,7 @@ $c_Lsympany_ui_Graph$.prototype.highlightPoints__Lorg_scalajs_dom_MouseEvent__V 
       }))(p, mx$1, my$1, event$1, nonLocalReturnKey1$1)))
     }))(mx, my, event, nonLocalReturnKey1)));
     this.hidePointBox__V();
+    this.setPointer__Z__V(false);
     this.Lsympany_ui_Graph$__f_currentPoint = $m_s_None$()
   } catch (e) {
     if ((e instanceof $c_sr_NonLocalReturnControl)) {

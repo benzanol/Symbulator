@@ -136,6 +136,11 @@ object Graph {
   // Display important points when the mouse hovers over them
   var currentPoint: Option[IntersectionPoint] = None
 
+  def setPointer(pointer: Boolean) =
+    document.getElementById("graph-container").setAttribute("style",
+      if (pointer) "cursor:pointer" else ""
+    )
+
   def highlightPoints(event: dom.MouseEvent) {
     val rect = fc.getBoundingClientRect()
 
@@ -148,6 +153,9 @@ object Graph {
 
         // Set the current point
         this.currentPoint = Some(p)
+
+        // Make the cursor a pointer
+        setPointer(true)
 
         // Set the text of the point box and move it to the cursor
         val box = document.getElementById("point-box")
@@ -162,6 +170,7 @@ object Graph {
 
     // If no points were found, make sure the box is hidden
     hidePointBox()
+    setPointer(false)
     this.currentPoint = None
   }
 
