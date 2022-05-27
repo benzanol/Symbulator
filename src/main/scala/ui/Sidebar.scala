@@ -91,28 +91,30 @@ object IntegralSidebar {
   var integral: Option[Sym] = None
   var solution: Option[Sym] = None
 
-  def select(): JsContext => Unit = {
-    if (p1.isEmpty || p2.isEmpty || y1.isEmpty || y2.isEmpty) return this.draw(_)
+  def select(): JsContext => Unit =
+    if (p1.isEmpty || p2.isEmpty || y1.isEmpty || y2.isEmpty) {
+      return this.draw(_)
+    } else {
 
-    this.function = Some(++(p1.get.funcs(0), **(-1, p1.get.funcs(1))))
-    this.integral = function.get.integral
+      this.function = Some(++(p1.get.funcs(0), **(-1, p1.get.funcs(1))))
+      this.integral = function.get.integral
 
-    if (integral.isDefined)
-      this.solution = Some(
-        ++(integral.get.replaceExpr('x, p2.get.x),
-          **(-1, integral.get.replaceExpr('x, p1.get.x)))
-          .simple
-      )
+      if (integral.isDefined)
+        this.solution = Some(
+          ++(integral.get.replaceExpr('x, p2.get.x),
+            **(-1, integral.get.replaceExpr('x, p1.get.x)))
+            .simple
+        )
 
-    for (i <- integral ; s <- solution) {
-      val suScripts = s"_{${p1.get.x.toLatex}}^{${p2.get.x.toLatex}}"
-      setText("solution1", s"\\int$suScripts ${function.get.toLatex}")
-      setText("solution2", s" = \\left[ ${integral.get.toLatex} \\right]$suScripts")
-      setText("solution3", " = " + solution.get.toLatex)
-      setText("solution4", " ≈ " + solution.get.approx.head)
+      for (i <- integral ; s <- solution) {
+        val suScripts = s"_{${p1.get.x.toLatex}}^{${p2.get.x.toLatex}}"
+        setText("solution1", s"\\int$suScripts ${function.get.toLatex}")
+        setText("solution2", s" = \\left[ ${integral.get.toLatex} \\right]$suScripts")
+        setText("solution3", " = " + solution.get.toLatex)
+        setText("solution4", " ≈ " + solution.get.approx.head)
+      }
+      return this.draw(_)
     }
-    return this.draw(_)
-  }
 
   def draw(ctx: JsContext) {
     // Make sure that both points and both functions are defined
@@ -152,23 +154,24 @@ object TangentSidebar {
 
   var function: Option[Sym] = None
 
-  def select(): JsContext => Unit = {
+  def select(): JsContext => Unit =
     if (p1.isEmpty || y1.isEmpty) return this.draw(_)
+    else {
 
-    val p = p1.get
-    val y = y1.get
+      val p = p1.get
+      val y = y1.get
 
-    val slope = y.derivative.simple.replaceExpr(SymVar('x), p.x).simple
-    val yint = ++(p.y, **(-1, slope, p.x)).simple
+      val slope = y.derivative.simple.replaceExpr(SymVar('x), p.x).simple
+      val yint = ++(p.y, **(-1, slope, p.x)).simple
 
-    this.function = Some(++(**(slope, 'x), yint))
+      this.function = Some(++(**(slope, 'x), yint))
 
-    setText("equation", s"y = ${function.get.toLatex}")
+      setText("equation", s"y = ${function.get.toLatex}")
 
-    js.eval("formatStaticEquations()")
+      js.eval("formatStaticEquations()")
 
-    return this.draw(_)
-  }
+      return this.draw(_)
+    }
 
   def draw(ctx: JsContext) {
     import Graph._
@@ -197,29 +200,27 @@ object DistanceSidebar {
   var deltaY: Option[Sym] = None
   var pos = List[Double]()
 
-  def select(): JsContext => Unit = {
-    if (p1.isEmpty || p2.isEmpty || y1.isEmpty || y2.isEmpty) {
+  def select(): JsContext => Unit =
+    if (p1.isEmpty || p2.isEmpty) {
       this.pos = Nil
       return this.draw(_)
+    } else {
+      val (xa, xb, ya, yb) = (p1.get.x, p2.get.x, p1.get.y, p2.get.y)
+
+      this.pos = List(xa, xb, ya, yb).map(_.approx.head)
+
+      this.deltaX = Some(++(xb, **(-1, xa)).simple)
+      this.deltaY = Some(++(yb, **(-1, ya)).simple)
+      this.distance = Some(^(++(^(deltaX.get, 2), ^(deltaY.get, 2)), 1~2).simple)
+
+      setText("deltax", s"\\Delta x = ${deltaX.get.toLatex}")
+      setText("deltay", s"\\Delta y = ${deltaY.get.toLatex}")
+      setText("distance", s"\\text{Distance} = ${distance.get.toLatex}")
+
+      js.eval("formatStaticEquations()")
+
+      return this.draw(_)
     }
-
-    val (xa, xb) = (p1.get.x, p2.get.x)
-    val (ya, yb) = (y1.get.replaceExpr('x, xa), y2.get.replaceExpr('x, xb))
-
-    this.pos = List(xa, xb, ya, yb).map(_.approx.head)
-
-    this.deltaX = Some(++(xb, **(-1, xa)).simple)
-    this.deltaY = Some(++(yb, **(-1, ya)).simple)
-    this.distance = Some(^(++(^(deltaX.get, 2), ^(deltaY.get, 2)), 1~2).simple)
-
-    setText("deltax", s"\\Delta x = ${deltaX.get.toLatex}")
-    setText("deltay", s"\\Delta y = ${deltaY.get.toLatex}")
-    setText("distance", s"\\text{Distance} = ${distance.get.toLatex}")
-
-    js.eval("formatStaticEquations()")
-
-    return this.draw(_)
-  }
 
   def draw(ctx: JsContext) =
     if (this.pos.length == 4) {
@@ -246,12 +247,10 @@ object SlopeSidebar {
   var function: Option[Sym] = None
 
   def select(): JsContext => Unit =
-    if (p1.isEmpty || p2.isEmpty || y1.isEmpty || y2.isEmpty) {
-      return this.draw(_)
-    } else {
+    if (p1.isEmpty || p2.isEmpty) return this.draw(_)
+    else {
 
-      val (xa, xb) = (p1.get.x, p2.get.x)
-      val (ya, yb) = (y1.get.replaceExpr('x, xa), y2.get.replaceExpr('x, xb))
+      val (xa, xb, ya, yb) = (p1.get.x, p2.get.x, p1.get.y, p2.get.y)
 
       val slope = **( ++(yb, **(-1, ya)), ^(++(xb, **(-1, xa)), -1)).simple
       val yint = ++(ya, **(-1, slope, xa)).simple
