@@ -211,6 +211,11 @@ object Simplify {
 
   /// Simplifying infinities
 
+  sRules.+("Even root of negative number is undefined"){
+    PowP( RatP() |> { (_: SymR) < 0 },
+      RatP(SymP(1), IntP() |> { (_: SymInt).toInt % 2 == 0 }))
+  }{ case () => SymUndefined() }
+
   sRules.+("Anything with an undefined is undefined"){
     AnyP() |> {e: Sym => Sym.containsExpr(e, SymUndefined())}
   }{ case () => SymUndefined() }

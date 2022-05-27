@@ -97,7 +97,9 @@ object Equations {
     //Some("Important" -> sym.important),
     Some("Derivative" -> Seq(sym.derivative)),
     //sym.integral.map("Integral" -> Seq(_)),
-  ).flatten.filter(_._2.nonEmpty)
+  ).flatten.map{t => (t._1, t._2.map(_.simple))}
+    .map{t => (t._1, t._2.filter(_.isFinite))}
+    .filter(_._2.nonEmpty)
 }
 
 import Equations.makeElement

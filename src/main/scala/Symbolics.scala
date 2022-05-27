@@ -70,7 +70,10 @@ object Latex {
   }
 
   def wrappedLatex(e: Sym, pow: Boolean = false): String = e match {
-    case SymSum(_) | SymProd(_) => "\\left(" + toLatex(e) + "\\right)"
+    case SymSum(_) => "\\left(" + toLatex(e) + "\\right)"
+    case SymProd(_) => toLatex(e).pipe{ l =>
+      if (l.startsWith("\\frac")) l else ("\\left(" + toLatex(e) + "\\right)")
+    }
     case _: SymLog | _: SymPM if pow => "\\left(" + toLatex(e) + "\\right)"
     case _ => toLatex(e)
   }
@@ -196,7 +199,7 @@ trait Sym {
     else expand.flatMap(_.functions)
 
 
-  def isDefined: Boolean = true
+  def isFinite: Boolean = true
 
   //def allHoles: Set[Sym] = exprHoles ++ extraHoles
   //def exprHoles: Set[Sym] = Set()
@@ -348,19 +351,19 @@ case class SymUndefined() extends SymR {
   override def toString = "NaN"
   def n = 0
   def d = 0
-  override def isDefined = false
+  override def isFinite = false
 }
 case class SymPositiveInfinity() extends SymR {
   override def toString = "Inf"
   def n = 1
   def d = 0
-  override def isDefined = false
+  override def isFinite = false
 }
 case class SymNegativeInfinity() extends SymR {
   override def toString = "-Inf"
   def n = -1
   def d = 0
-  override def isDefined = false
+  override def isFinite = false
 }
 
 /// Operations
