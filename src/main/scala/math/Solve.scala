@@ -64,15 +64,16 @@ object Solve {
   }
 
   zRules.+("x^3 + x^2 = x^2(x + 1)"){
-    's @@ SumP(Repeat( AsProdP( AsPowP(XP, RatP()), __*) ))
+    's @@ SumP(Repeat( AsProdP( AsPowP(XP, RatP()), __*), min=2 ), Repeat(noxP()))
   }{ case s: SymSum =>
       // Figure out the smallest exponent of x, the power of x to divide by
-      val minExpt: SymR = s.exprs.flatMap{ e =>
+      val minExpt: SymR = s.exprs.map{ e =>
         AsProdP( AsPowP(XP, 'p), __*).matches(e)
           .headOption.map(_.apply('p).asInstanceOf[SymR])
+          .getOrElse(SymR(0))
       }.foldLeft(SymPositiveInfinity(): SymR)(_ min _)
 
-      if (minExpt > 0.s && minExpt < SymPositiveInfinity()) {
+      if (minExpt.n != 0 && minExpt.d != 0) {
         // Subtract the min exponent from each power of x
         val rule = new Rule("", AsProdP( AsPowP(XP, 'p @@ RatP()), 'r @@ __*), {
           case (p: Sym, r: Seq[Sym]) =>
@@ -80,9 +81,12 @@ object Solve {
         })
 
         // Sum the newly divided powers and try to solve
-        val divided = +++( s.exprs.map(rule.first(_).get) )
+        val divided = +++( s.exprs.map{ e => rule.first(e).getOrElse{ **(e, ^(X, minExpt.negative)) } } )
 
-        SymInt(0) +: solve( divided )
+        if (minExpt < 0) solve( divided )
+        else SymInt(0) +: solve( divided )
+        
+        
 
       } else Nil
   }
@@ -143,16 +147,16 @@ object Solve {
   }
 
   /*
-  zRules.+("Cubic formula"){
-    SumP(
-      @?('as) @@ Repeat(AsProdP(PowP(XP, =#?(3)), Repeat(noxP())), min=1), // Any number of a*x^3
-      @?('bs) @@ Repeat(AsProdP(PowP(XP, =#?(2)), Repeat(noxP()))), // Any number of a*x^2
-      @?('cs) @@ Repeat(AsProdP(XP, Repeat(noxP()))), // Any number of b*x
-      @?('ds) @@ Repeat(noxP(), min=1) // Any number of c
-    )
-  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym], dS: Seq[Sym]) =>
-      Seq(cubicFormula(aS, bS, cS, dS))
-  }
+   zRules.+("Cubic formula"){
+   SumP(
+   @?('as) @@ Repeat(AsProdP(PowP(XP, =#?(3)), Repeat(noxP())), min=1), // Any number of a*x^3
+   @?('bs) @@ Repeat(AsProdP(PowP(XP, =#?(2)), Repeat(noxP()))), // Any number of a*x^2
+   @?('cs) @@ Repeat(AsProdP(XP, Repeat(noxP()))), // Any number of b*x
+   @?('ds) @@ Repeat(noxP(), min=1) // Any number of c
+   )
+   }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym], dS: Seq[Sym]) =>
+   Seq(cubicFormula(aS, bS, cS, dS))
+   }
    */
 
   def cubicFormula(aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym], dS: Seq[Sym]): Sym = {

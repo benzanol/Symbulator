@@ -203,6 +203,9 @@ object Graph {
           case (SymVertical(x), b) => Seq(IntersectionPoint(Seq(a, b), x, b.replaceExpr('x, x).simple, col))
           case (a, SymVertical(x)) => Seq(IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col))
           case (SymVertical(x1), SymVertical(x2)) => Nil
+          case (a, b) if b == 0.s => ++(a, **(b, -1)).zeros.flatMap(_.expand).map{ x =>
+            IntersectionPoint(Seq(a, b), x, 0, col)
+          }
           case (a, b) => ++(a, **(b, -1)).zeros.flatMap(_.expand).map{ x =>
             IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col)
           }
