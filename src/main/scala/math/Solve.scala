@@ -81,7 +81,6 @@ object Solve {
 
         // Sum the newly divided powers and try to solve
         val divided = +++( s.exprs.map(rule.first(_).get) )
-        println("Divided:", divided)
 
         SymInt(0) +: solve( divided )
 
@@ -124,8 +123,8 @@ object Solve {
   zRules.+("Quadratic formula"){
     SumP(
       @?('as) @@ Repeat(AsProdP(PowP(XP, =#?(2)), Repeat(noxP())), min=1), // Any number of a*x^2
-      @?('bs) @@ Repeat(AsProdP(XP, Repeat(noxP())), min=1), // Any number of b*x
-      @?('cs) @@ Repeat(noxP()) // Any number of c
+      @?('bs) @@ Repeat(AsProdP(XP, Repeat(noxP()))), // Any number of b*x
+      @?('cs) @@ Repeat(noxP(), min=1) // Any number of c
     )
   }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
       Seq(quadraticFormula(aS, bS, cS))
@@ -141,5 +140,35 @@ object Solve {
       +++(realEs).pipe(simplify)
     }
     **( ++( **(-1, b), +-{ ^(++(^(b, 2), **(-4, a, c)), 1~2) }), ^(**(2, a), -1)).simple
+  }
+
+  /*
+  zRules.+("Cubic formula"){
+    SumP(
+      @?('as) @@ Repeat(AsProdP(PowP(XP, =#?(3)), Repeat(noxP())), min=1), // Any number of a*x^3
+      @?('bs) @@ Repeat(AsProdP(PowP(XP, =#?(2)), Repeat(noxP()))), // Any number of a*x^2
+      @?('cs) @@ Repeat(AsProdP(XP, Repeat(noxP()))), // Any number of b*x
+      @?('ds) @@ Repeat(noxP(), min=1) // Any number of c
+    )
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym], dS: Seq[Sym]) =>
+      Seq(cubicFormula(aS, bS, cS, dS))
+  }
+   */
+
+  def cubicFormula(aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym], dS: Seq[Sym]): Sym = {
+    val List(a, b, c, d) = List(aS, bS, cS, dS).map{ es: Seq[Sym] =>
+      val realEs = es.map(_ match {
+        case p: SymProd => p.exprs.filter(noX).pipe(***)
+        case f if hasX(f) => SymInt(1)
+        case f => f
+      })
+      +++(realEs).pipe(simplify)
+    }
+    val p = **(-1~3, b, ^(a, -1))
+    val q = ++(^(p, 3), **(1~6, ++(**(b, c), **(-3, a, d)), ^(a, -2)))
+    val r = **(1~3, c, ^(a, -1))
+    val s = ^(++(^(q, 2), ^(++(r, **(-1, ^(p, 2))), 3)), 1~2)
+    val x = ++( ^(++(q, SymPM(s)), 1~3), ^(++(q, **(-1, s)), 1~3), p)
+    x
   }
 }

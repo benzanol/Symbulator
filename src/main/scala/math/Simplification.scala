@@ -186,8 +186,6 @@ object Simplify {
   sRules.+("Add rationals or similar products of rationals"){
     SumP(AsProdP('a @@ %?(), 'r @@ __*), AsProdP('b @@ %?(), 'r @@ __*), 'rest @@ __*)
   }{ case (a: SymR, b: SymR, r: Seq[Sym], rest: Seq[Sym]) =>
-      //println(s"$a, $b, $r, $rest")
-      //println(+++( ***((a + b) +: r) +: rest ))
       +++( ***((a + b) +: r) +: rest )
   }
   
@@ -278,9 +276,7 @@ object Simplify {
   sRules.+("Expand binomials"){
     PowP( 's @@ SumP( RatP(), ProdP(PowP(RatP(), RatP()), RatP()) ), IntP('p) )
   }{ case (p: SymInt, s: SymSum) =>
-      val a = (2 to p.n.toInt).foldLeft(s.exprs){ (acc, n) => distribute(acc, s.exprs) }.pipe(+++)
-      println("Simp", s, p, a)
-      a
+      (2 to p.n.toInt).foldLeft(s.exprs){ (acc, n) => distribute(acc, s.exprs) }.pipe(+++)
   }
 
   def distribute(l1: Seq[Sym], l2: Seq[Sym]): Seq[Sym] =
