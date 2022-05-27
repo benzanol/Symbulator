@@ -15128,6 +15128,140 @@ function $m_Lsympany_math_Solve$() {
   return $n_Lsympany_math_Solve$
 }
 /** @constructor */
+function $c_Lsympany_ui_DistanceSidebar$() {
+  this.Lsympany_ui_DistanceSidebar$__f_distance = null;
+  this.Lsympany_ui_DistanceSidebar$__f_deltaX = null;
+  this.Lsympany_ui_DistanceSidebar$__f_deltaY = null;
+  this.Lsympany_ui_DistanceSidebar$__f_pos = null;
+  $n_Lsympany_ui_DistanceSidebar$ = this;
+  this.Lsympany_ui_DistanceSidebar$__f_distance = $m_s_None$();
+  this.Lsympany_ui_DistanceSidebar$__f_deltaX = $m_s_None$();
+  this.Lsympany_ui_DistanceSidebar$__f_deltaY = $m_s_None$();
+  this.Lsympany_ui_DistanceSidebar$__f_pos = $m_sci_Nil$()
+}
+$c_Lsympany_ui_DistanceSidebar$.prototype = new $h_O();
+$c_Lsympany_ui_DistanceSidebar$.prototype.constructor = $c_Lsympany_ui_DistanceSidebar$;
+/** @constructor */
+function $h_Lsympany_ui_DistanceSidebar$() {
+  /*<skip>*/
+}
+$h_Lsympany_ui_DistanceSidebar$.prototype = $c_Lsympany_ui_DistanceSidebar$.prototype;
+$c_Lsympany_ui_DistanceSidebar$.prototype.setText__T__T__V = (function(id, str) {
+  document.getElementById(("distance-" + id)).innerText = str
+});
+$c_Lsympany_ui_DistanceSidebar$.prototype.select__F1 = (function() {
+  if (((($m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_p1.isEmpty__Z() || $m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_p2.isEmpty__Z()) || $m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_y1.isEmpty__Z()) || $m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_y2.isEmpty__Z())) {
+    this.Lsympany_ui_DistanceSidebar$__f_pos = $m_sci_Nil$();
+    return new $c_sjsr_AnonFunction1(((x$7$2) => {
+      $m_Lsympany_ui_DistanceSidebar$().draw__Lorg_scalajs_dom_CanvasRenderingContext2D__V(x$7$2)
+    }))
+  };
+  var _1 = $as_Lsympany_ui_Graph$IntersectionPoint($m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_p1.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_x;
+  var _2 = $as_Lsympany_ui_Graph$IntersectionPoint($m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_p2.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_x;
+  var this$4 = $as_Lsympany_Sym($m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_y1.get__O());
+  var this$2 = $m_s_Symbol$();
+  var _s = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$2, "x"));
+  var t = new $c_Lsympany_Sym$ImplicitSymVar(_s);
+  var _1$1 = $m_Lsympany_Sym$().replaceExpr__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym(this$4, t, _1);
+  var this$7 = $as_Lsympany_Sym($m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_y2.get__O());
+  var this$5 = $m_s_Symbol$();
+  var _s$1 = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$5, "x"));
+  var t$1 = new $c_Lsympany_Sym$ImplicitSymVar(_s$1);
+  var _2$1 = $m_Lsympany_Sym$().replaceExpr__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym(this$7, t$1, _2);
+  $m_sci_List$();
+  var array = [_1, _2, _1$1, _2$1];
+  var elems = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array);
+  var this$12 = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(elems);
+  var f = ((x$10$2) => {
+    var x$10 = $as_Lsympany_Sym(x$10$2);
+    return $uD(x$10.approx__sci_Seq().head__O())
+  });
+  if ((this$12 === $m_sci_Nil$())) {
+    var $$x1 = $m_sci_Nil$()
+  } else {
+    var arg1 = this$12.head__O();
+    var h = new $c_sci_$colon$colon(f(arg1), $m_sci_Nil$());
+    var t$2 = h;
+    var rest = $as_sci_List(this$12.tail__O());
+    while ((rest !== $m_sci_Nil$())) {
+      var arg1$1 = rest.head__O();
+      var nx = new $c_sci_$colon$colon(f(arg1$1), $m_sci_Nil$());
+      t$2.sci_$colon$colon__f_next = nx;
+      t$2 = nx;
+      rest = $as_sci_List(rest.tail__O())
+    };
+    var $$x1 = h
+  };
+  this.Lsympany_ui_DistanceSidebar$__f_pos = $$x1;
+  var $$x3 = $m_Lsympany_Sym$();
+  var $$x2 = $m_Lsympany_Sym$();
+  var array$1 = [new $c_Lsympany_Sym$ImplicitSymInt((-1)), _1];
+  var array$2 = [_2, $$x2.$times$times__sci_Seq__Lsympany_SymProd($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1))];
+  this.Lsympany_ui_DistanceSidebar$__f_deltaX = new $c_s_Some($$x3.$plus$plus__sci_Seq__Lsympany_SymSum($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2)).simple__Lsympany_Sym());
+  var $$x5 = $m_Lsympany_Sym$();
+  var $$x4 = $m_Lsympany_Sym$();
+  var array$3 = [new $c_Lsympany_Sym$ImplicitSymInt((-1)), _1$1];
+  var array$4 = [_2$1, $$x4.$times$times__sci_Seq__Lsympany_SymProd($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3))];
+  this.Lsympany_ui_DistanceSidebar$__f_deltaY = new $c_s_Some($$x5.$plus$plus__sci_Seq__Lsympany_SymSum($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$4)).simple__Lsympany_Sym());
+  var $$x7 = $m_Lsympany_Sym$();
+  var base = $as_Lsympany_Sym(this.Lsympany_ui_DistanceSidebar$__f_deltaX.get__O());
+  var expt = new $c_Lsympany_Sym$ImplicitSymInt(2);
+  var $$x6 = new $c_Lsympany_SymPow(base, expt);
+  var base$1 = $as_Lsympany_Sym(this.Lsympany_ui_DistanceSidebar$__f_deltaY.get__O());
+  var expt$1 = new $c_Lsympany_Sym$ImplicitSymInt(2);
+  var array$5 = [$$x6, new $c_Lsympany_SymPow(base$1, expt$1)];
+  var base$2 = $$x7.$plus$plus__sci_Seq__Lsympany_SymSum($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$5));
+  var this$36 = new $c_Lsympany_Sym$ImplicitSymInt(1);
+  var o = new $c_Lsympany_Sym$ImplicitSymInt(2);
+  var expt$2 = $m_Lsympany_SymR$().apply__s_math_BigInt__s_math_BigInt__Lsympany_SymR(this$36.Lsympany_SymInt__f_n, o.Lsympany_SymInt__f_n);
+  this.Lsympany_ui_DistanceSidebar$__f_distance = new $c_s_Some(new $c_Lsympany_SymPow(base$2, expt$2).simple__Lsympany_Sym());
+  var this$38 = $as_Lsympany_Sym(this.Lsympany_ui_DistanceSidebar$__f_deltaX.get__O());
+  this.setText__T__T__V("deltax", ("\\Delta x = " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$38)));
+  var this$39 = $as_Lsympany_Sym(this.Lsympany_ui_DistanceSidebar$__f_deltaY.get__O());
+  this.setText__T__T__V("deltay", ("\\Delta y = " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$39)));
+  var this$40 = $as_Lsympany_Sym(this.Lsympany_ui_DistanceSidebar$__f_distance.get__O());
+  this.setText__T__T__V("distance", ("\\text{Distance} = " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$40)));
+  (0, eval)("formatStaticEquations()");
+  return new $c_sjsr_AnonFunction1(((x$11$2) => {
+    $m_Lsympany_ui_DistanceSidebar$().draw__Lorg_scalajs_dom_CanvasRenderingContext2D__V(x$11$2)
+  }))
+});
+$c_Lsympany_ui_DistanceSidebar$.prototype.draw__Lorg_scalajs_dom_CanvasRenderingContext2D__V = (function(ctx) {
+  if ((this.Lsympany_ui_DistanceSidebar$__f_pos.length__I() === 4)) {
+    var $$x1 = $m_Lsympany_ui_Graph$();
+    var this$1 = this.Lsympany_ui_DistanceSidebar$__f_pos;
+    var _1$mcI$sp = $$x1.canvasX__D__I($uD($f_sc_LinearSeqOps__apply__I__O(this$1, 0)));
+    var $$x2 = $m_Lsympany_ui_Graph$();
+    var this$2 = this.Lsympany_ui_DistanceSidebar$__f_pos;
+    var _2$mcI$sp = $$x2.canvasX__D__I($uD($f_sc_LinearSeqOps__apply__I__O(this$2, 1)));
+    var $$x3 = $m_Lsympany_ui_Graph$();
+    var this$3 = this.Lsympany_ui_DistanceSidebar$__f_pos;
+    var _1$mcI$sp$1 = $$x3.canvasY__D__I($uD($f_sc_LinearSeqOps__apply__I__O(this$3, 2)));
+    var $$x4 = $m_Lsympany_ui_Graph$();
+    var this$4 = this.Lsympany_ui_DistanceSidebar$__f_pos;
+    var _2$mcI$sp$1 = $$x4.canvasY__D__I($uD($f_sc_LinearSeqOps__apply__I__O(this$4, 3)));
+    var s = $m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_color;
+    ctx.strokeStyle = s;
+    $m_Lsympany_ui_Graph$().drawLine__I__I__I__I__I__Lorg_scalajs_dom_CanvasRenderingContext2D__V(_1$mcI$sp, _1$mcI$sp$1, _2$mcI$sp, _2$mcI$sp$1, ($m_Lsympany_ui_Graph$(), (-1)), ctx);
+    $m_Lsympany_ui_Graph$().drawLine__I__I__I__I__I__Lorg_scalajs_dom_CanvasRenderingContext2D__V(_1$mcI$sp, _1$mcI$sp$1, _2$mcI$sp, _1$mcI$sp$1, ($m_Lsympany_ui_Graph$(), (-1)), ctx);
+    $m_Lsympany_ui_Graph$().drawLine__I__I__I__I__I__Lorg_scalajs_dom_CanvasRenderingContext2D__V(_2$mcI$sp, _1$mcI$sp$1, _2$mcI$sp, _2$mcI$sp$1, ($m_Lsympany_ui_Graph$(), (-1)), ctx)
+  }
+});
+var $d_Lsympany_ui_DistanceSidebar$ = new $TypeData().initClass({
+  Lsympany_ui_DistanceSidebar$: 0
+}, false, "sympany.ui.DistanceSidebar$", {
+  Lsympany_ui_DistanceSidebar$: 1,
+  O: 1
+});
+$c_Lsympany_ui_DistanceSidebar$.prototype.$classData = $d_Lsympany_ui_DistanceSidebar$;
+var $n_Lsympany_ui_DistanceSidebar$;
+function $m_Lsympany_ui_DistanceSidebar$() {
+  if ((!$n_Lsympany_ui_DistanceSidebar$)) {
+    $n_Lsympany_ui_DistanceSidebar$ = new $c_Lsympany_ui_DistanceSidebar$()
+  };
+  return $n_Lsympany_ui_DistanceSidebar$
+}
+/** @constructor */
 function $c_Lsympany_ui_EquationHandler() {
   this.Lsympany_ui_EquationHandler__f_id = null;
   this.Lsympany_ui_EquationHandler__f_rootElem = null;
@@ -16492,7 +16626,7 @@ $c_Lsympany_ui_Sidebar$.prototype.selectSidebar__T__V = (function(bar) {
     this.Lsympany_ui_Sidebar$__f_y1 = $m_s_None$();
     this.Lsympany_ui_Sidebar$__f_y2 = $m_s_None$()
   };
-  this.Lsympany_ui_Sidebar$__f_currentDraw = ((bar === "integral") ? new $c_s_Some($m_Lsympany_ui_IntegralSidebar$().select__F1()) : ((bar === "tangent") ? new $c_s_Some($m_Lsympany_ui_TangentSidebar$().select__F1()) : $m_s_None$()));
+  this.Lsympany_ui_Sidebar$__f_currentDraw = ((bar === "integral") ? new $c_s_Some($m_Lsympany_ui_IntegralSidebar$().select__F1()) : ((bar === "tangent") ? new $c_s_Some($m_Lsympany_ui_TangentSidebar$().select__F1()) : ((bar === "distance") ? new $c_s_Some($m_Lsympany_ui_DistanceSidebar$().select__F1()) : ((bar === "slope") ? new $c_s_Some($m_Lsympany_ui_SlopeSidebar$().select__F1()) : $m_s_None$()))));
   (0, eval)("formatStaticEquations()");
   $m_Lsympany_ui_Graph$().draw__V()
 });
@@ -16615,6 +16749,110 @@ function $m_Lsympany_ui_Sidebar$() {
     $n_Lsympany_ui_Sidebar$ = new $c_Lsympany_ui_Sidebar$()
   };
   return $n_Lsympany_ui_Sidebar$
+}
+/** @constructor */
+function $c_Lsympany_ui_SlopeSidebar$() {
+  this.Lsympany_ui_SlopeSidebar$__f_function = null;
+  $n_Lsympany_ui_SlopeSidebar$ = this;
+  this.Lsympany_ui_SlopeSidebar$__f_function = $m_s_None$()
+}
+$c_Lsympany_ui_SlopeSidebar$.prototype = new $h_O();
+$c_Lsympany_ui_SlopeSidebar$.prototype.constructor = $c_Lsympany_ui_SlopeSidebar$;
+/** @constructor */
+function $h_Lsympany_ui_SlopeSidebar$() {
+  /*<skip>*/
+}
+$h_Lsympany_ui_SlopeSidebar$.prototype = $c_Lsympany_ui_SlopeSidebar$.prototype;
+$c_Lsympany_ui_SlopeSidebar$.prototype.setText__T__T__V = (function(id, str) {
+  document.getElementById(("slope-" + id)).innerText = str
+});
+$c_Lsympany_ui_SlopeSidebar$.prototype.select__F1 = (function() {
+  if (((($m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_p1.isEmpty__Z() || $m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_p2.isEmpty__Z()) || $m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_y1.isEmpty__Z()) || $m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_y2.isEmpty__Z())) {
+    return new $c_sjsr_AnonFunction1(((x$14$2) => {
+      $m_Lsympany_ui_SlopeSidebar$().draw__Lorg_scalajs_dom_CanvasRenderingContext2D__V(x$14$2)
+    }))
+  } else {
+    var _1 = $as_Lsympany_ui_Graph$IntersectionPoint($m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_p1.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_x;
+    var _2 = $as_Lsympany_ui_Graph$IntersectionPoint($m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_p2.get__O()).Lsympany_ui_Graph$IntersectionPoint__f_x;
+    var this$4 = $as_Lsympany_Sym($m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_y1.get__O());
+    var this$2 = $m_s_Symbol$();
+    var _s = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$2, "x"));
+    var t = new $c_Lsympany_Sym$ImplicitSymVar(_s);
+    var _1$1 = $m_Lsympany_Sym$().replaceExpr__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym(this$4, t, _1);
+    var this$7 = $as_Lsympany_Sym($m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_y2.get__O());
+    var this$5 = $m_s_Symbol$();
+    var _s$1 = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$5, "x"));
+    var t$1 = new $c_Lsympany_Sym$ImplicitSymVar(_s$1);
+    var _2$1 = $m_Lsympany_Sym$().replaceExpr__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym(this$7, t$1, _2);
+    var $$x6 = $m_Lsympany_Sym$();
+    var $$x5 = $m_Lsympany_Sym$();
+    var $$x4 = $m_Lsympany_Sym$();
+    var array = [new $c_Lsympany_Sym$ImplicitSymInt((-1)), _1$1];
+    var array$1 = [_2$1, $$x4.$times$times__sci_Seq__Lsympany_SymProd($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))];
+    var $$x3 = $$x5.$plus$plus__sci_Seq__Lsympany_SymSum($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1));
+    var $$x2 = $m_Lsympany_Sym$();
+    var $$x1 = $m_Lsympany_Sym$();
+    var array$2 = [new $c_Lsympany_Sym$ImplicitSymInt((-1)), _1];
+    var array$3 = [_2, $$x1.$times$times__sci_Seq__Lsympany_SymProd($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2))];
+    var base = $$x2.$plus$plus__sci_Seq__Lsympany_SymSum($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3));
+    var expt = new $c_Lsympany_Sym$ImplicitSymInt((-1));
+    var array$4 = [$$x3, new $c_Lsympany_SymPow(base, expt)];
+    var slope = $$x6.$times$times__sci_Seq__Lsympany_SymProd($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$4)).simple__Lsympany_Sym();
+    var $$x8 = $m_Lsympany_Sym$();
+    var $$x7 = $m_Lsympany_Sym$();
+    var array$5 = [new $c_Lsympany_Sym$ImplicitSymInt((-1)), slope, _1];
+    var array$6 = [_1$1, $$x7.$times$times__sci_Seq__Lsympany_SymProd($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$5))];
+    var yint = $$x8.$plus$plus__sci_Seq__Lsympany_SymSum($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$6)).simple__Lsympany_Sym();
+    var $$x10 = $m_Lsympany_Sym$();
+    var $$x9 = $m_Lsympany_Sym$();
+    var this$34 = $m_s_Symbol$();
+    var _s$2 = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$34, "x"));
+    var array$7 = [slope, new $c_Lsympany_Sym$ImplicitSymVar(_s$2)];
+    var array$8 = [$$x9.$times$times__sci_Seq__Lsympany_SymProd($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$7)), yint];
+    this.Lsympany_ui_SlopeSidebar$__f_function = new $c_s_Some($$x10.$plus$plus__sci_Seq__Lsympany_SymSum($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$8)).simple__Lsympany_Sym());
+    this.setText__T__T__V("slope", ("\\frac{\\Delta y}{\\Delta x} = " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(slope)));
+    var this$42 = $as_Lsympany_Sym(this.Lsympany_ui_SlopeSidebar$__f_function.get__O());
+    this.setText__T__T__V("equation", ("y = " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$42)));
+    (0, eval)("formatStaticEquations()");
+    return new $c_sjsr_AnonFunction1(((x$17$2) => {
+      $m_Lsympany_ui_SlopeSidebar$().draw__Lorg_scalajs_dom_CanvasRenderingContext2D__V(x$17$2)
+    }))
+  }
+});
+$c_Lsympany_ui_SlopeSidebar$.prototype.draw__Lorg_scalajs_dom_CanvasRenderingContext2D__V = (function(ctx) {
+  var s = $m_Lsympany_ui_Sidebar$().Lsympany_ui_Sidebar$__f_color;
+  ctx.strokeStyle = s;
+  var maxX = ($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_x + ((($uI(ctx.canvas.width) - $m_Lsympany_ui_Graph$().marginX__I()) | 0) * $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_xs));
+  var $$x8 = $m_Lsympany_ui_Graph$();
+  var $$x7 = $m_Lsympany_ui_Graph$().canvasX__D__I($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_x);
+  var $$x6 = $m_Lsympany_ui_Graph$();
+  var $$x5 = $as_Lsympany_Sym(this.Lsympany_ui_SlopeSidebar$__f_function.get__O());
+  var this$2 = $m_s_Symbol$();
+  var self = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$2, "x"));
+  var y = $m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_x;
+  var array = [$ct_T2__O__O__(new $c_T2(), self, y)];
+  var $$x4 = $$x6.canvasY__D__I($uD($$x5.approx__sci_Seq__sci_Seq($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array)).head__O()));
+  var $$x3 = $m_Lsympany_ui_Graph$().canvasX__D__I(maxX);
+  var $$x2 = $m_Lsympany_ui_Graph$();
+  var $$x1 = $as_Lsympany_Sym(this.Lsympany_ui_SlopeSidebar$__f_function.get__O());
+  var this$8 = $m_s_Symbol$();
+  var self$1 = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$8, "x"));
+  var array$1 = [$ct_T2__O__O__(new $c_T2(), self$1, maxX)];
+  $$x8.drawLine__I__I__I__I__I__Lorg_scalajs_dom_CanvasRenderingContext2D__V($$x7, $$x4, $$x3, $$x2.canvasY__D__I($uD($$x1.approx__sci_Seq__sci_Seq($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1)).head__O())), ($m_Lsympany_ui_Graph$(), (-1)), ctx)
+});
+var $d_Lsympany_ui_SlopeSidebar$ = new $TypeData().initClass({
+  Lsympany_ui_SlopeSidebar$: 0
+}, false, "sympany.ui.SlopeSidebar$", {
+  Lsympany_ui_SlopeSidebar$: 1,
+  O: 1
+});
+$c_Lsympany_ui_SlopeSidebar$.prototype.$classData = $d_Lsympany_ui_SlopeSidebar$;
+var $n_Lsympany_ui_SlopeSidebar$;
+function $m_Lsympany_ui_SlopeSidebar$() {
+  if ((!$n_Lsympany_ui_SlopeSidebar$)) {
+    $n_Lsympany_ui_SlopeSidebar$ = new $c_Lsympany_ui_SlopeSidebar$()
+  };
+  return $n_Lsympany_ui_SlopeSidebar$
 }
 /** @constructor */
 function $c_Lsympany_ui_TangentSidebar$() {

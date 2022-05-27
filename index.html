@@ -36,6 +36,10 @@
                     <br/><br/>
                     <button onclick="selectSidebar('integral')">Integrate</button>
                     <br/><br/>
+                    <button onclick="selectSidebar('distance')">Distance</button>
+                    <br/><br/>
+                    <button onclick="selectSidebar('slope')">Slope</button>
+                    <br/><br/>
                 </div>
 
                 <div id="points-sidebar"></div>
@@ -49,6 +53,17 @@
 
                 <div id="tangent-sidebar" style="display:none">
                     <p id="tangent-equation"   class="mq-static"></p><br/>
+                </div>
+
+                <div id="distance-sidebar" style="display:none">
+                    <p id="distance-deltax"   class="mq-static"></p><br/>
+                    <p id="distance-deltay"   class="mq-static"></p><br/>
+                    <p id="distance-distance"   class="mq-static"></p><br/>
+                </div>
+
+                <div id="slope-sidebar" style="display:none">
+                    <p id="slope-slope"   class="mq-static"></p><br/>
+                    <p id="slope-equation"   class="mq-static"></p><br/>
                 </div>
             </div>
 

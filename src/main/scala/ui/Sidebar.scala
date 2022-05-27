@@ -44,6 +44,8 @@ object Sidebar {
     this.currentDraw = bar match {
       case "integral" => Some(IntegralSidebar.select())
       case "tangent" => Some(TangentSidebar.select())
+      case "distance" => Some(DistanceSidebar.select())
+      case "slope" => Some(SlopeSidebar.select())
       case _ => None
     }
 
@@ -167,6 +169,102 @@ object TangentSidebar {
 
     return this.draw(_)
   }
+
+  def draw(ctx: JsContext) {
+    import Graph._
+
+    ctx.strokeStyle = Sidebar.color
+    
+    val maxX = pos.x + (ctx.canvas.width - marginX) * pos.xs
+    drawLine(
+      canvasX(pos.x),
+      canvasY(this.function.get.approx('x -> pos.x).head),
+      canvasX(maxX),
+      canvasY(this.function.get.approx('x -> maxX).head),
+    )(ctx)
+  }
+}
+
+object DistanceSidebar {
+  import Sidebar._
+
+  def setText(id: String, str: String) {
+    document.getElementById(s"distance-$id").innerText = str
+  }
+
+  var distance: Option[Sym] = None
+  var deltaX: Option[Sym] = None
+  var deltaY: Option[Sym] = None
+  var pos = List[Double]()
+
+  def select(): JsContext => Unit = {
+    if (p1.isEmpty || p2.isEmpty || y1.isEmpty || y2.isEmpty) {
+      this.pos = Nil
+      return this.draw(_)
+    }
+
+    val (xa, xb) = (p1.get.x, p2.get.x)
+    val (ya, yb) = (y1.get.replaceExpr('x, xa), y2.get.replaceExpr('x, xb))
+
+    this.pos = List(xa, xb, ya, yb).map(_.approx.head)
+
+    this.deltaX = Some(++(xb, **(-1, xa)).simple)
+    this.deltaY = Some(++(yb, **(-1, ya)).simple)
+    this.distance = Some(^(++(^(deltaX.get, 2), ^(deltaY.get, 2)), 1~2).simple)
+
+    setText("deltax", s"\\Delta x = ${deltaX.get.toLatex}")
+    setText("deltay", s"\\Delta y = ${deltaY.get.toLatex}")
+    setText("distance", s"\\text{Distance} = ${distance.get.toLatex}")
+
+    js.eval("formatStaticEquations()")
+
+    return this.draw(_)
+  }
+
+  def draw(ctx: JsContext) =
+    if (this.pos.length == 4) {
+      import Graph._
+
+      val (cx1, cx2) = (canvasX(this.pos(0)), canvasX(this.pos(1)))
+      val (cy1, cy2) = (canvasY(this.pos(2)), canvasY(this.pos(3)))
+
+      ctx.strokeStyle = Sidebar.color
+
+      Graph.drawLine(cx1, cy1, cx2, cy2)(ctx)
+      Graph.drawLine(cx1, cy1, cx2, cy1)(ctx)
+      Graph.drawLine(cx2, cy1, cx2, cy2)(ctx)
+    }
+}
+
+object SlopeSidebar {
+  import Sidebar._
+
+  def setText(id: String, str: String) {
+    document.getElementById(s"slope-$id").innerText = str
+  }
+
+  var function: Option[Sym] = None
+
+  def select(): JsContext => Unit =
+    if (p1.isEmpty || p2.isEmpty || y1.isEmpty || y2.isEmpty) {
+      return this.draw(_)
+    } else {
+
+      val (xa, xb) = (p1.get.x, p2.get.x)
+      val (ya, yb) = (y1.get.replaceExpr('x, xa), y2.get.replaceExpr('x, xb))
+
+      val slope = **( ++(yb, **(-1, ya)), ^(++(xb, **(-1, xa)), -1)).simple
+      val yint = ++(ya, **(-1, slope, xa)).simple
+
+      this.function = Some(++(**(slope, 'x), yint).simple)
+
+      setText("slope", s"\\frac{\\Delta y}{\\Delta x} = ${slope.toLatex}")
+      setText("equation", s"y = ${function.get.toLatex}")
+
+      js.eval("formatStaticEquations()")
+
+      return this.draw(_)
+    }
 
   def draw(ctx: JsContext) {
     import Graph._
