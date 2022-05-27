@@ -75,6 +75,7 @@ object Sidebar {
   }
 }
 
+
 object IntegralSidebar {
   import Sidebar._
 
@@ -110,9 +111,32 @@ object IntegralSidebar {
   }
 
   def draw(ctx: JsContext) {
-    
+    // Make sure that both points and both functions are defined
+    for (gp1 <- Sidebar.p1 ; gp2 <- Sidebar.p2 ; f1 <- Sidebar.y1 ; f2 <- Sidebar.y2) {
+      // Make sure that both points have defined x values
+      for (x1 <- gp1.x.approx.headOption ; x2 <- gp2.x.approx.headOption) {
+        ctx.beginPath()
+
+        ctx.fillStyle = Sidebar.color + "66"
+
+        // Go to the starting position
+        ctx.moveTo(x1, Graph.canvasY(f1.approx('x -> x1).head))
+
+        // Trace 100 points both functions
+        for (x <- BigDecimal(x1) to BigDecimal(x2) by BigDecimal((x2 - x1) / 100.0)) {
+          ctx.lineTo(Graph.canvasX(x.toDouble), Graph.canvasY(f1.approx('x -> x.toDouble).head))
+        }
+        for (x <- BigDecimal(x2) to BigDecimal(x1) by BigDecimal((x1 - x2) / 100.0)) {
+          ctx.lineTo(Graph.canvasX(x.toDouble), Graph.canvasY(f2.approx('x -> x.toDouble).head))
+        }
+
+        ctx.closePath()
+        ctx.fill()
+      }
+    }
   }
 }
+
 
 
 object TangentSidebar {
