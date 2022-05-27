@@ -2,50 +2,31 @@
 [0m[[0m[0mdebug[0m] [0m[0mInitial source changes: [0m
 [0m[[0m[0mdebug[0m] [0m[0m	removed:Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	added: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Equations.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala)[0m
 [0m[[0m[0mdebug[0m] [0m[0mInvalidated products: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mExternal API changes: API Changes: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(sympany.ui.Equations, sympany.ui.EquationHandler)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(sympany.ui.Graph.GraphPos, sympany.ui.Graph, sympany.ui.Graph.IntersectionPoint)[0m
 [0m[[0m[0mdebug[0m] [0m[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0mSources indirectly invalidated by:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	product: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	external source: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(sympany.ui.Equations, sympany.ui.EquationHandler)[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Equations.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.ui.Equations, sympany.ui.EquationHandler[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(sympany.ui.Graph.GraphPos, sympany.ui.Graph, sympany.ui.Graph.IntersectionPoint)[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(/home/quaviq/Documents/Programming/Scala/Calculator/src/main/scala/ui/Graph.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.ui.Graph.GraphPos, sympany.ui.Graph, sympany.ui.Graph.IntersectionPoint[0m
 [0m[[0m[0minfo[0m] [0m[0mCompiling 1 Scala source to /home/quaviq/Documents/Programming/Scala/Calculator/target/scala-2.13/classes ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.13:1.3.2:compile for Scala 2.13.1[0m
 [0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.13:1.3.2:compile for Scala 2.13.1[0m
-[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 2f0baddc for Scala compiler version 2.13.1[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 164eb66b for Scala compiler version 2.13.1[0m
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-Xplugin:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-compiler_2.13.1/1.10.0/scalajs-compiler_2.13.1-1.10.0.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.1/scala-library-2.13.1.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/home/quaviq/Documents/Programming/Scala/Calculator/target/scala-2.13/classes:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-dom_sjs1_2.13/2.1.0/scalajs-dom_sjs1_2.13-2.1.0.jar:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-library_2.13/1.10.0/scalajs-library_2.13-1.10.0.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 0.397459143 s[0m
+[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 1.082221277 s[0m
 [0m[[0m[0mdebug[0m] [0m[0mDone compiling.[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.ui.Equations...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.ui.Equations[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.ui.Equations)[0m
-[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.Main. This dependency is not being considered for invalidation.[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.ui.Equations,ModifiedNames(changes = UsedName(finalize,[Default]))) invalidates 1 classes due to The sympany.ui.Equations has the following regular definitions changed:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	UsedName(finalize,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.ui.Equations)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> [0m
-[0m[[0m[0mdebug[0m] [0m[0m	> [0m
-[0m[[0m[0mdebug[0m] [0m[0m        [0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.ui.EquationHandler...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.ui.EquationHandler[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.ui.EquationHandler)[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.ui.EquationHandler,ModifiedNames(changes = UsedName(finalize,[Default]))) invalidates 1 classes due to The sympany.ui.EquationHandler has the following regular definitions changed:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	UsedName(finalize,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.ui.EquationHandler)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> [0m
-[0m[[0m[0mdebug[0m] [0m[0m	> [0m
-[0m[[0m[0mdebug[0m] [0m[0m        [0m
 [0m[[0m[0mdebug[0m] [0m[0mNew invalidations:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: [0m

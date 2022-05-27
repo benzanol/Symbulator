@@ -352,13 +352,14 @@ object Graph {
     
     val minY = pos.y
     val maxY = pos.y + (fc.height - marginY) * pos.ys
-    def inRange(y: Double) = (y >= minY) && (y <= maxY)
+    //def inRange(y: Double) = (y >= minY) && (y <= maxY)
+    def inRange(y: Double) = true
 
     // The total width of the screen in units
     val width = (fc.width - marginX) * pos.xs
 
     // The distance between calculated points will be a power of 1.5
-    val dist = Math.pow(1.5, Math.round(Math.log(width / 100.0) / Math.log(1.5)))
+    val dist = Math.pow(1.1, Math.round(Math.log(width / 500.0) / Math.log(1.5)))
 
     // The x position of the current point (starts slightly to the left of the screen)
     var x = pos.x - dist - (pos.x % dist)

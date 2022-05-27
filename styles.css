@@ -18,6 +18,16 @@ button {
     display: flex;
 }
 
+
+.prop-name {
+    margin: 0px;
+    font-size: 17px;
+    font-family: Arial;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    line-height: 1.0;
+}
+
 #page-container {
     color: black;
     display: flex;
@@ -39,7 +49,7 @@ button {
     padding: 0px 0px 0px 0px;
 }
 
-.mq-static, .mq-dynamic, .prop-name {
+.mq-static, .mq-dynamic {
     margin: 0px;
     line-height: 1.1;
     padding: 0px 0px 0px 0px;

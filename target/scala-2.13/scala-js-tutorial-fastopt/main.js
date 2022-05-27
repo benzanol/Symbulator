@@ -15356,9 +15356,6 @@ function $m_Lsympany_ui_Equations$() {
   };
   return $n_Lsympany_ui_Equations$
 }
-function $p_Lsympany_ui_Graph$__inRange$1__D__D__D__Z($thiz, y, minY$1, maxY$1) {
-  return ((y >= minY$1) && (y <= maxY$1))
-}
 /** @constructor */
 function $c_Lsympany_ui_Graph$() {
   this.Lsympany_ui_Graph$__f_fc = null;
@@ -15996,17 +15993,16 @@ $c_Lsympany_ui_Graph$.prototype.drawPoint__Lsympany_Sym__Lsympany_Sym__T__Lorg_s
   }))(ye, ctx, color)))
 });
 $c_Lsympany_ui_Graph$.prototype.functionSegments__F1__sci_Seq__sci_Seq = (function(f, extras) {
-  var minY = this.Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_y;
-  var maxY = (this.Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_y + ((((-20) + $uI(this.Lsympany_ui_Graph$__f_fc.height)) | 0) * this.Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_ys));
+  $uI(this.Lsympany_ui_Graph$__f_fc.height);
   var width = ((($uI(this.Lsympany_ui_Graph$__f_fc.width) - this.marginX__I()) | 0) * this.Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_xs);
-  var a = (width / 100.0);
+  var a = (width / 500.0);
   var a$1 = ($uD(Math.log(a)) / $uD(Math.log(1.5)));
   var this$4 = $m_RTLong$();
   var value = $uD(Math.round(a$1));
   var lo = this$4.org$scalajs$linker$runtime$RuntimeLong$$fromDoubleImpl__D__I(value);
   var hi = this$4.RTLong$__f_org$scalajs$linker$runtime$RuntimeLong$$hiReturn;
   var b = $m_RTLong$().org$scalajs$linker$runtime$RuntimeLong$$toDouble__I__I__D(lo, hi);
-  var dist = $uD(Math.pow(1.5, b));
+  var dist = $uD(Math.pow(1.1, b));
   var elem = ((this.Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_x - dist) - (this.Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_x % dist));
   var x = new $c_sr_DoubleRef(elem);
   var lastMultiple = x.sr_DoubleRef__f_elem;
@@ -16031,15 +16027,17 @@ $c_Lsympany_ui_Graph$.prototype.functionSegments__F1__sci_Seq__sci_Seq = (functi
         throw $ct_jl_ArithmeticException__(new $c_jl_ArithmeticException())
       };
       var y = $uD(this$12.get__O());
-      if ((($as_sci_List(segments.head__O()).length__I() >= 2) && (!$p_Lsympany_ui_Graph$__inRange$1__D__D__D__Z(this, y, minY, maxY)))) {
+      if (($as_sci_List(segments.head__O()).length__I(), false)) {
         var this$13 = $as_sc_LinearSeqOps(segments.head__O());
-        var $$x2 = (!$p_Lsympany_ui_Graph$__inRange$1__D__D__D__Z(this, $as_T2($f_sc_LinearSeqOps__apply__I__O(this$13, 0))._2$mcD$sp__D(), minY, maxY))
+        $as_T2($f_sc_LinearSeqOps__apply__I__O(this$13, 0))._2$mcD$sp__D();
+        var $$x2 = (!true)
       } else {
         var $$x2 = false
       };
       if ($$x2) {
         var this$14 = $as_sc_LinearSeqOps(segments.head__O());
-        var $$x1 = (!$p_Lsympany_ui_Graph$__inRange$1__D__D__D__Z(this, $as_T2($f_sc_LinearSeqOps__apply__I__O(this$14, 1))._2$mcD$sp__D(), minY, maxY))
+        $as_T2($f_sc_LinearSeqOps__apply__I__O(this$14, 1))._2$mcD$sp__D();
+        var $$x1 = (!true)
       } else {
         var $$x1 = false
       };
