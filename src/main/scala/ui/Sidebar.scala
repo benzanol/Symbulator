@@ -33,6 +33,7 @@ object Sidebar {
     currentEl.setAttribute("style", "display:block")
 
     document.getElementById("current-points").setAttribute("style", display(bar != "equation"))
+    document.getElementById("property-checks").setAttribute("style", display(bar == "equation"))
 
     if (bar == "equation") {
       this.p1 = None
@@ -96,7 +97,7 @@ object IntegralSidebar {
       return this.draw(_)
     } else {
 
-      this.function = Some(++(p1.get.funcs(0), **(-1, p1.get.funcs(1))))
+      this.function = Some(++(y1.get, **(-1, y2.get)))
       this.integral = function.get.integral
 
       if (integral.isDefined)

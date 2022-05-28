@@ -209,7 +209,11 @@ object Graph {
     // Generate the list of intersection points
     this.points = {
       (Seq(IntersectionPoint(Nil, 0.s, 0.s, gridColor)) +: Seq(
-        ps.map{ p => IntersectionPoint(Seq(p._1), p._2, p._3, colors(exprs.indexOf(p._1) % colors.length)) }
+        ps.flatMap{ case (a, b, c) =>
+          for (b1 <- b.expand ; c1 <- (if (c.expand.length == 1) Seq(c) else a.replaceExpr('x, b).simple.expand))
+          yield (a, b1, c1)
+        }
+          .map{ p => IntersectionPoint(Seq(p._1, 0.s), p._2, p._3, colors(exprs.indexOf(p._1) % colors.length)) }
       )) ++ (
         for ((a, col) <- allExprs ; (b, _) <- (allExprs) if a != b)
         yield (a, b) match {
