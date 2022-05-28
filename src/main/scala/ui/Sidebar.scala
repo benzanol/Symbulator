@@ -130,10 +130,14 @@ object IntegralSidebar {
 
         // Trace 100 points both functions
         for (x <- BigDecimal(x1) to BigDecimal(x2) by BigDecimal((x2 - x1) / 100.0)) {
-          ctx.lineTo(Graph.canvasX(x.toDouble), Graph.canvasY(f1.approx('x -> x.toDouble).head))
+          val y = f1.approx('x -> x.toDouble).head
+          if (y.isFinite && x.toDouble.isFinite)
+            ctx.lineTo(Graph.canvasX(x.toDouble), Graph.canvasY(y))
         }
         for (x <- BigDecimal(x2) to BigDecimal(x1) by BigDecimal((x1 - x2) / 100.0)) {
-          ctx.lineTo(Graph.canvasX(x.toDouble), Graph.canvasY(f2.approx('x -> x.toDouble).head))
+          val y = f2.approx('x -> x.toDouble).head
+          if (y.isFinite && x.toDouble.isFinite)
+            ctx.lineTo(Graph.canvasX(x.toDouble), Graph.canvasY(y))
         }
 
         ctx.closePath()
