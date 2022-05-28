@@ -32,7 +32,7 @@ object Graph {
 
   window.addEventListener("resize", { (e: Any) => draw })
 
-    setGraphs(Nil)
+    setGraphs(Nil, Nil)
   draw
   }
 
@@ -199,7 +199,7 @@ object Graph {
     def toLatex: String = s"\\left( ${x.toLatex}, \\quad \\quad ${y.toLatex} \\right)"
   }
 
-  def setGraphs(exprs: Seq[Sym]) {
+  def setGraphs(exprs: Seq[Sym], ps: Seq[(Sym, Sym, Sym)]) {
   this.graphs = exprs
 
     val expanded = exprs.map(_.expand)
@@ -208,8 +208,10 @@ object Graph {
 
     // Generate the list of intersection points
     this.points = {
-      Seq(IntersectionPoint(Nil, 0.s, 0.s, gridColor)) +: (
-        for ((a, col) <- allExprs ; (b, _) <- (allExprs :+ (0.s -> "")) if a != b)
+      (Seq(IntersectionPoint(Nil, 0.s, 0.s, gridColor)) +: Seq(
+        ps.map{ p => IntersectionPoint(Seq(p._1), p._2, p._3, colors(exprs.indexOf(p._1) % colors.length)) }
+      )) ++ (
+        for ((a, col) <- allExprs ; (b, _) <- (allExprs) if a != b)
         yield (a, b) match {
           case (SymVertical(x), b) => Seq(IntersectionPoint(Seq(a, b), x, b.replaceExpr('x, x).simple, col))
           case (a, SymVertical(x)) => Seq(IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col))
@@ -360,11 +362,11 @@ object Graph {
         .flatMap(_.approx()).flatMap{n => List(n - tiny, n + tiny)}
 
       // Calculate the function and derivative
-      this.segments :+= Seq[Seq[(Double, Double)]]()
+      var newSeg = Seq[Seq[(Double, Double)]]()
       for (f <- sym.functions) {
-        val segs = functionSegments(f, important ++ undefined)
-        this.segments = (segs ++ this.segments.head) +: this.segments.tail
+        newSeg = newSeg ++ functionSegments(f, important ++ undefined)
       }
+      this.segments :+= newSeg
     }
   }
 
@@ -483,8 +485,15 @@ object Graph {
 
       val xc2 = (ps(i+2)._1 + ps(i + 1)._1) / 2;
       val yc2 = (ps(i+2)._2 + ps(i + 1)._2) / 2;
+
+      ctx.moveTo(ps(i-1)._1, ps(i-1)._2);
+
       ctx.quadraticCurveTo(ps(i)._1, ps(i)._2, xc, yc);
-      ctx.quadraticCurveTo(xc2, yc2, xc, yc);
+
+      ctx.moveTo(ps(i)._1, ps(i)._2);
+
+      ctx.quadraticCurveTo(xc, yc, xc2, yc2);
+
       ctx.stroke()
     }
     ctx.beginPath()

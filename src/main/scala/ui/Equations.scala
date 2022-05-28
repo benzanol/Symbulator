@@ -30,7 +30,12 @@ object Equations {
 
   // Whenever any equation changes, the graph screen needs to be updated
   def updateGraphs: Unit =
-    Graph.setGraphs(handlers.flatMap(_.eqn).flatMap(_.explicit))
+    Graph.setGraphs(handlers.flatMap(_.eqn).flatMap(_.explicit),
+      handlers.flatMap(_.eqn).flatMap{ e =>
+        expressionProperties(e).flatMap(_._2).collect{
+          case SymPoint(x, y) => (e, x, y)
+        }
+      })
 
   // Create a new html element with various properties and return it
   def makeElement(tag: String, props: (String, String)*): dom.Element = {
@@ -60,6 +65,7 @@ object Equations {
   def insertEquation(s: String) {
     val h = new EquationHandler()
     h.eqnElem.innerText = s
+    h.eqnElem.setAttribute("class", "mq-static mq-dynamic")
     h.updateLatex(s)
     handlers :+= h
     updateEquations()
@@ -76,7 +82,7 @@ object Equations {
 
   // Update the handler that has the specified id to have a new equation
   @JSExportTopLevel("updateLatex")
-  def updateLatex(id: String, latex: String): Unit = {
+  def updateLatex(id: String, latex: String) {
     handlers.find(_.id == id) match {
       case Some(h) => {
         h.updateLatex(latex)
@@ -86,18 +92,45 @@ object Equations {
     }
   }
 
+  @JSExportTopLevel("updateProps")
+  def updateProps() {
+    for (h <- this.handlers)
+      h.update()
+
+    updateGraphs
+  }
+
+  def pointString(f: Sym, x: Sym): Seq[SymPoint] =
+    x.simple.expand.map{ x1 =>
+      SymPoint(x1.simple, f.replaceExpr('x, x1.simple).simple)
+    }
+
+  case class SymPoint(x: Sym, y: Sym) extends Sym {
+    def instance(args: Sym*) = SymPoint(args(0), args(1))
+    def exprs = Seq(x, y)
+    override def isFinite = x.isFinite || y.isFinite
+  }
+
   // Get the list of properties that should be displayed below an equation
   def expressionProperties(sym: Sym): Seq[(String, Seq[Sym])] = Seq(
-    Some("Simplified" -> Seq(sym.simple)),
+    Some("Simplified", Seq(sym.simple)),
     {if (sym.explicit.isDefined && sym.explicit.get != sym.simple)
-      Some("Explicit" -> Seq(sym.explicit.get)) else None},
-    Some("Zeros" -> sym.zeros),
-    Some("Extremas" -> sym.extremas),
-    //Some("Undefined" -> sym.undefined),
-    //Some("Important" -> sym.important),
-    Some("Derivative" -> Seq(sym.derivative)),
-    //sym.integral.map("Integral" -> Seq(_)),
-  ).flatten.map{t => (t._1, t._2.map(_.simple))}
+      Some("Explicit", Seq(sym.explicit.get)) else None},
+    Some("Zeros", sym.zeros.map{ (a: Sym) => SymPoint(a, SymInt(0)) }),
+    Some("Mins and Maxes", sym.extremas.flatMap(pointString(sym, _))),
+    Some("Inflection Points", sym.derivative.extremas.flatMap(pointString(sym, _))),
+    Some("Holes", sym.undefined.flatMap(pointString(sym, _))),
+    Some("Derivative", Seq(sym.derivative)),
+    //sym.integral.map("Integral", Seq(_)),
+  ).flatten
+    .filter{ case (n, seq) => (n == "Explicit").||(
+      try {
+        document.getElementById(n.toLowerCase.replace(' ', '-') + "-chk")
+          .asInstanceOf[dom.HTMLInputElement].checked
+      } catch {
+        case e: Throwable => false
+      }
+    )}.map{t => (t._1, t._2.map(_.simple))}
     .map{t => (t._1, t._2.filter(_.isFinite))}
     .filter(_._2.nonEmpty)
 }
@@ -125,11 +158,12 @@ class EquationHandler() {
   var eqn: Option[Sym] = None
 
   def updateLatex(newLatex: String): Unit = {
-    if (newLatex == this.latex) return
-
     this.latex = newLatex
     this.eqn = Parse.parseLatex(newLatex)
+    this.update()
+  }
 
+  def update() {
     propElem.replaceChildren()
 
     if (eqn.isDefined)

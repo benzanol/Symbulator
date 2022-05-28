@@ -145,6 +145,9 @@ object Latex {
     case SymVertical(x) => s"x = ${toLatex(x)}"
 
     case Integral.SymIntegral(sub) => s"\\integral ${wrappedLatex(sub)}"
+
+    case sympany.ui.Equations.SymPoint(x, y) =>
+      ("(" + x.toLatex + ", \\quad \\quad " + y.toLatex + ")")
   }
 }
 

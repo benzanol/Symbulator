@@ -197,6 +197,11 @@ object Simplify {
   
   sRules.+("Plus/minus 0 is 0"){ SymP(SymPM(0)) }{ case () => 0 }
 
+  sRules.+("Plus/minus -1 is PM1"){
+    PMP(AsProdP('n @@ %?() |> { (_: SymR) < 0 }, 'r @@ __*))
+  }{ case (n: SymR, r: Seq[Sym]) => SymPM(***( n.negative +: r ))
+  }
+
   sRules.+("Remove nested plus/minus"){ PMP(PMP('e)) }{ case e: Sym => SymPM(e) }
   
   sRules.+("Plus/minus -x is +-x"){
@@ -280,6 +285,12 @@ object Simplify {
 
   sRules.+("Expand binomials"){
     PowP( 's @@ SumP( RatP(), ProdP(PowP(RatP(), RatP()), RatP()) ), IntP('p) )
+  }{ case (p: SymInt, s: SymSum) =>
+      (2 to p.n.toInt).foldLeft(s.exprs){ (acc, n) => distribute(acc, s.exprs) }.pipe(+++)
+  }
+
+  sRules.+("Expand simpler binomials"){
+    PowP( 's @@ SumP( RatP(), PowP(RatP(), RatP()) ), IntP('p) )
   }{ case (p: SymInt, s: SymSum) =>
       (2 to p.n.toInt).foldLeft(s.exprs){ (acc, n) => distribute(acc, s.exprs) }.pipe(+++)
   }
