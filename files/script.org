@@ -1,0 +1,41 @@
+* Intro
+Hi, my name is Adam Tillou, and I am presenting Symbulator. My goal with this project is to expand off of existing programs like Symbolab, which can do algebraic computations like solving equations and integrals, and combine it with the convenience of graphing calculators like Desmos or Geogebra, which allow you to visually see and understand equations. This program will allow you to do both; Solving complex mathematical problems, but also showing you the solution visually.
+
+
+*But enough of the boring part*
+
+* Equations, graphs, zooming, and, panning
+Just like Desmos, you can type in equations on the side here *x^2* and you can add some more *ln x* ,  *sin x* ... and of course remove them.
+As you can see, the graph will show up on the right, and you can pan ... and zoom in and out just like you'd expect.
+Also, you can put your cursor over the x or y axis to zoom in one particular direction.
+*???* You wouldn't expect it but one of the hardest parts of this program is figuring out the right distance between the lines of either 1, 2, or 5 so that the apparent distance between them stays about the same
+
+* Point Properties
+Now what you might notice that Demos doesn't have is all these checkboxes. These are options that show you anything you would want to know about an equation.
+......................... *Show zeros / mins & maxes*
+And the coolest part is that the graph will actually show you where the points are on the function, and when you hover over them, it will show you the exact coordinates.
+*Show inflection points*
+You can also see the inflection points of the graph, which is where the graph switches from curving upward to curving downward, for example ....
+
+These are things that you could find using a program like symbolab, but as far as I know, there isn't any program that can represent them graphically the way this does.
+Desmos can do something similar, by giving you approximations just for the zeros by simply guessing values as the function gets closer and closer to zero, but it doesn't know how to solve the equation to get the real values like these.
+
+*Deselect the properties*
+
+* Function Properties
+
+*Show holes*
+Another nice thing you can see are the points where the function is undefined, so say I put in the equation 1 over x-2, it is obviously undefined at 2, but say we had a more complicated function like the √x / x^2 - x + pi we can see exactly where the holes are.
+But obviously, seeing this equation won't help you actually understand where the function is undefined, which is why you can just press this plus button to add this as an equation, and you can see right on the graph the vertical asymptotes where the function is undefined.
+
+So something else that you can show for a function is the derivative. So as you can see the derivative of .... is .....
+Now of course this is something you could find pretty easily with another program, but of course since this is a graphing calculator .. bam .. you can instantly see the derivative on the graph next to the original function.
+So what this means is that you can see the exact slope of your original function at any point, so for example the slope of this function at ... is ...., and of course over here where its much steeper, you can see the slope is much higher
+And then if you really want to be fancy you can see the second derivative, *second derivative*, and so on *remove second derivative*
+
+* Implicit Functions
+Now all of these functions before were explicit functions, which means they are written with y as a function of x ; even though y isn't written here, each of these functions equals y.
+But since this calculator can do algebraic manipulation, you can type in any function with x and y that can be solved for y, so for example you can put in x^2 + y^2 = 1, which is the equation for a circle. Then the program can solve this equation to get y in terms of x, in this case .... and it will plot it on the graph. Even cooler is that all of the checkboxes from before can still be used, so for example, you can see the derivative here, of course its very large where the circle is steep and zero where the circle is flat.
+
+* Intersections
+Finally, if you have multiple equations on the grid,  *x^3 - 2x    x^2 / 3* What you'll actually see is that the program will solve for the exact intersections of the two graphs. Now the cool part is that you can click on the intersections, and we have a bunch of options for what you can do.

@@ -1,0 +1,1225 @@
+#+TITLE: Symbolic Calculator
+#+PROPERTY: header-args :tangle ./calculator.scala :results silent
+* Setup
+** Imports
+#+BEGIN_SRC scala
+import scala.util.chaining._
+#+END_SRC
+
+Parallel collections must be imported from the remote package
+#+BEGIN_SRC scala
+import $ivy.`org.scala-lang.modules::scala-parallel-collections:1.0.0`
+import scala.collection.parallel.CollectionConverters._
+#+END_SRC
+
+** Helper Functions
+*** Convert List to Multiset
+#+BEGIN_SRC scala
+def toMultiset[T](seq: Seq[T]): Map[T, Int] =
+  seq.groupBy(identity).toList
+    .map{ case (identity, list) => (identity, list.length) }
+    .toMap
+#+END_SRC
+
+* Symbolics
+** Traits
+*** Base Trait
+#+BEGIN_SRC scala
+trait Sym {
+  def exprs: Seq[Sym]
+  def mapExprs(f: Sym => Sym): Sym
+
+  def id: Any = this
+  def ==(o: Sym) = this.id == o.id
+
+  //def allHoles: Set[Sym] = exprHoles ++ extraHoles
+  //def exprHoles: Set[Sym] = Set()
+  //var extraHoles = Set[Sym] = Set()
+  //def addHoles(newHoles: Set[Sym]): Unit =
+  //  this.extraHoles = extraHoles ++ newHoles
+  //def zeros: Set[Sym] = Set()
+}
+#+END_SRC
+
+*** Constant Trait
+#+BEGIN_SRC scala
+trait SymConstant extends Sym {
+  def exprs = Nil
+  def mapExprs(f: Sym => Sym) = this
+}
+#+END_SRC
+
+*** Unordered Trait
+#+BEGIN_SRC scala
+trait SymUnordered extends Sym
+#+END_SRC
+
+** Variables
+#+BEGIN_SRC scala
+implicit class ImplicitSymVar(orig: Symbol) extends SymVar(orig)
+
+case class SymVar(symbol: Symbol = 'x) extends SymConstant {
+  override def toString = symbol.name
+  def s = this
+}
+#+END_SRC
+
+** Rationals
+*** Rational Constructor
+#+BEGIN_SRC scala
+object SymR {
+  def apply(n: BigInt = 1, d: BigInt = 1): SymR = {
+    if (d == 0 && n == 0) return SymUndefined()
+    else if (d == 0 && n > 0) return SymPositiveInfinity()
+    else if (d == 0 && n < 0) return SymNegativeInfinity()
+
+    val gcd: BigInt = n.abs gcd d.abs
+    // 1 if d is positive, -1 if d is negative
+    val one = d / d.abs
+
+    if (d.abs / gcd == BigInt(1)) SymInt(one * n / gcd)
+    else SymFrac(one * n / gcd, d.abs / gcd)
+  }
+}
+#+END_SRC
+
+*** Rational Trait
+#+BEGIN_SRC scala
+trait SymR extends SymConstant {
+  override def toString = f"$n/$d"
+  def n: BigInt
+  def d: BigInt
+
+  def inverse: SymR = SymR(d, n)
+  def negative: SymR = SymR(-n, d)
+  def +(o: SymR): SymR = SymR((n * o.d) + (o.n * d), d * o.d)
+  def -(o: SymR): SymR = this + o.negative
+  def *(o: SymR): SymR = SymR(n * o.n, d * o.d)
+  def /(o: SymR): SymR = this * o.inverse
+  def ^(o: SymInt): SymR = SymR(n.pow(o.n.toInt))
+}
+#+END_SRC
+
+*** Fractions
+#+BEGIN_SRC scala
+case class SymFrac(n: BigInt = 1, d: BigInt = 1) extends SymR
+#+END_SRC
+
+*** Integers
+#+BEGIN_SRC scala
+implicit class ImplicitSymBigInt(original: BigInt) extends SymInt(original)
+implicit class ImplicitSymInt(original: Int) extends SymInt(BigInt(original))
+
+case class SymInt(n: BigInt = 1) extends SymR {
+  override def toString = n.toString
+  def d = BigInt(1)
+  def s = this
+  def ~(o: SymInt) = SymR(n, o.n)
+
+  lazy val primeFactors: Map[SymInt, SymInt] = {
+    var num = n.abs
+    var f = 2
+    var map = scala.collection.mutable.Map[SymInt, SymInt]()
+    while (num > 1) {
+      var count = 0
+      while (num % f == 0) {count += 1 ; num /= f}
+      if (count > 0) map += (SymInt(f) -> SymInt(count))
+      f += 1
+    }
+    map.toMap
+  }
+
+  override def negative: SymInt = SymInt(-n)
+  def +(o: SymInt): SymInt = SymInt(n + o.n)
+  def -(o: SymInt): SymInt = this + o.negative
+  def *(o: SymInt): SymInt = SymInt(n * o.n)
+  override def ^(o: SymInt): SymInt = SymInt(n.pow(o.n.toInt))
+}
+#+END_SRC
+
+*** Non numbers
+#+BEGIN_SRC scala
+case class SymUndefined() extends SymR {
+  override def toString = "NaN"
+  def n = 0
+  def d = 0
+}
+case class SymPositiveInfinity() extends SymR {
+  override def toString = "Inf"
+  def n = 1
+  def d = 0
+}
+case class SymNegativeInfinity() extends SymR {
+  override def toString = "-Inf"
+  def n = -1
+  def d = 0
+}
+#+END_SRC
+
+** Case Classes
+*** Unordered
+#+BEGIN_SRC scala
+case class SymSum(exprs: Sym*) extends SymUnordered {
+  override def toString = f"(+ " + exprs.mkString(" ") + ")"
+  override def id = (SymSum, toMultiset(exprs.map(_.id)))
+  def mapExprs(f: Sym => Sym) = SymSum(exprs.map(f):_*)
+}
+
+case class SymProd(exprs: Sym*) extends SymUnordered {
+  override def toString = f"(* " + exprs.mkString(" ") + ")"
+  override def id = (SymProd, toMultiset(exprs.map(_.id)))
+  def mapExprs(f: Sym => Sym) = SymProd(exprs.map(f):_*)
+}
+#+END_SRC
+
+*** Powers and Logs
+#+BEGIN_SRC scala
+case class SymPow(base: Sym = 1, expt: Sym = 1) extends Sym {
+  override def toString = f"(^ $base $expt)"
+  def exprs = Seq(base, expt)
+  def mapExprs(f: Sym => Sym) = SymPow(f(base), f(expt))
+}
+
+case class SymLog(pow: Sym = 1, base: Sym = SymE()) extends Sym {
+  override def toString = if (base == SymE()) f"(ln $pow)" else f"(log $pow $base)"
+  def exprs = Seq(pow, base)
+  def mapExprs(f: Sym => Sym) = SymLog(f(pow), f(base))
+}
+#+END_SRC
+
+*** Plus-Minus
+#+BEGIN_SRC scala
+case class SymPM(expr: Sym = 1) extends Sym {
+  override def toString = f"(+- $expr)"
+  def exprs = Seq(expr)
+  def mapExprs(f: Sym => Sym) = SymPM(f(expr))
+}
+#+END_SRC
+
+*** Mathematical Constants
+#+BEGIN_SRC scala
+case class SymPi() extends SymConstant {
+  override def toString = "Pi"
+}
+case class SymE() extends SymConstant {
+  override def toString = "E"
+}
+#+END_SRC
+
+** Abbreviations
+#+BEGIN_SRC scala
+def ++(es: Sym*) = SymSum(es:_*)
+def **(es: Sym*) = SymProd(es:_*)
+def ^(base: Sym, expt: Sym) = SymPow(base, expt)
+def log(pow: Sym, base: Sym = SymE()) = SymLog(pow, base)
+def +-(e: Sym) = SymPM(e)
+def Pi = SymPi()
+def E = SymE()
+def X = SymVar('x)
+
+def rev[T](l: List[T]): List[T] = l match {
+  case Nil => Nil
+  case h :: t => rev(t) :+ h
+}
+#+END_SRC
+
+* Pattern Matching
+** Explanation
+*** General Process
+The program has access to a list of intermediate equivalence patterns for both equations and expressions. An equation can only be equivalent to another equation, and an expression can only be equivalent to another expression.
+The program will be given a starting equation, and a goal equation pattern. Using the expression and equation rules, the program will try to find an equation that is equal to the starting pattern and matches the goal pattern.
+The program will simultaneously try patterns from the starting pattern AND from the goal pattern, until it finds a way to link them together.
+
+*** Algebra Example
+*Starting Pattern:* =(2 * x) + 1 = 7=
+*Goal Pattern:* =x = a:Int=
+
+*Intermediate:* =a + b = c= <=> =a = c + (b*-1)=
+The program will match the starting pattern with =a = 2 * x=, =b = 1=, and =c = 7=. It will then substitute this into the second pattern, getting =2*x = 7 + (1*-1)=, which it will run basic simplification on to get =2*x = 6=.
+Now, it will check if this equation matches the goal pattern, or any of the patterns reached from the goal pattern. If it doesn't match, and no other results from this level match, it will check this new equation in all of the matchers again.
+
+*Intermediate:* =a * b = c= <=> =a = c * b^-1=
+The program will match the first pattern to the previously calculated pattern with =a = x=, =b = 2=
+, and =c = 6=. It will then substitute this into the second pattern, getting =x = 6 * 2^-1=, which will simplify to =x = 3=.
+Now it will check if this matches the goal pattern (or any pattern calculated from it), and it will match with =a = 3=. The program will exit with a calculated value of a = 3.
+
+
+** Types
+*** Binding
+Other than determine if an object does or does not match a particular pattern, a matchers only job is to determine which variables in the pattern are linked to which values in the expression.
+A binding describes one possible way an object could match to a certian pattern, with each key of the map being a variable that was bound, and each value being the part of the object that it got bound to.
+In this case, the binding can either be a symbolic or a sequence of symbolics.
+#+BEGIN_SRC scala
+type Binding = Map[Symbol, Any]
+#+END_SRC
+
+*** SeqMatch
+When the pattern matcher tries to match over a given sequence, it will go through the list of patterns sequentially. Each possible way one of the patterns can match part of a sequence is described by a =SeqMatch=.
+It contains the symbolic or list of symbolics that got matched by the pattern, =m=, the list of patterns not matched by the pattern, =rest=, as well as the list of possible bindings that can be made from matching with the particular expression, =binds=.
+#+BEGIN_SRC scala
+case class SeqMatch(m: Any, rest: Seq[Sym], binds: Seq[Binding])
+#+END_SRC
+
+** Helper Functions
+*** Combining Bindings
+When two bindings don't have any conflicts (a variable mapping to two different values in both bindings,) return the result of combining them together.
+#+BEGIN_SRC scala
+def tryMerge(a: Binding, b: Binding): Option[Binding] =
+  Option.when((a.keySet & b.keySet).filter{k => a(k) != b(k)}.isEmpty)(a ++ b)
+#+END_SRC
+
+Given two binding lists, return a list of every pairing of each binding in the first list to each binding in the second list, added using =tryMerge=.
+#+BEGIN_SRC scala
+def tryCombinations(a: Seq[Binding], b: Seq[Binding]): Seq[Binding] =
+  a.flatMap{m1 => b.flatMap(tryMerge(m1, _))}
+#+END_SRC
+
+*** Applying Patterns
+Given a list of expressions and patterns to match each expression to, return all possible combinations of matches for each pattern using =tryCombinations=.
+#+BEGIN_SRC scala
+def matchSeveral(ts: (Sym, Pattern)*): Seq[Binding] =
+  ts.map{t => t._2.matches(t._1)}.foldLeft(Seq[Binding](Map()))(tryCombinations)
+#+END_SRC
+
+Same as =matchSeveral=, but for a non fixed number of expressions and patterns
+#+BEGIN_SRC scala
+def matchSeq(syms: Seq[Sym], ps: Seq[Pattern]): Seq[Binding] =
+  if (ps.isEmpty) {
+    if (syms.isEmpty) Seq(Map()) else Seq()
+  } else {
+    ps.head.matchesSeq(syms)
+      .flatMap{ case SeqMatch(_, rest, binds) =>
+        tryCombinations(binds, matchSeq(rest, ps.tail))
+      }.distinct
+  }
+#+END_SRC
+
+*** Calling a Function with a Binding
+Writing a function that takes a raw binding map as input is tedious, so instead, the =callWithBind= function turns the binding map into a more condensed form. It sorts the variables alphabetically, then calls the function with a tuple of the values of the variable in alphabetical order by the variable's name.
+
+This allows you to define a function like:
+~case (a: SymInt, b: SymInt) => a + b~
+Instead of:
+~map => map('a).asInstanceOf[SymInt] + map('b).asInstanceOf[SymInt]~
+
+Just keep in mind that no matter what names you give the variable in the case statement, it will be called with the variables from the pattern in alphabetical order. This is also why =With= is important, because you can't have a variable that might or might not be bound.
+
+#+BEGIN_SRC scala
+def callWithBind[T](b: Binding)(f: Any => T) =
+  b.toList
+    .sortWith(_._1.name < _._1.name)
+    .map(_._2)
+    .pipe(listToTuple)
+    .pipe(f)
+
+assert(callWithBind(Map()){ case () => 3 + 4 } == 7)
+assert(callWithBind(Map(('a, 3.s))){ case a: SymInt => a.n < 4 } == true)
+assert(callWithBind(Map(('a, 1), ('b, 2), ('c, 3))){
+  case (a: Int, b: Int, c: Int) => a + b + c
+} == 6)
+#+END_SRC
+
+#+BEGIN_SRC scala
+def listToTuple(list: List[Any]): Any = list match {
+  case Nil                                => ()
+  case List(a)                            => a
+  case List(a, b)                         => (a, b)
+  case List(a, b, c)                      => (a, b, c)
+  case List(a, b, c, d)                   => (a, b, c, d)
+  case List(a, b, c, d, e)                => (a, b, c, d, e)
+  case List(a, b, c, d, e, f)             => (a, b, c, d, e, f)
+  case List(a, b, c, d, e, f, g)          => (a, b, c, d, e, f, g)
+  case List(a, b, c, d, e, f, g, h)       => (a, b, c, d, e, f, g, h)
+  case List(a, b, c, d, e, f, g, h, i)    => (a, b, c, d, e, f, g, h, i)
+  case List(a, b, c, d, e, f, g, h, i, j) => (a, b, c, d, e, f, g, h, i, j)
+}
+#+END_SRC
+
+** Patterns
+*** Pattern Trait
+#+BEGIN_SRC scala
+trait Pattern {
+  /* The list of possible ways to bind the variables contained in a pattern to
+   * match the given expression
+   * If it returns an empty list, the pattern does not match the expression
+   * If it returns a list with an empty map, the pattern matches the expression,
+   * but without any variables being bound
+   */
+  def matches(e: Sym): Seq[Binding]
+
+  /* For each possible match for specified expression, pass the match variables
+   * to the function, and return the list of new expressions returned.
+   * Don't include instances where the function returns the original expression.
+   */
+  def matchesApply(expr: Sym)(func: Any => Sym): Seq[Sym] =
+    this.matches(expr)
+      .map(callWithBind(_)(func))
+      .filter{ e => !(e == expr) }
+
+  /* Given a sequence of expressions, return a list of ways to match it.
+   * The elements of the list contain what was matched, what wasn't matched, and
+   * for that specific match, the list of possible ways to bind the variables.
+   */
+  def matchesSeq(syms: Seq[Sym]): Seq[SeqMatch] =
+    (0 until syms.length).map{i =>
+      SeqMatch(m = syms(i),
+        rest = syms.patch(i, Nil, 1),
+        binds = this.matches(syms(i)))
+    }.filter(_.binds.nonEmpty)
+
+  def &(o: Pattern) = And(this, o)
+  def |(o: Pattern) = Or(this, o)
+  def >(o: Pattern) = First(this, o)
+  def &@(bind: (Symbol, Any)) = With(this, bind._1, bind._2)
+
+  // `satisfies` always has a single argument, the entire expression, while `guards`
+  // take the arguments from the current binding generated by `callWithBind`
+  def |>[T <: Sym](satisfies: (T => Boolean)) = Satisfies(this, satisfies)
+  def |>>(guard: Any => Boolean) = Guard(this, guard)
+}
+#+END_SRC
+
+*** Simple Patterns
+**** Pattern Variable
+Matches any single object with that object bound to the symbol specified.
+#+BEGIN_SRC scala
+case class PatternVar(symbol: Symbol) extends Pattern {
+  def matches(e: Sym) = Seq(Map(this.symbol -> e))
+  def @@(p: Pattern) = Bind(this.symbol, p)
+}
+implicit class ImplicitPatternVar(_s: Symbol) extends PatternVar(_s)
+#+END_SRC
+
+**** Any
+Matches any single object without binding anything
+#+BEGIN_SRC scala
+case class AnyP() extends Pattern {
+  def matches(e: Sym) = Seq(Map())
+}
+#+END_SRC
+
+**** Any Constant
+#+BEGIN_SRC scala
+case class ConstP() extends Pattern {
+  def matches(e: Sym) = e match {
+    case c: SymConstant => Seq(Map())
+    case _ => Seq()
+  }
+}
+#+END_SRC
+
+**** Particular Sym
+Matches a particular expression exactly
+#+BEGIN_SRC scala
+case class SymP(c: Sym) extends Pattern {
+  def matches(e: Sym) = if (e == c) Seq(Map()) else Seq()
+}
+#+END_SRC
+
+**** Bind
+Match a particular pattern and bind a variable to the object matched by that pattern.
+#+BEGIN_SRC scala
+case class Bind(v: Symbol, p: Pattern) extends Pattern {
+  // tryCombinations will add the variable to the already existing binding,
+  // while also making sure that there are no conflicts
+  def matches(e: Sym): Seq[Binding] =
+    tryCombinations(p.matches(e), Seq(Map(v -> e)))
+
+  override def matchesSeq(syms: Seq[Sym]) =
+    p.matchesSeq(syms).map{
+      case SeqMatch(m, rest, bindings) =>
+        SeqMatch(m = m, rest = rest,
+          binds = tryCombinations(bindings, Seq(Map(v -> m))))
+    }
+}
+#+END_SRC
+
+**** With
+Match pattern =p= with the variable =v= bound to a certain, predefined value =bind=.
+This is useful in logical expressions, when a certain case fails, so you want to specify a default value for a variable.
+For example:
+~ProdP(First('a @@ IntP(), With('a, 1)), rest @@ Repeat())~
+Will either bind ='a= to each integer in the product, or if there are no integers, bind ='a= to =1=.
+#+BEGIN_SRC scala
+case class With(p: Pattern, v: Symbol, bind: Any) extends Pattern {
+  def matches(e: Sym): Seq[Binding] =
+    tryCombinations(p.matches(e), Seq(Map(v -> bind)))
+
+  override def matchesSeq(syms: Seq[Sym]) =
+    p.matchesSeq(syms).map{ case SeqMatch(m, rest, binds) =>
+      SeqMatch(m = m, rest = rest,
+        binds = tryCombinations(binds, Seq(Map(v -> bind))))
+    }
+}
+#+END_SRC
+
+*** Types of Expressions
+**** Rationals
+#+BEGIN_SRC scala
+case class RatP(n: Pattern = AnyP(), d: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymFrac(a, b) => matchSeveral((a.s -> n), (b.s -> d))
+    case a: SymInt => matchSeveral((a.s -> n), (1.s -> d))
+    case _ => Seq()
+  }
+}
+
+case class IntP(n: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case a: SymInt => matchSeveral((a -> n))
+    case _ => Seq[Binding]()
+  }
+}
+
+case class FracP(n: Pattern = AnyP(), d: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymFrac(a, b) => matchSeveral((a.s -> n), (b.s -> d))
+    case _ => Seq[Binding]()
+  }
+}
+#+END_SRC
+
+**** Sums and Products
+#+BEGIN_SRC scala
+case class SumP(ps: Pattern*) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymSum(exprs @ _*) => matchSeq(exprs, ps)
+    case _ => Nil
+  }
+}
+
+case class ProdP(ps: Pattern*) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymProd(exprs @ _*) => matchSeq(exprs, ps)
+    case _ => Nil
+  }
+}
+#+END_SRC
+
+**** Powers and Logs
+#+BEGIN_SRC scala
+case class PowP(base: Pattern = AnyP(), exp: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymPow(a, b) => matchSeveral((a -> base), (b -> exp))
+    case _ => Seq[Binding]()
+  }
+}
+
+case class LogP(pow: Pattern = AnyP(), base: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymLog(a, b) => matchSeveral((a -> pow), (b -> base))
+    case _ => Seq[Binding]()
+  }
+}
+#+END_SRC
+
+*** Repeating Pattern
+By default, match just the list of all expressions which satisfy =p=.
+If =min= is set, do the same thing, but only if there are atleast =min= expressions in that list, otherwise, don't match anything.
+If =max= is set, match all possible combinations of exactly =max= items that satisfy =p=. If =max= is 0, match an empty list.
+#+BEGIN_SRC scala
+case class Repeat(p: Pattern = AnyP(), min: Int = 0, max: Int = -1) extends Pattern {
+  // If matched against a single object, return nothing
+  def matches(e: Sym) = Seq()
+
+  override def matchesSeq(seq: Seq[Sym]): Seq[SeqMatch] =
+    // Separate expressions that match from those that dont
+    seq.partition(p.matches(_).nonEmpty) match {
+
+      // If there are fewer matches than the min, there are no possible ways to match
+      case (matches, dontMatch) if (matches.length < min) => Seq()
+
+      // If there is a specified maximum, get all possible combinations of said maximum
+      case (matches, dontMatch) if (max >= 0 && matches.length > max) =>
+        (0 until matches.length).combinations(max).map{idxs =>
+          SeqMatch(m = idxs.map(matches(_)),
+            // Remove the current matches from the match list, then add that to the non matches
+            rest = dontMatch ++ idxs.foldLeft(matches)
+              { (acc, i) => acc.patch(i, Nil, 1) },
+            binds = Seq[Binding](Map()))
+        }.toSeq
+
+      // If no maximum is specified, only return one possibility, where all matches are present
+      case (matches, dontMatch) =>
+        Seq(SeqMatch(m = matches, rest = dontMatch, binds = Seq(Map())) )
+    }
+}
+#+END_SRC
+
+*** Conditional Patterns
+**** Guard
+Call the =guard= function with the entire binding map resulting from matching =p=, and only match if the function returns =true=.
+#+BEGIN_SRC scala
+case class Guard(p: Pattern, guard: Any => Boolean) extends Pattern {
+  // Run through each guard, and stop after one of them returns false
+  def matches(e: Sym): Seq[Binding] =
+    p.matches(e).filter{ b => callWithBind(b)(guard) }
+}
+#+END_SRC
+
+**** Satisfies
+Same as =guards=, but call the function with the /object/ matched by =p= instead of the /binding map/.
+#+BEGIN_SRC scala
+case class Satisfies[T <: Sym](p: Pattern, f: T => Boolean) extends Pattern {
+  def matches(e: Sym): Seq[Binding] =
+    if (f(e.asInstanceOf[T])) p.matches(e)
+    else Seq()
+}
+#+END_SRC
+
+*** Boolean Patterns
+**** Or
+Return all matches from any element of =ps=
+#+BEGIN_SRC scala
+case class Or(ps: Pattern*) extends Pattern {
+  def matches(e: Sym): Seq[Binding] =
+    ps.map(_.matches(e)).reduceLeft(_ ++ _).distinct
+
+  override def matchesSeq(syms: Seq[Sym]): Seq[SeqMatch] =
+    // Get a sequence of all match groups from all patterns
+    ps.flatMap(_.matchesSeq(syms))
+  // Map(what was matched -> List(match groups))
+      .groupBy(_.m)
+  // List(sequence of match groups with the same match)
+      .values
+  // For each sequence of match groups, concatenate their binding lists
+      .map(_.reduceLeft{ (a, b) =>
+        SeqMatch(m = a.m,
+          rest = a.rest,
+          binds = (a.binds ++ b.binds).distinct ) })
+      .toSeq // Shut the compiler up
+}
+#+END_SRC
+
+**** First
+Return matches from /only/ the first pattern of =ps= which matches something.
+#+BEGIN_SRC scala
+case class First(ps: Pattern*) extends Pattern {
+  // Return either the first nonempty binding list of ps, or Nil
+  def matches(e: Sym): Seq[Binding] =
+    LazyList(ps:_*).map(_.matches(e)).find(_.nonEmpty).getOrElse(Nil)
+
+  // Return either the first nonempty SeqMatch list of ps, or Nil
+  override def matchesSeq(syms: Seq[Sym]): Seq[SeqMatch] =
+    LazyList(ps:_*).map(_.matchesSeq(syms)).find(_.nonEmpty).getOrElse(Nil)
+}
+#+END_SRC
+
+**** And
+Return only matches which match every pattern in =ps=.
+#+BEGIN_SRC scala
+case class And(ps: Pattern*) extends Pattern {
+  def matches(e: Sym): Seq[Binding] =
+    ps.map(_.matches(e)).reduceLeft(tryCombinations)
+
+  override def matchesSeq(syms: Seq[Sym]): Seq[SeqMatch] =
+    ps.flatMap(_.matchesSeq(syms))
+      .groupBy(_.m)
+      .values
+      .filter(_.length == ps.length)
+      .map{ seqMatches => SeqMatch(
+        m = seqMatches.head.m,
+        rest = seqMatches.head.rest,
+        binds = seqMatches.map(_.binds).reduceLeft(tryCombinations))
+      }.toSeq
+}
+#+END_SRC
+
+*** Type Fitting
+Even if an object is not an instance of a certain type, treat it as if it is.
+#+BEGIN_SRC scala
+case class AsSumP(ps: Pattern*) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymSum(exprs @ _*) => matchSeq(exprs, ps)
+    case expr => matchSeq(Seq(expr), ps)
+  }
+}
+
+case class AsProdP(ps: Pattern*) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymProd(exprs @ _*) => matchSeq(exprs, ps)
+    case expr => matchSeq(Seq(expr), ps)
+  }
+}
+
+case class AsPowP(base: Pattern = AnyP(), exp: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymPow(a, b) => matchSeveral((a -> base), (b -> exp))
+    case a => matchSeveral((a -> base), (1.s -> exp))
+  }
+}
+#+END_SRC
+
+** Abbreviations
+#+BEGIN_SRC scala
+def #?(p: Pattern = AnyP()) = IntP(p)
+def %?(n: Pattern = AnyP(), d: Pattern = AnyP()) = RatP(n, d)
+def /?(n: Pattern = AnyP(), d: Pattern = AnyP()) = FracP(n, d)
+def *?(ps: Pattern*) = ProdP(ps:_*)
+def +?(ps: Pattern*) = SumP(ps:_*)
+def ^?(base: Pattern = AnyP(), exp: Pattern = AnyP()) = PowP(base, exp)
+def logP(pow: Pattern = AnyP(), base: Pattern = AnyP()) = LogP(pow, base)
+def =?(sym: Sym) = SymP(sym)
+
+def __ = AnyP()
+def __* = Repeat()
+def ~~ = Repeat(max = 0)
+def *(p: Pattern = AnyP(), min: Int = 0, max: Int = 0) = Repeat(p, min, max)
+def XP = SymP('x)
+#+END_SRC
+
+* Math
+** Rules
+*** Rule Class
+A rule defines a particular way to modify an expression with a pattern and a function. If an expression matches =p=, the matching binding will be passed into =f=, where the new expression will be returned.
+#+BEGIN_SRC scala
+class Rule(name: String, p: Pattern, f: Any => Sym) {
+  def first(e: Sym): Option[Sym] =
+    try {
+      LazyList(p.matches(e):_*)
+        .map(callWithBind[Sym](_)(f))
+        .find(_.id != e.id)
+    } catch {
+      case err => println(f"Rule `$name` threw error `$err`") ; None
+    }
+
+  def all(e: Sym): Seq[Sym] =
+    p.matches(e)
+      .map(callWithBind[Sym](_)(f))
+      .filter(_.id != e.id)
+}
+#+END_SRC
+
+*** Rule List
+Creates a way of organizing rules by separating rules by the base type of expression they will match (power, product, log, etc.) in order to remove the strain of checking whether an object matches a pattern that would never match that type of expression.
+#+BEGIN_SRC scala
+class Rules() {
+  val rules = scala.collection.mutable.Map[Sym, Seq[Rule]]()
+  def +(t: Sym)(n: String)(p: Pattern)(f: Any => Sym) =
+    rules(t) = rules.getOrElse(t, Nil) :+ new Rule(n, p, f)
+
+  def apply(sym: Sym): Seq[Rule] = {
+    rules.toList
+      .filter{ r => (r._1 == 0.s) || (r._1.getClass.isInstance(sym)) }
+      .flatMap(_._2)
+  }
+
+  def first(e: Sym): Option[Sym] =
+    LazyList(apply(e):_*).flatMap(_.first(e)).headOption
+
+  def all(e: Sym): Seq[Sym] =
+    apply(e).foldLeft(Seq[Sym]()){ (acc, r) => acc ++ r.all(e) }
+}
+#+END_SRC
+
+** Simplification
+*** Setup
+#+BEGIN_SRC scala
+val sRules = new Rules()
+
+def simplify(expr: Sym): Sym =
+  expr.mapExprs(simplify).pipe{e =>
+    LazyList(sRules(e):_*)
+      .flatMap(_.first(e))
+      .headOption match {
+        case Some(simpler) => simplify(simpler)
+        case None => e
+      }
+  }
+#+END_SRC
+
+*** Helper Functions
+Separate the integer factor from an improper root
+#+BEGIN_SRC scala
+def separateRoot(base: SymInt, root: SymInt): (SymInt, SymInt) =
+  ( base.primeFactors.toList.foldLeft(1.s){ (a, t) => a * (t._1 ^ (t._2.n / root.n).s) },
+    base.primeFactors.toList.foldLeft(1.s){ (a, t) => a * (t._1 ^ (t._2.n % root.n).s) }
+  )
+#+END_SRC
+
+
+*** Power rules
+#+BEGIN_SRC scala
+sRules.+(SymPow())("x^0 = 1"){
+  PowP(__, =?(0))
+}{ case () => 1 }
+
+sRules.+(SymPow())("x^1 = x"){
+  PowP('b, =?(1))
+}{ case b: Sym => b }
+
+sRules.+(SymPow())("0^x = 0"){
+  PowP(=?(0), __)
+}{ case () => 0.s }
+
+sRules.+(SymPow())("1^x = 1"){
+  PowP(=?(1), __)
+}{ case () => 1.s }
+
+// Roots - simplifies if greatest power of a prime factor is >= the root
+sRules.+(SymPow())("Factor powers out of roots"){
+  'whole @@ PowP(RatP('n, 'd), FracP(=?(1), 'root))
+}{ case (d: SymInt, n: SymInt, root: SymInt, whole: Sym) =>
+    List(n, d).map(separateRoot(_, root)) match {
+      case List((on, in), (od, id)) =>
+        if (on == 1.s && od == 1.s) whole
+        else **(on~od, ^(((n.n.abs ~ d.n.abs) / (n~d)) * in~id, 1~root))
+    }
+}
+
+// (n/d) ^ (p/root) = (n^p)/(d^p) ^ (1/root)
+sRules.+(SymPow())("Simplify rational powers of rational bases"){
+  PowP(RatP('n, 'd), RatP('p |> { (_:SymInt) != 1.s }, 'root))
+}{ case (d: SymInt, n: SymInt, p: SymInt, root: SymInt) =>
+    if (p.n > 0) ^((n ^ p) / (d ^ p), 1~root)
+    else ^((d ^ (0.s - p)) / (n ^ (0.s - p)), 1~root)
+}
+
+// (a*b*c)^p =>> a^p * b^p * c^p
+sRules.+(SymPow())("Power of product to product of powers"){
+  PowP(ProdP('es @@ __*), 'expt)
+}{ case (es: Seq[Sym], expt: Sym) =>
+    **( { es.map(^(_, expt)) }:_* ) }
+
+// (a^p1)^p2 = a^(p1*p2)
+sRules.+(SymPow())("Nested powers multiply"){
+  PowP(PowP('base, 'p1), 'p2)
+}{ case (b: Sym, p1: Sym, p2: Sym) =>
+    ^(b, **(p1, p2))
+}
+
+sRules.+(SymPow())("Power with a log as the exponent"){
+  PowP('b, LogP('p, 'b))
+}{ case (b: Sym, p: Sym) => p }
+
+sRules.+(SymPow())("Power to a product with a log"){
+  PowP('b, ProdP(LogP('p, 'b), 'rest @@ __*))
+}{ case (b: Sym, p: Sym, rest: Seq[Sym]) =>
+  SymPow(p, SymProd(rest:_*))
+}
+
+sRules.+(SymPow())("Power to a sum with a log"){
+  PowP('b, SumP(LogP('p, 'b), 'rest @@ __*))
+}{ case (b: Sym, p: Sym, rest: Seq[Sym]) =>
+  SymProd(p, SymPow(b, SymProd(rest:_*)))
+}
+#+END_SRC
+
+*** Log Rules
+#+BEGIN_SRC scala
+sRules.+(SymLog())("log(a^p) = p * log(a)"){
+  LogP(PowP('powBase, 'expt), 'logBase)
+}{ case (expt: Sym, logBase: Sym, powBase: Sym) =>
+    **(expt, log(powBase, logBase))
+}
+
+sRules.+(SymLog())("log(a * b) =>> log(a) * log(b)"){
+  LogP('prod @@ ProdP(__*), 'base)
+}{ case (base: Sym, prod: SymProd) =>
+    ++({ prod.exprs.map(log(_, base)) }:_*)
+}
+#+END_SRC
+
+*** Product Rules
+#+BEGIN_SRC scala
+sRules.+(SymProd())("Multiplicative identity is 1"){
+  ProdP()
+}{ case () => 1.s }
+
+sRules.+(SymProd())("Simplify product of a single number"){
+  ProdP('a)
+}{ case a: Sym => a }
+
+sRules.+(SymProd())("Product containing 0 is 0"){
+  ProdP(=?(0), __*)
+}{ case () => 0 }
+
+sRules.+(SymProd())("x*1 = x"){
+  ProdP(=?(1), 'rest @@ __*)
+}{ case rest: Seq[Sym] => **(rest:_*) }
+
+sRules.+(SymProd())("Merge nested products"){
+  ProdP('prod @@ ProdP(__*), 'rest @@ __*)
+}{ case (prod: SymProd, rest: Seq[Sym]) =>
+    SymProd({ prod.exprs ++ rest }:_*)
+}
+
+sRules.+(SymProd())("Distributive property"){
+  ProdP(SumP('terms @@ __*), 'prod @@ __*)
+}{ case (prod: Seq[Sym], terms: Seq[Sym]) =>
+    SymSum({ terms.map{ e => SymProd({ e +: prod }:_*) } }:_*)
+}
+
+sRules.+(SymProd())("x^a * x^b = x^(a+b)"){
+  ProdP(AsPowP('base, 'p1 @@ %?()), AsPowP('base, 'p2 @@ %?()), 'rest @@ __*)
+}{ case (base: Sym, p1: SymR, p2: SymR, rest: Seq[Sym]) =>
+    SymProd({ ^(base, (p1 + p2)) +: rest }:_*)
+}
+
+sRules.+(SymProd())("Multiply rational factors"){
+  ProdP('a @@ %?(), 'b @@ %?(), 'rest @@ __*)
+}{ case (a: SymR, b: SymR, rest: Seq[Sym]) =>
+    SymProd({ (a * b) +: rest }:_*)
+}
+
+sRules.+(SymProd())("Multiply rational roots"){
+  ProdP(PowP('b1 @@ %?(), /?(=?(1), 'r1)), PowP('b2 @@ %?(), /?(=?(1), 'r2)), 'rest @@ __*)
+}{ case (b1: SymR, b2: SymR, r1: SymInt, r2: SymInt, rest: Seq[Sym]) =>
+    val lcm = SymInt((r1.n * r2.n) / (r1.n gcd r2.n))
+    val newBase = (b1 ^ SymInt(lcm.n / r1.n)) * (b2 ^ SymInt(lcm.n / r2.n))
+    SymProd({ ^(newBase, 1~lcm) +: rest }:_*)
+}
+#+END_SRC
+
+*** Sum Rules
+#+BEGIN_SRC scala
+sRules.+(SymSum())("Additive identity is 0"){
+  SumP()
+}{ case () => 0.s }
+
+sRules.+(SymSum())("Simplify sum of a single number"){
+  SumP('a)
+}{ case (a: Sym) => a }
+
+sRules.+(SymSum())("Merge nested sums"){
+  SumP('sum @@ SumP(__*), 'rest @@ __*)
+}{ case (rest: Seq[Sym], sum: SymSum) =>
+    SymSum({ sum.exprs ++ rest }:_*)
+}
+
+sRules.+(SymSum())("x*a? + x*b? = (a+b)*x"){
+  SumP(
+    First(ProdP('f1 @@ RatP(), 'u), 'u &@ 'f1 -> 1.s),
+    First(ProdP('f2 @@ RatP(), 'u), 'u &@ 'f2 -> 1.s),
+    'rest @@ __*)
+}{ case (f1: SymR, f2: SymR, rest: Seq[SymR], u: Sym) =>
+    SymSum({ **(f1 + f2, u) +: rest }:_*)
+}
+
+sRules.+(SymSum())("x*y*a? + x*y*b? = (a+b)*x*y"){
+  SumP(
+    ProdP(First('f1 @@ RatP(), ~~ &@ 'f1 -> 1.s), 'us @@ __*),
+    ProdP(First('f2 @@ RatP(), ~~ &@ 'f2 -> 1.s), 'us @@ __*),
+    'rest @@ __*)
+}{ case (f1: SymR, f2: SymR, rest: Seq[SymR], us: Seq[Sym]) =>
+    SymSum({ **({ (f1 + f2) +: us }:_*) +: rest }:_*)
+}
+
+sRules.+(SymSum())("Add rationals or similar products of rationals"){
+  SumP(AsProdP('a @@ %?(), 'r @@ __*), AsProdP('b @@ %?(), 'r @@ __*), 'rest @@ __*)
+}{ case (a: SymR, b: SymR, r: Seq[Sym], rest: Seq[Sym]) =>
+    SymSum({ SymProd({ (a + b) +: r }:_*) +: rest }:_*)
+}
+#+END_SRC
+
+*** Plus-Minus Rules
+#+BEGIN_SRC scala
+sRules.+(SymPM())("Plus/minus 0 is 0"){ SymP(SymPM(0)) }{ case () => 0 }
+#+END_SRC
+
+** Algebraic Manipulations
+*** Has X
+Determine if an expression contains /x/
+#+BEGIN_SRC scala
+def hasX(e: Sym): Boolean = e match {
+  case SymVar('x) => true
+  case e: SymConstant => false
+  case e => LazyList(e.exprs:_*).map(hasX).find(_ == true).isDefined
+}
+def noX(e: Sym): Boolean = !hasX(e)
+
+def hasxP(p: Pattern = __) = Satisfies(p, hasX)
+def noxP(p: Pattern = __) = Satisfies(p, noX)
+#+END_SRC
+
+*** Rules
+#+BEGIN_SRC scala
+val aRules = new Rules()
+
+aRules.+(SymSum())("Divide by common factor"){
+  SumP(ProdP('h @@ Repeat(hasxP(), min=1), 'n @@ Repeat(noxP(), min=1)), 'rest @@ Repeat(noxP()))
+}{ case (h: Seq[Sym], n: Seq[Sym], rest: Seq[Sym]) =>
+  SymSum(SymProd(h:_*), SymProd(^(**(n:_*), -1), ++(rest:_*))).pipe(simplify)
+}
+#+END_SRC
+
+** Solving
+*** Solving Zeros
+#+BEGIN_SRC scala
+def zero(e: Sym): Option[Sym] = zero(Seq(e), Nil)
+def zero(es: Seq[Sym], old: Seq[Sym]): Option[Sym] = {
+  println(f"Called with $es")
+  LazyList(es:_*)
+    // List of direct solutions
+    .flatMap(zRules.first)
+    // Option of the first valid solution in the list
+    .headOption
+    .map(simplify)
+    // If there is a solution, turn it into a Some
+    .map(Some(_))
+    // If there is a Some(solution) return it, otherwise recurse
+    .getOrElse{
+      es.flatMap{ e => aRules.all(e)
+        .filter(!old.contains(_))
+        .filter(!es.contains(_))
+      }.pipe{ newEs => if (newEs.isEmpty) None else zero(newEs, old ++ es) }
+    }
+}
+#+END_SRC
+
+*** Directly Solveable
+Cases where an expression is directly solvable for /x/
+#+BEGIN_SRC scala
+val zRules = new Rules()
+
+zRules.+(SymVar())("x = 0"){ =?('x) }{ case () => 0 }
+
+zRules.+(SymSum())("x + a = 0"){
+  SumP(XP, 'rest @@ __*)
+}{ case rest: Seq[Sym] => SymProd(-1.s, SymSum(rest:_*)) }
+
+zRules.+(SymProd())("x * a = 0"){
+  ProdP(XP, __*)
+}{ case () => 0 }
+
+zRules.+(SymSum())("x^p + a => x +- (-a)^(1/p)"){
+  AsSumP(PowP(XP, 'p @@ noxP()), 'rest @@ Repeat(noxP()))
+}{ case (SymInt(n), r: Seq[Sym]) if (n % 2 == 0) => SymPM(SymPow(SymSum(r:_*), 1 ~ n))
+  case (p: Sym, r: Seq[Sym]) => SymPow(SymProd(-1, SymSum(r:_*)), SymPow(p, -1))
+}
+#+END_SRC
+
+** Derivatives
+#+BEGIN_SRC scala
+val dRules = new Rules()
+
+def derivative(e: Sym): Sym =
+  dRules.first(e).map(simplify)
+  .orElse{ dRules.first(simplify(e)).map(simplify) }
+  .get
+
+dRules.+(SymVar())("Derivative of x is 1"){ XP }{ case () => 1 }
+dRules.+(0)("Derivative of a constant is 0"){ noxP() }{ case () => 0 }
+
+dRules.+(SymSum())("d/dx u + v = du/dx + dv/dx"){
+  SumP('es @@ __*)
+}{ case es: Seq[Sym] => SymSum({ es.map(derivative) }:_*) }
+
+dRules.+(SymProd())("d/dx c u = c u'"){
+  ProdP('cs @@ Repeat(noxP(), min=1), 'us @@ Repeat(hasxP(), min=1))
+}{ case (cs: Seq[Sym], us: Seq[Sym]) =>
+  SymProd({ cs :+ derivative(simplify(SymProd(us:_*))) }:_*)
+}
+
+dRules.+(SymProd())("Product rule"){
+  ProdP('a @@ hasxP(), 'bs @@ Repeat(hasxP(), min=1))
+}{ case (a: Sym, bs: Seq[Sym]) =>
+  SymSum(
+    SymProd(a, derivative(simplify(SymProd(bs:_*)))),
+    SymProd({ derivative(simplify(a)) +: bs }:_*)
+  )
+}
+
+dRules.+(SymPow())("Power rule"){
+  PowP(XP, 'p @@ noxP())
+}{ case (p: Sym) => SymProd(p, SymPow('x, ++(p, -1))) }
+
+dRules.+(SymPow())("d/dx e^u = u' e^u"){
+  PowP(=?(E), 'p @@ hasxP())
+}{ case p: Sym =>
+  SymProd(derivative(p), SymPow(E, p))
+}
+
+dRules.+(SymPow())("n^u = e^(u ln(n))"){
+  PowP('b, 'p @@ hasxP())
+}{ case (b: Sym, p: Sym) =>
+  derivative{ SymPow(E, simplify{ **(p, log(b)) }) }
+}
+
+dRules.+(SymLog())("d/dx ln(u) = u' / u"){
+  LogP('u, =?(E))
+}{ case u: Sym => SymProd(derivative(u), SymPow(u, -1)) }
+#+END_SRC
+
+** Integrals
+#+BEGIN_SRC scala :tangle no
+case class SymIntegral(expr: Sym) extends Sym {
+  def exprs = Seq(expr)
+  def mapExprs(f: Sym => Sym) = SymIntegral(f(expr))
+}
+
+def getIntegrals(e: Sym): Seq[SymIntegral] = e match {
+  case _: SymConstant => Nil
+  case i @ SymIntegral(expr) => (i +: getIntegrals(expr)).distinct
+  case _ => e.exprs.flatMap(getIntegrals)
+}
+
+def replaceExpr(whole: Sym, target: Sym, replacement: Sym): Sym =
+  if (whole == target) replacement
+  else (whole.mapExprs(replaceExpr(_, target, replacement)))
+
+def integral(e: Sym): Option[Sym] = {
+  import scala.collection.mutable
+  val queue = mutable.ListBuffer[Sym](SymIntegral(e))
+  val map = mutable.Map[Sym, Sym]
+  return None
+}
+
+class UnsolvedIntegral(var expr: Sym) {
+  def solve(integral: SymIntegral, solution: Sym)
+    expr = replaceExpr(expr, integral, solution)
+}
+
+def tryIntegrate(e: Sym): Either[Sym, Seq[Sym]] =
+  iRules.first(e) match {
+    case Some(integral) => Left(integral)
+    case None => Right(Nil)
+}
+
+
+
+val iRules = new Rules()
+#+END_SRC
+
+* Tests
+#+BEGIN_SRC scala :tangle ./tests.scala
+def check(expr: Sym)(simplified: Sym) =
+  assert(if (simplify(expr) == simplified) true
+  else { println(f"Failed on: $expr = $simplified") ; false })
+
+/// Symbolic Expression Tests
+// Equality regardless of factor order and assigned type (Sym vs SymProd)
+assert( List[Sym](SymProd(2, Pi)).head == SymProd(Pi, 2) )
+
+/// Pattern Matching Tests
+// Pattern matching basics
+assert{
+  ProdP(Or('i @@ IntP(), 'a), __*).matches(**(2, 1~2)) == List(
+    Map('i -> SymInt(2)),
+    Map('a -> SymInt(2)),
+    Map('a -> SymFrac(1, 2))
+  )
+}
+
+// Pattern guards: |>
+assert{ /?('a, 'b |> {(_:SymInt).n < 4}).matches(3~2).nonEmpty }
+assert{ /?('a, 'b |> {(_:SymInt).n < 4}).matches(3~5).isEmpty }
+
+// Assigned Vars
+assert{ *?(First('i @@ #?(), ~~ &@ 'i -> 1.s), 'rest @@ __*).matches(**(Pi, 3, 4, E)).length == 2 }
+assert{ *?(Or('i @@ #?(), ~~ &@ 'i -> 1.s), 'rest @@ __*).matches(**(Pi, 3, 4, E)).length == 3 }
+assert{ *?(And('i @@ #?(), ~~ &@ 'a -> 1.s), 'rest @@ __*).matches(**(Pi, 3, 4, E)).length == 0 }
+
+// Or/And/First
+assert {
+  Or(/?('n, 'd), 'u).matches(2~3) ==
+  Seq(Map('n -> 2.s, 'd -> 3.s), Map('u -> 2~3))
+}
+
+assert {
+  First(/?('n, 'd), 'u).matches(2~3) ==
+  Seq(Map('n -> 2.s, 'd -> 3.s))
+}
+
+assert {
+  And(/?('n, 'd), 'u).matches(2~3) ==
+  Seq(Map('n -> 2.s, 'd -> 3.s, 'u -> 2~3))
+}
+
+// As Product
+assert{ AsProdP(=?(8)).matches(8) == Seq(Map()) }
+assert{ AsProdP(=?(8)).matches(**(8)) == Seq(Map()) }
+assert{ AsProdP(=?(8)).matches(++(8)) == Nil }
+assert{ AsProdP(First('a @@ #?(), ~~ &@ 'a->1.s), 'rest @@ __*).matches(**(E, 3, Pi, 4)).length == 2 }
+assert{ AsProdP(First('a @@ #?(), ~~ &@ 'a->1.s), 'rest @@ __*).matches(**(E, Pi)).head('a) == 1.s }
+assert{ AsProdP(First('a @@ #?(), ~~ &@ 'a->1.s), 'rest @@ __*).matches(Pi) ==
+  Seq(Map('a -> SymInt(n = 1), 'rest -> List(SymPi())))
+}
+assert{ AsProdP(First('a @@ #?(), ~~ &@ 'a->1.s), 'rest @@ __*).matches(8) ==
+  Seq(Map('a -> SymInt(n = 8), 'rest -> List()))
+}
+
+assert{ AsPowP('base, 'expt).matches(^(3, 4)) == Seq(Map('base -> 3.s, 'expt -> 4.s)) }
+assert{ AsPowP('base, 'expt).matches(3) == Seq(Map('base -> 3.s, 'expt -> 1.s)) }
+assert{ *?(AsPowP('base, 'e1), AsPowP('base, 'e2)).matches(**(3, ^(3, 4))).contains(
+  Map('base -> 3.s, 'e1 -> 1.s, 'e2 -> 4.s) )
+}
+assert{ *?(AsPowP('base, 'e1), AsPowP('base, 'e2)).matches(**(3, ^(5, 4))).isEmpty }
+
+
+/// Simplifying Rationals Tests
+assert{ +6 ~ +4 == +3~2 }
+assert{ -6 ~ -4 == +3~2 }
+assert{ +6 ~ -4 == -3~2 }
+assert{ -6 ~ +4 == -3~2 }
+assert{ +8 ~ +2 ==  4.s }
+assert{ +8 ~ -2 == -4.s }
+assert{ +2 ~ +0 == SymPositiveInfinity() }
+assert{ -3 ~ +0 == SymNegativeInfinity() }
+assert{ +0 ~ +0 == SymUndefined() }
+
+/// Simplifying Powers Tests
+check{ ^(1, 100) }{ 1 }
+check{ ^(0, 100) }{ 0 }
+check{ ^(100, 0) }{ 1 }
+check{ ^(100, 1) }{ 100 }
+check{ ^(2, 3) }{ 8 }
+check{ ^(3~2, 0) }{ 1 }
+check{ ^(2, -1) }{ 1~2 }
+check{ ^(2, -3) }{ 1~8 }
+check{ ^(1~4, 3 ~ -2) }{ 8 }
+check{ ^(4, 1~2) }{ 2 }
+check{ ^(3~4, 2) }{ 9~16 }
+check{ ^(12, 1~2) }{ **(2, ^(3, 1~2)) }
+check{ ^(12~5, 2~3) }{ **(2, ^(18~25, 1~3)) }
+
+// Simplifying Logs Tests
+check{ log(^(2, 1~2)) }{ **(1~2, log(2)) }
+check{ log(**(2, 3)) }{ log(6) }
+check{ **(7, log(**(2, Pi), 10)) }{ **(log(2, 10), log(Pi, 10), 7) }
+
+/// Simplifying Products Tests
+// Multiplying rationals and rational roots
+check{ **() }{ 1 }
+check{ **(1, 1, Pi, 1, 1) }{ Pi }
+check{ **(7, 3) }{ 21 }
+check{ **(7~4, 10~3) }{ 35~6 }
+check{ **(7, **(Pi, 2), E) }{ **(14, Pi, E) }
+check{ **(3~2, 2~3, Pi, E) }{ **(Pi, E) }
+check{ **(^(2, 1~2), ^(3, 1~3)) }{ ^(72, 1~6) }
+check{
+  **(3~2, ^(3, 2~3), ^(2, 1~3), ^(1024, 1~2))
+}{ **(48, ^(18, 1~3)) }
+
+// Combining similar bases
+check{ **(E, ^(E, -1)) }{ 1 }
+check{ **(E, E) }{ ^(E, 2) }
+check{ **(E, 7, ^(E, 1~2)) }{ **(7, ^(E, 3~2)) }
+check{ **(2, ^(E, 1~2), ^(E, 5~3)) }{ **(2, ^(E, 13~6)) }
+check{ **(2, ^(E, 3), ^(Pi, 3)) }{ **(2, ^(E, 3), ^(Pi, 3)) }
+
+// Distributive property
+check{ **(2, ++(3, 4)) }{ 14 }
+check{ **(2, ++(3, Pi)) }{ ++(6, **(2, Pi)) }
+check{ **(E, ++(1, ^(2, 1~2))) }{ ++(E, **(E, ^(2, 1~2))) }
+
+/// Simplifying Sums Tests
+// Adding rationals
+check{ ++(1, 2) }{ 3 }
+check{ ++(1, 1~2) }{ 3~2 }
+check{ ++(3~7, ++(Pi, 1~2)) }{ ++(Pi, 13~14) }
+
+// Combining similar products
+check{ ++(Pi, Pi) }{ **(Pi, 2) }
+check{ ++(Pi, **(Pi, 3~2)) }{ **(Pi, 5~2) }
+check{ ++(**(Pi, 3~2), **(Pi, -3~2)) }{ 0 }
+check{ ++(**(Pi, E), **(Pi, E)) }{ **(Pi, E, 2) }
+check{ ++(**(Pi, E), **(2, Pi, E)) }{ **(Pi, E, 3) }
+check{
+  ++(7, 6,
+    **(E, Pi, 3), **(E, Pi, 4), **(E, Pi),
+    Pi, **(Pi, -1),
+    **(E, 3~2), **(E, -1~2))
+}{ ++(13, **(E, 8, Pi), E) }
+
+#+END_SRC

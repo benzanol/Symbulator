@@ -108,7 +108,6 @@ object Equations {
   case class SymPoint(x: Sym, y: Sym) extends Sym {
     def instance(args: Sym*) = SymPoint(args(0), args(1))
     def exprs = Seq(x, y)
-    override def isFinite = x.isFinite || y.isFinite
   }
 
   // Get the list of properties that should be displayed below an equation
@@ -119,7 +118,7 @@ object Equations {
     Some("Zeros", sym.zeros.map{ (a: Sym) => SymPoint(a, SymInt(0)) }),
     Some("Mins and Maxes", sym.extremas.flatMap(pointString(sym, _))),
     Some("Inflection Points", sym.derivative.extremas.flatMap(pointString(sym, _))),
-    Some("Holes", sym.undefined.flatMap(pointString(sym, _))),
+    Some("Holes", sym.undefined.map(SymVertical)),
     Some("Derivative", Seq(sym.derivative)),
     //sym.integral.map("Integral", Seq(_)),
   ).flatten
@@ -184,7 +183,11 @@ class EquationHandler() {
           )
 
           if (p._2.length == 1) {
-            val txt = text.replace("\\", "\\\\")
+            val txt = (p._2.head match {
+              case Equations.SymPoint(x, y) => y.simple.toLatex
+              case e => e.simple.toLatex
+            }).replace("\\", "\\\\")
+
             val btn = makeElement("button", "innerText" -> "+", "class" -> "plus-btn",
               "onclick" -> s"insertEquation('$txt')")
             divv.appendChild(btn)

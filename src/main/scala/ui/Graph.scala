@@ -18,38 +18,38 @@ import javax.lang.model.`type`.IntersectionType
 object Graph {
   // Set up the graph when it is loaded for the first time
   def setup {
-  fc.addEventListener("mousemove", panGraph)
-  fc.addEventListener("wheel", zoomGraph)
-  fc.addEventListener("mousemove", detectMouseAxes)
+    fc.addEventListener("mousemove", panGraph)
+    fc.addEventListener("wheel", zoomGraph)
+    fc.addEventListener("mousemove", detectMouseAxes)
 
-  fc.addEventListener("mousedown", { (e: Any) => mouseDown = true  })
-  fc.addEventListener("mouseup",   { (e: Any) => mouseDown = false })
-  fc.addEventListener("mouseout",  { (e: Any) => mouseDown = false })
+    fc.addEventListener("mousedown", { (e: Any) => mouseDown = true  })
+    fc.addEventListener("mouseup",   { (e: Any) => mouseDown = false })
+    fc.addEventListener("mouseout",  { (e: Any) => mouseDown = false })
 
-  fc.addEventListener("mousemove", highlightPoints)
-  fc.addEventListener("mouseout",  { (e: Any) => hidePointBox() })
-  fc.addEventListener("mousedown", maybeClickPoint)
+    fc.addEventListener("mousemove", highlightPoints)
+    fc.addEventListener("mouseout",  { (e: Any) => hidePointBox() })
+    fc.addEventListener("mousedown", maybeClickPoint)
 
-  window.addEventListener("resize", { (e: Any) => draw })
+    window.addEventListener("resize", { (e: Any) => draw })
 
     setGraphs(Nil, Nil)
-  draw
+    draw
   }
 
   type JsCanvas = dom.HTMLCanvasElement
   type JsContext = dom.CanvasRenderingContext2D
 
   def drawLine(x1: Int, y1: Int, x2: Int, y2: Int, w: Int = -1)
-  (implicit ctx: JsContext): Unit = {
+    (implicit ctx: JsContext): Unit = {
 
-  ctx.beginPath()
+    ctx.beginPath()
 
-  if (w != -1)
+    if (w != -1)
       ctx.lineWidth = w
 
-  ctx.moveTo(x1, y1)
-  ctx.lineTo(x2, y2)
-  ctx.stroke()
+    ctx.moveTo(x1, y1)
+    ctx.lineTo(x2, y2)
+    ctx.stroke()
   }
 
   def canvasX(x: Double): Int = (marginX + (x - pos.x) / pos.xs).toInt
@@ -80,17 +80,17 @@ object Graph {
   // Figure out how to move the graph
   def panGraph(event: dom.MouseEvent) {
     // Only pan the graph if the mouse is down
-  if (!mouseDown) return
+    if (!mouseDown) return
 
     val dx = event.movementX * pos.xs
     val dy = -event.movementY * pos.ys
-  pos = GraphPos(pos.x - dx, pos.y - dy, pos.xs, pos.ys)
-  draw
+    pos = GraphPos(pos.x - dx, pos.y - dy, pos.xs, pos.ys)
+    draw
 
   }
 
   def zoomGraph(event: dom.WheelEvent) {
-  val scale = Math.pow(1.0008, event.deltaY);
+    val scale = Math.pow(1.0008, event.deltaY);
 
     val (w, h) = (fc.width * pos.xs, fc.height * pos.ys)
 
@@ -98,13 +98,13 @@ object Graph {
     if (scale > 1 && (w*10 > Double.MaxValue || h*10 > Double.MaxValue)) return
     if (scale < 1 && (w/10 < Double.MinValue || h/10 < Double.MinValue)) return
 
-  // Calculate the x and y position of the mouse pointer on the canvas
-  val rect = fc.getBoundingClientRect
-  val (mouseX, mouseY) = (event.clientX - rect.left, event.clientY - rect.top)
+    // Calculate the x and y position of the mouse pointer on the canvas
+    val rect = fc.getBoundingClientRect
+    val (mouseX, mouseY) = (event.clientX - rect.left, event.clientY - rect.top)
 
-  // Calculate the change in x and y
-  val dx = pos.xs * (mouseX - marginX) * (1 - scale)
-  val dy = pos.ys * (fc.clientHeight - mouseY - marginY) * (1 - scale)
+    // Calculate the change in x and y
+    val dx = pos.xs * (mouseX - marginX) * (1 - scale)
+    val dy = pos.ys * (fc.clientHeight - mouseY - marginY) * (1 - scale)
 
     // Only change one scale if the cursor is on one of the axes
     this.pos =
@@ -112,8 +112,8 @@ object Graph {
       else if (onYAxis && !onXAxis) GraphPos(pos.x, pos.y + dy, pos.xs, pos.ys * scale)
       else GraphPos(pos.x + dx, pos.y + dy, pos.xs * scale, pos.ys * scale)
 
-  // Redraw the graph
-  draw
+    // Redraw the graph
+    draw
   }
 
   def detectMouseAxes(event: dom.MouseEvent) {
@@ -122,7 +122,7 @@ object Graph {
 
     // Figure out the position of the mouse and canvas
     val rect = fc.getBoundingClientRect
-  val (mouseX, mouseY) = (event.clientX - rect.left, event.clientY - rect.top)
+    val (mouseX, mouseY) = (event.clientX - rect.left, event.clientY - rect.top)
 
     // Figure out the position of the axes on the canvas
     val xAxisY = rect.height - marginY + pos.y/pos.ys
@@ -200,7 +200,7 @@ object Graph {
   }
 
   def setGraphs(exprs: Seq[Sym], ps: Seq[(Sym, Sym, Sym)]) {
-  this.graphs = exprs
+    this.graphs = exprs
 
     val expanded = exprs.map(_.expand)
     val allExprs: Seq[(Sym, String)] = (0 until expanded.length)
@@ -260,7 +260,7 @@ object Graph {
     drawSegments()
 
     if (this.rainbow && this.rainbowTimer.isEmpty) {
-      this.rainbowTimer = Some(js.eval("setInterval(drawSegments, 50)").toString)
+      this.rainbowTimer = Some(js.eval("setInterval(repeatDraw, 100)").toString)
     } else if (!this.rainbow && this.rainbowTimer.isDefined) {
       js.eval(s"clearInterval(${rainbowTimer.get})")
       this.rainbowTimer = None
@@ -288,8 +288,8 @@ object Graph {
     // Loop through the same code twice for the horizontal and vertical lines
     for (horizontal <- List(true, false)) {
       val (start, size) =
-          if (horizontal) (pos.y, (ctx.canvas.height - marginY) * pos.ys)
-          else (pos.x, (ctx.canvas.width - marginX) * pos.xs)
+        if (horizontal) (pos.y, (ctx.canvas.height - marginY) * pos.ys)
+        else (pos.x, (ctx.canvas.width - marginX) * pos.xs)
 
       // The minimum pixel distance for grid lines is constant,
       // so calculate the minimum unit distance based on it
@@ -301,13 +301,13 @@ object Graph {
       // with the larger distanced grid lines being thicker than the closer ones
       var dists = List[BigDecimal](BigDecimal(10).pow(Math.ceil(Math.log10(size)).toInt))
       while (dists.head > min)
-          dists = (
-        if (Math.log10(dists.head.toDouble) % 1 != 0) BigDecimal(0) :: dists
-        else if (0.1*dists.head >= min) (dists.head * 0.1) :: dists
-        else if (0.2*dists.head >= min) (dists.head * 0.2) :: dists
-        else if (0.5*dists.head >= min) (dists.head * 0.5) :: dists
-        else BigDecimal(0) :: dists
-          )
+        dists = (
+          if (Math.log10(dists.head.toDouble) % 1 != 0) BigDecimal(0) :: dists
+          else if (0.1*dists.head >= min) (dists.head * 0.1) :: dists
+          else if (0.2*dists.head >= min) (dists.head * 0.2) :: dists
+          else if (0.5*dists.head >= min) (dists.head * 0.5) :: dists
+          else BigDecimal(0) :: dists
+        )
 
       // Remove the first element, because it is too small,
       // and then put the list in descending order
@@ -315,35 +315,35 @@ object Graph {
 
       // Keep shortening the distance until it gets too low
       for (i <- 0 until dists.length) {
-          val dist: BigDecimal = dists(i)
-          val pixDist: Double = (dist / (if (horizontal) -pos.ys else pos.xs)).toDouble
+        val dist: BigDecimal = dists(i)
+        val pixDist: Double = (dist / (if (horizontal) -pos.ys else pos.xs)).toDouble
 
-          // The x or y position of the current line being drawn
+        // The x or y position of the current line being drawn
         // The pixel width needs to be a double to prevent getting progressively more inaccurate
-          var cur: BigDecimal = dist * Math.ceil(start / dist.toDouble).toInt
-          var pix: Double = cur.toDouble.pipe(if (horizontal) canvasY else canvasX)
+        var cur: BigDecimal = dist * Math.ceil(start / dist.toDouble).toInt
+        var pix: Double = cur.toDouble.pipe(if (horizontal) canvasY else canvasX)
 
-          val thickness = dists.length - i
+        val thickness = dists.length - i
 
-          // Calculate when to display text
-          val textAll = pixDist.abs > textPixMin
-          val powOf10 = textAll || Math.log10(dist.toDouble) % 1 == 0
-          val text2s = textAll || (powOf10 && (pixDist.abs * 2) > textPixMin)
-          val text5s = textAll || (!text2s && powOf10 && (pixDist.abs * 5) > textPixMin)
+        // Calculate when to display text
+        val textAll = pixDist.abs > textPixMin
+        val powOf10 = textAll || Math.log10(dist.toDouble) % 1 == 0
+        val text2s = textAll || (powOf10 && (pixDist.abs * 2) > textPixMin)
+        val text5s = textAll || (!text2s && powOf10 && (pixDist.abs * 5) > textPixMin)
 
-          // Draw each line for the current distance
-          while (cur < start + size) {
+        // Draw each line for the current distance
+        while (cur < start + size) {
           val pixInt = pix.toInt
-        if (horizontal) drawLine(marginX, pixInt, ctx.canvas.width, pixInt, thickness)
-        else drawLine(pixInt, 0, pixInt, ctx.canvas.height - marginY, thickness)
+          if (horizontal) drawLine(marginX, pixInt, ctx.canvas.width, pixInt, thickness)
+          else drawLine(pixInt, 0, pixInt, ctx.canvas.height - marginY, thickness)
 
-        if (textAll || (text2s && cur % (dist*2) == 0) || (text5s && cur % (dist*5) == 0))
+          if (textAll || (text2s && cur % (dist*2) == 0) || (text5s && cur % (dist*5) == 0))
             if (horizontal) ctx.fillText(cur.toString, 5, pixInt + 5)
             else ctx.fillText(cur.toString, pixInt - 10, ctx.canvas.height - 5)
 
-        cur += dist
-        pix += pixDist
-          }
+          cur += dist
+          pix += pixDist
+        }
       }
     }
   }
@@ -351,10 +351,10 @@ object Graph {
   // Drawing the actual function
   def calculateSegments(sym: Sym) = sym match {
     case SymVertical(x) =>
-      this.segments :+= Seq(Seq(
-        x.approx.head -> 0,
-        x.approx.head -> fctx.canvas.height * pos.xs
-      ))
+      this.segments :+= x.approx.map{a => Seq(
+        a -> -fctx.canvas.height * pos.xs,
+        a -> fctx.canvas.height * pos.xs
+      )}
     case _ => {
       // Make sure to include important points on the curve (extremas, holes, etc)
       val tiny = (fctx.canvas.width * pos.xs) / 1000000.0
@@ -374,7 +374,12 @@ object Graph {
     }
   }
 
-  @JSExportTopLevel("drawSegments")
+  @JSExportTopLevel("repeatDraw")
+  def repeatDraw() {
+    fctx.clearRect(0, 0, fc.width, fc.height)
+    drawSegments()
+  }
+
   def drawSegments() =
     for (i <- 0 until this.segments.length ; s <- this.segments(i)) {
       fctx.strokeStyle = colors(i % colors.length)
@@ -442,7 +447,7 @@ object Graph {
         else throw new Exception
 
       } catch {
-          case _: Throwable =>
+        case _: Throwable =>
           if (segments.head.nonEmpty) segments = Nil :: segments
       }
 
@@ -477,8 +482,10 @@ object Graph {
 
     val timeOffset = 8 * System.nanoTime() / Math.pow(10, 7)
 
+    if (!this.rainbow) ctx.beginPath()
+
     for (i <- 1 to ps.length - 4) {
-      ctx.beginPath()
+      if (this.rainbow) ctx.beginPath()
 
       if (this.rainbow)
         ctx.strokeStyle = s"hsla(${i + timeOffset}, 100%, 50%, 1.0)";
@@ -490,17 +497,34 @@ object Graph {
       val xc2 = (ps(i+2)._1 + ps(i + 1)._1) / 2;
       val yc2 = (ps(i+2)._2 + ps(i + 1)._2) / 2;
 
+      if (this.rainbow && (i + timeOffset.toInt/8) % 300 == 0 && false) {
+
+        val img = js.eval("let i = new Image() ; i.src = './Cat.png' ; i").asInstanceOf[dom.HTMLElement]
+
+        val angle = Math.atan((yc2 - yc).toDouble / (xc2 - xc).toDouble)
+
+        ctx.translate(xc, yc)
+        ctx.rotate(angle)
+        ctx.drawImage(img, -100, -100, 200, 200)
+        ctx.rotate(-angle)
+        ctx.translate(-xc, -yc)
+
+      }
+
       ctx.moveTo(ps(i-1)._1, ps(i-1)._2);
 
       ctx.quadraticCurveTo(ps(i)._1, ps(i)._2, xc, yc);
 
-      ctx.moveTo(ps(i)._1, ps(i)._2);
+      if (this.rainbow) {
+        ctx.moveTo(ps(i)._1, ps(i)._2);
 
-      ctx.quadraticCurveTo(xc, yc, xc2, yc2);
+        ctx.quadraticCurveTo(xc, yc, xc2, yc2);
+      }
 
-      ctx.stroke()
+      if (this.rainbow) ctx.stroke()
     }
-    ctx.beginPath()
+
+    if (this.rainbow) ctx.beginPath()
 
 
     // Curve through the last two ps

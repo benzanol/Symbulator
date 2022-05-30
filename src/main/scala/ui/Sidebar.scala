@@ -264,6 +264,7 @@ object SlopeSidebar {
 
       setText("slope", s"\\frac{\\Delta y}{\\Delta x} = ${slope.toLatex}")
       setText("equation", s"y = ${function.get.toLatex}")
+      println(function.get)
 
       js.eval("formatStaticEquations()")
 

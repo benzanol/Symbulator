@@ -221,6 +221,11 @@ object Simplify {
       RatP(SymP(1), IntP() |> { (_: SymInt).toInt % 2 == 0 }))
   }{ case () => SymUndefined() }
 
+  sRules.+("Even root of negative number is undefined"){
+    PowP( 'b @@ RatP() |> { (_: SymR) < 0 },
+      'p @@ RatP(SymP(1), IntP() |> { (_: SymInt).toInt % 2 == 1 }))
+  }{ case (b: SymR, p: SymR) => SymPow(b.negative, p) }
+
   sRules.+("Anything with an undefined is undefined"){
     AnyP() |> {e: Sym => Sym.containsExpr(e, SymUndefined())}
   }{ case () => SymUndefined() }
@@ -294,6 +299,10 @@ object Simplify {
   }{ case (p: SymInt, s: SymSum) =>
       (2 to p.n.toInt).foldLeft(s.exprs){ (acc, n) => distribute(acc, s.exprs) }.pipe(+++)
   }
+
+  sRules.+("Expand power of root times fraction"){
+    PowP( ProdP('n @@ RatP(), PowP('b, 'p @@ RatP()) ), 'i @@ IntP() )
+  }{ case (b: Sym, i: SymInt, n: SymR, p: SymR) => **(n^i, ^(b, p*i)) }
 
   def distribute(l1: Seq[Sym], l2: Seq[Sym]): Seq[Sym] =
     l1.flatMap{ a => l2.map{ b => **(a, b).simple } }

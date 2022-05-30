@@ -72,7 +72,8 @@ object Latex {
   def wrappedLatex(e: Sym, pow: Boolean = false): String = e match {
     case SymSum(_) => "\\left(" + toLatex(e) + "\\right)"
     case SymProd(_) => toLatex(e).pipe{ l =>
-      if (l.startsWith("\\frac")) l else ("\\left(" + toLatex(e) + "\\right)")
+      if (l.startsWith("\\frac") && !pow) l
+      else ("\\left(" + toLatex(e) + "\\right)")
     }
     case _: SymLog | _: SymPM if pow => "\\left(" + toLatex(e) + "\\right)"
     case _ => toLatex(e)
@@ -313,7 +314,9 @@ trait SymR extends SymConstant {
   def -(o: SymR): SymR = this + o.negative
   def *(o: SymR): SymR = SymR(n * o.n, d * o.d)
   def /(o: SymR): SymR = this * o.inverse
-  def ^(o: SymInt): SymR = SymR(n.pow(o.n.toInt), d.pow(o.n.toInt))
+  def ^(o: SymInt): SymR =
+    if (o < 0) SymR(d.pow(-o.n.toInt), n.pow(-o.n.toInt))
+    else SymR(n.pow(o.n.toInt), d.pow(o.n.toInt))
 
   def <(o: SymR): Boolean = (this.n*o.d) < (o.n*this.d)
   def >(o: SymR): Boolean = (this.n*o.d) > (o.n*this.d)

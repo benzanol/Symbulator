@@ -56,6 +56,11 @@ object Solve {
   //    }).distinct
   
   val zRules = new SeqRules()
+
+  zRules.+("Multiplication zeros"){
+    ProdP('es @@ __*)
+  }{ case es: Seq[Sym] => es.flatMap(_.zeros)
+  }
   
   zRules.+("Subtract from one side of equation"){
     @?('whole) @@ EquationP(@?('l), @?('r))
@@ -94,8 +99,11 @@ object Solve {
   zRules.+("Plus Minus"){ PMP(@?('e)) }{ case e: Sym => solve(e) }
 
   zRules.+("f(x)^a = 0 => f(x) = 0"){
-    PowP('a, ConstP())
-  }{ case a: Sym => solve(a) }
+    PowP('a, 'c @@ ConstP())
+  }{ case (a: Sym, c: SymConstant) =>
+      if (c.constant < 0) Nil
+      else solve(a)
+  }
 
   zRules.+("f(x)^a + b = 0 => f(x) + b^1/a = 0"){
     SumP(PowP(hasxP('a), 'p @@ ConstP()), 'r @@ Repeat(noxP()))
