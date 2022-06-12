@@ -120,6 +120,9 @@ object Equations {
     Some("Inflection Points", sym.derivative.extremas.flatMap(pointString(sym, _))),
     Some("Holes", sym.undefined.map(SymVertical)),
     Some("Derivative", Seq(sym.derivative)),
+    Some("Integral",
+      if (document.getElementById("integral-chk").asInstanceOf[dom.HTMLInputElement].checked)
+        sym.integral.toSeq else Nil)
     //sym.integral.map("Integral", Seq(_)),
   ).flatten
     .filter{ case (n, seq) => (n == "Explicit").||(

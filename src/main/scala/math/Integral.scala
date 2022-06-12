@@ -51,15 +51,24 @@ object Integral {
     case _ => e.exprs.flatMap(getIntegrals)
   }
 
+  def containsOtherVar(e: Sym): Boolean = e match {
+    case SymVar('x) => false
+    case SymVar(_) => true
+    case _ => e.exprs.map(containsOtherVar).contains(true)
+  }
+
   type ActorMap = scala.collection.mutable.Map[SymIntegral, IntegralActor]
 
   def integrate(start: SymIntegral): Option[Sym] = {
+    if (containsOtherVar(start)) return None
+
     val startActor = new IntegralActor(start)
 
     val actors: ActorMap = scala.collection.mutable.Map(start -> startActor)
 
     // The list of integrals to try to solve
     var queue = List[SymIntegral](start)
+    var history = scala.collection.mutable.ListBuffer[SymIntegral](start)
 
     while (queue.nonEmpty) {
       // Get the first element of the queue, and remove it
@@ -68,7 +77,9 @@ object Integral {
       queue = queue.tail
       
       // Add the new integrals to the end of the queue
-      queue ++= tryIntegral(q, actors)
+      val newIntegrals = tryIntegral(q, actors).filter{ s => !(history contains s) }
+      queue ++= newIntegrals
+      history ++= newIntegrals
       
       // If the final solution has been found return it
       if (startActor.solution.isDefined)
@@ -165,6 +176,8 @@ object IntegralRules {
       case c: SymConstant => Some(**(c, SymVar('x)).simple)
       case SymPow(SymVar('x), p: SymConstant) =>
         Some( **(^(++(p, 1), -1), ^('x, ++(p, 1))).simple )
+      case SymPow(b, SymVar('x)) if Pattern.noX(b) =>
+        Some(**(^(SymLog(b), -1), ^(b, 'x)).simple)
       case e => basicIntegrals.get(e)
     }
 
