@@ -153,15 +153,17 @@ object IntegralRules {
     }
   }
 
+  // This does NOT include the strategy of making x appear out of
+  // nowhere, as that adds a lot of unnecessary computation
   def allParts(expr: Sym): Seq[Rule] = {
     val exprSet = simplify(expr) match {
       case prod: SymProd => prod.exprs.toSet
       case other => Set(other)
     }
 
-    exprSet
-      .subsets
+    exprSet.subsets
       .filter(_.nonEmpty)
+      .filter(_.size < exprSet.size)
       .map{us =>
         val u = simplify(***(us.toList))
         val dv = simplify(***((exprSet diff us).toList))

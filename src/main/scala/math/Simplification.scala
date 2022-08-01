@@ -62,10 +62,15 @@ object Simplify {
   
   // (n/d) ^ (p/root) = (n^p)/(d^p) ^ (1/root)
   sRules.+("Simplify rational powers of rational bases"){
-    PowP(RatP('n, 'd), RatP('p |> { (_:SymInt) != 1.s }, 'root))
-  }{ case (d: SymInt, n: SymInt, p: SymInt, root: SymInt) =>
-      if (p.n > 0) ^((n ^ p) / (d ^ p), 1~root)
-      else ^((d ^ (0.s - p)) / (n ^ (0.s - p)), 1~root)
+    PowP(AsProdP(RatP('n, 'd), 'r @@ __*), 'pow @@ RatP('p |> { (_:SymInt) != 1.s }, 'root))
+  }{ case (d: SymInt, n: SymInt, p: SymInt, pow: SymR, r: Seq[Sym], root: SymInt) =>
+      val rat = {
+        if (p.n > 0) ^((n ^ p) / (d ^ p), 1~root)
+        else ^((d ^ (0.s - p)) / (n ^ (0.s - p)), 1~root)
+      }
+      if (r.isEmpty) rat
+      else if (r.length == 1) **(^(r(0), pow), rat)
+      else **(^(***(r), pow), rat)
   }
   
   // (a^p1)^p2 = a^(p1*p2)
@@ -117,24 +122,31 @@ object Simplify {
       ***(prod.exprs ++ rest)
   }
   
-  // Don't do this for rational bases, otherwise an infinite loop will be created
+  // The inner AsProdPs allow (x * (x * y)^-1) to become y^-1
   sRules.+("Combine rational powers of similar bases being multiplied"){
     'whole @@ ProdP(
-      AsPowP('base, 'p1 @@ %?()),
-      AsPowP('base, 'p2 @@ %?()),
+      AsPowP(AsProdP('base, 'r1 @@ __*), 'p1 @@ %?()),
+      AsPowP(AsProdP('base, 'r2 @@ __*), 'p2 @@ %?()),
       'rest @@ __*
     )
-  }{ case (base: Sym, p1: SymR, p2: SymR, rest: Seq[Sym], whole: Sym) =>
+  }{ case (base: Sym, p1: SymR, p2: SymR, r1: Seq[Sym], r2: Seq[Sym], rest: Seq[Sym], whole: Sym) =>
+      // Don't do this for rational bases, otherwise an infinite loop will be created
+      val rp1 = if (r1.isEmpty) Nil else Seq(^(***(r1), p1))
+      val rp2 = if (r2.isEmpty) Nil else Seq(^(***(r2), p2))
+
       if (base.isInstanceOf[SymR]) whole
-      else ***(^(base, (p1 + p2)) +: rest)
+      else ***(^(base, (p1 + p2)) +: (rest ++ rp1 ++ rp2))
   }
 
-  sRules.+("Power of product is a product of powers"){
-    ProdP(PowP(ProdP('fs @@ __*), 'pow), 'rest @@ __*)
-  }{ case (fs: Seq[Sym], pow: Sym, rest: Seq[Sym]) =>
-      ***(fs.map(SymPow(_, pow)) ++ rest)
-  }
-  
+  // This rule is controversial
+  /*
+   sRules.+("Power of product is a product of powers"){
+   ProdP(PowP(ProdP('fs @@ __*), 'pow), 'rest @@ __*)
+   }{ case (fs: Seq[Sym], pow: Sym, rest: Seq[Sym]) =>
+   ***(fs.map(SymPow(_, pow)) ++ rest)
+   }
+   */
+
   sRules.+("Multiply rational factors"){
     ProdP('a @@ %?(), 'b @@ %?(), 'rest @@ __*)
   }{ case (a: SymR, b: SymR, rest: Seq[Sym]) =>
@@ -170,19 +182,10 @@ object Simplify {
       +++(sum.exprs ++ rest)
   }
   
-  sRules.+("3x + 2x = 5x"){
-    SumP(
-      First(ProdP('f1 @@ RatP(), 'u), 'u &@ 'f1 -> 1.s),
-      First(ProdP('f2 @@ RatP(), 'u), 'u &@ 'f2 -> 1.s),
-      'rest @@ __*)
-  }{ case (f1: SymR, f2: SymR, rest: Seq[SymR], u: Sym) =>
-      +++(**(f1 + f2, u) +: rest)
-  }
-  
   sRules.+("3xy + 2xy = 5xy"){
     SumP(
-      ProdP(First('f1 @@ RatP(), ~~ &@ 'f1 -> 1.s), 'us @@ __*),
-      ProdP(First('f2 @@ RatP(), ~~ &@ 'f2 -> 1.s), 'us @@ __*),
+      AsProdP(First('f1 @@ RatP(), ~~ &@ 'f1 -> 1.s), 'us @@ __*),
+      AsProdP(First('f2 @@ RatP(), ~~ &@ 'f2 -> 1.s), 'us @@ __*),
       'rest @@ __*)
   }{ case (f1: SymR, f2: SymR, rest: Seq[SymR], us: Seq[Sym]) =>
       +++( **({ (f1 + f2) +: us }:_*) +: rest )
@@ -194,11 +197,13 @@ object Simplify {
       +++( ***((a + b) +: r) +: rest )
   }
   
-  sRules.+("Distributive property"){
-    ProdP(SumP('terms @@ __*), 'n @@ %?(), 'rest @@ __*)
-  }{ case (n: Sym, rest: Seq[Sym], terms: Seq[Sym]) =>
-      ***( +++( terms.map{ e => **(e, n) } ) +: rest )
-  }
+  /*
+   sRules.+("Distributive property"){
+   ProdP(SumP('terms @@ __*), 'n @@ %?(), 'rest @@ __*)
+   }{ case (n: Sym, rest: Seq[Sym], terms: Seq[Sym]) =>
+   ***( +++( terms.map{ e => **(e, n) } ) +: rest )
+   }
+   */
   
   sRules.+("Plus/minus 0 is 0"){ SymP(SymPM(0)) }{ case () => 0 }
 
