@@ -42,7 +42,9 @@ object Main {
   def doStuff {
     import sympany.math._
     import sympany.Sym._
-    ///jslog(simplify(**(^(**(X, 2), -1), ^(X, 3))).toString())
+    jslog(simplify(
+      SymLog(^('x, 5), 'x)
+    ).toString())
   }
 
   @JSExportTopLevel("simplify")
