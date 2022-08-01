@@ -8,12 +8,7 @@ import org.scalajs.dom.window
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSExportTopLevel
 
-import sympany.Main.jslog
-import sympany.Parse.parseLatex
 import sympany._
-import sympany.math._
-import sympany.Sym._
-import javax.lang.model.`type`.IntersectionType
 
 object Graph {
   // Set up the graph when it is loaded for the first time
@@ -133,58 +128,6 @@ object Graph {
   }
 
 
-  // Display important points when the mouse hovers over them
-  var currentPoint: Option[IntersectionPoint] = None
-
-  def setPointer(pointer: Boolean) =
-    document.getElementById("graph-container").setAttribute("style",
-      if (pointer) "cursor:pointer" else ""
-    )
-
-  def highlightPoints(event: dom.MouseEvent) {
-    val rect = fc.getBoundingClientRect()
-
-    val mx = event.clientX - rect.left
-    val my = event.clientY - rect.top
-
-    for (p <- points ; x <- p.x.approx ; y <- p.y.approx)
-      // Find the first point that is less than the min distance from the cursor
-      if (Math.sqrt( Math.pow(canvasX(x)-mx, 2) + Math.pow(canvasY(y)-my, 2) ) < pointRadius) {
-
-        // Set the current point
-        this.currentPoint = Some(p)
-
-        // Make the cursor a pointer
-        setPointer(true)
-
-        // Set the text of the point box and move it to the cursor
-        val box = document.getElementById("point-box")
-        box.innerText = s"\\left( ${p.x.toLatex}, \\quad ${p.y.toLatex} \\right)"
-        box.setAttribute("style", s"left:${event.clientX}px; top:${event.clientY}px; display:block;")
-
-        // Format the point as a latex equation
-        js.eval("MQ.StaticMath(document.getElementById('point-box'));")
-
-        return
-      }
-
-    // If no points were found, make sure the box is hidden
-    hidePointBox()
-    setPointer(false)
-    this.currentPoint = None
-  }
-
-  def hidePointBox() {
-    val box = document.getElementById("point-box")
-    box.setAttribute("style", "display:none;")
-  }
-
-  def maybeClickPoint(event: dom.MouseEvent) =
-    this.currentPoint match {
-      case Some(p) => Sidebar.clickPoint(p)
-      case None => ()
-    }
-
   // Draw the graph
 
   var graphs = Seq[Sym]()
@@ -202,40 +145,7 @@ object Graph {
   def setGraphs(exprs: Seq[Sym], ps: Seq[(Sym, Sym, Sym)]) {
     this.graphs = exprs
 
-    val expanded = exprs.map(_.expand)
-    val allExprs: Seq[(Sym, String)] = (0 until expanded.length)
-      .flatMap{ i => expanded(i).map(_ -> colors(i % colors.length)) }
-
-    // Generate the list of intersection points
-    this.points = {
-      (Seq(IntersectionPoint(Nil, 0.s, 0.s, gridColor)) +: Seq(
-        ps.flatMap{ case (a, b, c) =>
-          for (b1 <- b.expand ; c1 <- (if (c.expand.length == 1) Seq(c) else a.replaceExpr('x, b).simple.expand))
-          yield (a, b1, c1)
-        }
-          .map{ p => IntersectionPoint(Seq(p._1, 0.s), p._2, p._3, colors(exprs.indexOf(p._1) % colors.length)) }
-      )) ++ (
-        for ((a, col) <- allExprs ; (b, _) <- (allExprs) if a != b)
-        yield (a, b) match {
-          case (SymVertical(x), b) => Seq(IntersectionPoint(Seq(a, b), x, b.replaceExpr('x, x).simple, col))
-          case (a, SymVertical(x)) => Seq(IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col))
-          case (SymVertical(x1), SymVertical(x2)) => Nil
-          case (a, b) if b == 0.s => a.zeros.flatMap(_.expand).map{ x =>
-            IntersectionPoint(Seq(a, b), x, 0.s, col)
-          }
-          case (a, b) => ++(a, **(b, -1)).zeros.flatMap(_.expand).map{ x =>
-            IntersectionPoint(Seq(a, b), x, a.replaceExpr('x, x).simple, col)
-          }
-        }
-      )
-      // Combine multiple functions that intersect at the same point
-    }.flatten.groupBy{ p => (p.x, p.y) }
-      .map{ case (p: (Sym, Sym), is: Seq[IntersectionPoint]) =>
-        IntersectionPoint(
-          // Always deprioritize y=0 so it is at the end of the list
-          is.flatMap(_.funcs).distinct.sortWith{ (a, b) => a != SymInt(0) },
-          p._1, p._2, is.head.color)
-      }.toSeq
+    this.points = Nil
 
     draw
   }
@@ -255,7 +165,7 @@ object Graph {
     this.segments = Nil
     for (i <- 0 until graphs.length) {
       fctx.strokeStyle = colors(i % colors.length)
-      calculateSegments(graphs(i))
+      segments :+= calculateSegments(graphs(i))
     }
     drawSegments()
 
@@ -267,11 +177,7 @@ object Graph {
     }
 
     // Draw the points on the main canvas
-    val selectedPs = Sidebar.p1.toSeq ++ Sidebar.p2.toSeq
-    points.foreach{ p => drawPoint(p.x, p.y, p.color, selectedPs contains p)(fctx) }
-
-    // Draw anything extra for the current sidebar
-    Sidebar.currentDraw.map(_.apply(fctx))
+    points.foreach{ p => drawPoint(p.x, p.y, p.color, false)(fctx) }
 
     // Remove any of the function lines that went into the margin
     fctx.clearRect(0, 0, marginX, fc.height)
@@ -348,32 +254,6 @@ object Graph {
     }
   }
 
-  // Drawing the actual function
-  def calculateSegments(sym: Sym) = sym match {
-    case SymVertical(x) =>
-      this.segments :+= x.approx.map{a => Seq(
-        a -> -fctx.canvas.height * pos.xs,
-        a -> fctx.canvas.height * pos.xs
-      )}
-    case _ => {
-      // Make sure to include important points on the curve (extremas, holes, etc)
-      val tiny = (fctx.canvas.width * pos.xs) / 1000000.0
-
-      val important = sym.important
-        .flatMap(_.approx()).flatMap{n => List(n - tiny, n, n + tiny)}
-
-      val undefined = sym.undefined
-        .flatMap(_.approx()).flatMap{n => List(n - tiny, n + tiny)}
-
-      // Calculate the function and derivative
-      var newSeg = Seq[Seq[(Double, Double)]]()
-      for (f <- sym.functions) {
-        newSeg = newSeg ++ functionSegments(f, important ++ undefined)
-      }
-      this.segments :+= newSeg
-    }
-  }
-
   @JSExportTopLevel("repeatDraw")
   def repeatDraw() {
     fctx.clearRect(0, 0, fc.width, fc.height)
@@ -388,83 +268,21 @@ object Graph {
 
   // Drawing special points
   def drawPoint(xe: Sym, ye: Sym, color: String, selected: Boolean = false)(implicit ctx: JsContext) {
-    for (x <- xe.approx() ; y <- ye.approx() if x.isFinite && y.isFinite) {
-      val cx = marginX + ((x - pos.x) / pos.xs).toInt
-      val cy = ctx.canvas.height - marginY - ((y - pos.y) / pos.ys).toInt
+    val (x, y) = (xe.approx(), ye.approx())
+    if (!x.isFinite || !y.isFinite) return
 
-      ctx.beginPath()
+    val cx = marginX + ((x - pos.x) / pos.xs).toInt
+    val cy = ctx.canvas.height - marginY - ((y - pos.y) / pos.ys).toInt
 
-      ctx.lineWidth = 4
-      ctx.strokeStyle = if (selected) "black" else color
-      ctx.fillStyle = if (selected) "black" else "white"
-      ctx.arc(cx, cy, pointRadius, 0, 2 * Math.PI)
+    ctx.beginPath()
 
-      ctx.fill()
-      ctx.stroke()
-    }
-  }
+    ctx.lineWidth = 4
+    ctx.strokeStyle = if (selected) "black" else color
+    ctx.fillStyle = if (selected) "black" else "white"
+    ctx.arc(cx, cy, pointRadius, 0, 2 * Math.PI)
 
-  // Get a distrobution of points with higher density of points where there is a steeper derivative
-  def functionSegments(f: Double => Option[Double], extras: Seq[Double] = Nil):
-      Seq[Seq[(Double, Double)]] = {
-
-    val minY = pos.y
-    val maxY = pos.y + (fc.height - marginY) * pos.ys
-    //def inRange(y: Double) = (y >= minY) && (y <= maxY)
-    def inRange(y: Double) = true
-
-    // The total width of the screen in units
-    val width = (fc.width - marginX) * pos.xs
-
-    // The distance between calculated points will be a power of 1.5
-    val dist = Math.pow(1.1, Math.round(Math.log(width / 500.0) / Math.log(1.1)))
-
-    // The x position of the current point (starts slightly to the left of the screen)
-    var x = pos.x - dist - (pos.x % dist)
-
-    // When using an extra point, remember, where we were before
-    var lastMultiple = x
-
-    // The largest x value on the screen
-    val max = pos.x + width + dist;
-
-    // The extras that haven't yet been used - remove any that are outside of the screen
-    var extrasLeft = extras.sortWith(_ < _).filter(_ > x).distinct
-
-    // The list of points being made
-    var segments = List(List[(Double, Double)]())
-
-    while (x < max) {
-      try {
-        val y: Double = f(x).getOrElse{throw new ArithmeticException ; 0}
-
-        // If the current, last, and last last were out of range, remove the last one
-        if (segments.head.length >= 2 && !inRange(y) &&
-          !inRange(segments.head(0)._2) && !inRange(segments.head(1)._2))
-          segments = segments.head.tail :: segments.tail
-
-        if (y.isFinite) segments = ((x, y) :: segments.head) :: segments.tail
-        else throw new Exception
-
-      } catch {
-        case _: Throwable =>
-          if (segments.head.nonEmpty) segments = Nil :: segments
-      }
-
-      x = lastMultiple + dist
-
-      if (extrasLeft.nonEmpty && extrasLeft.head <= x) {
-        x = extrasLeft.head
-        extrasLeft = extrasLeft.tail
-      } else if (Math.floor(x) > Math.floor(lastMultiple) && dist < 1) {
-        x = Math.floor(x)
-        lastMultiple = x
-      } else {
-        lastMultiple = x
-      }
-    }
-
-    return segments
+    ctx.fill()
+    ctx.stroke()
   }
 
   def connectWithCurves(points: Seq[(Double, Double)])(implicit ctx: JsContext) {
@@ -534,7 +352,7 @@ object Graph {
     ctx.stroke()
   }
 
-
+  // Rainbow mode
   var rainbow: Boolean = false
   var rainbowTimer: Option[String] = None
 
@@ -542,5 +360,153 @@ object Graph {
   def toggleRainbow() {
     this.rainbow = !this.rainbow
     this.draw
+  }
+
+
+  // Display important points when the mouse hovers over them
+  var currentPoint: Option[IntersectionPoint] = None
+
+  def setPointer(pointer: Boolean) =
+    document.getElementById("graph-container").setAttribute("style",
+      if (pointer) "cursor:pointer" else ""
+    )
+
+  def highlightPoints(event: dom.MouseEvent) {
+    val rect = fc.getBoundingClientRect()
+
+    val mx = event.clientX - rect.left
+    val my = event.clientY - rect.top
+
+    for (p <- points) {
+      val (x, y) = (p.x.approx(), p.y.approx())
+
+      // Find the first point that is less than the min distance from the cursor
+      if (Math.sqrt( Math.pow(canvasX(x)-mx, 2) + Math.pow(canvasY(y)-my, 2) ) < pointRadius) {
+
+        // Set the current point
+        this.currentPoint = Some(p)
+
+        // Make the cursor a pointer
+        setPointer(true)
+
+        // Set the text of the point box and move it to the cursor
+        val box = document.getElementById("point-box")
+        box.innerText = s"\\left( ${p.x.toLatex}, \\quad ${p.y.toLatex} \\right)"
+        box.setAttribute("style", s"left:${event.clientX}px; top:${event.clientY}px; display:block;")
+
+        // Format the point as a latex equation
+        js.eval("MQ.StaticMath(document.getElementById('point-box'));")
+
+        return
+      }
+    }
+
+    // If no points were found, make sure the box is hidden
+    hidePointBox()
+    setPointer(false)
+    this.currentPoint = None
+  }
+
+  def hidePointBox() {
+    val box = document.getElementById("point-box")
+    box.setAttribute("style", "display:none;")
+  }
+
+  def maybeClickPoint(event: dom.MouseEvent) =
+    this.currentPoint match {
+      case Some(p) => ()
+      case None => ()
+    }
+
+
+  // Calculating the curve values
+
+  /* Given one of the graph expressions, create a list of segments, each
+   * segment being a list of points
+   */
+  def calculateSegments(sym: Sym): Seq[Seq[(Double, Double)]] = sym match {
+    case SymVertical(x) =>
+      return Seq(Seq(
+        x.approx() -> -fctx.canvas.height * pos.xs,
+        x.approx() -> fctx.canvas.height * pos.xs
+      ))
+    case _ => {
+      // Make sure to include important points on the curve (extremas, holes, etc)
+      val tiny = (fctx.canvas.width * pos.xs) / 1000000.0
+
+      // Calculate the function and derivative
+      return sym.expanded.flatMap{e => calculateFunctionSegments(
+        { d: Double =>
+          try {
+            Some(e.at(d))
+          } catch {
+            case e: Throwable => None
+          }
+        }
+      )};
+    }
+  }
+
+  // Get a distrobution of points with higher density of points where there is a steeper derivative
+  def calculateFunctionSegments(f: Double => Option[Double], extras: Seq[Double] = Nil):
+      Seq[Seq[(Double, Double)]] = {
+
+    val minY = pos.y
+    val maxY = pos.y + (fc.height - marginY) * pos.ys
+    //def inRange(y: Double) = (y >= minY) && (y <= maxY)
+    def inRange(y: Double) = true
+
+    // The total width of the screen in units
+    val width = (fc.width - marginX) * pos.xs
+
+    // The distance between calculated points will be a power of 1.5
+    val dist = Math.pow(1.1, Math.round(Math.log(width / 500.0) / Math.log(1.1)))
+
+    // The x position of the current point (starts slightly to the left of the screen)
+    var x = pos.x - dist - (pos.x % dist)
+
+    // When using an extra point, remember, where we were before
+    var lastMultiple = x
+
+    // The largest x value on the screen
+    val max = pos.x + width + dist;
+
+    // The extras that haven't yet been used - remove any that are outside of the screen
+    var extrasLeft = extras.sortWith(_ < _).filter(_ > x).distinct
+
+    // The list of points being made
+    var segments = List(List[(Double, Double)]())
+
+    while (x < max) {
+      try {
+        val y: Double = f(x).getOrElse{throw new ArithmeticException ; 0}
+
+        // If the current, last, and last last were out of range, remove the last one
+        if (segments.head.length >= 2 && !inRange(y) &&
+          !inRange(segments.head(0)._2) && !inRange(segments.head(1)._2))
+          segments = segments.head.tail :: segments.tail
+
+        if (y.isFinite) segments = ((x, y) :: segments.head) :: segments.tail
+        else throw new Exception
+
+      } catch {
+        case _: Throwable =>
+          if (segments.head.nonEmpty) segments = Nil :: segments
+      }
+
+      x = lastMultiple + dist
+
+      if (extrasLeft.nonEmpty && extrasLeft.head <= x) {
+        x = extrasLeft.head
+        extrasLeft = extrasLeft.tail
+      } else if (Math.floor(x) > Math.floor(lastMultiple) && dist < 1) {
+        x = Math.floor(x)
+        lastMultiple = x
+      } else {
+        lastMultiple = x
+      }
+    }
+
+    return segments
   }
 }

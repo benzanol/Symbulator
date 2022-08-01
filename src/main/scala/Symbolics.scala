@@ -10,7 +10,7 @@ object Sym {
   def replaceExpr(expr: Sym, target: Sym, replacement: Sym): Sym =
     if (expr == target) replacement
     else expr.mapExprs(replaceExpr(_, target, replacement))
-  
+
   def containsExpr(expr: Sym, target: Sym): Boolean =
     if (expr == target) true
     else expr.exprs.map(containsExpr(_, target)).contains(true)
@@ -19,13 +19,13 @@ object Sym {
     if (str.startsWith("\\left(")) str.substring(6, str.length - 7)
     else if (str.head == '(') str.substring(1, str.length - 1)
     else str
-  
+
   def combos[T](l1: Seq[Seq[T]], l2: Seq[T]): Seq[Seq[T]] =
     l1.flatMap{a => l2.map{b => a :+ b}}
-  
+
   def allCombos[T](ls: Seq[T]*): Seq[Seq[T]] =
     ls.foldLeft(Seq(Seq[T]()))(combos[T])
-  
+
   def ++(es: Sym*) = SymSum(Multiset.fromSeq(es))
   def +++(es: Seq[Sym]) = SymSum(Multiset.fromSeq(es))
   def **(es: Sym*) = SymProd(Multiset.fromSeq(es))
@@ -79,7 +79,7 @@ object Latex {
     case _ => toLatex(e)
   }
 
-  def toLatex(e: Sym): String = e.simple match {
+  def toLatex(e: Sym): String = math.Simplify.simplify(e) match {
     case SymFrac(n, d) if n < 0 => s"- \\frac{${-n}}{$d}"
     case SymFrac(n, d) => s"\\frac{$n}{$d}"
     case SymInt(n) => n.toString
@@ -88,6 +88,7 @@ object Latex {
     case SymUndefined() => "\\NaN"
     case SymE() => "e"
     case SymPi() => "\\pi"
+    case SymVar('*) => "x"
     case SymVar(s) if s.name contains '/' =>
       s.name.split("/").pipe{ case Array(dy, dx) => s"\\frac{$dy}{$dx}" }
     case SymVar(s) => s.name
@@ -145,9 +146,9 @@ object Latex {
     case SymEquation(l, r) => s"${toLatex(l)} = ${toLatex(r)}"
     case SymVertical(x) => s"x = ${toLatex(x)}"
 
-    case Integral.SymIntegral(sub) => s"\\integral ${wrappedLatex(sub)}"
+    case SymIntegral(sub) => s"\\integral ${wrappedLatex(sub)}"
 
-    case sympany.ui.Equations.SymPoint(x, y) =>
+    case SymPoint(x, y) =>
       ("(" + x.toLatex + ", \\quad \\quad " + y.toLatex + ")")
   }
 }
@@ -155,58 +156,35 @@ object Latex {
 /// Symbolic trait
 trait Sym {
   def toLatex: String = Latex.toLatex(this)
+  def size: Int = 1 + this.exprs.map(_.size).sum
 
   def exprs: Seq[Sym]
   def instance(args: Sym*): Sym
 
-  def mapExprs(f: Sym => Sym): Sym =
-    instance(exprs.map(f):_*)
-
+  def mapExprs(f: Sym => Sym): Sym = instance(exprs.map(f):_*)
   def replaceExpr(t: Sym, r: Sym) = Sym.replaceExpr(this, t, r)
+  def isExplicit: Boolean = this match {
+    case SymVar('x) => true
+    case _: SymVar => false
+    case _: SymEquation => false
+    case e => e.exprs.find(!_.isExplicit).isEmpty
+  }
 
-  lazy val expand: Seq[Sym] =
-    exprs.map(_.expand)
+  // Convert a function with multiple curves (eg plus-minus) to a list of single curves
+  lazy val expanded: Seq[Sym] =
+    exprs.map(_.expanded)
       .foldLeft(Seq(Seq[Sym]())){ (acc, seq: Seq[Sym]) =>
         acc.flatMap{a => seq.map{b => a :+ b}}
       }.map{es => this.instance(es:_*)}
-      .map(Simplify.simplify)
-
 
   type Bind = (Symbol, Double)
-  def approx(env: Bind*): Seq[Double] = Nil
-  lazy val approx: Seq[Double] = approx()
-
-  def solve(v: Symbol): Seq[Sym] = Solve.solve(this, v)
-
-  lazy val simple: Sym = Simplify.simplify(this)
-  lazy val derivative: Sym = Derivative.derive(maybeExplicit, 'x)
-  lazy val zeros: Seq[Sym] = explicit.map{_.solve('x)}.getOrElse(Nil)
-  lazy val important: Seq[Sym] = explicit.map{Solve.importantPoints(_, 'x)}.getOrElse(Nil)
-  lazy val undefined: Seq[Sym] = explicit.map{Solve.undefinedPoints(_, 'x)}.getOrElse(Nil)
-  lazy val integral: Option[Sym] = Integral.integrate(Integral.SymIntegral(maybeExplicit))
-
-  lazy val maybeExplicit = explicit.getOrElse(this)
-
-  lazy val explicit: Option[Sym] =
-    if (!containsExpr(simple, SymVar('y))) Some(simple)
-    else this.solve('y).headOption
-
-  lazy val extremas: Seq[Sym] =
-    if (explicit.isEmpty) Nil
-    else derivative.zeros
-
-  val pointCache = mutable.Map[Double, Seq[Double]]()
-  def at(x: Double): Seq[Double] = if (explicit.isEmpty) Nil else {
-    if (!pointCache.contains(x)) pointCache(x) = explicit.get.approx('x -> x)
-    return pointCache(x)
-  }
-  lazy val functions: Seq[Double => Option[Double]] =
-    if (expand.length <= 1) Seq{ x: Double => this.at(x).headOption }
-    else expand.flatMap(_.functions)
+  def approx(env: Bind*): Double
+  def at(x: Double): Double = this.approx('x -> x)
 
 
   def isFinite: Boolean = true
 
+  //lazy val simple: Sym = Simplify.simplify(this)
   //def allHoles: Set[Sym] = exprHoles ++ extraHoles
   //def exprHoles: Set[Sym] = Set()
   //var extraHoles = Set[Sym] = Set()
@@ -220,7 +198,7 @@ trait SymConstant extends Sym {
   lazy val exprs = Nil
   def instance(args: Sym*) = this
 
-  override def approx(env: Bind*) = Seq(constant)
+  def approx(env: Bind*) = constant
   def constant: Double
 }
 
@@ -228,16 +206,19 @@ trait SymConstant extends Sym {
 trait SymOp extends Sym {
   def operation(vs: Double*): Double
 
-  override def approx(env: Bind*): Seq[Double] =
-    exprs.map(_.approx(env:_*))
-      .foldLeft(Seq(Seq[Double]())){ (acc, seq: Seq[Double]) =>
-        acc.flatMap{a => seq.map{b => a :+ b}}
-      }.map{ds => this.operation(ds:_*)}
+  def approx(env: Bind*): Double =
+    this.operation({ exprs.map(_.approx(env:_*)) }:_*)
+}
+
+trait SymSpecial extends Sym {
+  def approx(env: Bind*) = {
+    throw new Error("Cannot approximate special value"); 0
+  }
 }
 
 /// Special
 //// Equation
-case class SymEquation(left: Sym = SymInt(0), right: Sym = SymInt(0)) extends Sym {
+case class SymEquation(left: Sym, right: Sym) extends SymSpecial {
   lazy val exprs = Seq(left, right)
   def instance(args: Sym*) = SymEquation(args(0), args(1))
 
@@ -245,11 +226,27 @@ case class SymEquation(left: Sym = SymInt(0), right: Sym = SymInt(0)) extends Sy
 }
 
 //// Vertical Line
-case class SymVertical(x: Sym) extends Sym {
+case class SymVertical(x: Sym) extends SymSpecial {
   lazy val exprs = Seq(x)
   def instance(args: Sym*) = SymVertical(args.head)
 
   override def toString = "x = " + x.toString
+}
+
+//// Integral
+case class SymIntegral(expr: Sym) extends SymSpecial {
+  lazy val exprs = Seq(expr)
+  def instance(args: Sym*) = SymIntegral(args.head)
+
+  override def toString = f"Integral($expr)"
+}
+
+//// Point
+case class SymPoint(x: Sym, y: Sym) extends SymSpecial {
+  lazy val exprs = Seq(x, y)
+  def instance(args: Sym*) = SymPoint(args(0), args(1))
+
+  override def toString = f"($x, $y)"
 }
 
 /// Variables
@@ -257,12 +254,21 @@ case class SymVertical(x: Sym) extends Sym {
 case class SymVar(symbol: Symbol = 'x) extends Sym {
   lazy val exprs = Nil
   def instance(args: Sym*) = this
-  override lazy val expand = Seq(this)
-  override def approx(env: Bind*) = env.find(_._1 == symbol).map(_._2).toSeq
+  override lazy val expanded = Seq(this)
+
+  override def approx(env: Bind*): Double =
+    env.find(_._1 == symbol) match {
+      case Some((s, num)) => num
+      case None => throw new Error("Variable not in bind") ; 0
+    }
 
   def s = this
 
-  override def toString = symbol.name
+  override def toString =
+    symbol.name match {
+      case "*" => "X"
+      case a => a
+    }
 }
 
 /// Constants
@@ -290,11 +296,11 @@ object SymR {
     if (d == 0 && n == 0) return SymUndefined()
     else if (d == 0 && n > 0) return SymPositiveInfinity()
     else if (d == 0 && n < 0) return SymNegativeInfinity()
-    
+
     val gcd: BigInt = n.abs gcd d.abs
     // 1 if d is positive, -1 if d is negative
     val one = d / d.abs
-    
+
     if (d.abs / gcd == BigInt(1)) SymInt(one * n / gcd)
     else SymFrac(one * n / gcd, d.abs / gcd)
   }
@@ -307,7 +313,7 @@ trait SymR extends SymConstant {
   override def toString = f"$n/$d"
 
   lazy val constant = n.toDouble / d.toDouble
-  
+
   def inverse: SymR = SymR(d, n)
   def negative: SymR = SymR(-n, d)
   def +(o: SymR): SymR = SymR((n * o.d) + (o.n * d), d * o.d)
@@ -334,7 +340,7 @@ case class SymInt(n: BigInt = 1) extends SymR {
   def ~(o: SymInt) = SymR(n, o.n)
   def s = this
   def toInt = n.toInt
-  
+
   lazy val primeFactors: Map[SymInt, SymInt] = {
     var num = n.abs
     var f = 2
@@ -347,7 +353,7 @@ case class SymInt(n: BigInt = 1) extends SymR {
     }
     map.toMap
   }
-  
+
   override def negative: SymInt = SymInt(-n)
   def +(o: SymInt): SymInt = SymInt(n + o.n)
   def -(o: SymInt): SymInt = this + o.negative
@@ -428,26 +434,26 @@ case class SymPM(expr: Sym = SymInt(1)) extends Sym {
   lazy val exprs = Seq(expr)
   def instance(args: Sym*) = SymPM(args.head)
 
-  override def approx(env: Bind*) =
-    List(1, -1).flatMap{ n => expr.approx(env:_*).map(_ * n) }
+  override def approx(env: Bind*) = expr.approx(env:_*)
 
-  override lazy val expand =
-    List(1, -1).flatMap{ n => expr.expand.map(**(_, S(n)).simple) }
+  override lazy val expanded =
+    expr.expanded ++ expr.expanded.map(**(_, -1.s))
 
   override def toString = f"(+- $expr)"
 }
 
 case class SymSin(expr: Sym) extends SymOp {
+  override def toString = f"sin($expr)"
   lazy val exprs = Seq(expr)
   def instance(args: Sym*) = SymSin(args.head)
 
   def operation(vs: Double*) = Math.sin(vs.head)
 }
 
-case class SymCos(expr: Sym) extends Sym {
+case class SymCos(expr: Sym) extends SymOp {
+  override def toString = f"cos($expr)"
   lazy val exprs = Seq(expr)
   def instance(args: Sym*) = SymCos(args.head)
 
   def operation(vs: Double*) = Math.cos(vs.head)
 }
-

@@ -11,12 +11,11 @@ import sympany.Pattern._
 object Simplify {
   val sRules = new Rules()
   
-  @JSExportTopLevel("simplify")
   def simplify(expr: Sym): Sym = {
     //println("Simplify", expr)
-    expr.mapExprs(_.simple).pipe{e =>
+    expr.mapExprs(simplify).pipe{e =>
       sRules.first(e) match {
-        case Some(simpler) => simpler.simple
+        case Some(simpler) => simplify(simpler)
         case None => e
       }
     }
@@ -129,6 +128,12 @@ object Simplify {
       if (base.isInstanceOf[SymR]) whole
       else ***(^(base, (p1 + p2)) +: rest)
   }
+
+  sRules.+("Power of product is a product of powers"){
+    ProdP(PowP(ProdP('fs @@ __*), 'pow), 'rest @@ __*)
+  }{ case (fs: Seq[Sym], pow: Sym, rest: Seq[Sym]) =>
+      ***(fs.map(SymPow(_, pow)) ++ rest)
+  }
   
   sRules.+("Multiply rational factors"){
     ProdP('a @@ %?(), 'b @@ %?(), 'rest @@ __*)
@@ -205,7 +210,7 @@ object Simplify {
   sRules.+("Remove nested plus/minus"){ PMP(PMP('e)) }{ case e: Sym => SymPM(e) }
   
   sRules.+("Plus/minus -x is +-x"){
-    PMP('a @@ RatP() |>[SymR] {a: SymR => (a.n*a.d) < 0})
+    PMP('a @@ RatP() |> {a: SymR => (a.n*a.d) < 0})
   }{ case a: SymR => a.negative }
   
   sRules.+("Product moves inside plus-minus"){
@@ -268,23 +273,25 @@ object Simplify {
 
   /// Integral rules
 
-  sRules.+("Basic Integrals"){
-    'i @@ IntegralP()
-  }{ case i: Integral.SymIntegral =>
-      IntegralRules.basicIntegration(i).getOrElse(i)
-  }
+  /*
+   sRules.+("Basic Integrals"){
+   'i @@ IntegralP()
+   }{ case i: Integral.SymIntegral =>
+   IntegralRules.basicIntegration(i).getOrElse(i)
+   }
 
-  sRules.+("Integral of a product is a product with an integral"){
-    IntegralP( ProdP( ConstP('c), 'rest @@ __* ) )
-  }{ case (c: SymConstant, rest: Seq[Sym]) =>
-      **(c, math.Integral.SymIntegral(***(rest)))
-  }
+   sRules.+("Integral of a product is a product with an integral"){
+   IntegralP( ProdP( ConstP('c), 'rest @@ __* ) )
+   }{ case (c: SymConstant, rest: Seq[Sym]) =>
+   **(c, math.Integral.SymIntegral(***(rest)))
+   }
 
-  sRules.+("Integral of a sum is a sum of integrals"){
-    IntegralP( 's @@ SumP(__*) )
-  }{ case s: SymSum =>
-      +++( s.exprs.map(Integral.SymIntegral(_)) )
-  }
+   sRules.+("Integral of a sum is a sum of integrals"){
+   IntegralP( 's @@ SumP(__*) )
+   }{ case s: SymSum =>
+   +++( s.exprs.map(Integral.SymIntegral(_)) )
+   }
+   */
 
   /// Controversial
 
@@ -301,11 +308,11 @@ object Simplify {
   }
 
   sRules.+("Expand power of root times fraction"){
-    PowP( ProdP('n @@ RatP(), PowP('b, 'p @@ RatP()) ), 'i @@ IntP() )
+    PowP( ProdP('n @@ RatP(), PowP('b, 'p @@ RatP()) ), IntP('i) |> { (_:SymInt) >= 0 } )
   }{ case (b: Sym, i: SymInt, n: SymR, p: SymR) => **(n^i, ^(b, p*i)) }
 
   def distribute(l1: Seq[Sym], l2: Seq[Sym]): Seq[Sym] =
-    l1.flatMap{ a => l2.map{ b => **(a, b).simple } }
+    l1.flatMap{ a => l2.map{ b => **(a, b).pipe(simplify) } }
 
   //sRules.+("Expand out powers of polynomials"){
   //  PowP('s @@ SumP(Repeat(Or( AsPowP(VarP(), RatP()), RatP() ))), 'p @@ IntP())

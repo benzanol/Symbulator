@@ -176,7 +176,7 @@ case class With(p: Pattern, v: Symbol, bind: Any) extends Pattern {
 
 case class IntegralP(p: Pattern = AnyP()) extends Pattern {
   def matches(e: Sym): Seq[Binding] = e match {
-    case math.Integral.SymIntegral(sub) => matchSeveral((sub -> p))
+    case SymIntegral(sub) => matchSeveral((sub -> p))
     case _ => Seq[Binding]()
   }
 }
@@ -360,9 +360,16 @@ case class AsPowP(base: Pattern = AnyP(), exp: Pattern = AnyP()) extends Pattern
 
 case class Rule(name: String, p: Pattern, f: Any => Sym) {
   def first(e: Sym): Option[Sym] =
-    LazyList(p.matches(e):_*)
-      .map(callWithBind[Sym](_)(f))
-      .find(_ != e)
+    try {
+      LazyList(p.matches(e):_*)
+        .map(callWithBind[Sym](_)(f))
+        .find(_ != e)
+    } catch {
+      case err: Throwable => {
+        throw new Error("Error at rule " + name + ": " + e.toString() + " : " + err.toString())
+        None
+      }
+    }
   
   def all(e: Sym): Seq[Sym] =
     try {
