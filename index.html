@@ -1,122 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
     <link rel="stylesheet" href="./styles.css"/>
 
-    <head>
-        <!-- Automatically refresh browser when filesystem changes -->
-        <meta charset="UTF-8">
-        <title>ScalaJS Calculator!</title>
-    </head>
+    <title>Calculator</title>
+  </head>
+  
+  <body>
+    <p id="point-box" style="display:none;"></p>
+    <div id="page-container">
 
-    <body>
-        <p id="point-box" style="display:none;"></p>
+      <div id="sidebar"></div>
 
-        <div id="page-container">
-            <div id="sidebar">
-                <div id="equation-sidebar" style="display:block">
-                    <button onclick="addEquation()" class="add-equation-button">Add Equation</button>
-                    <br>
-                    <div id="equations">
-                    </div>
-                </div>
+      <div class="vertical-line"></div>
 
-                <div id="current-points" style="display:none">
-                    <button onclick="selectSidebar('equation')"> ← Back to equations </button>
-                    <br/><br/>
-                    <p class="mq-static p1"></p>
-                    <br/>
-                    <p class="mq-static p2"></p>
-                    <br/><br/>
-                    <p class="mq-static y1"></p>
-                    <br/>
-                    <p class="mq-static y2"></p>
-                    <br/><br/>
+      <div id="graph-container">
+        <canvas class="graph-canvas" id="graph-grid"
+                style="background-color: transparent;" style="z-index: 0;">
+        </canvas>
+        <canvas class="graph-canvas" id="graph-functions"
+                style="background-color: transparent;" style="z-index: 1;">
+        </canvas>
+      </div>
 
-                    <button onclick="selectSidebar('tangent')">Tangent Line</button>
-                    <br/><br/>
-                    <button onclick="selectSidebar('distance')">Distance</button>
-                    <br/><br/>
-                    <button onclick="selectSidebar('slope')">Slope</button>
-                    <br/><br/>
-                    <button onclick="selectSidebar('integral')">Integrate</button>
-                    <br/><br/>
-                </div>
+    </div>
 
-                <div id="points-sidebar"></div>
-
-                <div id="integral-sidebar" style="display:none">
-                    <p id="integral-solution1" class="mq-static"></p>
-                    <p id="integral-solution2" class="mq-static"></p>
-                    <p id="integral-solution3" class="mq-static"></p>
-                    <p id="integral-solution4" class="mq-static"></p>
-                </div>
-
-                <div id="tangent-sidebar" style="display:none">
-                    <p id="tangent-equation"   class="mq-static"></p><br/>
-                </div>
-
-                <div id="distance-sidebar" style="display:none">
-                    <p id="distance-deltax"   class="mq-static"></p><br/>
-                    <p id="distance-deltay"   class="mq-static"></p><br/>
-                    <p id="distance-distance"   class="mq-static"></p><br/>
-                </div>
-
-                <div id="slope-sidebar" style="display:none">
-                    <p id="slope-slope"   class="mq-static"></p><br/>
-                    <p id="slope-equation"   class="mq-static"></p><br/>
-                </div>
+    <div style="text-align: right">
+      <button onclick="toggleRainbow()" id="rainbow-button">Rainbow Mode</button>
+    </div>
+  </body>
 
 
-                
-                <div id="property-checks">
-                    <br/> <br/>
-                    <input type="checkbox" id="simple-chk" onclick="updateProps()">Simplified</input>
-                    <br/>
-                    <input type="checkbox" id="zeros-chk" onclick="updateProps()">Zeros</input>
-                    <br/>
-                    <input type="checkbox" id="mins-and-maxes-chk" onclick="updateProps()">Mins/Maxes</input>
-                    <br/>
-                    <input type="checkbox" id="inflection-points-chk" onclick="updateProps()">Inflection Points</input>
-                    <br/>
-                    <input type="checkbox" id="derivative-chk" onclick="updateProps()">Derivative</input>
-                    <br/>
-                    <input type="checkbox" id="holes-chk" onclick="updateProps()">Holes</input>
-                    <br/>
-                    <input type="checkbox" id="integral-chk" onclick="updateProps()">Integral</input>
-                </div> 
-            </div>
-
-            <div class="vertical-line"></div>
-
-            <div id="graph-container">
-                <canvas class="graph-canvas" id="graph-grid"
-                        style="background-color: transparent;" style="z-index: 0;">
-                </canvas>
-                <canvas class="graph-canvas" id="graph-functions"
-                        style="background-color: transparent;" style="z-index: 1;">
-                </canvas>
-            </div>
-
-        </div>
-
-        <div style="text-align: right">
-            <button onclick="toggleRainbow()" id="rainbow-button">
-                Rainbow Mode
-            </button>
-        </div>
-    </body>
-
-    <!-- Mathquill -->
-    <link rel="stylesheet" href="./node_modules/mathquill/build/mathquill.css"/>
-    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="./node_modules/mathquill/build/mathquill.min.js"></script>
-
-    <script src="./javascript/mathquill.js"></script>
+  <!-- Main javascript code -->
+  <script type="text/javascript" src="./src/main.js"></script>
 
 
-    <script src="./javascript/concurrent.js"></script>
+  <!-- Mathquill -->
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
 
-    <!-- Scala.js code -->
-    <script type="text/javascript" src="./javascript/scala.js"></script>
+  <link rel="stylesheet" href="./node_modules/mathquill/build/mathquill.css"/>
+  <script src="./node_modules/mathquill/build/mathquill.min.js"></script>
+
+  <script type="text/javascript" src="./src/mathquill.js"></script>
+
+
+  <!-- Load scala code -->
+  <script type="text/javascript" src="./src/scala.js"></script>
 
 </html>

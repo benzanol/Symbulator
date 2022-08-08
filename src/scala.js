@@ -1,0 +1,1 @@
+../scala/target/scala-2.13/scala-js-tutorial-fastopt/main.js
