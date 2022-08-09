@@ -44,6 +44,15 @@ button {
     overflow: auto;
 }
 
+#calculators {
+    font-size: 20px;
+    width: 20%;
+    max-width: 400px;
+
+    resize: both;
+    overflow: auto;
+}
+
 .mq-dynamic {
     margin: 0px;
     line-height: 1.0;

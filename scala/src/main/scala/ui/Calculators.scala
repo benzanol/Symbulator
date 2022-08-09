@@ -16,8 +16,47 @@ object CalcSolver {
     def step(): Option[Seq[Solution]]
   }
 
-  class Solution(expr: Sym, sol: Sym, sub: Seq[Solution]) {
-    def toHtml: dom.Element = makeElement("p", "innerText" -> sol.toString)
+  sealed trait HtmlLine {
+    def toHtml: dom.Element
+  }
+  case class HtmlText(text: String) extends HtmlLine {
+    def toHtml = makeElement("p", "innerText" -> text)
+  }
+  case class HtmlEquation(eqn: String) extends HtmlLine {
+    def toHtml = makeElement("p", "innerText" -> eqn, "class" -> "mq-static")
+  }
+
+  class Solution(before: Seq[HtmlLine], after: Seq[HtmlLine], sub: Seq[Solution]) {
+    def toHtml: dom.Element = {
+      val details = makeElement("div",
+        "style" -> "display:none",
+        "children" -> Seq(
+          makeElement("div",
+            "style" -> "padding-left: 40px",
+            "children" -> (after.map(_.toHtml) ++ sub.map(_.toHtml))
+          )
+        )
+      )
+      val hideBtn = makeElement("button", "innerText" -> "Hide Steps", "style" -> "display:none")
+      val showBtn = makeElement("button", "innerText" -> "Show Steps", "style" -> "display:block")
+
+      // Hide and show the details and buttons on click
+      hideBtn.addEventListener("click", (event: Any) => {
+        details.setAttribute("style", "display:none")
+        hideBtn.setAttribute("style", "display:none")
+        showBtn.setAttribute("style", "display:block")
+      })
+      showBtn.addEventListener("click", (event: Any) => {
+        details.setAttribute("style", "display:block")
+        hideBtn.setAttribute("style", "display:block")
+        showBtn.setAttribute("style", "display:none")
+      })
+
+      makeElement("div",
+        "style" -> f"padding-left: 40px",
+        "children" -> (before.map(_.toHtml) ++ Seq(showBtn, hideBtn, details))
+      )
+    }
   }
 
 
@@ -28,20 +67,19 @@ object CalcSolver {
     )
 
     def ruleToSolutions(rule: Integral.IntegralRule): Seq[Solution] =
-        new Solution(
-          SymIntegral(rule.integral),
-          rule.expression,
-          rule.subRules.flatMap(ruleToSolutions)
-        ) +: rule.afterRules.flatMap(ruleToSolutions)
+      new Solution(
+        Seq(HtmlEquation(SymIntegral(rule.integral).toLatex + " = " + rule.solution.toLatex)),
+        Seq(HtmlText(rule.toString),
+          HtmlEquation(SymIntegral(rule.integral).toLatex + " = " + rule.forward.toLatex)),
+        rule.subRules.flatMap(ruleToSolutions)
+      ) +: rule.afterRules.flatMap(ruleToSolutions)
 
 
     def step(): Option[Seq[Solution]] =
       iSolver.step() match {
         case None => None
         case Some(None) => Some(Nil)
-        case Some(Some(rule)) => Some(Seq(
-          new Solution(rule.integral, rule.solution, ruleToSolutions(rule))
-        ))
+        case Some(Some(rule)) => Some(ruleToSolutions(rule))
       }
   }
 }

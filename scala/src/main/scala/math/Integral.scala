@@ -69,10 +69,11 @@ object Integral {
     def solution = backward(expression)
 
     // List of rules for solving the sub integrals of this expression
-    private var rules = Seq[IntegralRule]()
-    def subRules: Seq[IntegralRule] = if (rules.isEmpty) Nil else rules.init
-    def afterRules: Seq[IntegralRule] = if (rules.isEmpty) Nil else Seq(rules.last)
-
+    protected var rules = Seq[IntegralRule]()
+    //def subRules: Seq[IntegralRule] = if (rules.isEmpty) Nil else rules.init
+    //def afterRules: Seq[IntegralRule] = if (rules.isEmpty) Nil else Seq(rules.last)
+    def subRules: Seq[IntegralRule] = rules
+    def afterRules: Seq[IntegralRule] = Nil
 
     // Functions to gradually turn `expression` into a solution
     def nextIntegral(e: Sym): Option[Sym] = {
@@ -100,7 +101,7 @@ object Integral {
 
 object IntegralPatterns {
   class BasicIRule(integral: Sym, known: Sym) extends Integral.IntegralRule(integral) {
-    override def toString = f"Known: Integral($integral) = $known"
+    override def toString = f"Known integral"
     def forward = known
     def backward(sol: Sym) = sol
   }
@@ -170,31 +171,37 @@ object IntegralRules {
 
 
   class ProductRule(integral: Sym) extends IntegralRule(integral) {
-    override def toString = f"Separate Constant Factors: $integral"
+    override def toString = f"Separate Constant Factors"
 
-    def forward: Sym = integral match {
+    def forward: Sym = simplify(integral) match {
       case prod: SymProd => {
-        val consts = integral.exprs.filter(Pattern.noX)
-        val exprs = integral.exprs.filter(Pattern.hasX)
+        val consts = prod.exprs.filter(Pattern.noX)
+        val exprs = prod.exprs.filter(Pattern.hasX)
         simplify(***(consts :+ SymIntegral(***(exprs))))
       }
       case _ => SymIntegral(integral)
     }
     def backward(sol: Sym): Sym = sol
+
+    override def subRules = rules
+    override def afterRules = Nil
   }
 
   class SumRule(integral: Sym) extends IntegralRule(integral) {
-    override def toString = f"Split up Sum: $integral"
+    override def toString = f"Integral of a sum is a sum of integrals"
 
     def forward: Sym = integral match {
       case sum: SymSum => simplify(+++(sum.exprs.map(SymIntegral(_))))
       case _ => SymIntegral(integral)
     }
     def backward(sol: Sym): Sym = sol
+
+    override def subRules = rules
+    override def afterRules = Nil
   }
 
   class Parts(integral: Sym, val u: Sym, val dv: Sym) extends IntegralRule(integral) {
-    override def toString = f"Parts u=$u dv=$dv  =>  $integral -> ${this.forward}"
+    override def toString = f"Integration by Parts u=$u dv=$dv"
     def v = SymIntegral(dv)
     def du = derive(u, X.symbol)
 
@@ -203,7 +210,7 @@ object IntegralRules {
   }
 
   class USub(integral: Sym, val u: Sym, val replaced: Sym) extends IntegralRule(integral) {
-    override def toString = f"USub: u=$u  =>  $integral -> ${replaced}"
+    override def toString = f"USub: u=$u"
 
     def forward = SymIntegral(replaced)
     def backward(sol: Sym): Sym = sol.replaceExpr(X, u)

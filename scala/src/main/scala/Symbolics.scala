@@ -155,7 +155,7 @@ object Latex {
     case SymEquation(l, r) => s"${toLatex(l)} = ${toLatex(r)}"
     case SymVertical(x) => s"x = ${toLatex(x)}"
 
-    case SymIntegral(sub) => s"\\integral ${wrappedLatex(sub)}"
+    case SymIntegral(sub) => s"∫ ${wrappedLatex(sub)}"
 
     case SymPoint(x, y) =>
       ("(" + x.toLatex + ", \\quad \\quad " + y.toLatex + ")")
