@@ -19175,7 +19175,7 @@ $c_Lsympany_math_Integral$IntegralRule.prototype.insideNode__Lorg_scalajs_dom_No
 $c_Lsympany_math_Integral$IntegralRule.prototype.wrappedInsideNode__F1__Lorg_scalajs_dom_Node = (function(wrap) {
   var $$x4 = $m_Lsympany_JsUtils$();
   var $$x3 = $ct_T2__O__O__(new $c_T2(), "class", "solution-step-details");
-  var $$x2 = this.toString__T();
+  var $$x2 = this.toHtml__T();
   var this$4 = $as_Lsympany_Sym(wrap.apply__O__O(new $c_Lsympany_SymIntegral(this.Lsympany_math_Integral$IntegralRule__f_integral)));
   var $$x1 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$4);
   var this$5 = this.wrapward__Lsympany_Sym__Lsympany_Sym($as_Lsympany_Sym(wrap.apply__O__O(this.forward__Lsympany_Sym__Lsympany_Sym(this.Lsympany_math_Integral$IntegralRule__f_integral))));
@@ -23090,8 +23090,14 @@ function $h_Lsympany_math_IntegralPatterns$BasicIRule() {
   /*<skip>*/
 }
 $h_Lsympany_math_IntegralPatterns$BasicIRule.prototype = $c_Lsympany_math_IntegralPatterns$BasicIRule.prototype;
-$c_Lsympany_math_IntegralPatterns$BasicIRule.prototype.toString__T = (function() {
-  return "Known integral"
+$c_Lsympany_math_IntegralPatterns$BasicIRule.prototype.toHtml__T = (function() {
+  var this$1 = new $c_Lsympany_SymIntegral(this.Lsympany_math_Integral$IntegralRule__f_integral);
+  var arg$macro$1 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$1);
+  var this$2 = this.Lsympany_math_IntegralPatterns$BasicIRule__f_known;
+  var arg$macro$2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$2);
+  var $$x1 = $m_sc_StringOps$();
+  var array = [arg$macro$1, arg$macro$2];
+  return $$x1.format$extension__T__sci_Seq__T("Known integral: \\(%s = %s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
 });
 $c_Lsympany_math_IntegralPatterns$BasicIRule.prototype.forward__Lsympany_Sym__Lsympany_Sym = (function(in$1) {
   return this.Lsympany_math_IntegralPatterns$BasicIRule__f_known
@@ -23141,12 +23147,21 @@ function $h_Lsympany_math_IntegralRules$Parts() {
   /*<skip>*/
 }
 $h_Lsympany_math_IntegralRules$Parts.prototype = $c_Lsympany_math_IntegralRules$Parts.prototype;
-$c_Lsympany_math_IntegralRules$Parts.prototype.toString__T = (function() {
-  var arg$macro$1 = this.Lsympany_math_IntegralRules$Parts__f_u;
-  var arg$macro$2 = this.Lsympany_math_IntegralRules$Parts__f_dv;
-  var $$x1 = $m_sc_StringOps$();
+$c_Lsympany_math_IntegralRules$Parts.prototype.toHtml__T = (function() {
+  var this$1 = this.Lsympany_math_IntegralRules$Parts__f_dv;
+  var arg$macro$1 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$1);
+  var this$2 = new $c_Lsympany_SymIntegral(this.Lsympany_math_IntegralRules$Parts__f_dv);
+  var arg$macro$2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$2);
+  var $$x3 = $m_sc_StringOps$();
   var array = [arg$macro$1, arg$macro$2];
-  return $$x1.format$extension__T__sci_Seq__T("Integration by Parts u=%s dv=%s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
+  var $$x2 = $$x3.format$extension__T__sci_Seq__T("<br/>\\(dv=%s\\), \\(v=%s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
+  var this$6 = this.Lsympany_math_IntegralRules$Parts__f_u;
+  var arg$macro$3 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$6);
+  var this$7 = this.du__Lsympany_Sym();
+  var arg$macro$4 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$7);
+  var $$x1 = $m_sc_StringOps$();
+  var array$1 = [arg$macro$3, arg$macro$4];
+  return ((("Integration by Parts:" + $$x2) + $$x1.format$extension__T__sci_Seq__T("<br/>\\(u=%s\\), \\(du=%s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1))) + "<br/><br/>\\(\u222bu \\cdot dv = u \\cdot v - \u222b v \\cdot du \\)")
 });
 $c_Lsympany_math_IntegralRules$Parts.prototype.du__Lsympany_Sym = (function() {
   return $m_Lsympany_math_Derivative$().derive__Lsympany_Sym__s_Symbol__Lsympany_Sym(this.Lsympany_math_IntegralRules$Parts__f_u, $m_Lsympany_Sym$().X__Lsympany_SymVar().Lsympany_SymVar__f_symbol)
@@ -23225,7 +23240,7 @@ function $h_Lsympany_math_IntegralRules$ProductRule() {
   /*<skip>*/
 }
 $h_Lsympany_math_IntegralRules$ProductRule.prototype = $c_Lsympany_math_IntegralRules$ProductRule.prototype;
-$c_Lsympany_math_IntegralRules$ProductRule.prototype.toString__T = (function() {
+$c_Lsympany_math_IntegralRules$ProductRule.prototype.toHtml__T = (function() {
   return "Separate Constant Factors"
 });
 $c_Lsympany_math_IntegralRules$ProductRule.prototype.separate__T2 = (function() {
@@ -23273,7 +23288,7 @@ function $h_Lsympany_math_IntegralRules$SumRule() {
   /*<skip>*/
 }
 $h_Lsympany_math_IntegralRules$SumRule.prototype = $c_Lsympany_math_IntegralRules$SumRule.prototype;
-$c_Lsympany_math_IntegralRules$SumRule.prototype.toString__T = (function() {
+$c_Lsympany_math_IntegralRules$SumRule.prototype.toHtml__T = (function() {
   return "Integral of a sum is a sum of integrals"
 });
 $c_Lsympany_math_IntegralRules$SumRule.prototype.forward__Lsympany_Sym__Lsympany_Sym = (function(in$1) {
@@ -23326,11 +23341,14 @@ function $h_Lsympany_math_IntegralRules$USub() {
   /*<skip>*/
 }
 $h_Lsympany_math_IntegralRules$USub.prototype = $c_Lsympany_math_IntegralRules$USub.prototype;
-$c_Lsympany_math_IntegralRules$USub.prototype.toString__T = (function() {
-  var arg$macro$1 = this.Lsympany_math_IntegralRules$USub__f_u;
+$c_Lsympany_math_IntegralRules$USub.prototype.toHtml__T = (function() {
+  var this$1 = this.Lsympany_math_IntegralRules$USub__f_u;
+  var arg$macro$1 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$1);
+  var this$2 = $m_Lsympany_math_Derivative$().derive__Lsympany_Sym__s_Symbol__Lsympany_Sym(this.Lsympany_math_IntegralRules$USub__f_u, $m_Lsympany_Sym$().X__Lsympany_SymVar().Lsympany_SymVar__f_symbol);
+  var arg$macro$2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$2);
   var $$x1 = $m_sc_StringOps$();
-  var array = [arg$macro$1];
-  return $$x1.format$extension__T__sci_Seq__T("USub: u=%s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
+  var array = [arg$macro$1, arg$macro$2];
+  return $$x1.format$extension__T__sci_Seq__T("U Substitution:<br/>\\(u=%s\\), \\(du=%s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
 });
 $c_Lsympany_math_IntegralRules$USub.prototype.backward__Lsympany_Sym__Lsympany_Sym = (function(sol) {
   var t = $m_Lsympany_Sym$().X__Lsympany_SymVar();

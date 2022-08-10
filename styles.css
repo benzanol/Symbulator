@@ -43,8 +43,8 @@ button {
 
 /* Solution steps of an equation  */
 .solution-step {
-    font-family: Tahoma, sans-serif;
-    font-size: 16px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 18px;
 
     margin-top: 20px;
 }
