@@ -27,8 +27,7 @@ object Graph {
 
     window.addEventListener("resize", { (e: Any) => draw })
 
-    setGraphs(Nil, Nil)
-    draw
+    setGraphs()
   }
 
 
@@ -132,6 +131,7 @@ object Graph {
 
   var graphs = Seq[Sym]()
   var points = Seq[IntersectionPoint]()
+  var drawings = Seq[JsContext => Unit]()
   val colors = Seq("#AA0000", "#0000AA", "#008800")
   val graphThickness = 5
   val gridColor = "#AAAAAA"
@@ -142,15 +142,21 @@ object Graph {
     def toLatex: String = s"\\left( ${x.toLatex}, \\quad \\quad ${y.toLatex} \\right)"
   }
 
-  def setGraphs(exprs: Seq[Sym], ps: Seq[(Sym, Sym, Sym)]) {
+  def setGraphs(
+    exprs: Seq[Sym] = Nil,
+    ps: Seq[(Sym, Sym, Sym)] = Nil,
+    drawings: Seq[JsContext => Unit] = Nil
+  ) {
     this.graphs = exprs
 
     this.points = Nil
 
-    draw
+    this.drawings = drawings
+
+    this.draw()
   }
 
-  def draw {
+  def draw() {
     // Hide the point box so that a point from a past function doesn't remain
     hidePointBox()
 
@@ -178,6 +184,15 @@ object Graph {
 
     // Draw the points on the main canvas
     points.foreach{ p => drawPoint(p.x, p.y, p.color, false)(fctx) }
+
+    // Draw the extra drawings on the main canvas
+    for (d <- drawings)
+      try {
+        d.apply(fctx)
+      } catch {
+        case e: Throwable => ()
+      }
+
 
     // Remove any of the function lines that went into the margin
     fctx.clearRect(0, 0, marginX, fc.height)

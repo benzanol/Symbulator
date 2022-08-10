@@ -2,6 +2,7 @@ package sympany.ui
 
 import sympany._
 import sympany.math._
+import sympany.Sym._
 
 import scala.scalajs.js
 import js.annotation.JSExportTopLevel
@@ -12,6 +13,8 @@ import org.scalajs.dom.document
 import JsUtils.makeElement
 
 object CalcSolver {
+  import CalcFields._
+
   trait CalcSolution {
     def beforeNode: dom.Node
     def insideNode: dom.Node
@@ -69,6 +72,38 @@ object CalcSolver {
   }
 
 
+  def integralDrawing(e1: Sym, e2: Sym, ctx: Graph.JsContext) {
+    import Graph._
+
+    // Make sure that both points and both functions are defined
+    val x1 = Graph.pos.x - (10 * Graph.pos.xs)
+    val y1 = e1.approx('x -> Graph.pos.x)
+    val x2 = Graph.pos.x + (ctx.canvas.width - Graph.marginX) * Graph.pos.xs + (10 * Graph.pos.xs)
+    val y2 = e1.approx('x -> x2)
+
+    ctx.beginPath()
+
+    ctx.fillStyle = "#8800BB66"
+
+    // Go to the starting position
+    ctx.moveTo(canvasX(x1), canvasY(y1))
+
+    // Trace 100 points both functions
+    for (x <- BigDecimal(x1) to BigDecimal(x2) by BigDecimal((x2 - x1) / 100.0)) {
+      val y = e1.approx('x -> x.toDouble)
+      if (y.isFinite && x.toDouble.isFinite)
+        ctx.lineTo(canvasX(x.toDouble), canvasY(y))
+    }
+    for (x <- BigDecimal(x2) to BigDecimal(x1) by BigDecimal((x1 - x2) / 100.0)) {
+      val y = e2.approx('x -> x.toDouble)
+      if (y.isFinite && x.toDouble.isFinite)
+        ctx.lineTo(canvasX(x.toDouble), canvasY(y))
+    }
+
+    ctx.closePath()
+    ctx.fill()
+  }
+
   class IntegralSolver(expr: Sym) extends AsyncSolver {
     private val iSolver = new Integral.IntegralSolver(
       expr.replaceExpr(SymVar('x), Sym.X)
@@ -80,6 +115,20 @@ object CalcSolver {
         case Some(None) => Some(Nil)
         case Some(Some(rule)) => Some(Seq(rule))
       }
+  }
+
+  class IntegralResult(field: String) extends ResultField(field) {
+    def makeSolver(es: Seq[Sym]) = new IntegralSolver(es(0))
+
+    override def drawings: Seq[Graph.JsContext => Unit] =
+      this.exprs.map{es => integralDrawing(es(0), 0, _)}.toSeq
+  }
+
+  class DoubleIntegralResult(f1: String, f2: String) extends ResultField(f1, f2) {
+    def makeSolver(es: Seq[Sym]) = new IntegralSolver(++(es(0), **(-1, es(1))))
+
+    override def drawings: Seq[Graph.JsContext => Unit] =
+      this.exprs.map{es => integralDrawing(es(0), es(1), _)}.toSeq
   }
 }
 
@@ -93,7 +142,14 @@ object CalcFields {
     def update() {
       for (f <- fields) f.update(this)
 
-      Graph.setGraphs(fields.flatMap(_.graphs()), Nil)
+      //println(fields(0).asInstanceOf[EquationField].expr)
+      //println(fields(1).asInstanceOf[ResultField].exprs)
+
+      Graph.setGraphs(
+        fields.flatMap(_.graphs),
+        Nil,
+        fields.flatMap(_.drawings)
+      )
     }
 
     // Get an equation by a certain name
@@ -105,7 +161,7 @@ object CalcFields {
     // Generate the dom representation
     val element = makeElement("div", "class" -> "calculator")
     this.element.replaceChildren(
-      this.fields.map{f => f.node}:_*
+      this.fields.flatMap{f => Seq(f.node, makeElement("br"))}:_*
     )
   }
 
@@ -120,7 +176,9 @@ object CalcFields {
     // arbitrary code (function will be called continuously)
     def step(): Boolean = true
 
-    def graphs(): Seq[Sym] = Nil
+    def graphs: Seq[Sym] = Nil
+
+    def drawings: Seq[Graph.JsContext => Unit] = Nil
   }
 
   class EquationField(val name: String) extends CalcField {
@@ -131,7 +189,7 @@ object CalcFields {
     // Keep track of the current latex string and expression
     var latex: String = ""
     var expr: Option[Sym] = None
-    override def graphs() = expr.toSeq
+    override def graphs = expr.toSeq
 
     def setLatex(newLatex: String) {
       latex = newLatex
@@ -141,21 +199,24 @@ object CalcFields {
     }
   }
 
-  class ResultField(field: String, makeSolver: Sym => AsyncSolver) extends CalcField {
+  abstract class ResultField(fields: String*) extends CalcField {
     // Keep track of the current equation and solver for that equation
-    var expr: Option[Sym] = None
+    var exprs: Option[Seq[Sym]] = None
+
     var solver: Option[AsyncSolver] = None
+    def makeSolver(es: Seq[Sym]): AsyncSolver
 
     // Called whenever any equation is updated
     override def update(c: Calculator) {
-      val newExpr = c.getEquation(field)
+      val newExprs = fields.flatMap(c.getEquation)
 
-      if (newExpr != expr) {
-        expr = newExpr
+      if (exprs != Some(newExprs)) {
+        exprs = Option.when(newExprs.length == fields.length)(newExprs)
+
         solutions = None
         updateNode()
 
-        solver = expr.map(makeSolver)
+        solver = exprs.map(makeSolver)
       }
     }
 
@@ -180,7 +241,7 @@ object CalcFields {
 
     private def updateNode() {
       node.replaceChildren(
-        if (expr.isEmpty) makeElement("p", "innterText" -> "No Equation!")
+        if (exprs.isEmpty) makeElement("p", "innterText" -> "No Equation!")
         else solutions match {
           case None => makeElement("p", "innerText" -> "Solving...")
           case Some(Nil) => makeElement("p", "innerText" -> "No solution")
@@ -210,13 +271,12 @@ object Calculators {
   val calculators: Seq[Calculator] = Seq(
     new Calculator("Integral")(
       new EquationField("e1"),
-      new ResultField("e1", (e1) => new IntegralSolver(e1)),
+      new IntegralResult("e1"),
     ),
     new Calculator("Area between curves")(
       new EquationField("e1"),
-      new ResultField("e1", e1 => new IntegralSolver(e1)),
       new EquationField("e2"),
-      new ResultField("e2", e2 => new IntegralSolver(e2)),
+      new DoubleIntegralResult("e1", "e2"),
       new TextField("Area between curves:"),
     )
   )
