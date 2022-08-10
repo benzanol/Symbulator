@@ -12,53 +12,6 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 import org.scalajs.dom.Node
 
 object Integral {
-
-  class IntegralSolver(val expr: Sym) {
-    private var index = 0
-    private var (
-      solution: Option[Option[IntegralRule]],
-      rules: Seq[(IntegralRule, Option[IntegralSolver])]
-    ) = IntegralPatterns.basicSolve(expr) match {
-      case Some(sol) => (Some(Some(sol)), Nil)
-      case None => (None, IntegralRules.allRules(expr).map(_ -> None))
-    }
-
-    //println("Integral: " + expr.toString)
-    //if (solution.isDefined) println("  Solution: " + solution.get.get.toString)
-    //else for (r <- rules) println("  Rule: " + r._1.toString + "\n  Now: " + r._1.forward.toString)
-
-    def step(): Option[Option[IntegralRule]] = {
-      if (solution.isDefined) {}
-      else if (rules.isEmpty) solution = Some(None)
-      // Progress the current rule as determined by `index`
-      else rules(index) match {
-
-        // If there is an active solver for the current rule, step it
-        case (r, Some(solver)) => solver.step() match {
-          case None => index = (index + 1) % rules.length
-          // If the current integral for that rule is unsolvable, // eliminate the rule
-          case Some(None) => {
-            rules = rules.take(index) ++ rules.drop(index + 1)
-            index = 0
-          }
-          case Some(Some(sol)) => {
-            r.solveNext(sol)
-            rules = rules.updated(index, r -> None)
-          }
-        }
-
-        // If there is no active solver, figure out if there are remaining integrals
-        case (r, None) => r.nextIntegral(r.expression) match {
-          // If there is another integral, create a new solver for it
-          case Some(next) => rules = rules.updated(index, r -> Some(new IntegralSolver(next)))
-          // If there are no new integrals, the expression is solved
-          case None => solution = Some(Some(r))
-        }
-      }
-      solution
-    }
-  }
-
   import ui.CalcSolver.CalcSolution
   abstract class IntegralRule(val integral: Sym) extends CalcSolution {
     // Return an expression containing integrals, which when solved,
@@ -107,58 +60,133 @@ object Integral {
       SymIntegral(integral).toLatex + " = " +
       solution.toLatex + "\\)"
     )
-    def insideNode = wrappedInsideNode(identity)
-    def wrappedInsideNode(wrap: Sym => Sym): org.scalajs.dom.Node =
-      makeElement("div",
-        "class" -> "solution-step-details",
-        "children" -> (
-          stringToNode(
-            this.toHtml + "<br/>" + "\\(" +
-              wrap(SymIntegral(integral)).toLatex + "=" +
-              this.wrapward(wrap(forward(integral))).toLatex + /*"+c" +*/ "\\)"
-          ) +: {
-            if (rules.length == 1) {
-              rules.map{r => r.wrappedInsideNode{e => this.wrapward(wrap(e))}}
-            } else subRules.map{r => r.node
-              // makeElement("div",
-              //   "class" -> "solution-step-indented",
-              //   "children" -> Seq(r.node)
-              // )
-            }
-          }
+    def insideNode = wrappedInsideNode(0)(identity)
+
+    /* How the current rule is displayed is dependent on the previous
+     * rules, so `wrap` provides a way to display the expressions in
+     * the rule in terms of the previous rules For example, replacing
+     * x with u if there was previously a U-Sub.
+     * 
+     * Num indicates the number of steps listed before this one at the
+     * same level, which could be used to number the steps
+     */
+    def wrappedInsideNode(num: Int)(wrap: Sym => Sym): org.scalajs.dom.Node = {
+      val title = stringToNode(
+        // Have a bullet before the rule
+        //"①②③④⑤⑥⑦⑧⑨"(num) + " " +
+        "➣ " +
+
+        // Include a brief description of the rule
+        this.toHtml + "<br/>" +
+
+        // Show the transformation the rule is making
+        "\\(" + wrap(SymIntegral(integral)).toLatex + "=" +
+          this.wrapward(wrap(forward(integral))).toLatex + /*"+c" +*/ "\\)"
+          ,
+
+        cls = "solution-step-title"
+      )
+
+      // If this rule created several new integrals, list them as sub
+      // rules, but if it only created one, list it after, but at the
+      // same level as, this rule
+      if (rules.length == 1)
+        makeElement("div", "children" -> (
+          makeElement("div",
+            "class" -> "solution-step-details",
+            "children" -> Seq(title)
+          ) +: rules.map{r => r.wrappedInsideNode(num + 1){e => this.wrapward(wrap(e))}}
         ))
+      else
+        makeElement("div",
+          "class" -> "solution-step-details",
+          "children" -> (title +: subRules.map(_.node))
+        )
+    }
 
     def afterNode = makeElement("div")
     
   }
 
+  class IntegralSolver(val expr: Sym) {
+    private var index = 0
+    private var (
+      solution: Option[Option[IntegralRule]],
+      rules: Seq[(IntegralRule, Option[IntegralSolver])]
+    ) = IntegralPatterns.basicSolve(expr) match {
+      case Some(sol) => (Some(Some(sol)), Nil)
+      case None => (None, IntegralRules.allRules(expr).map(_ -> None))
+    }
+
+    //println("Integral: " + expr.toString)
+    //if (solution.isDefined) println("  Solution: " + solution.get.get.toString)
+    //else for (r <- rules) println("  Rule: " + r._1.toString + "\n  Now: " + r._1.forward.toString)
+
+    def step(): Option[Option[IntegralRule]] = {
+      if (solution.isDefined) {}
+      else if (rules.isEmpty) solution = Some(None)
+      // Progress the current rule as determined by `index`
+      else rules(index) match {
+
+        // If there is an active solver for the current rule, step it
+        case (r, Some(solver)) => solver.step() match {
+          case None => index = (index + 1) % rules.length
+          // If the current integral for that rule is unsolvable, // eliminate the rule
+          case Some(None) => {
+            rules = rules.take(index) ++ rules.drop(index + 1)
+            index = 0
+          }
+          case Some(Some(sol)) => {
+            r.solveNext(sol)
+            rules = rules.updated(index, r -> None)
+          }
+        }
+
+        // If there is no active solver, figure out if there are remaining integrals
+        case (r, None) => r.nextIntegral(r.expression) match {
+          // If there is another integral, create a new solver for it
+          case Some(next) => rules = rules.updated(index, r -> Some(new IntegralSolver(next)))
+          // If there are no new integrals, the expression is solved
+          case None => solution = Some(Some(r))
+        }
+      }
+      solution
+    }
+  }
 }
 
 object IntegralPatterns {
-  class BasicIRule(integral: Sym, known: Sym) extends Integral.IntegralRule(integral) {
+  import Integral.IntegralRule
+  import Pattern._
+
+  class PowerIRule(power: Sym) extends IntegralRule(SymPow(X, power)) {
+    def toHtml = f"Power Rule: \\(∫ x^a = \\frac{1}{a-1} \\cdot x^{a-1}\\)"
+    def forward(in: Sym) = simplify(**(^(++(power, -1), -1), ^(X, ++(power, -1))))
+    def backward(sol: Sym) = sol
+  }
+
+  class BasicIRule(integral: Sym, known: Sym) extends IntegralRule(integral) {
     def toHtml = f"Known integral: \\(${SymIntegral(integral).toLatex} = ${known.toLatex}\\)"
     def forward(in: Sym) = known
     def backward(sol: Sym) = sol
   }
 
-  def basicSolve(expr: Sym): Option[BasicIRule] =
-    iRules.first(expr).map{sol => new BasicIRule(expr, simplify(sol)) }
+  def basicSolve(expr: Sym): Option[IntegralRule] = {
+    AsPowP(XP, noxP('p)).matches(expr).map(_.toSeq) match {
+      case Seq(Seq('p -> (pow: Sym))) => Some(new PowerIRule(pow))
+      case _ => iRules.first(expr).map{sol => new BasicIRule(expr, simplify(sol)) }
+    }
+  }
   
-  import Pattern._
-
   val iRules = new Rules()
 
   iRules.+("Constant"){ noxP('c) }{ case (c: Sym) => **(c, X) }
 
-  iRules.+("a * x^p"){
-    AsPowP(XP, noxP('p))
-  }{ case (p: Sym) => **(^(++(p, 1), -1), ^(X, ++(p, 1))) }
-
-  iRules.+("a * sin x"){
+  iRules.+("sin x"){
     =?(SymSin(X))
   }{ case () => **(-1.s, SymCos(X)) }
 
-  iRules.+("a * cos x"){
+  iRules.+("cos x"){
     =?(SymCos(X))
   }{ case () => SymSin(X) }
 
@@ -252,7 +280,7 @@ object IntegralRules {
   }
 
   class USub(integral: Sym, val u: Sym, val replaced: Sym) extends IntegralRule(integral) {
-    def toHtml = f"U Substitution:<br/>\\(u=${u.toLatex}\\), \\(du=${derive(u, X.symbol).toLatex}"
+    def toHtml = f"U Substitution:<br/>\\(u=${u.toLatex}\\), \\(du=${derive(u, X.symbol).toLatex}\\)"
 
     def forward(in: Sym) = SymIntegral(replaced)
     def backward(sol: Sym): Sym = sol.replaceExpr(X, u)

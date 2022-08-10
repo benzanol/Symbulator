@@ -12,21 +12,18 @@ import org.scalajs.dom.document
 import JsUtils.makeElement
 
 object CalcSolver {
-  trait AsyncSolver {
-    def step(): Option[Seq[CalcSolution]]
-  }
-
   trait CalcSolution {
     def beforeNode: dom.Node
     def insideNode: dom.Node
     def afterNode: dom.Node
 
-    def stringToNode(str: String) = makeElement("div",
-      "class" -> "mixed-equation-string",
-      "innerHTML" ->
-        (str.replace("\\(", "<p class=\"mq-static\">")
-          .replace("\\)", "</p>"))
-    )
+    def stringToNode(str: String, cls: String = "") =
+      makeElement("div",
+        "class" -> cls,
+        "innerHTML" ->
+          (str.replace("\\(", "<p class=\"mq-static\">")
+            .replace("\\)", "</p>"))
+      )
 
     def node: dom.Node = {
       val showBtn = makeElement("button",
@@ -65,6 +62,10 @@ object CalcSolver {
         )
       )
     }
+  }
+
+  trait AsyncSolver {
+    def step(): Option[Seq[CalcSolution]]
   }
 
 

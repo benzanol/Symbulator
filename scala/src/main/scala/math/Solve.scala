@@ -1,6 +1,7 @@
 package sympany.math
 
 import scala.util.chaining._
+import scala.collection.mutable
 
 import scala.scalajs.js.annotation.JSExportTopLevel
 import scala.scalajs.js
@@ -12,13 +13,21 @@ import sympany.Sym._
 import sympany.Pattern._
 
 
-object Solve {
-  @JSExportTopLevel("solve")
-  def solveAnd(e: Sym, and: Option[Sym] => Any, v: Symbol = X.symbol) {
-    replaceExpr(simplify(e), SymVar(v), X).pipe{e =>
-      js.Dynamic.global.concurrentSolve(e.asInstanceOf[js.Any])
-    }
-}
+object Zero {
+  import ui.CalcSolver.CalcSolution
+  // trait ZeroRule extends CalcSolution {
+  //   def name: String
+  //   def beforeNode = 
+  // }
+
+  // class ZeroSolver(expr: Sym) {
+  //   val history = mutable.Set[Sym]()
+  //   val queue = mutable.ListBuffer(expr)
+
+  //   def step(): Option[Seq[ZeroRule]] = {
+  //     None
+  //   }
+  // }
 }
 
 object EquivalentZeros {
