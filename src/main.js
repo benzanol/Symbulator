@@ -1,11 +1,11 @@
 var tickTimer = null
-function tickCalculator() {
+function tickCalculator(call) {
     // Kill any existing tick timer
     clearTimeout(tickTimer)
     //console.log("Ticking - " + tickTimer)
 
-    if (stepCurrentCalculator()) {
-        tickTimer = setTimeout(tickCalculator, 0);
+    if (call()) {
+        tickTimer = setTimeout(() => tickCalculator(call), 0);
     } else {
         //console.log("Stopped ticking")
     }

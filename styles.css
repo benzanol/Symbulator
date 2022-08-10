@@ -35,7 +35,7 @@ button {
     height: 95vh;
 }
 
-#sidebar {
+#current-calculator {
     font-size: 20px;
     width: 40%;
     max-width: 400px;

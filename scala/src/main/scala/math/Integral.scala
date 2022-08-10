@@ -9,6 +9,7 @@ import sympany.math.Derivative.derive
 import sympany.math.Simplify.simplify
 
 import scala.scalajs.js.annotation.JSExportTopLevel
+import org.scalajs.dom.Node
 
 object Integral {
 
@@ -58,22 +59,23 @@ object Integral {
     }
   }
 
-  abstract class IntegralRule(val integral: Sym) {
+  import ui.CalcSolver.CalcSolution
+  abstract class IntegralRule(val integral: Sym) extends CalcSolution {
     // Return an expression containing integrals, which when solved,
     // can be sent to `backward` to get the integral of `in`
-    def forward: Sym
-    var expression: Sym = forward
+    def forward(in: Sym): Sym
+    var expression: Sym = forward(integral)
 
     // Turn the solved expression into the solution to `integral`
     def backward(sol: Sym): Sym
     def solution = backward(expression)
+    def wrapward(e: Sym): Sym = backward(e)
 
     // List of rules for solving the sub integrals of this expression
     protected var rules = Seq[IntegralRule]()
-    //def subRules: Seq[IntegralRule] = if (rules.isEmpty) Nil else rules.init
-    //def afterRules: Seq[IntegralRule] = if (rules.isEmpty) Nil else Seq(rules.last)
-    def subRules: Seq[IntegralRule] = rules
-    def afterRules: Seq[IntegralRule] = Nil
+    def subRules   = if (rules.length == 1) Nil else rules
+    def afterRules = if (rules.length == 1) rules else Nil
+
 
     // Functions to gradually turn `expression` into a solution
     def nextIntegral(e: Sym): Option[Sym] = {
@@ -95,6 +97,31 @@ object Integral {
       )
       rules :+= r
     }
+
+
+    // Functions for displaying
+    import JsUtils.makeElement
+    def beforeNode = stringToNode(f"${rules.length} \\(${SymIntegral(integral).toLatex} = ${solution.toLatex}\\)")
+    def insideNode = wrappedInsideNode(identity)
+    def wrappedInsideNode(wrap: Sym => Sym): org.scalajs.dom.Node =
+      makeElement("div", "children" -> (
+        stringToNode(
+          this.toString + "\n" + "\\(" +
+            wrap(SymIntegral(integral)).toLatex + " = " +
+            this.wrapward(wrap(forward(integral))).toLatex + "\\)"
+        ) +: {
+          if (rules.length == 1) {
+            rules.map(_.wrappedInsideNode{e => this.wrapward(wrap(e))})
+          } else subRules.map(_.node)
+        }
+      ))
+
+    def afterNode = makeElement("div", "children" -> (
+      afterRules.map(_.node) :+ stringToNode(
+        f"\\(${SymIntegral(forward(integral)).toLatex} = ${solution.toLatex})\\"
+      )
+    ))
+    
   }
 
 }
@@ -102,7 +129,7 @@ object Integral {
 object IntegralPatterns {
   class BasicIRule(integral: Sym, known: Sym) extends Integral.IntegralRule(integral) {
     override def toString = f"Known integral"
-    def forward = known
+    def forward(in: Sym) = known
     def backward(sol: Sym) = sol
   }
 
@@ -173,15 +200,17 @@ object IntegralRules {
   class ProductRule(integral: Sym) extends IntegralRule(integral) {
     override def toString = f"Separate Constant Factors"
 
-    def forward: Sym = simplify(integral) match {
+    lazy val separate: (Sym, Sym) = simplify(integral) match {
       case prod: SymProd => {
         val consts = prod.exprs.filter(Pattern.noX)
         val exprs = prod.exprs.filter(Pattern.hasX)
-        simplify(***(consts :+ SymIntegral(***(exprs))))
+        (simplify(***(consts)), simplify(***(exprs)))
       }
-      case _ => SymIntegral(integral)
+      case whole => (1, whole)
     }
-    def backward(sol: Sym): Sym = sol
+
+    def forward(in: Sym): Sym = SymIntegral(separate._2)
+    def backward(sol: Sym): Sym = simplify(**(separate._1, sol))
 
     override def subRules = rules
     override def afterRules = Nil
@@ -190,9 +219,9 @@ object IntegralRules {
   class SumRule(integral: Sym) extends IntegralRule(integral) {
     override def toString = f"Integral of a sum is a sum of integrals"
 
-    def forward: Sym = integral match {
+    def forward(in: Sym): Sym = in match {
       case sum: SymSum => simplify(+++(sum.exprs.map(SymIntegral(_))))
-      case _ => SymIntegral(integral)
+      case _ => SymIntegral(in)
     }
     def backward(sol: Sym): Sym = sol
 
@@ -205,15 +234,16 @@ object IntegralRules {
     def v = SymIntegral(dv)
     def du = derive(u, X.symbol)
 
-    def forward: Sym = simplify(++( **(u, v), **(-1, SymIntegral(**(du, v)))))
+    def forward(in: Sym): Sym = simplify(++( **(u, v), **(-1, SymIntegral(**(du, v)))))
     def backward(sol: Sym): Sym = sol
   }
 
   class USub(integral: Sym, val u: Sym, val replaced: Sym) extends IntegralRule(integral) {
     override def toString = f"USub: u=$u"
 
-    def forward = SymIntegral(replaced)
+    def forward(in: Sym) = SymIntegral(replaced)
     def backward(sol: Sym): Sym = sol.replaceExpr(X, u)
+    override def wrapward(e: Sym) = e.replaceExpr(X, 'u)
   }
 
   // Return Some(replaced) if the usub succeeds, otherwise None
