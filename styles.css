@@ -1,3 +1,4 @@
+/* Useful things */
 button {
     background-color: transparent;
     border-style: solid;
@@ -7,26 +8,14 @@ button {
     cursor: pointer;
 }
 
-.plus-btn {
-    border-radius: 50px;
-    font-size: 14px;
-    padding: 0px;
-    padding-left: 4px;
-    padding-right: 4px;
+.vertical-line {
+    background-color: gray;
+    width: 1px;
 }
 
+/* Setting up the layout */
 .flex {
     display: flex;
-}
-
-
-.prop-name {
-    margin: 0px;
-    font-size: 17px;
-    font-family: Arial;
-    padding-top: 5px;
-    padding-bottom: 3px;
-    line-height: 1.0;
 }
 
 #page-container {
@@ -36,9 +25,8 @@ button {
 }
 
 #current-calculator {
-    font-size: 20px;
-    width: 40%;
-    max-width: 400px;
+    width: 50%;
+    max-width: 800px;
 
     resize: both;
     overflow: auto;
@@ -53,39 +41,52 @@ button {
     overflow: auto;
 }
 
-.mq-dynamic {
+/* Solution steps of an equation  */
+.solution-step {
+    font-family: Tahoma, sans-serif;
+    font-size: 16px;
+
+    margin-top: 20px;
+}
+
+.solution-step-details {
+    margin-top: 15px;
+}
+
+.solution-step-indented {
+    margin-left: 10px;
+    border-left: 2px solid gray;
+    padding-left: 15px;
+}
+
+.show-steps-btn {
+    font-family: Tahoma, sans-serif;
+    font-size: 13px;
+    text-decoration: underline;
+
+    border: none;
+    border-radius: 0px;
+    padding: 0px;
+}
+
+
+/* Mathquill fields */
+.mq-math-mode {
     margin: 0px;
     line-height: 1.0;
     padding: 0px 0px 0px 0px;
-    border-style: solid;
-    border-color: #555555;
-    border-width: 1px;
 }
 
-.mq-static, .mq-dynamic {
-    margin: 0px;
-    line-height: 1.1;
-    padding: 0px 0px 0px 0px;
+.mq-static {
+    font-size: 20px !important;
 }
 
-.prop-name {
-    margin-top: 10px;
+.mq-editable-field {
+    font-size: 20px;
+    margin-top: 30px;
 }
 
-.mq-dynamic {
-    margin-top: 25px;
-}
-
-.delete-equation-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none;
-    margin-top: 20px;
-    font-size: 18px;
-}
-
+/* The graph */
 #graph-container {
     position: relative;
     margin: 3%;
@@ -99,11 +100,6 @@ button {
     height: 100%;
     top: 0px;
     left: 0px;
-}
-
-.vertical-line {
-    background-color: gray;
-    width: 1px;
 }
 
 #point-box {

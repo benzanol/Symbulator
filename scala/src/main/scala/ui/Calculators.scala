@@ -22,6 +22,7 @@ object CalcSolver {
     def afterNode: dom.Node
 
     def stringToNode(str: String) = makeElement("div",
+      "class" -> "mixed-equation-string",
       "innerHTML" ->
         (str.replace("\\(", "<p class=\"mq-static\">")
           .replace("\\)", "</p>"))
@@ -30,15 +31,15 @@ object CalcSolver {
     def node: dom.Node = {
       val showBtn = makeElement("button",
         "class" -> "show-steps-btn",
-        "innerText" -> "Show Steps"
+        "innerText" -> "▹ Show Steps"
       )
       val hideBtn = makeElement("button",
         "class" -> "show-steps-btn",
-        "innerText" -> "Hide Steps"
+        "innerText" -> "▿ Hide Steps"
       )
 
       val details = makeElement("div",
-        "style" -> "padding-left: 30px",
+        "class" -> "solution-step-indented",
         "children" -> Seq(insideNode)
       )
 
@@ -55,9 +56,9 @@ object CalcSolver {
       updateHidden(false)
 
       makeElement("div",
+        "class" -> "solution-step",
         "children" -> Seq(
           beforeNode,
-          makeElement("br"),
           showBtn, hideBtn, details,
           makeElement("br"),
           afterNode

@@ -101,26 +101,32 @@ object Integral {
 
     // Functions for displaying
     import JsUtils.makeElement
-    def beforeNode = stringToNode(f"${rules.length} \\(${SymIntegral(integral).toLatex} = ${solution.toLatex}\\)")
+    def beforeNode = stringToNode("\\(" +
+      SymIntegral(integral).toLatex + " = " +
+      solution.toLatex + "\\)"
+    )
     def insideNode = wrappedInsideNode(identity)
     def wrappedInsideNode(wrap: Sym => Sym): org.scalajs.dom.Node =
-      makeElement("div", "children" -> (
-        stringToNode(
-          this.toString + "\n" + "\\(" +
-            wrap(SymIntegral(integral)).toLatex + " = " +
-            this.wrapward(wrap(forward(integral))).toLatex + "\\)"
-        ) +: {
-          if (rules.length == 1) {
-            rules.map(_.wrappedInsideNode{e => this.wrapward(wrap(e))})
-          } else subRules.map(_.node)
-        }
-      ))
+      makeElement("div",
+        "class" -> "solution-step-details",
+        "children" -> (
+          stringToNode(
+            this.toString + "<br/>" + "\\(" +
+              wrap(SymIntegral(integral)).toLatex + "=" +
+              this.wrapward(wrap(forward(integral))).toLatex + "\\)"
+          ) +: {
+            if (rules.length == 1) {
+              rules.map{r => r.wrappedInsideNode{e => this.wrapward(wrap(e))}}
+            } else subRules.map{r => r.node
+              // makeElement("div",
+              //   "class" -> "solution-step-indented",
+              //   "children" -> Seq(r.node)
+              // )
+            }
+          }
+        ))
 
-    def afterNode = makeElement("div", "children" -> (
-      afterRules.map(_.node) :+ stringToNode(
-        f"\\(${SymIntegral(forward(integral)).toLatex} = ${solution.toLatex})\\"
-      )
-    ))
+    def afterNode = makeElement("div")
     
   }
 
