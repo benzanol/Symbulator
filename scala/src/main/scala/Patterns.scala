@@ -419,4 +419,7 @@ class SeqRules() {
     rules :+= new SeqRule(n, p, f)
 
   def all(e: Sym): Seq[Sym] = rules.flatMap(_.all(e))
+
+  def allWithLabels(e: Sym): Seq[(Sym, String)] =
+    for (rule <- rules ; sol <- rule.all(e)) yield (sol, rule.name)
 }

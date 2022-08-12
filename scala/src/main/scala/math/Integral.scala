@@ -81,13 +81,13 @@ object Integral {
 
   class IntegralSolver(val expr: Sym) {
     private var index = 0
-    private var (
-      solution: Option[Option[IntegralRule]],
-      rules: Seq[(IntegralRule, Option[IntegralSolver])]
-    ) = IntegralPatterns.basicSolve(expr) match {
-      case Some(sol) => (Some(Some(sol)), Nil)
-      case None => (None, IntegralRules.allRules(expr).map(_ -> None))
-    }
+
+    private var solution: Option[Option[IntegralRule]] =
+      IntegralPatterns.basicSolve(expr).map(Some(_))
+
+    private var rules: Seq[(IntegralRule, Option[IntegralSolver])] =
+      if (solution.isDefined) Nil
+      else IntegralRules.allRules(expr).map(_ -> None)
 
     //println("Integral: " + expr.toString)
     //if (solution.isDefined) println("  Solution: " + solution.get.get.toString)

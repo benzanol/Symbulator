@@ -2,138 +2,123 @@
 [0m[[0m[0mdebug[0m] [0m[0mInitial source changes: [0m
 [0m[[0m[0mdebug[0m] [0m[0m	removed:Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	added: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Integral.scala, /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/ui/Calculators.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Patterns.scala, /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala)[0m
 [0m[[0m[0mdebug[0m] [0m[0mInvalidated products: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mExternal API changes: API Changes: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(sympany.ui.CalcFields.CalcField, sympany.math.IntegralRules.Parts, sympany.math.IntegralPatterns.ExponentIRule, sympany.math.IntegralPatterns.PowerIRule, sympany.ui.CalcSolver.DoubleIntegralResult, sympany.ui.CalcSolver.IntegralSolver, sympany.ui.CalcFields.Calculator, sympany.math.IntegralPatterns, sympany.math.IntegralRules.ProductRule, sympany.ui.CalcSolver, sympany.math.Integral.IntegralRule, sympany.math.IntegralRules, sympany.ui.CalcFields.ResultField, sympany.ui.CalcSolver.IntegralResult, sympany.math.IntegralPatterns.BasicIRule, sympany.math.IntegralRules.SumRule, sympany.math.Integral, sympany.ui.CalcSolver.AsyncSolver, sympany.math.Integral.IntegralSolver, sympany.ui.Calculators, sympany.ui.CalcSolver.CalcSolution, sympany.ui.CalcFields, sympany.math.IntegralRules.USub, sympany.ui.CalcFields.TextField, sympany.ui.CalcFields.EquationField)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(sympany.PMP, sympany.And, sympany.PatternVar, sympany.With, sympany.EquationP, sympany.IntegralP, sympany.Rules, sympany.Pattern.SeqMatch, sympany.SumP, sympany.Pattern.ImplicitPatternVar, sympany.SeqRule, sympany.PowP, sympany.AsProdP, sympany.Bind, sympany.AsPowP, sympany.ConstP, sympany.LogP, sympany.IntP, sympany.Rule, sympany.Satisfies, sympany.ProdP, sympany.Guard, sympany.SeqRules, sympany.Repeat, sympany.Or, sympany.First, sympany.AnyP, sympany.Pattern, sympany.RatP, sympany.FracP, sympany.AsSumP, sympany.SymP, sympany.VarP)[0m
 [0m[[0m[0mdebug[0m] [0m[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0mSources indirectly invalidated by:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	product: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	external source: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(sympany.ui.CalcFields.CalcField, sympany.math.IntegralRules.Parts, sympany.math.IntegralPatterns.ExponentIRule, sympany.math.IntegralPatterns.PowerIRule, sympany.ui.CalcSolver.DoubleIntegralResult, sympany.ui.CalcSolver.IntegralSolver, sympany.ui.CalcFields.Calculator, sympany.math.IntegralPatterns, sympany.math.IntegralRules.ProductRule, sympany.ui.CalcSolver, sympany.math.Integral.IntegralRule, sympany.math.IntegralRules, sympany.ui.CalcFields.ResultField, sympany.ui.CalcSolver.IntegralResult, sympany.math.IntegralPatterns.BasicIRule, sympany.math.IntegralRules.SumRule, sympany.math.Integral, sympany.ui.CalcSolver.AsyncSolver, sympany.math.Integral.IntegralSolver, sympany.ui.Calculators, sympany.ui.CalcSolver.CalcSolution, sympany.ui.CalcFields, sympany.math.IntegralRules.USub, sympany.ui.CalcFields.TextField, sympany.ui.CalcFields.EquationField)[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Integral.scala, /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/ui/Calculators.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.ui.CalcFields.CalcField, sympany.math.IntegralRules.Parts, sympany.math.IntegralPatterns.ExponentIRule, sympany.math.IntegralPatterns.PowerIRule, sympany.ui.CalcSolver.DoubleIntegralResult, sympany.ui.CalcSolver.IntegralSolver, sympany.ui.CalcFields.Calculator, sympany.math.IntegralPatterns, sympany.math.IntegralRules.ProductRule, sympany.ui.CalcSolver, sympany.math.Integral.IntegralRule, sympany.math.IntegralRules, sympany.ui.CalcFields.ResultField, sympany.ui.CalcSolver.IntegralResult, sympany.math.IntegralPatterns.BasicIRule, sympany.math.IntegralRules.SumRule, sympany.math.Integral, sympany.ui.CalcSolver.AsyncSolver, sympany.math.Integral.IntegralSolver, sympany.ui.Calculators, sympany.ui.CalcSolver.CalcSolution, sympany.ui.CalcFields, sympany.math.IntegralRules.USub, sympany.ui.CalcFields.TextField, sympany.ui.CalcFields.EquationField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcFields.EquationField by sympany.ui.CalcFields.CalcField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcFields.TextField by sympany.ui.CalcFields.CalcField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcFields.ResultField by sympany.ui.CalcFields.CalcField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.IntegralResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.DoubleIntegralResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns.BasicIRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.SumRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.USub by sympany.math.Integral.IntegralRule[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(sympany.PMP, sympany.And, sympany.PatternVar, sympany.With, sympany.EquationP, sympany.IntegralP, sympany.Rules, sympany.Pattern.SeqMatch, sympany.SumP, sympany.Pattern.ImplicitPatternVar, sympany.SeqRule, sympany.PowP, sympany.AsProdP, sympany.Bind, sympany.AsPowP, sympany.ConstP, sympany.LogP, sympany.IntP, sympany.Rule, sympany.Satisfies, sympany.ProdP, sympany.Guard, sympany.SeqRules, sympany.Repeat, sympany.Or, sympany.First, sympany.AnyP, sympany.Pattern, sympany.RatP, sympany.FracP, sympany.AsSumP, sympany.SymP, sympany.VarP)[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Patterns.scala, /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.PMP, sympany.And, sympany.PatternVar, sympany.With, sympany.EquationP, sympany.IntegralP, sympany.Rules, sympany.Pattern.SeqMatch, sympany.SumP, sympany.Pattern.ImplicitPatternVar, sympany.SeqRule, sympany.PowP, sympany.AsProdP, sympany.Bind, sympany.AsPowP, sympany.ConstP, sympany.LogP, sympany.IntP, sympany.Rule, sympany.Satisfies, sympany.ProdP, sympany.Guard, sympany.SeqRules, sympany.Repeat, sympany.Or, sympany.First, sympany.AnyP, sympany.Pattern, sympany.RatP, sympany.FracP, sympany.AsSumP, sympany.SymP, sympany.VarP[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.Pattern.ImplicitPatternVar by sympany.PatternVar[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.RatP by sympany.Pattern[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.FracP by sympany.Pattern[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.AsSumP by sympany.Pattern[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymP by sympany.Pattern[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.VarP by sympany.Pattern[0m
 [0m[[0m[0minfo[0m] [0m[0mCompiling 2 Scala sources to /home/quaviq/Documents/Programming/Scala/Calculator/scala/target/scala-2.13/classes ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.13:1.3.2:compile for Scala 2.13.1[0m
 [0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.13:1.3.2:compile for Scala 2.13.1[0m
-[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 2efd3899 for Scala compiler version 2.13.1[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 6d62494f for Scala compiler version 2.13.1[0m
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-Xplugin:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-compiler_2.13.1/1.10.0/scalajs-compiler_2.13.1-1.10.0.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.1/scala-library-2.13.1.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/home/quaviq/Documents/Programming/Scala/Calculator/scala/target/scala-2.13/classes:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-dom_sjs1_2.13/2.1.0/scalajs-dom_sjs1_2.13-2.1.0.jar:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-library_2.13/1.10.0/scalajs-library_2.13-1.10.0.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 1.370184551 s[0m
+[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 2.437296665 s[0m
 [0m[[0m[0mdebug[0m] [0m[0mDone compiling.[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.IntegralRules.USub...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.IntegralRules.USub[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.IntegralRules.USub)[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.IntegralRules.USub,ModifiedNames(changes = UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]))) invalidates 1 classes due to The sympany.math.IntegralRules.USub has the following regular definitions changed:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.IntegralRules.USub)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.Zero.FinalZeroRule...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.Zero.FinalZeroRule[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.Zero.FinalZeroRule)[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.Zero.FinalZeroRule,ModifiedNames(changes = UsedName($init$,[Default]), UsedName(hashCode,[Default]), UsedName(##,[Default]), UsedName(beforeNode,[Default]), UsedName(notify,[Default]), UsedName(clone,[Default]), UsedName(wait,[Default]), UsedName(sympany;math;Zero;FinalZeroRule;init;,[Default]), UsedName(FinalZeroRule,[Default]), UsedName(isInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(asInstanceOf,[Default]), UsedName(ne,[Default]), UsedName(synchronized,[Default]), UsedName(eq,[Default]), UsedName(rules,[Default]), UsedName($asInstanceOf,[Default]), UsedName(equals,[Default]), UsedName(wrappedInsideNode,[Default]), UsedName(getClass,[Default]), UsedName(!=,[Default]), UsedName(==,[Default]), UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(insideNode,[Default]), UsedName(ruleDescription,[Default]), UsedName(notifyAll,[Default]), UsedName(node,[Default]), UsedName(wrapFunc,[Default]))) invalidates 1 classes due to The sympany.math.Zero.FinalZeroRule has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName($init$,[Default]), UsedName(hashCode,[Default]), UsedName(##,[Default]), UsedName(beforeNode,[Default]), UsedName(notify,[Default]), UsedName(clone,[Default]), UsedName(wait,[Default]), UsedName(sympany;math;Zero;FinalZeroRule;init;,[Default]), UsedName(FinalZeroRule,[Default]), UsedName(isInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(asInstanceOf,[Default]), UsedName(ne,[Default]), UsedName(synchronized,[Default]), UsedName(eq,[Default]), UsedName(rules,[Default]), UsedName($asInstanceOf,[Default]), UsedName(equals,[Default]), UsedName(wrappedInsideNode,[Default]), UsedName(getClass,[Default]), UsedName(!=,[Default]), UsedName(==,[Default]), UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(insideNode,[Default]), UsedName(ruleDescription,[Default]), UsedName(notifyAll,[Default]), UsedName(node,[Default]), UsedName(wrapFunc,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.Zero.FinalZeroRule)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m        [0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.IntegralPatterns.BasicIRule...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.IntegralPatterns.BasicIRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.IntegralPatterns.BasicIRule)[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.IntegralPatterns.BasicIRule,ModifiedNames(changes = UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]))) invalidates 1 classes due to The sympany.math.IntegralPatterns.BasicIRule has the following regular definitions changed:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.IntegralPatterns.BasicIRule)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.ZeroRules...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.ZeroRules[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.ZeroRules)[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.ZeroRules,ModifiedNames(changes = UsedName(hashCode,[Default]), UsedName(##,[Default]), UsedName(notify,[Default]), UsedName(clone,[Default]), UsedName(wait,[Default]), UsedName(isInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(asInstanceOf,[Default]), UsedName(ne,[Default]), UsedName(synchronized,[Default]), UsedName(eq,[Default]), UsedName(rules,[Default]), UsedName(ZeroRules,[Default]), UsedName(allRules,[Default]), UsedName($asInstanceOf,[Default]), UsedName(equals,[Default]), UsedName(getClass,[Default]), UsedName(!=,[Default]), UsedName(==,[Default]), UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(notifyAll,[Default]))) invalidates 1 classes due to The sympany.math.ZeroRules has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(hashCode,[Default]), UsedName(##,[Default]), UsedName(notify,[Default]), UsedName(clone,[Default]), UsedName(wait,[Default]), UsedName(isInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(asInstanceOf,[Default]), UsedName(ne,[Default]), UsedName(synchronized,[Default]), UsedName(eq,[Default]), UsedName(rules,[Default]), UsedName(ZeroRules,[Default]), UsedName(allRules,[Default]), UsedName($asInstanceOf,[Default]), UsedName(equals,[Default]), UsedName(getClass,[Default]), UsedName(!=,[Default]), UsedName(==,[Default]), UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(notifyAll,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.ZeroRules)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m        [0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.IntegralRules.Parts...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.IntegralRules.Parts[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.IntegralRules.Parts)[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.IntegralRules.Parts,ModifiedNames(changes = UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]))) invalidates 1 classes due to The sympany.math.IntegralRules.Parts has the following regular definitions changed:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.IntegralRules.Parts)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.SeqRules...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.SeqRules[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.SeqRules)[0m
+[0m[[0m[0mdebug[0m] [0m[0mThe following modified names cause invalidation of sympany.math.ZeroRules: Set(UsedName(allWithLabels,[Default]))[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.SeqRules,ModifiedNames(changes = UsedName(allWithLabels,[Default]))) invalidates 2 classes due to The sympany.SeqRules has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(allWithLabels,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.SeqRules)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> [0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by member reference: Set(sympany.math.ZeroRules)[0m
+[0m[[0m[0mdebug[0m] [0m[0m        [0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.Zero.ZeroSolver...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.Zero.ZeroSolver[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.Zero.ZeroSolver)[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.Zero.ZeroSolver,ModifiedNames(changes = UsedName(ZeroSolver,[Default]), UsedName(hashCode,[Default]), UsedName(##,[Default]), UsedName(index,[Default]), UsedName(notify,[Default]), UsedName(clone,[Default]), UsedName(wait,[Default]), UsedName(zeros,[Default]), UsedName(isInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(asInstanceOf,[Default]), UsedName(ne,[Default]), UsedName(synchronized,[Default]), UsedName(eq,[Default]), UsedName(<init>$default$2,[Default]), UsedName($asInstanceOf,[Default]), UsedName(expr,[Default]), UsedName(equals,[Default]), UsedName(sympany;math;Zero;ZeroSolver;init;,[Default]), UsedName(getClass,[Default]), UsedName(!=,[Default]), UsedName(==,[Default]), UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(queue,[Default]), UsedName(notifyAll,[Default]), UsedName(step,[Default]))) invalidates 1 classes due to The sympany.math.Zero.ZeroSolver has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(ZeroSolver,[Default]), UsedName(hashCode,[Default]), UsedName(##,[Default]), UsedName(index,[Default]), UsedName(notify,[Default]), UsedName(clone,[Default]), UsedName(wait,[Default]), UsedName(zeros,[Default]), UsedName(isInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(asInstanceOf,[Default]), UsedName(ne,[Default]), UsedName(synchronized,[Default]), UsedName(eq,[Default]), UsedName(<init>$default$2,[Default]), UsedName($asInstanceOf,[Default]), UsedName(expr,[Default]), UsedName(equals,[Default]), UsedName(sympany;math;Zero;ZeroSolver;init;,[Default]), UsedName(getClass,[Default]), UsedName(!=,[Default]), UsedName(==,[Default]), UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(queue,[Default]), UsedName(notifyAll,[Default]), UsedName(step,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.Zero.ZeroSolver)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m        [0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.IntegralRules.ProductRule...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.IntegralRules.ProductRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.IntegralRules.ProductRule)[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.IntegralRules.ProductRule,ModifiedNames(changes = UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]))) invalidates 1 classes due to The sympany.math.IntegralRules.ProductRule has the following regular definitions changed:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.IntegralRules.ProductRule)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.Zero.ZeroRule...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.Zero.ZeroRule[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Zero.IntermediateZeroRule by sympany.math.Zero.ZeroRule[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Zero.FinalZeroRule by sympany.math.Zero.ZeroRule[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.Zero.IntermediateZeroRule, sympany.math.Zero.ZeroRule, sympany.math.Zero.FinalZeroRule)[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.Zero.ZeroRule,ModifiedNames(changes = UsedName($init$,[Default]), UsedName(hashCode,[Default]), UsedName(##,[Default]), UsedName(beforeNode,[Default]), UsedName(notify,[Default]), UsedName(ZeroRule,[Default]), UsedName(clone,[Default]), UsedName(wait,[Default]), UsedName(isInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(asInstanceOf,[Default]), UsedName(ne,[Default]), UsedName(synchronized,[Default]), UsedName(eq,[Default]), UsedName(rules,[Default]), UsedName($asInstanceOf,[Default]), UsedName(equals,[Default]), UsedName(wrappedInsideNode,[Default]), UsedName(getClass,[Default]), UsedName(!=,[Default]), UsedName(==,[Default]), UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(insideNode,[Default]), UsedName(ruleDescription,[Default]), UsedName(notifyAll,[Default]), UsedName(node,[Default]), UsedName(wrapFunc,[Default]))) invalidates 3 classes due to The sympany.math.Zero.ZeroRule has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName($init$,[Default]), UsedName(hashCode,[Default]), UsedName(##,[Default]), UsedName(beforeNode,[Default]), UsedName(notify,[Default]), UsedName(ZeroRule,[Default]), UsedName(clone,[Default]), UsedName(wait,[Default]), UsedName(isInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(asInstanceOf,[Default]), UsedName(ne,[Default]), UsedName(synchronized,[Default]), UsedName(eq,[Default]), UsedName(rules,[Default]), UsedName($asInstanceOf,[Default]), UsedName(equals,[Default]), UsedName(wrappedInsideNode,[Default]), UsedName(getClass,[Default]), UsedName(!=,[Default]), UsedName(==,[Default]), UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(insideNode,[Default]), UsedName(ruleDescription,[Default]), UsedName(notifyAll,[Default]), UsedName(node,[Default]), UsedName(wrapFunc,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.Zero.IntermediateZeroRule, sympany.math.Zero.ZeroRule, sympany.math.Zero.FinalZeroRule)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m        [0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.IntegralPatterns.ExponentIRule...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.IntegralPatterns.ExponentIRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.IntegralPatterns.ExponentIRule)[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.IntegralPatterns.ExponentIRule,ModifiedNames(changes = UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]))) invalidates 1 classes due to The sympany.math.IntegralPatterns.ExponentIRule has the following regular definitions changed:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.IntegralPatterns.ExponentIRule)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.Zero.IntermediateZeroRule...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.Zero.IntermediateZeroRule[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.Zero.IntermediateZeroRule)[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.Zero.IntermediateZeroRule,ModifiedNames(changes = UsedName($init$,[Default]), UsedName(withSubRule,[Default]), UsedName(hashCode,[Default]), UsedName(expr2,[Default]), UsedName(##,[Default]), UsedName(beforeNode,[Default]), UsedName(notify,[Default]), UsedName(sympany;math;Zero;IntermediateZeroRule;init;,[Default]), UsedName(clone,[Default]), UsedName(wait,[Default]), UsedName(isInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(expr1,[Default]), UsedName(asInstanceOf,[Default]), UsedName(ne,[Default]), UsedName(IntermediateZeroRule,[Default]), UsedName(synchronized,[Default]), UsedName(eq,[Default]), UsedName(rules,[Default]), UsedName($asInstanceOf,[Default]), UsedName(equals,[Default]), UsedName(wrappedInsideNode,[Default]), UsedName(getClass,[Default]), UsedName(!=,[Default]), UsedName(==,[Default]), UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(insideNode,[Default]), UsedName(ruleDescription,[Default]), UsedName(description,[Default]), UsedName(notifyAll,[Default]), UsedName(node,[Default]), UsedName(wrapFunc,[Default]))) invalidates 1 classes due to The sympany.math.Zero.IntermediateZeroRule has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName($init$,[Default]), UsedName(withSubRule,[Default]), UsedName(hashCode,[Default]), UsedName(expr2,[Default]), UsedName(##,[Default]), UsedName(beforeNode,[Default]), UsedName(notify,[Default]), UsedName(sympany;math;Zero;IntermediateZeroRule;init;,[Default]), UsedName(clone,[Default]), UsedName(wait,[Default]), UsedName(isInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(expr1,[Default]), UsedName(asInstanceOf,[Default]), UsedName(ne,[Default]), UsedName(IntermediateZeroRule,[Default]), UsedName(synchronized,[Default]), UsedName(eq,[Default]), UsedName(rules,[Default]), UsedName($asInstanceOf,[Default]), UsedName(equals,[Default]), UsedName(wrappedInsideNode,[Default]), UsedName(getClass,[Default]), UsedName(!=,[Default]), UsedName(==,[Default]), UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(insideNode,[Default]), UsedName(ruleDescription,[Default]), UsedName(description,[Default]), UsedName(notifyAll,[Default]), UsedName(node,[Default]), UsedName(wrapFunc,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.Zero.IntermediateZeroRule)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m        [0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.IntegralRules.SumRule...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.IntegralRules.SumRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.IntegralRules.SumRule)[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.IntegralRules.SumRule,ModifiedNames(changes = UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]))) invalidates 1 classes due to The sympany.math.IntegralRules.SumRule has the following regular definitions changed:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.IntegralRules.SumRule)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.Zero...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.Zero[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.Zero)[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.Zero,ModifiedNames(changes = UsedName(ZeroSolver,[Default]), UsedName(hashCode,[Default]), UsedName(Zero,[Default]), UsedName(##,[Default]), UsedName(notify,[Default]), UsedName(ZeroRule,[Default]), UsedName(clone,[Default]), UsedName(wait,[Default]), UsedName(FinalZeroRule,[Default]), UsedName(isInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(asInstanceOf,[Default]), UsedName(ne,[Default]), UsedName(IntermediateZeroRule,[Default]), UsedName(synchronized,[Default]), UsedName(eq,[Default]), UsedName($asInstanceOf,[Default]), UsedName(equals,[Default]), UsedName(getClass,[Default]), UsedName(!=,[Default]), UsedName(==,[Default]), UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(notifyAll,[Default]))) invalidates 1 classes due to The sympany.math.Zero has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(ZeroSolver,[Default]), UsedName(hashCode,[Default]), UsedName(Zero,[Default]), UsedName(##,[Default]), UsedName(notify,[Default]), UsedName(ZeroRule,[Default]), UsedName(clone,[Default]), UsedName(wait,[Default]), UsedName(FinalZeroRule,[Default]), UsedName(isInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(asInstanceOf,[Default]), UsedName(ne,[Default]), UsedName(IntermediateZeroRule,[Default]), UsedName(synchronized,[Default]), UsedName(eq,[Default]), UsedName($asInstanceOf,[Default]), UsedName(equals,[Default]), UsedName(getClass,[Default]), UsedName(!=,[Default]), UsedName(==,[Default]), UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(notifyAll,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.Zero)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m        [0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.IntegralPatterns.PowerIRule...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.IntegralPatterns.PowerIRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.IntegralPatterns.PowerIRule)[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.IntegralPatterns.PowerIRule,ModifiedNames(changes = UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]))) invalidates 1 classes due to The sympany.math.IntegralPatterns.PowerIRule has the following regular definitions changed:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.IntegralPatterns.PowerIRule)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.Bind...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.Bind[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.Bind)[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroPatterns. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroRules. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Simplify. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.Bind,ModifiedNames(changes = UsedName(finalize,[Default]))) invalidates 1 classes due to The sympany.Bind has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(finalize,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.Bind)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m        [0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.Integral.IntegralRule...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.Parts by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns.ExponentIRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns.PowerIRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.ProductRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns.BasicIRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.SumRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.USub by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.IntegralRules.Parts, sympany.math.IntegralPatterns.ExponentIRule, sympany.math.IntegralPatterns.PowerIRule, sympany.math.IntegralRules.ProductRule, sympany.math.Integral.IntegralRule, sympany.math.IntegralPatterns.BasicIRule, sympany.math.IntegralRules.SumRule, sympany.math.IntegralRules.USub)[0m
-[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.ui.CalcSolver.IntegralSolver. This dependency is not being considered for invalidation.[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.Integral.IntegralRule,ModifiedNames(changes = UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]))) invalidates 8 classes due to The sympany.math.Integral.IntegralRule has the following regular definitions changed:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.IntegralRules.Parts, sympany.math.IntegralPatterns.ExponentIRule, sympany.math.IntegralPatterns.PowerIRule, sympany.math.IntegralRules.ProductRule, sympany.math.Integral.IntegralRule, sympany.math.IntegralPatterns.BasicIRule, sympany.math.IntegralRules.SumRule, sympany.math.IntegralRules.USub)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.ZeroPatterns...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.ZeroPatterns[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.ZeroPatterns)[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.ZeroPatterns,ModifiedNames(changes = UsedName(quadraticFormula,[Default]), UsedName(hashCode,[Default]), UsedName(##,[Default]), UsedName(notify,[Default]), UsedName(clone,[Default]), UsedName(wait,[Default]), UsedName(isInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(asInstanceOf,[Default]), UsedName(ne,[Default]), UsedName(synchronized,[Default]), UsedName(eq,[Default]), UsedName(ZeroPatterns,[Default]), UsedName($asInstanceOf,[Default]), UsedName(equals,[Default]), UsedName(basicZeros,[Default]), UsedName(getClass,[Default]), UsedName(!=,[Default]), UsedName(==,[Default]), UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(zRules,[Default]), UsedName(notifyAll,[Default]))) invalidates 1 classes due to The sympany.math.ZeroPatterns has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(quadraticFormula,[Default]), UsedName(hashCode,[Default]), UsedName(##,[Default]), UsedName(notify,[Default]), UsedName(clone,[Default]), UsedName(wait,[Default]), UsedName(isInstanceOf,[Default]), UsedName(toString,[Default]), UsedName(asInstanceOf,[Default]), UsedName(ne,[Default]), UsedName(synchronized,[Default]), UsedName(eq,[Default]), UsedName(ZeroPatterns,[Default]), UsedName($asInstanceOf,[Default]), UsedName(equals,[Default]), UsedName(basicZeros,[Default]), UsedName(getClass,[Default]), UsedName(!=,[Default]), UsedName(==,[Default]), UsedName(finalize,[Default]), UsedName($isInstanceOf,[Default]), UsedName(zRules,[Default]), UsedName(notifyAll,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.ZeroPatterns)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
-[0m[[0m[0mdebug[0m] [0m[0m        [0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.ui.CalcSolver.CalcSolution...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.ui.CalcSolver.CalcSolution[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Integral.IntegralRule by sympany.ui.CalcSolver.CalcSolution[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.Parts by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns.ExponentIRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns.PowerIRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.ProductRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns.BasicIRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.SumRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.USub by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.IntegralRules.Parts, sympany.math.IntegralPatterns.ExponentIRule, sympany.math.IntegralPatterns.PowerIRule, sympany.math.IntegralRules.ProductRule, sympany.math.Integral.IntegralRule, sympany.math.IntegralPatterns.BasicIRule, sympany.math.IntegralRules.SumRule, sympany.ui.CalcSolver.CalcSolution, sympany.math.IntegralRules.USub)[0m
-[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.ui.CalcSolver.IntegralSolver. This dependency is not being considered for invalidation.[0m
-[0m[[0m[0mdebug[0m] [0m[0mThe following modified names cause invalidation of sympany.math.Integral.IntegralRule: Set(UsedName(stringToNode,[Default]), UsedName(stringToNode$default$2,[Default]))[0m
-[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Integral. This dependency is not being considered for invalidation.[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.ui.CalcSolver.CalcSolution,ModifiedNames(changes = UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]))) invalidates 9 classes due to The sympany.ui.CalcSolver.CalcSolution has the following regular definitions changed:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	UsedName(stringToNode$default$2,[Default]), UsedName(stringToNode,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.IntegralRules.Parts, sympany.math.IntegralPatterns.ExponentIRule, sympany.math.IntegralPatterns.PowerIRule, sympany.math.IntegralRules.ProductRule, sympany.math.Integral.IntegralRule, sympany.math.IntegralPatterns.BasicIRule, sympany.math.IntegralRules.SumRule, sympany.ui.CalcSolver.CalcSolution, sympany.math.IntegralRules.USub)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> [0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by member reference: Set(sympany.math.Integral.IntegralRule)[0m
 [0m[[0m[0mdebug[0m] [0m[0m        [0m
 [0m[[0m[0mdebug[0m] [0m[0mNew invalidations:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Set()[0m

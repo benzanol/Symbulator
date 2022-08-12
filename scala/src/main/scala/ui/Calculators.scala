@@ -11,6 +11,7 @@ import org.scalajs.dom
 import org.scalajs.dom.document
 
 import JsUtils.makeElement
+import scala.annotation.varargs
 
 object CalcSolver {
   import CalcFields._
@@ -90,7 +91,7 @@ object CalcSolver {
 
 
   trait AsyncSolver {
-    def step(): Option[Seq[CalcSolution]]
+    def step(): (Seq[CalcSolution], Boolean)
   }
 
 
@@ -131,11 +132,11 @@ object CalcSolver {
       expr.replaceExpr(SymVar('x), Sym.X)
     )
 
-    def step(): Option[Seq[CalcSolution]] =
+    def step(): (Seq[CalcSolution], Boolean) =
       iSolver.step() match {
-        case None => None
-        case Some(None) => Some(Nil)
-        case Some(Some(rule)) => Some(Seq(rule))
+        case None => (Nil, true)
+        case Some(None) => (Nil, false)
+        case Some(Some(rule)) => (Seq(rule), false)
       }
   }
 
@@ -159,7 +160,7 @@ object CalcFields {
 
   class Calculator(val name: String)(val fields: CalcField*) {
     // Run step function for all fields
-    def step(): Boolean = fields.map(_.step()).contains(false)
+    def step(): Boolean = fields.map(_.step()).contains(true)
 
     def update() {
       for (f <- fields) f.update(this)
@@ -196,7 +197,7 @@ object CalcFields {
 
     // A function that can be overriden by an equation to run
     // arbitrary code (function will be called continuously)
-    def step(): Boolean = true
+    def step(): Boolean = false
 
     def graphs: Seq[Sym] = Nil
 
@@ -225,6 +226,12 @@ object CalcFields {
     // Keep track of the current equation and solver for that equation
     var exprs: Option[Seq[Sym]] = None
 
+    // List of currently found solutions to the problem
+    var solutions: Seq[CalcSolution] = Nil
+
+    // Whether the solver is actively trying to find solutions
+    var solving: Boolean = false
+
     var solver: Option[AsyncSolver] = None
     def makeSolver(es: Seq[Sym]): AsyncSolver
 
@@ -233,27 +240,36 @@ object CalcFields {
       val newExprs = fields.flatMap(c.getEquation)
 
       if (exprs != Some(newExprs)) {
-        exprs = Option.when(newExprs.length == fields.length)(newExprs)
+        exprs = None
+        solutions = Nil
+        solver = None
+        solving = false
 
-        solutions = None
+        if (newExprs.length == fields.length) {
+          exprs = Some(newExprs)
+          solver = Some(makeSolver(newExprs))
+          solving = true
+        }
+
         updateNode()
 
-        solver = exprs.map(makeSolver)
       }
     }
 
     // Generate the solutions for the equation
-    var solutions: Option[Seq[CalcSolution]] = None
     override def step(): Boolean = {
-      if (solver.isEmpty || solutions.isDefined) return true
+      if (!solving) return false
 
-      solutions = solver.get.step()
-
-      if (solutions.isEmpty) return false
+      val stepped = solver.get.step()
+      solving = stepped._2
 
       // If a solution was found, update the html view
-      updateNode()
-      return true
+      if (stepped._1 != solutions) {
+        solutions = stepped._1
+        updateNode()
+      }
+
+      return solving
     }
 
 
@@ -264,20 +280,19 @@ object CalcFields {
     private def updateNode() {
       node.replaceChildren(
         if (exprs.isEmpty) makeElement("p", "innterText" -> "No Equation!")
-        else solutions match {
-          case None => makeElement("p", "innerText" -> "Solving...")
-          case Some(Nil) => makeElement("p", "innerText" -> "No solution")
-          case Some(sols) => makeElement("div",
-            "id" -> "solutions",
-            "children" -> sols.flatMap{sol => Seq(
+        else if (!solving && solutions.isEmpty)
+          makeElement("p", "innerText" -> "No solutions found ):")
+        else makeElement("div",
+          "id" -> "solutions",
+          "children" -> (
+            solutions.flatMap{sol => Seq(
               makeElement("p", "innerText" -> ","), makeElement("br"), sol.node
             )}.drop(2) // Remove the first comma and newline
+              ++ Option.when(solving)(makeElement("p", "innerText" -> "Solving...")).toSeq
           )
-        }
+        )
       )
-
-      if (solutions.isDefined)
-        js.Dynamic.global.formatStaticEquations()
+      js.Dynamic.global.formatStaticEquations()
     }
   }
 

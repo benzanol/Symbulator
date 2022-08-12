@@ -11,30 +11,91 @@ import sympany.math.Simplify.simplify
 import sympany.math.Derivative.derive
 import sympany.Sym._
 import sympany.Pattern._
+import org.scalajs.dom.Node
 
 
-/*
+
 object Zero {
   import ui.CalcSolver.CalcSolution
   trait ZeroRule extends CalcSolution {
+    def beforeNode: Node = JsUtils.makeElement("p", "innerText" -> "BEFORE NODE!!!!")
 
+    def ruleDescription: String
+    def insideNode(num: Int)(wrap: Sym => Sym) = JsUtils.stringToNode(
+      // Have a bullet before the rule
+      //"①②③④⑤⑥⑦⑧⑨"(num) + " " +
+      "➣ " +
+
+      // Include a brief description of the rule
+      this.ruleDescription + "<br/>"
+
+      // Show the transformation the rule is making
+      ,
+      cls = "solution-step-title"
+    )
   }
 
-  type Exprs = mutable.Set[Sym]
-  class ZeroSolver(expr: Sym, history: Exprs = mutable.Set[Sym]()) {
-    var zeros = ZeroPatterns.basicZeros(expr).toSet
+  class FinalZeroRule(expr: Sym, zero: Sym) extends ZeroRule {
+    def ruleDescription = f"When \\(${expr.toLatex} = 0\\), \\(x = ${zero.toLatex}\\)"
+    def rules = Nil
+  }
 
-    var queue = if (!zeros.isEmpty) Nil else {
-      (ZeroRules.allRules(expr) -- history)
+  class IntermediateZeroRule(val expr1: Sym, val expr2: Sym, val description: String) extends ZeroRule {
+    def ruleDescription = f"$description<br/>\\(${expr1} \\rightarrow ${expr2}\\)"
+
+    // Each intermediate zero rule in a solution will have exactly 1
+    // sub rule, and multiple instances of a single rule with
+    // different sub rules will sometimes be needed
+    var rules = Seq[ZeroRule]()
+    def withSubRule(r: ZeroRule): IntermediateZeroRule = {
+      val newR = new IntermediateZeroRule(expr1, expr2, description)
+      newR.rules = Seq(r)
+      return newR
     }
-    var index = 0
+  }
 
-    def step(): Option[Set[ZeroRule]] =
-      if (queue.isEmpty) Some(zeros)
-      else {
+
+  class ZeroSolver(val expr: Sym, history: mutable.Set[Sym] = mutable.Set[Sym]()) {
+    var zeros: Seq[ZeroRule] =
+      ZeroPatterns.basicZeros(expr).map{ z => new FinalZeroRule(expr, z) }
+
+    var queue: Seq[(IntermediateZeroRule, ZeroSolver)] = Nil
+
+    // Index as -1 indicates that the queue has not yet been generated
+    var index = -1
+
+    def step(): (Seq[ZeroRule], Boolean) =
+      if (queue.isEmpty && (index != -1 || !zeros.isEmpty)) (zeros, true)
+      else if (index == -1) {
+        // Make the queue all possible rules that aren't already in
+        // the history, pairing each with its own solver
+        queue = ZeroRules.allRules(expr)
+          .filter{ r => !history.contains(r.expr2) }
+          .map{ r => (r, new ZeroSolver(r.expr2, history)) }
+
+        // Add the new rules to the history
+        history.addAll(queue.map(_._1.expr2))
+
+        // Indicate that the queue has now been created
+        index = 0
+
+        // Don't return anything of interest yet
+        (Nil, false)
+
+      } else {
         val next = queue(index)
-        val stepped = next.step
-        None
+        val stepped = next._2.step()
+
+        // Add the zeros from the nested function to my zeros
+        zeros ++= stepped._1
+
+        // If the solver is finished, remove it from the queue
+        if (!stepped._2) {
+          queue = queue.take(index) ++ queue.drop(index + 1)
+          index = 0
+        }
+
+        return (stepped._1.map(next._1.withSubRule), !queue.isEmpty)
       }
   }
 }
@@ -108,11 +169,9 @@ object ZeroPatterns {
 
 object ZeroRules {
   import Zero._
-  class ZeroSolution(original: Sym, zeros: Seq[Sym]) extends ZeroRule {
 
-  }
-
-  def allRules(e: Sym): Seq[Sym] = rules.all(e)
+  def allRules(e: Sym): Seq[IntermediateZeroRule] =
+    rules.allWithLabels(e).map{ case (z, str) => new IntermediateZeroRule(e, z, str) }
 
   val rules = new SeqRules()
 
@@ -186,4 +245,4 @@ object ZeroRules {
   }
 }
 
-*/
+
