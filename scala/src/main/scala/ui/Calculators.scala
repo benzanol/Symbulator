@@ -127,7 +127,7 @@ object CalcSolver {
     ctx.fill()
   }
 
-  class IntegralSolver(expr: Sym) extends AsyncSolver {
+  class AsyncIntegralSolver(expr: Sym) extends AsyncSolver {
     private val iSolver = new Integral.IntegralSolver(
       expr.replaceExpr(SymVar('x), Sym.X)
     )
@@ -141,17 +141,36 @@ object CalcSolver {
   }
 
   class IntegralResult(field: String) extends ResultField(field) {
-    def makeSolver(es: Seq[Sym]) = new IntegralSolver(es(0))
+    def makeSolver(es: Seq[Sym]) = new AsyncIntegralSolver(es(0))
 
     override def drawings: Seq[Graph.JsContext => Unit] =
       this.exprs.map{es => integralDrawing(es(0), 0, _)}.toSeq
   }
 
   class DoubleIntegralResult(f1: String, f2: String) extends ResultField(f1, f2) {
-    def makeSolver(es: Seq[Sym]) = new IntegralSolver(++(es(0), **(-1, es(1))))
+    def makeSolver(es: Seq[Sym]) = new AsyncIntegralSolver(++(es(0), **(-1, es(1))))
 
     override def drawings: Seq[Graph.JsContext => Unit] =
       this.exprs.map{es => integralDrawing(es(0), es(1), _)}.toSeq
+  }
+
+
+  class ZeroResult(field: String) extends ResultField(field) {
+    def makeSolver(es: Seq[Sym]) = new AsyncZeroSolver(es(0))
+  }
+
+  class AsyncZeroSolver(expr: Sym) extends AsyncSolver {
+    private val solver = new Zero.ZeroSolver(
+      expr.replaceExpr(SymVar('x), Sym.X)
+    )
+
+    var allZeros = Set[Zero.ZeroRule]()
+
+    def step(): (Seq[Zero.ZeroRule], Boolean) = {
+      val stepped = solver.step()
+      allZeros ++= stepped._1
+      return (allZeros.toSeq, stepped._2)
+    }
   }
 }
 
@@ -306,6 +325,10 @@ object Calculators {
   import CalcFields._
 
   val calculators: Seq[Calculator] = Seq(
+    new Calculator("Zeros")(
+      new EquationField("e1"),
+      new ZeroResult("e1"),
+    ),
     new Calculator("Integral")(
       new EquationField("e1"),
       new IntegralResult("e1"),

@@ -198,13 +198,11 @@ object Simplify {
       +++( ***((a + b) +: r) +: rest )
   }
   
-  /*
-   sRules.+("Distributive property"){
-   ProdP(SumP('terms @@ __*), 'n @@ %?(), 'rest @@ __*)
-   }{ case (n: Sym, rest: Seq[Sym], terms: Seq[Sym]) =>
-   ***( +++( terms.map{ e => **(e, n) } ) +: rest )
-   }
-   */
+  sRules.+("Distributive property"){
+    ProdP(SumP('terms @@ __*), 'n @@ %?(), 'rest @@ __*)
+  }{ case (n: Sym, rest: Seq[Sym], terms: Seq[Sym]) =>
+      ***( +++( terms.map{ e => **(e, n) } ) +: rest )
+  }
   
   sRules.+("Plus/minus 0 is 0"){ SymP(SymPM(0)) }{ case () => 0 }
 

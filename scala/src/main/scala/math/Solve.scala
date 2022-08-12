@@ -17,8 +17,16 @@ import org.scalajs.dom.Node
 
 object Zero {
   import ui.CalcSolver.CalcSolution
+  import JsUtils._
+
   trait ZeroRule extends CalcSolution {
-    def beforeNode: Node = JsUtils.makeElement("p", "innerText" -> "BEFORE NODE!!!!")
+    def beforeNode: Node = endResult match {
+      case None => stringToNode("Unsolved root")
+      case Some(z) => stringToNode(f"\\(x = ${z.toLatex}\\)<br/>")
+    }
+
+    def endResult: Option[Sym]
+
 
     def ruleDescription: String
     def insideNode(num: Int)(wrap: Sym => Sym) = JsUtils.stringToNode(
@@ -37,11 +45,13 @@ object Zero {
 
   class FinalZeroRule(expr: Sym, zero: Sym) extends ZeroRule {
     def ruleDescription = f"When \\(${expr.toLatex} = 0\\), \\(x = ${zero.toLatex}\\)"
+    def endResult = Some(zero)
     def rules = Nil
   }
 
   class IntermediateZeroRule(val expr1: Sym, val expr2: Sym, val description: String) extends ZeroRule {
     def ruleDescription = f"$description<br/>\\(${expr1} \\rightarrow ${expr2}\\)"
+    def endResult = rules.headOption.flatMap(_.endResult)
 
     // Each intermediate zero rule in a solution will have exactly 1
     // sub rule, and multiple instances of a single rule with
@@ -56,15 +66,15 @@ object Zero {
 
 
   class ZeroSolver(val expr: Sym, history: mutable.Set[Sym] = mutable.Set[Sym]()) {
-    var zeros: Seq[ZeroRule] =
-      ZeroPatterns.basicZeros(expr).map{ z => new FinalZeroRule(expr, z) }
+    var zeros: Set[ZeroRule] =
+      ZeroPatterns.basicZeros(expr).map{ z => new FinalZeroRule(expr, z) }.toSet
 
     var queue: Seq[(IntermediateZeroRule, ZeroSolver)] = Nil
 
     // Index as -1 indicates that the queue has not yet been generated
     var index = -1
 
-    def step(): (Seq[ZeroRule], Boolean) =
+    def step(): (Set[ZeroRule], Boolean) =
       if (queue.isEmpty && (index != -1 || !zeros.isEmpty)) (zeros, true)
       else if (index == -1) {
         // Make the queue all possible rules that aren't already in
@@ -80,7 +90,7 @@ object Zero {
         index = 0
 
         // Don't return anything of interest yet
-        (Nil, false)
+        (Set(), false)
 
       } else {
         val next = queue(index)
@@ -101,18 +111,18 @@ object Zero {
 }
 
 object ZeroPatterns {
-  def basicZeros(e: Sym): Seq[Sym] = e match {
+  def basicZeros(e: Sym): Seq[Sym] = (e match {
     case SymEquation(l, r) if l == X && noX(r) => Seq(r)
     case SymEquation(l, r) => zRules.all(simplify(++(l, **(-1, r))))
-    case e => zRules.all(e)
-  }
+    case e => zRules.all(simplify(e))
+  }).filter(_.isFinite)
 
   // Rules that will always result in a solution
-  val zRules = new Rules()
+  val zRules = new SeqRules()
 
-  //  zRules.+("a^p => a = 0"){
-  //    @?('whole) @@ PowP( @?('b), RatP( @?('p) |> { p: SymR => p.value > 0 } ) )
-  //  }{ case (b: Sym, p: SymR, whole: Sym) => solve(b).headOption.getOrElse(whole) }
+  zRules.+("x^p => x = 0 where p != 1"){
+    AsPowP(XP, noxP('p))
+  }{ case (p: Sym) => if (p == SymInt(0)) Nil else Seq(0) }
 
   zRules.+("Quadratic formula"){
     SumP(
@@ -121,7 +131,7 @@ object ZeroPatterns {
       @?('cs) @@ Repeat(noxP(), min=1) // Any number of c
     )
   }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
-      quadraticFormula(aS, bS, cS)
+      Seq(quadraticFormula(aS, bS, cS))
   }
 
 
