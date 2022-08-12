@@ -29,4 +29,12 @@ object JsUtils {
     }
     return e
   }
+
+  def stringToNode(str: String, cls: String = "") =
+    makeElement("div",
+      "class" -> cls,
+      "innerHTML" ->
+        (str.replace("\\(", "<p class=\"mq-static\">")
+          .replace("\\)", "</p>"))
+    )
 }

@@ -13,24 +13,106 @@ import sympany.Sym._
 import sympany.Pattern._
 
 
+/*
 object Zero {
   import ui.CalcSolver.CalcSolution
-  // trait ZeroRule extends CalcSolution {
-  //   def name: String
-  //   def beforeNode = 
-  // }
+  trait ZeroRule extends CalcSolution {
 
-  // class ZeroSolver(expr: Sym) {
-  //   val history = mutable.Set[Sym]()
-  //   val queue = mutable.ListBuffer(expr)
+  }
 
-  //   def step(): Option[Seq[ZeroRule]] = {
-  //     None
-  //   }
-  // }
+  type Exprs = mutable.Set[Sym]
+  class ZeroSolver(expr: Sym, history: Exprs = mutable.Set[Sym]()) {
+    var zeros = ZeroPatterns.basicZeros(expr).toSet
+
+    var queue = if (!zeros.isEmpty) Nil else {
+      (ZeroRules.allRules(expr) -- history)
+    }
+    var index = 0
+
+    def step(): Option[Set[ZeroRule]] =
+      if (queue.isEmpty) Some(zeros)
+      else {
+        val next = queue(index)
+        val stepped = next.step
+        None
+      }
+  }
 }
 
-object EquivalentZeros {
+object ZeroPatterns {
+  def basicZeros(e: Sym): Seq[Sym] = e match {
+    case SymEquation(l, r) if l == X && noX(r) => Seq(r)
+    case SymEquation(l, r) => zRules.all(simplify(++(l, **(-1, r))))
+    case e => zRules.all(e)
+  }
+
+  // Rules that will always result in a solution
+  val zRules = new Rules()
+
+  //  zRules.+("a^p => a = 0"){
+  //    @?('whole) @@ PowP( @?('b), RatP( @?('p) |> { p: SymR => p.value > 0 } ) )
+  //  }{ case (b: Sym, p: SymR, whole: Sym) => solve(b).headOption.getOrElse(whole) }
+
+  zRules.+("Quadratic formula"){
+    SumP(
+      @?('as) @@ Repeat(AsProdP(PowP(XP, =#?(2)), Repeat(noxP())), min=1), // Any number of a*x^2
+      @?('bs) @@ Repeat(AsProdP(XP, Repeat(noxP()))), // Any number of b*x
+      @?('cs) @@ Repeat(noxP(), min=1) // Any number of c
+    )
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+      quadraticFormula(aS, bS, cS)
+  }
+
+
+  def quadraticFormula(aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]): Sym = {
+    val List(a, b, c) = List(aS, bS, cS).map{ es: Seq[Sym] =>
+      val realEs = es.map(_ match {
+        case p: SymProd => p.exprs.filter(noX).pipe(***)
+        case f if hasX(f) => SymInt(1)
+        case f => f
+      })
+      +++(realEs).pipe(simplify)
+    }
+    **( ++( **(-1, b), +-{ ^(++(^(b, 2), **(-4, a, c)), 1~2) }), ^(**(2, a), -1)).pipe(simplify)
+  }
+
+  /*
+   zRules.+("Cubic formula"){
+   SumP(
+   @?('as) @@ Repeat(AsProdP(PowP(XP, =#?(3)), Repeat(noxP())), min=1), // Any number of a*x^3
+   @?('bs) @@ Repeat(AsProdP(PowP(XP, =#?(2)), Repeat(noxP()))), // Any number of a*x^2
+   @?('cs) @@ Repeat(AsProdP(XP, Repeat(noxP()))), // Any number of b*x
+   @?('ds) @@ Repeat(noxP(), min=1) // Any number of c
+   )
+   }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym], dS: Seq[Sym]) =>
+   Seq(cubicFormula(aS, bS, cS, dS))
+   }
+   def cubicFormula(aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym], dS: Seq[Sym]): Sym = {
+   val List(a, b, c, d) = List(aS, bS, cS, dS).map{ es: Seq[Sym] =>
+   val realEs = es.map(_ match {
+   case p: SymProd => p.exprs.filter(noX).pipe(***)
+   case f if hasX(f) => SymInt(1)
+   case f => f
+   })
+   +++(realEs).pipe(simplify)
+   }
+   val p = **(-1~3, b, ^(a, -1))
+   val q = ++(^(p, 3), **(1~6, ++(**(b, c), **(-3, a, d)), ^(a, -2)))
+   val r = **(1~3, c, ^(a, -1))
+   val s = ^(++(^(q, 2), ^(++(r, **(-1, ^(p, 2))), 3)), 1~2)
+   val x = ++( ^(++(q, SymPM(s)), 1~3), ^(++(q, **(-1, s)), 1~3), p)
+   x
+   }
+   */
+}
+
+object ZeroRules {
+  import Zero._
+  class ZeroSolution(original: Sym, zeros: Seq[Sym]) extends ZeroRule {
+
+  }
+
+  def allRules(e: Sym): Seq[Sym] = rules.all(e)
 
   val rules = new SeqRules()
 
@@ -104,72 +186,4 @@ object EquivalentZeros {
   }
 }
 
-object SolutionRules {
-  @JSExportTopLevel("definiteSolution")
-  def definiteSolution(e: Sym): js.Dictionary[Any] =
-    zRules.first(e) match {
-      case Some(sol) => js.Dictionary("solved" -> true, "solution" -> sol)
-      case None => js.Dictionary("solved" -> false)
-    }
-
-  // Rules that will always result in a solution
-  val zRules = new Rules()
-
-
-
-  //  zRules.+("a^p => a = 0"){
-  //    @?('whole) @@ PowP( @?('b), RatP( @?('p) |> { p: SymR => p.value > 0 } ) )
-  //  }{ case (b: Sym, p: SymR, whole: Sym) => solve(b).headOption.getOrElse(whole) }
-
-  zRules.+("Quadratic formula"){
-    SumP(
-      @?('as) @@ Repeat(AsProdP(PowP(XP, =#?(2)), Repeat(noxP())), min=1), // Any number of a*x^2
-      @?('bs) @@ Repeat(AsProdP(XP, Repeat(noxP()))), // Any number of b*x
-      @?('cs) @@ Repeat(noxP(), min=1) // Any number of c
-    )
-  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
-      quadraticFormula(aS, bS, cS)
-  }
-
-
-  def quadraticFormula(aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]): Sym = {
-    val List(a, b, c) = List(aS, bS, cS).map{ es: Seq[Sym] =>
-      val realEs = es.map(_ match {
-        case p: SymProd => p.exprs.filter(noX).pipe(***)
-        case f if hasX(f) => SymInt(1)
-        case f => f
-      })
-      +++(realEs).pipe(simplify)
-    }
-    **( ++( **(-1, b), +-{ ^(++(^(b, 2), **(-4, a, c)), 1~2) }), ^(**(2, a), -1)).pipe(simplify)
-  }
-
-  /*
-   zRules.+("Cubic formula"){
-   SumP(
-   @?('as) @@ Repeat(AsProdP(PowP(XP, =#?(3)), Repeat(noxP())), min=1), // Any number of a*x^3
-   @?('bs) @@ Repeat(AsProdP(PowP(XP, =#?(2)), Repeat(noxP()))), // Any number of a*x^2
-   @?('cs) @@ Repeat(AsProdP(XP, Repeat(noxP()))), // Any number of b*x
-   @?('ds) @@ Repeat(noxP(), min=1) // Any number of c
-   )
-   }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym], dS: Seq[Sym]) =>
-   Seq(cubicFormula(aS, bS, cS, dS))
-   }
-   def cubicFormula(aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym], dS: Seq[Sym]): Sym = {
-   val List(a, b, c, d) = List(aS, bS, cS, dS).map{ es: Seq[Sym] =>
-   val realEs = es.map(_ match {
-   case p: SymProd => p.exprs.filter(noX).pipe(***)
-   case f if hasX(f) => SymInt(1)
-   case f => f
-   })
-   +++(realEs).pipe(simplify)
-   }
-   val p = **(-1~3, b, ^(a, -1))
-   val q = ++(^(p, 3), **(1~6, ++(**(b, c), **(-3, a, d)), ^(a, -2)))
-   val r = **(1~3, c, ^(a, -1))
-   val s = ^(++(^(q, 2), ^(++(r, **(-1, ^(p, 2))), 3)), 1~2)
-   val x = ++( ^(++(q, SymPM(s)), 1~3), ^(++(q, **(-1, s)), 1~3), p)
-   x
-   }
-   */
-}
+*/

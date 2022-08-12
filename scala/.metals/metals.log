@@ -13446,3 +13446,890 @@ Aug 10, 2022 2:51:44 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellat
 WARNING: Unmatched cancel notification for request id 30581
 Aug 10, 2022 2:51:44 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
 WARNING: Unmatched cancel notification for request id 30584
+Aug 11, 2022 12:23:18 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30625
+Aug 11, 2022 12:23:21 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30629
+Aug 11, 2022 12:23:23 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30631
+Aug 11, 2022 12:24:01 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30649
+Aug 11, 2022 12:24:02 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30653
+Aug 11, 2022 12:24:13 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30666
+Aug 11, 2022 12:24:15 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30668
+Aug 11, 2022 12:24:52 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30686
+Aug 11, 2022 12:25:28 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30698
+Aug 11, 2022 12:25:30 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30700
+Aug 11, 2022 12:25:38 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30711
+Aug 11, 2022 12:25:38 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30710
+Aug 11, 2022 12:25:46 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30722
+Aug 11, 2022 12:26:18 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30734
+Aug 11, 2022 12:26:19 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30736
+Aug 11, 2022 12:26:20 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30738
+Aug 11, 2022 12:26:29 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30747
+Aug 11, 2022 12:26:29 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30753
+Aug 11, 2022 12:26:30 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30756
+Aug 11, 2022 12:26:53 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30796
+Aug 11, 2022 12:26:54 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30802
+Aug 11, 2022 12:26:56 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30804
+Aug 11, 2022 12:27:00 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30826
+Aug 11, 2022 12:27:01 AM scala.meta.internal.pc.CompilerAccess retryWithCleanCompiler
+INFO: compiler crashed due to an error in the Scala compiler, retrying with new compiler instance.
+Aug 11, 2022 12:27:05 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30842
+Aug 11, 2022 12:27:10 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30855
+Aug 11, 2022 12:27:21 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30865
+Aug 11, 2022 12:30:10 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30883
+Aug 11, 2022 12:54:49 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30921
+Aug 11, 2022 12:55:13 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30966
+Aug 11, 2022 12:55:14 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30969
+Aug 11, 2022 12:55:26 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 30991
+Aug 11, 2022 12:56:10 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31028
+Aug 11, 2022 12:58:24 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31041
+Aug 11, 2022 12:59:42 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31095
+Aug 11, 2022 1:05:28 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31126
+Aug 11, 2022 1:06:25 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31157
+Aug 11, 2022 1:06:30 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31167
+Aug 11, 2022 1:06:36 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31171
+Aug 11, 2022 1:06:55 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31188
+Aug 11, 2022 1:06:56 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31190
+Aug 11, 2022 1:06:59 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31194
+Aug 11, 2022 1:07:20 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31210
+Aug 11, 2022 1:07:21 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31213
+Aug 11, 2022 1:10:36 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31271
+Aug 11, 2022 1:10:41 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31281
+Aug 11, 2022 1:12:01 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31289
+Aug 11, 2022 1:12:25 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31297
+Aug 11, 2022 1:13:05 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31325
+Aug 11, 2022 1:13:05 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31327
+Aug 11, 2022 1:13:05 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31326
+Aug 11, 2022 1:13:07 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31328
+Aug 11, 2022 1:13:19 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31341
+Aug 11, 2022 1:15:21 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31398
+Aug 11, 2022 1:16:04 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31427
+Aug 11, 2022 1:16:15 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31442
+Aug 11, 2022 1:16:34 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31458
+Aug 11, 2022 1:16:47 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31463
+Aug 11, 2022 1:17:09 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31471
+Aug 11, 2022 1:17:32 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31482
+Aug 11, 2022 1:17:35 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31489
+Aug 11, 2022 1:17:39 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31501
+Aug 11, 2022 1:17:43 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31507
+Aug 11, 2022 1:19:19 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31523
+Aug 11, 2022 1:19:21 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31527
+Aug 11, 2022 1:19:26 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31537
+Aug 11, 2022 1:19:38 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31555
+Aug 11, 2022 1:19:51 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31581
+Aug 11, 2022 1:19:51 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31583
+Aug 11, 2022 1:19:54 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31594
+Aug 11, 2022 1:19:58 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31603
+Aug 11, 2022 1:19:59 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31608
+Aug 11, 2022 1:20:03 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31613
+Aug 11, 2022 1:20:13 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31629
+Aug 11, 2022 1:20:16 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31636
+Aug 11, 2022 1:20:16 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31638
+Aug 11, 2022 1:20:22 AM scala.meta.internal.pc.CompletionProvider expected$1
+WARNING: offset 865, count -1, length 5801
+Aug 11, 2022 1:20:27 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31660
+Aug 11, 2022 1:22:52 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31678
+Aug 11, 2022 1:22:58 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31683
+Aug 11, 2022 6:08:53 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 31695
+[0m2022.08.12 10:15:36 INFO  Started: Metals version 0.10.9 in workspace '/home/quaviq/Documents/Programming/Scala/Calculator/scala' for client emacs GNU Emacs 27.2 (build 1, x86_64-pc-linux-gnu, GTK+ Version 3.24.27, cairo version 1.16.0).[0m
+[0m2022.08.12 10:15:38 INFO  time: initialize in 1.5s[0m
+[0m2022.08.12 10:15:38 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher15983789656572357910/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m2022.08.12 10:15:38 INFO  skipping build import with status 'Installed'[0m
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+No server running at 127.0.0.1:8212, let's fire one...
+Resolving ch.epfl.scala:bloop-frontend_2.12:1.4.11...
+Starting bloop server at 127.0.0.1:8212...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Loading 2 projects from '/home/quaviq/Documents/Programming/Scala/Calculator/scala/.bloop'...
+[0m[32m[D][0m Loading project from '/home/quaviq/Documents/Programming/Scala/Calculator/scala/.bloop/scala.json'
+[0m[32m[D][0m Loading project from '/home/quaviq/Documents/Programming/Scala/Calculator/scala/.bloop/scala-test.json'
+[0m[32m[D][0m Cache miss for scala instance org.scala-lang:scala-compiler:2.13.1.
+[0m[32m[D][0m   => /home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/jline/jline/2.14.6/jline-2.14.6.jar
+[0m[32m[D][0m   => /home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/fusesource/jansi/jansi/1.12/jansi-1.12.jar
+[0m[32m[D][0m   => /home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.13.1/scala-compiler-2.13.1.jar
+[0m[32m[D][0m   => /home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.1/scala-library-2.13.1.jar
+[0m[32m[D][0m   => /home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.13.1/scala-reflect-2.13.1.jar
+[0m[32m[D][0m Resolving platform artifacts: List(Artifact(ch.epfl.scala,bloop-js-bridge-1_2.12,1.4.11), Artifact(org.scala-js,scalajs-sbt-test-adapter_2.12,1.10.0), Artifact(org.scala-js,scalajs-js-envs_2.12,1.1.1), Artifact(org.scala-js,scalajs-linker_2.12,1.10.0), Artifact(org.scala-js,scalajs-env-nodejs_2.12,1.1.1), Artifact(org.scala-js,scalajs-env-jsdom-nodejs_2.12,1.1.0), Artifact(org.scala-js,scalajs-logging_2.12,1.1.1))
+[0m[32m[D][0m Resolving ch.epfl.scala:bloop-js-bridge-1_2.12:1.4.11
+[0m[32m[D][0m Resolving org.scala-js:scalajs-sbt-test-adapter_2.12:1.10.0
+[0m[32m[D][0m Resolving org.scala-js:scalajs-js-envs_2.12:1.1.1
+[0m[32m[D][0m Resolving org.scala-js:scalajs-linker_2.12:1.10.0
+[0m[32m[D][0m Resolving org.scala-js:scalajs-env-nodejs_2.12:1.1.1
+[0m[32m[D][0m Resolving org.scala-js:scalajs-env-jsdom-nodejs_2.12:1.1.0
+[0m[32m[D][0m Resolving org.scala-js:scalajs-logging_2.12:1.1.1
+[0m[32m[D][0m Configured Scala SemanticDB in projects 'scala', 'scala-test'
+[0m[32m[D][0m Missing analysis file for project 'scala-test'
+[0m[32m[D][0m Loading previous analysis for 'scala' from '/home/quaviq/Documents/Programming/Scala/Calculator/scala/target/streams/compile/bloopAnalysisOut/_global/streams/inc_compile_2.13.zip'.
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher15983789656572357910/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher15983789656572357910/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2022.08.12 10:15:42 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/quaviq/.cache/metals/bsp.trace.json[0m
+[0m2022.08.12 10:15:42 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+[0m2022.08.12 10:15:42 INFO Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher4205377473965879045/bsp.socket'...
+ Attempting to connect to the build server...[0m
+Waiting for the bsp connection to come up...
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher8590246320505919418/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher4205377473965879045/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher4205377473965879045/bsp.socket...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher8590246320505919418/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher8590246320505919418/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2022.08.12 10:15:42 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/quaviq/.cache/metals/bsp.trace.json[0m
+[0m2022.08.12 10:15:42 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/quaviq/.cache/metals/bsp.trace.json[0m
+[0m2022.08.12 10:15:42 INFO  time: Connected to build server in 3.75s[0m
+[0m2022.08.12 10:15:42 INFO  Connected to Build server: Bloop v1.4.11[0m
+[0m2022.08.12 10:15:42 INFO  no build target: using presentation compiler with only scala-library: 3.1.0[0m
+[0m2022.08.12 10:15:42 INFO  time: code lens generation in 4.95s[0m
+[0m2022.08.12 10:15:45 INFO  no build target: using presentation compiler with only scala-library: 3.1.0[0m
+[0m2022.08.12 10:15:46 INFO  time: code lens generation in 7.58s[0m
+[0m2022.08.12 10:15:46 INFO  time: code lens generation in 7.58s[0m
+[0m2022.08.12 10:15:49 INFO  time: indexed workspace in 5.54s[0m
+[0m2022.08.12 10:15:49 INFO  compiling scala (5 scala sources)[0m
+[0m2022.08.12 10:15:49 ERROR Referring to non-existent class org.scalajs.testing.bridge.Bridge[0m
+[0m2022.08.12 10:15:49 ERROR   called from core module module initializers[0m
+[0m2022.08.12 10:15:49 ERROR Referring to non-existent method static org.scalajs.testing.bridge.Bridge.start()void[0m
+[0m2022.08.12 10:15:49 ERROR   called from core module module initializers[0m
+[0m2022.08.12 10:15:49 ERROR JavaScript linking failed with 'There were linking errors'[0m
+[0m2022.08.12 10:15:51 INFO  no build target: using presentation compiler with only scala-library: 2.13.1[0m
+[0m2022.08.12 10:15:51 INFO  Generated JavaScript file '/home/quaviq/Documents/Programming/Scala/Calculator/scala/.bloop/scala/scala-test.js'[0m
+[0m2022.08.12 10:15:58 WARN  there were 60 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.12 10:15:58 INFO  compiling scala-test (1 scala source)[0m
+[0m2022.08.12 10:15:58 INFO  time: compiled scala-test in 0.2s[0m
+[0m2022.08.12 10:15:58 INFO  time: compiled scala in 8.85s[0m
+Aug 12, 2022 10:44:31 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 45
+Aug 12, 2022 10:44:31 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 47
+Aug 12, 2022 10:46:46 AM scala.meta.internal.pc.CompilerAccess retryWithCleanCompiler
+INFO: compiler crashed due to an error in the Scala compiler, retrying with new compiler instance.
+Aug 12, 2022 10:46:47 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 99
+Aug 12, 2022 10:46:47 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 102
+Aug 12, 2022 10:46:55 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 123
+Aug 12, 2022 10:46:55 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 126
+Aug 12, 2022 10:46:56 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 129
+Aug 12, 2022 10:46:56 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 132
+[0m2022.08.12 10:47:01 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 10:47:01 INFO  time: compiled scala in 0.71s[0m
+[0m2022.08.12 10:47:14 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 10:47:14 INFO  time: compiled scala in 0.93s[0m
+[0m2022.08.12 10:47:14 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 10:47:16 INFO  time: compiled scala in 0.76s[0m
+Aug 12, 2022 10:47:38 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 150
+Aug 12, 2022 10:47:45 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 157
+Aug 12, 2022 10:47:58 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 172
+[0m2022.08.12 10:48:03 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 10:48:04 INFO  time: compiled scala in 1s[0m
+[0m2022.08.12 10:51:18 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 10:51:18 INFO  time: compiled scala in 0.58s[0m
+Aug 12, 2022 10:51:56 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 212
+Aug 12, 2022 10:51:56 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 214
+Aug 12, 2022 10:55:14 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 232
+Aug 12, 2022 10:55:15 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 242
+Aug 12, 2022 10:55:30 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 268
+Aug 12, 2022 10:55:30 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 267
+Aug 12, 2022 10:55:44 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 278
+Aug 12, 2022 11:05:58 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 450
+Aug 12, 2022 11:05:59 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 451
+Aug 12, 2022 11:06:11 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 487
+Aug 12, 2022 11:06:14 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 492
+Aug 12, 2022 11:07:42 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 518
+Aug 12, 2022 11:07:42 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 517
+Aug 12, 2022 11:07:55 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 543
+Aug 12, 2022 11:08:11 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 558
+Aug 12, 2022 11:08:50 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 567
+Aug 12, 2022 11:08:52 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 574
+Aug 12, 2022 11:32:39 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 643
+Aug 12, 2022 11:32:49 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 657
+Aug 12, 2022 11:32:49 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 660
+Aug 12, 2022 11:32:56 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 678
+Aug 12, 2022 11:32:56 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 680
+Aug 12, 2022 11:32:58 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 687
+Aug 12, 2022 11:32:58 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 688
+Aug 12, 2022 11:32:59 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 691
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:16: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+               ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:30: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+                             ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:44: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+                                           ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:118:35: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    ProdP('es @@ __*) }{ case es: Seq[Sym] => es }
+                                  ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:125:33: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Sym, p: SymInt, r: Seq[Sym]) if (p.toInt % 2 == 0) =>
+                                ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:128:38: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Sym, p: SymConstant, r: Seq[Sym]) =>
+                                     ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:139:15: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) =>
+              ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:139:39: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) =>
+                                      ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:141:14: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) =>
+             ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:141:35: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) =>
+                                  ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:159:28: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+          case (p: Sym, r: Seq[Sym]) =>
+                           ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:16: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+               ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:30: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+                             ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:44: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+                                           ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:118:35: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    ProdP('es @@ __*) }{ case es: Seq[Sym] => es }
+                                  ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:125:33: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Sym, p: SymInt, r: Seq[Sym]) if (p.toInt % 2 == 0) =>
+                                ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:128:38: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Sym, p: SymConstant, r: Seq[Sym]) =>
+                                     ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:139:15: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) =>
+              ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:139:39: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) =>
+                                      ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:141:14: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) =>
+             ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:141:35: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) =>
+                                  ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:159:28: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+          case (p: Sym, r: Seq[Sym]) =>
+                           ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:16: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+               ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:30: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+                             ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:44: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+                                           ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:118:35: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    ProdP('es @@ __*) }{ case es: Seq[Sym] => es }
+                                  ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:125:33: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Sym, p: SymInt, r: Seq[Sym]) if (p.toInt % 2 == 0) =>
+                                ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:128:38: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Sym, p: SymConstant, r: Seq[Sym]) =>
+                                     ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:139:15: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) =>
+              ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:139:39: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) =>
+                                      ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:141:14: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) =>
+             ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:141:35: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) =>
+                                  ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:159:28: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+          case (p: Sym, r: Seq[Sym]) =>
+                           ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:16: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+               ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:30: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+                             ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:44: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+                                           ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:118:35: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    ProdP('es @@ __*) }{ case es: Seq[Sym] => es }
+                                  ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:125:33: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Sym, p: SymInt, r: Seq[Sym]) if (p.toInt % 2 == 0) =>
+                                ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:128:38: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Sym, p: SymConstant, r: Seq[Sym]) =>
+                                     ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:139:15: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) =>
+              ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:139:39: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) =>
+                                      ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:141:14: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) =>
+             ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:141:35: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) =>
+                                  ^^^^^^^^[0m
+[0m2022.08.12 11:33:11 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:159:28: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+          case (p: Sym, r: Seq[Sym]) =>
+                           ^^^^^^^^[0m
+Aug 12, 2022 11:33:12 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 721
+Aug 12, 2022 11:33:19 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 731
+Aug 12, 2022 11:33:24 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 736
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:16: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+               ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:30: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+                             ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:44: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+                                           ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:118:35: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    ProdP('es @@ __*) }{ case es: Seq[Sym] => es }
+                                  ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:125:33: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Sym, p: SymInt, r: Seq[Sym]) if (p.toInt % 2 == 0) =>
+                                ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:128:38: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Sym, p: SymConstant, r: Seq[Sym]) =>
+                                     ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:139:15: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) =>
+              ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:139:39: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) =>
+                                      ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:141:14: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) =>
+             ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:141:35: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) =>
+                                  ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:159:28: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+          case (p: Sym, r: Seq[Sym]) =>
+                           ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:16: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+               ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:30: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+                             ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:53:44: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
+                                           ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:118:35: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    ProdP('es @@ __*) }{ case es: Seq[Sym] => es }
+                                  ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:125:33: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Sym, p: SymInt, r: Seq[Sym]) if (p.toInt % 2 == 0) =>
+                                ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:128:38: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Sym, p: SymConstant, r: Seq[Sym]) =>
+                                     ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:139:15: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) =>
+              ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:139:39: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+  }{ case (a: Seq[Sym], SymInt(n), r: Seq[Sym]) if (n % 2 == 0) =>
+                                      ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:141:14: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) =>
+             ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:141:35: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+    case (a: Seq[Sym], p: Sym, r: Seq[Sym]) =>
+                                  ^^^^^^^^[0m
+[0m2022.08.12 11:33:35 INFO  /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Solve.scala:159:28: stale bloop warning: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure
+          case (p: Sym, r: Seq[Sym]) =>
+                           ^^^^^^^^[0m
+Aug 12, 2022 11:33:38 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 758
+Aug 12, 2022 11:33:46 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 769
+Aug 12, 2022 11:35:12 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 784
+Aug 12, 2022 11:35:12 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 783
+Aug 12, 2022 11:35:14 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 794
+Aug 12, 2022 11:35:37 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 851
+Aug 12, 2022 11:36:36 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 879
+Aug 12, 2022 11:36:36 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 880
+Aug 12, 2022 11:36:57 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 905
+[0m2022.08.12 11:38:25 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 11:38:25 INFO  time: compiled scala in 0.49s[0m
+Aug 12, 2022 11:38:32 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 987
+Aug 12, 2022 11:38:34 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 988
+Aug 12, 2022 11:39:00 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1007
+[0m2022.08.12 11:39:01 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 11:39:01 INFO  time: compiled scala in 0.44s[0m
+Aug 12, 2022 11:39:29 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1023
+Aug 12, 2022 11:39:30 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1030
+Aug 12, 2022 11:39:36 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1035
+Aug 12, 2022 11:39:36 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1034
+Aug 12, 2022 11:39:39 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1042
+Aug 12, 2022 11:39:46 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1055
+Aug 12, 2022 11:39:46 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1054
+Aug 12, 2022 11:39:47 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1058
+Aug 12, 2022 11:39:49 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1064
+Aug 12, 2022 11:39:53 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1075
+Aug 12, 2022 11:39:56 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1079
+Aug 12, 2022 11:39:56 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1081
+Aug 12, 2022 11:39:56 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1085
+Aug 12, 2022 11:39:57 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1091
+Aug 12, 2022 11:40:01 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1098
+Aug 12, 2022 11:40:01 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1097
+Aug 12, 2022 11:40:02 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1101
+Aug 12, 2022 11:40:07 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1107
+Aug 12, 2022 11:40:12 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1110
+[0m2022.08.12 11:41:40 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 11:41:40 INFO  time: compiled scala in 0.68s[0m
+Aug 12, 2022 11:43:39 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1148
+Aug 12, 2022 11:44:29 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1155
+Aug 12, 2022 11:44:43 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1160
+Aug 12, 2022 11:45:34 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1170
+Aug 12, 2022 11:45:35 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1175
+Aug 12, 2022 11:46:44 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1190
+Aug 12, 2022 11:46:44 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1189
+Aug 12, 2022 11:47:48 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1209
+Aug 12, 2022 11:47:49 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1215
+Aug 12, 2022 11:48:03 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1220
+Aug 12, 2022 11:48:08 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1227
+Aug 12, 2022 11:48:10 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1232
+Aug 12, 2022 11:48:52 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1243
+Aug 12, 2022 11:48:54 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1248
+Aug 12, 2022 11:48:58 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1256
+Aug 12, 2022 11:49:06 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1265
+Aug 12, 2022 11:49:10 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1274
+Aug 12, 2022 11:49:18 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1281
+Aug 12, 2022 11:49:24 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1290
+Aug 12, 2022 11:49:48 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1297
+Aug 12, 2022 11:49:50 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1308
+Aug 12, 2022 11:49:55 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1313
+Aug 12, 2022 11:49:56 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1318
+Aug 12, 2022 11:50:01 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1334
+Aug 12, 2022 11:50:01 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1337
+Aug 12, 2022 11:50:07 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1346
+Aug 12, 2022 11:50:15 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1353
+Aug 12, 2022 11:50:36 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1362
+Aug 12, 2022 11:51:27 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1372
+Aug 12, 2022 11:51:27 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1378
+Aug 12, 2022 11:51:43 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1397
+Aug 12, 2022 11:51:55 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1405
+Aug 12, 2022 11:51:56 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1410
+Aug 12, 2022 11:51:58 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1416
+Aug 12, 2022 11:52:00 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1423
+Aug 12, 2022 11:52:07 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1428
+Aug 12, 2022 11:52:19 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1434
+Aug 12, 2022 11:52:23 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1447
+Aug 12, 2022 11:52:26 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1454
+Aug 12, 2022 11:52:26 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1457
+Aug 12, 2022 11:52:29 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1471
+Aug 12, 2022 11:52:31 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1476
+Aug 12, 2022 11:52:33 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1487
+Aug 12, 2022 11:52:35 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1493
+Aug 12, 2022 11:52:37 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1506
+Aug 12, 2022 11:52:42 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1521
+Aug 12, 2022 11:52:43 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1525
+Aug 12, 2022 11:52:47 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1532
+Aug 12, 2022 11:52:53 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1542
+Aug 12, 2022 11:52:58 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1547
+Aug 12, 2022 11:53:04 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1557
+Aug 12, 2022 11:53:05 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1562
+Aug 12, 2022 11:53:06 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1570
+Aug 12, 2022 11:53:14 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1577
+Aug 12, 2022 11:53:16 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1587
+[0m2022.08.12 11:53:17 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 11:53:17 INFO  time: compiled scala in 0.46s[0m
+Aug 12, 2022 11:53:31 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1605
+Aug 12, 2022 11:53:34 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1610
+Aug 12, 2022 11:53:34 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1613
+Aug 12, 2022 11:53:36 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1619
+Aug 12, 2022 11:53:41 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1625
+Aug 12, 2022 11:53:59 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1634
+Aug 12, 2022 11:55:23 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1691
+Aug 12, 2022 11:55:23 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1690
+Aug 12, 2022 11:55:31 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1698
+[0m2022.08.12 11:55:37 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 11:55:37 INFO  time: compiled scala in 0.61s[0m
+[0m2022.08.12 11:55:49 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 11:55:49 INFO  time: compiled scala in 0.53s[0m
+Aug 12, 2022 11:56:35 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1742
+Aug 12, 2022 11:56:38 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1752
+Aug 12, 2022 11:56:47 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1762
+Aug 12, 2022 11:56:47 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1763
+Aug 12, 2022 11:56:54 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1786
+Aug 12, 2022 11:57:05 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1810
+Aug 12, 2022 11:57:05 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1814
+Aug 12, 2022 11:57:07 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1820
+Aug 12, 2022 11:57:08 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1825
+[0m2022.08.12 11:57:09 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 11:57:09 INFO  time: compiled scala in 0.66s[0m
+Aug 12, 2022 11:57:16 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1838
+Aug 12, 2022 11:57:16 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1841
+Aug 12, 2022 11:57:16 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1839
+Aug 12, 2022 11:57:17 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1843
+[0m2022.08.12 11:57:23 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 11:57:23 INFO  time: compiled scala in 0.58s[0m
+Aug 12, 2022 11:57:39 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1858
+Aug 12, 2022 11:57:44 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1866
+Aug 12, 2022 11:57:46 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1874
+Aug 12, 2022 11:58:05 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1888
+Aug 12, 2022 11:58:12 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1896
+Aug 12, 2022 11:58:17 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1918
+[0m2022.08.12 11:58:18 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 11:58:18 INFO  time: compiled scala in 0.57s[0m
+[0m2022.08.12 11:58:47 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 11:58:47 INFO  time: compiled scala in 0.53s[0m
+Aug 12, 2022 11:59:21 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1965
+Aug 12, 2022 11:59:22 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1971
+Aug 12, 2022 11:59:23 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1974
+Aug 12, 2022 11:59:25 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1979
+Aug 12, 2022 11:59:44 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1994
+[0m2022.08.12 11:59:53 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 11:59:53 INFO  time: compiled scala in 0.57s[0m
+Aug 12, 2022 12:00:09 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2018
+[0m2022.08.12 12:00:11 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 12:00:11 INFO  time: compiled scala in 0.57s[0m
+Aug 12, 2022 12:00:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2032
+Aug 12, 2022 12:00:25 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2042
+Aug 12, 2022 12:00:26 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2048
+[0m2022.08.12 12:00:30 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 12:00:30 INFO  time: compiled scala in 0.51s[0m
+[0m2022.08.12 12:01:09 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 12:01:11 INFO  time: compiled scala in 1.7s[0m
+[0m2022.08.12 12:01:51 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 12:01:53 INFO  time: compiled scala in 1.4s[0m
+[0m2022.08.12 12:02:13 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 12:02:16 WARN  there were 23 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.12 12:02:16 INFO  time: compiled scala in 2.87s[0m
+Aug 12, 2022 12:05:23 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2124
+Aug 12, 2022 12:05:49 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2135
+Aug 12, 2022 12:05:49 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2138
+Aug 12, 2022 12:05:49 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2136
+Aug 12, 2022 12:05:50 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2140
+Aug 12, 2022 12:05:55 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2145
+Aug 12, 2022 12:06:01 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2153
+Aug 12, 2022 12:06:01 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2156
+Aug 12, 2022 12:06:04 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2160
+Aug 12, 2022 12:06:04 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2162
+Aug 12, 2022 12:06:07 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint fallbackResponseError
+SEVERE: Internal error: java.lang.reflect.InvocationTargetException
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:67)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:120)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:261)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:190)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:194)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.lang.reflect.InvocationTargetException
+	at jdk.internal.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:65)
+	... 11 more
+Caused by: java.lang.IllegalArgumentException: 38 is not a valid line number, allowed [0..32]
+	at scala.meta.internal.inputs.InternalInput.lineToOffset(InternalInput.scala:37)
+	at scala.meta.internal.inputs.InternalInput.lineToOffset$(InternalInput.scala:32)
+	at scala.meta.inputs.Input$VirtualFile.lineToOffset(Input.scala:80)
+	at scala.meta.inputs.Position$Range$.apply(Position.scala:59)
+	at scala.meta.internal.mtags.MtagsEnrichments$XtensionPositionLspInverse.toMeta(MtagsEnrichments.scala:133)
+	at scala.meta.internal.parsing.Trees.$anonfun$findLastEnclosingAt$4(Trees.scala:77)
+	at scala.Option.flatMap(Option.scala:271)
+	at scala.meta.internal.parsing.Trees.findLastEnclosingAt(Trees.scala:76)
+	at scala.meta.internal.metals.codeactions.PatternMatchRefactor.contribute(PatternMatchRefactor.scala:96)
+	at scala.meta.internal.metals.CodeActionProvider$$anonfun$1.applyOrElse(CodeActionProvider.scala:62)
+	at scala.meta.internal.metals.CodeActionProvider$$anonfun$1.applyOrElse(CodeActionProvider.scala:61)
+	at scala.collection.immutable.List.collect(List.scala:323)
+	at scala.meta.internal.metals.CodeActionProvider.codeActions(CodeActionProvider.scala:61)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$codeAction$1(MetalsLanguageServer.scala:1555)
+	at scala.meta.internal.metals.CancelTokens$.future(CancelTokens.scala:38)
+	at scala.meta.internal.metals.MetalsLanguageServer.codeAction(MetalsLanguageServer.scala:1554)
+	... 15 more
+
+[0m2022.08.12 12:06:10 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 12:06:11 INFO  time: compiled scala in 1.03s[0m
+[0m2022.08.12 12:06:11 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 12:06:12 WARN  there were 9 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.12 12:06:12 INFO  time: compiled scala in 1.33s[0m
+[0m2022.08.12 12:06:24 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 12:06:26 WARN  there were 14 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.12 12:06:26 INFO  time: compiled scala in 1.83s[0m
+[0m2022.08.12 12:06:26 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 12:06:26 INFO  time: compiled scala in 0.12s[0m
+Aug 12, 2022 12:07:00 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2190
+[0m2022.08.12 12:07:34 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 12:07:36 WARN  there were 23 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.12 12:07:36 INFO  time: compiled scala in 2.5s[0m

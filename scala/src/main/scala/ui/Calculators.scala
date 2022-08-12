@@ -16,17 +16,40 @@ object CalcSolver {
   import CalcFields._
 
   trait CalcSolution {
+    // Only displayed for sub nodes, before the show button
     def beforeNode: dom.Node
-    def insideNode: dom.Node
-    def afterNode: dom.Node
+    // Displayed for subsequent nodes, and folded for sub nodes
+    def insideNode(num: Int)(wrap: Sym => Sym): dom.Node
+    // List of rules to be displayed after the inside node
+    def rules: Seq[CalcSolution]
 
-    def stringToNode(str: String, cls: String = "") =
-      makeElement("div",
-        "class" -> cls,
-        "innerHTML" ->
-          (str.replace("\\(", "<p class=\"mq-static\">")
-            .replace("\\)", "</p>"))
-      )
+    def wrapFunc(e: Sym): Sym = e
+    def wrappedInsideNode(num: Int)(wrap: Sym => Sym): org.scalajs.dom.Node = {
+    /* How the current rule is displayed is dependent on the previous
+     * rules, so `wrap` provides a way to display the expressions in
+     * the rule in terms of the previous rules For example, replacing
+     * x with u if there was previously a U-Sub.
+     * 
+     * Num indicates the number of steps listed before this one at the
+     * same level, which could be used to number the steps
+     */
+
+      // If this rule created several new integrals, list them as sub
+      // rules, but if it only created one, list it after, but at the
+      // same level as, this rule
+      if (rules.length == 1)
+        makeElement("div", "children" -> (
+          makeElement("div",
+            "class" -> "solution-step-details",
+            "children" -> Seq(insideNode(num)(wrap))
+          ) +: rules.map{r => r.wrappedInsideNode(num + 1){e => this.wrapFunc(wrap(e))}}
+        ))
+      else
+        makeElement("div",
+          "class" -> "solution-step-details",
+          "children" -> (insideNode(num)(wrap) +: rules.map(_.node))
+        )
+    }
 
     def node: dom.Node = {
       val showBtn = makeElement("button",
@@ -40,7 +63,7 @@ object CalcSolver {
 
       val details = makeElement("div",
         "class" -> "solution-step-indented",
-        "children" -> Seq(insideNode)
+        "children" -> Seq(wrappedInsideNode(0)(identity))
       )
 
       def updateHidden(expanded: Boolean) {
@@ -60,12 +83,11 @@ object CalcSolver {
         "children" -> Seq(
           beforeNode,
           showBtn, hideBtn, details,
-          makeElement("br"),
-          afterNode
         )
       )
     }
   }
+
 
   trait AsyncSolver {
     def step(): Option[Seq[CalcSolution]]
