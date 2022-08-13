@@ -223,6 +223,14 @@ object Simplify {
       SymPM( ***(e +: rest) )
   }
 
+  /// Inverse trig functions
+ sRules.+("ASin of Sin"){ ASinP(SinP('a)) }{ case (a: Sym) => a }
+ sRules.+("ACos of Cos"){ ACosP(CosP('a)) }{ case (a: Sym) => a }
+ sRules.+("ATan of Tan"){ ATanP(TanP('a)) }{ case (a: Sym) => a }
+ sRules.+("Sin of ASin"){ SinP(ASinP('a)) }{ case (a: Sym) => a }
+ sRules.+("Cos of ACos"){ CosP(ACosP('a)) }{ case (a: Sym) => a }
+ sRules.+("Tan of ATan"){ TanP(ATanP('a)) }{ case (a: Sym) => a }
+
   /// Simplifying infinities
 
   sRules.+("Even root of negative number is undefined"){

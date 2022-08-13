@@ -247,6 +247,48 @@ case class PMP(pat: Pattern = AnyP()) extends Pattern {
   }
 }
 
+case class SinP(pat: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymSin(a) => matchSeveral((a -> pat))
+    case _ => Seq[Binding]()
+  }
+}
+
+case class CosP(pat: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymCos(a) => matchSeveral((a -> pat))
+    case _ => Seq[Binding]()
+  }
+}
+
+case class TanP(pat: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymTan(a) => matchSeveral((a -> pat))
+    case _ => Seq[Binding]()
+  }
+}
+
+case class ASinP(pat: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymASin(a) => matchSeveral((a -> pat))
+    case _ => Seq[Binding]()
+  }
+}
+
+case class ACosP(pat: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymACos(a) => matchSeveral((a -> pat))
+    case _ => Seq[Binding]()
+  }
+}
+
+case class ATanP(pat: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymATan(a) => matchSeveral((a -> pat))
+    case _ => Seq[Binding]()
+  }
+}
+
 case class EquationP(l: Pattern = AnyP(), r: Pattern = AnyP()) extends Pattern {
   def matches(e: Sym): Seq[Binding] = e match {
     case SymEquation(a, b) => matchSeveral((a -> l), (b -> r))
