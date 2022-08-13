@@ -150,6 +150,11 @@ object Latex {
     }
     case SymSin(expr) => s"\\sin ${wrappedLatex(expr)}"
     case SymCos(expr) => s"\\cos ${wrappedLatex(expr)}"
+    case SymTan(expr) => s"\\tan ${wrappedLatex(expr)}"
+    case SymASin(expr) => s"\\asin ${wrappedLatex(expr)}"
+    case SymACos(expr) => s"\\acos ${wrappedLatex(expr)}"
+    case SymATan(expr) => s"\\atan ${wrappedLatex(expr)}"
+
     case SymPM(expr) => s"\\pm ${wrappedLatex(expr)}"
 
     case SymEquation(l, r) => s"${toLatex(l)} = ${toLatex(r)}"
@@ -455,7 +460,6 @@ case class SymSin(expr: Sym) extends SymOp {
   override def toString = f"sin($expr)"
   lazy val exprs = Seq(expr)
   def instance(args: Sym*) = SymSin(args.head)
-
   def operation(vs: Double*) = Math.sin(vs.head)
 }
 
@@ -463,6 +467,33 @@ case class SymCos(expr: Sym) extends SymOp {
   override def toString = f"cos($expr)"
   lazy val exprs = Seq(expr)
   def instance(args: Sym*) = SymCos(args.head)
-
   def operation(vs: Double*) = Math.cos(vs.head)
+}
+
+case class SymTan(expr: Sym) extends SymOp {
+  override def toString = f"tan($expr)"
+  lazy val exprs = Seq(expr)
+  def instance(args: Sym*) = SymTan(args.head)
+  def operation(vs: Double*) = Math.tan(vs.head)
+}
+
+case class SymASin(expr: Sym) extends SymOp {
+  override def toString = f"asin($expr)"
+  lazy val exprs = Seq(expr)
+  def instance(args: Sym*) = SymASin(args.head)
+  def operation(vs: Double*) = Math.asin(vs.head)
+}
+
+case class SymACos(expr: Sym) extends SymOp {
+  override def toString = f"acos($expr)"
+  lazy val exprs = Seq(expr)
+  def instance(args: Sym*) = SymACos(args.head)
+  def operation(vs: Double*) = Math.acos(vs.head)
+}
+
+case class SymATan(expr: Sym) extends SymOp {
+  override def toString = f"tan($expr)"
+  lazy val exprs = Seq(expr)
+  def instance(args: Sym*) = SymATan(args.head)
+  def operation(vs: Double*) = Math.atan(vs.head)
 }
