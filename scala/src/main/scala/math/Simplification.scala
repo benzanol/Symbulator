@@ -9,7 +9,7 @@ import sympany.Sym._
 import sympany.Pattern._
 
 object Simplify {
-  val sRules = new Rules()
+  val sRules = new Rules[Sym]()
   
   def simplify(expr: Sym): Sym = {
     //println("Simplify", expr)

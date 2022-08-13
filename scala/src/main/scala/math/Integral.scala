@@ -158,7 +158,7 @@ object IntegralPatterns {
     }
   }
   
-  val iRules = new Rules()
+  val iRules = new Rules[Sym]()
 
   iRules.+("Constant"){ noxP('c) }{ case (c: Sym) => **(c, X) }
 

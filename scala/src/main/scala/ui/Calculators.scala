@@ -161,7 +161,7 @@ object CalcSolver {
 
   class AsyncZeroSolver(expr: Sym) extends AsyncSolver {
     private val solver = new Zero.ZeroSolver(
-      expr.replaceExpr(SymVar('x), Sym.X)
+      SymEquation(expr.replaceExpr(SymVar('x), Sym.X), 0)
     )
 
     var allZeros = Seq[Zero.ZeroRule]()

@@ -363,63 +363,42 @@ case class AsPowP(base: Pattern = AnyP(), exp: Pattern = AnyP()) extends Pattern
 }
 
 /// Rules
-case class Rule(name: String, p: Pattern, f: Any => Sym) {
-  def first(e: Sym): Option[Sym] =
+case class Rule[T](name: String, p: Pattern, f: Any => T) {
+  def first(e: Sym): Option[T] =
     try {
       LazyList(p.matches(e):_*)
-        .map(callWithBind[Sym](_)(f))
+        .map(callWithBind[T](_)(f))
         .find(_ != e)
     } catch {
       case err: Throwable => println(f"Rule `$name` threw error `$err`") ; None
     }
   
-  def all(e: Sym): Seq[Sym] =
+  def all(e: Sym): Seq[T] =
     try {
       p.matches(e)
-        .map(callWithBind[Sym](_)(f))
+        .map(callWithBind[T](_)(f))
         .filter(_ != e)
     } catch {
       case err: Throwable => println(f"Rule `$name` threw error `$err`") ; Nil
     }
 }
 
-class Rules() {
-  private var rules = List[Rule]()
+class Rules[T]() {
+  private var rules = Seq[Rule[T]]()
 
-  def +(n: String)(p: Pattern)(f: Any => Sym) =
-    rules :+= new Rule(n, p, f)
+  def +(n: String)(p: Pattern)(f: Any => T) =
+    rules :+= new Rule[T](n, p, f)
 
-  def first(e: Sym): Option[Sym] =
+  def first(e: Sym): Option[T] =
     LazyList(rules:_*).flatMap{r => r.first(e) match {
       case None => None
       //case Some(a) => println(s"${r.name} -> $a") ; Some(a)
       case Some(a) => Some(a)
     }}.headOption
   
-  def all(e: Sym): Seq[Sym] =
-    rules.foldLeft(Seq[Sym]()){ (acc, r) => acc ++ r.all(e) }
+  def all(e: Sym): Seq[T] = rules.flatMap(_.all(e))
+
+  def allWithLabels(e: Sym): Seq[(T, Rule[T])] =
+    for (rule <- rules ; sol <- rule.all(e)) yield (sol, rule)
 }
 
-
-case class SeqRule(name: String, p: Pattern, f: Any => Seq[Sym]) {
-  def all(e: Sym): Seq[Sym] =
-    try {
-      p.matches(e)
-        .flatMap(callWithBind[Seq[Sym]](_)(f))
-        .filter(_ != e)
-    } catch {
-      case err: Throwable => println(f"Rule `$name` threw error `$err`") ; Nil
-    }
-}
-
-class SeqRules() {
-  private var rules = List[SeqRule]()
-
-  def +(n: String)(p: Pattern)(f: Any => Seq[Sym]) =
-    rules :+= new SeqRule(n, p, f)
-
-  def all(e: Sym): Seq[Sym] = rules.flatMap(_.all(e))
-
-  def allWithLabels(e: Sym): Seq[(Sym, String)] =
-    for (rule <- rules ; sol <- rule.all(e)) yield (sol, rule.name)
-}

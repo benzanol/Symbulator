@@ -1,3 +1,8 @@
+body {
+    /* background-color: black; */
+    /* color: white !important; */
+}
+
 /* Useful things */
 button {
     background-color: transparent;
@@ -19,7 +24,7 @@ button {
 }
 
 #page-container {
-    color: black;
+    /* color: black; */
     display: flex;
     height: 95vh;
 }

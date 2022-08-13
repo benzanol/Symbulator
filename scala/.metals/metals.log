@@ -18637,3 +18637,269 @@ WARNING: Unmatched cancel notification for request id 11992
 [0m2022.08.12 20:17:44 INFO  compiling scala (1 scala source)[0m
 [0m2022.08.12 20:17:46 WARN  there were 33 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
 [0m2022.08.12 20:17:46 INFO  time: compiled scala in 1.41s[0m
+Aug 12, 2022 8:21:51 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12028
+Aug 12, 2022 8:21:54 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12036
+Aug 12, 2022 8:22:02 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12044
+Aug 12, 2022 8:22:03 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12047
+Aug 12, 2022 8:22:13 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12060
+[0m2022.08.12 20:22:26 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 20:22:27 WARN  there were 33 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.12 20:22:27 INFO  time: compiled scala in 1.39s[0m
+Aug 12, 2022 8:23:40 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12089
+Aug 12, 2022 8:23:40 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12088
+[0m2022.08.12 20:23:42 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 20:23:43 WARN  there were 33 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.12 20:23:43 INFO  time: compiled scala in 1.51s[0m
+Aug 12, 2022 8:23:57 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12096
+Aug 12, 2022 8:24:03 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12101
+Aug 12, 2022 8:24:03 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12103
+Aug 12, 2022 8:24:04 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12107
+Aug 12, 2022 8:24:04 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12106
+Aug 12, 2022 8:24:05 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12110
+Aug 12, 2022 8:24:05 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12109
+[0m2022.08.12 20:24:06 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 20:24:07 WARN  there were 33 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.12 20:24:07 INFO  time: compiled scala in 1.32s[0m
+Aug 12, 2022 8:44:47 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12166
+Aug 12, 2022 8:44:47 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12174
+Aug 12, 2022 8:44:49 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12179
+Aug 12, 2022 8:45:26 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12241
+Aug 12, 2022 8:45:26 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12240
+Aug 12, 2022 8:48:34 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12343
+[0m2022.08.12 20:50:19 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 20:50:19 INFO  time: compiled scala in 0.32s[0m
+[0m2022.08.12 20:50:48 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 20:50:48 INFO  time: compiled scala in 0.3s[0m
+[0m2022.08.12 20:51:17 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 20:51:20 WARN  there were four deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.12 20:51:20 INFO  time: compiled scala in 2.87s[0m
+[0m2022.08.12 20:51:20 INFO  compiling scala (4 scala sources)[0m
+[0m2022.08.12 20:51:20 INFO  time: compiled scala in 0.25s[0m
+Aug 12, 2022 8:52:14 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12474
+Aug 12, 2022 8:52:24 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12490
+Aug 12, 2022 8:52:25 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12495
+[0m2022.08.12 20:52:32 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 20:52:32 INFO  time: compiled scala in 0.43s[0m
+[0m2022.08.12 20:54:06 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 20:54:06 INFO  time: compiled scala in 0.45s[0m
+Aug 12, 2022 8:55:16 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12553
+[0m2022.08.12 20:55:18 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 20:55:18 INFO  time: compiled scala in 0.39s[0m
+[0m2022.08.12 20:55:47 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 20:55:47 INFO  time: compiled scala in 0.38s[0m
+Aug 12, 2022 8:56:25 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12585
+Aug 12, 2022 8:56:31 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12600
+Aug 12, 2022 8:56:51 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12623
+Aug 12, 2022 8:56:51 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12622
+[0m2022.08.12 20:57:03 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 20:57:03 INFO  time: compiled scala in 0.36s[0m
+Aug 12, 2022 8:57:48 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12673
+Aug 12, 2022 8:57:54 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12684
+[0m2022.08.12 20:58:24 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 20:58:24 INFO  time: compiled scala in 0.35s[0m
+Aug 12, 2022 8:59:00 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12743
+Aug 12, 2022 8:59:08 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12752
+Aug 12, 2022 8:59:09 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12755
+Aug 12, 2022 8:59:49 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12771
+Aug 12, 2022 8:59:50 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12776
+Aug 12, 2022 9:00:12 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12821
+Aug 12, 2022 9:00:12 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12820
+Aug 12, 2022 9:00:12 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12824
+Aug 12, 2022 9:00:12 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12823
+Aug 12, 2022 9:00:23 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12850
+Aug 12, 2022 9:00:23 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12849
+Aug 12, 2022 9:00:41 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12868
+Aug 12, 2022 9:00:44 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12876
+Aug 12, 2022 9:00:49 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12885
+Aug 12, 2022 9:00:50 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12889
+Aug 12, 2022 9:00:50 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12888
+Aug 12, 2022 9:00:53 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12894
+Aug 12, 2022 9:01:03 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12909
+Aug 12, 2022 9:01:05 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12915
+Aug 12, 2022 9:01:30 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12933
+Aug 12, 2022 9:01:40 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12956
+Aug 12, 2022 9:01:40 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12958
+[0m2022.08.12 21:01:46 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 21:01:46 INFO  time: compiled scala in 0.38s[0m
+[0m2022.08.12 21:01:55 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 21:01:55 INFO  time: compiled scala in 0.38s[0m
+Aug 12, 2022 9:02:05 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12984
+Aug 12, 2022 9:02:24 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13003
+Aug 12, 2022 9:02:28 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13013
+Aug 12, 2022 9:02:30 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13018
+Aug 12, 2022 9:02:44 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13033
+[0m2022.08.12 21:02:49 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 21:02:49 INFO  time: compiled scala in 0.39s[0m
+Aug 12, 2022 9:04:11 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13079
+Aug 12, 2022 9:04:13 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13085
+Aug 12, 2022 9:06:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13128
+Aug 12, 2022 9:06:33 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13139
+Aug 12, 2022 9:06:39 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13143
+Aug 12, 2022 9:06:51 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13172
+[0m2022.08.12 21:07:35 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 21:07:35 INFO  time: compiled scala in 0.3s[0m
+[0m2022.08.12 21:07:53 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 21:07:56 WARN  there were 32 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.12 21:07:56 INFO  time: compiled scala in 2.71s[0m
+[0m2022.08.12 21:07:56 INFO  compiling scala (5 scala sources)[0m
+[0m2022.08.12 21:07:56 INFO  time: compiled scala in 0.22s[0m
+[0m2022.08.12 21:08:54 INFO  compiling scala (3 scala sources)[0m
+[0m2022.08.12 21:08:57 WARN  there were 122 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.12 21:08:57 INFO  time: compiled scala in 2.88s[0m
+[0m2022.08.12 21:08:57 INFO  compiling scala (3 scala sources)[0m
+[0m2022.08.12 21:08:57 INFO  time: compiled scala in 0.13s[0m
+Aug 12, 2022 9:09:43 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13292
+Aug 12, 2022 9:09:43 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13291
+Aug 12, 2022 9:09:45 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13300
+[0m2022.08.12 21:09:46 INFO  compiling scala (4 scala sources)[0m
+[0m2022.08.12 21:09:50 WARN  there were 137 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.12 21:09:50 INFO  time: compiled scala in 3.49s[0m
+[0m2022.08.12 21:09:50 INFO  compiling scala (3 scala sources)[0m
+[0m2022.08.12 21:09:50 INFO  time: compiled scala in 0.17s[0m
+[0m2022.08.12 21:10:48 INFO  compiling scala (5 scala sources)[0m
+[0m2022.08.12 21:10:52 WARN  there were 146 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.12 21:10:52 INFO  time: compiled scala in 3.85s[0m
+[0m2022.08.12 21:10:52 INFO  compiling scala (2 scala sources)[0m
+[0m2022.08.12 21:10:52 WARN  there were 21 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.12 21:10:52 INFO  time: compiled scala in 0.54s[0m
+Aug 12, 2022 9:16:01 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13386
+Aug 12, 2022 9:16:41 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13406
+Aug 12, 2022 9:16:43 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13414
+Aug 12, 2022 9:16:44 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13422
+Aug 12, 2022 9:17:36 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13457
+Aug 12, 2022 9:18:43 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13502
+Aug 12, 2022 9:18:46 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13516
+Aug 12, 2022 9:19:05 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13537
+Aug 12, 2022 9:19:06 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13543
+Aug 12, 2022 9:20:12 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13567
+[0m2022.08.12 21:20:43 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 21:20:43 INFO  time: compiled scala in 0.17s[0m
+[0m2022.08.12 21:20:54 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 21:20:54 INFO  time: compiled scala in 0.24s[0m
+[0m2022.08.12 21:21:00 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 21:21:00 INFO  time: compiled scala in 0.21s[0m
+Aug 12, 2022 9:21:13 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13596
+Aug 12, 2022 9:21:35 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13621
+Aug 12, 2022 9:21:35 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13620
+Aug 12, 2022 9:21:55 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13643
+Aug 12, 2022 9:21:56 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13651
+Aug 12, 2022 9:21:56 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13652
+Aug 12, 2022 9:22:31 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13706
+Aug 12, 2022 9:22:32 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13714
+Aug 12, 2022 9:23:36 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13726
+Aug 12, 2022 9:23:47 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13737
+Aug 12, 2022 9:24:07 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13763
+Aug 12, 2022 9:24:07 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13762
+Aug 12, 2022 9:24:14 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13784
+Aug 12, 2022 9:24:14 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13783
+Aug 12, 2022 9:24:18 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13788
+[0m2022.08.12 21:25:26 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 21:25:26 INFO  time: compiled scala in 0.25s[0m
+Aug 12, 2022 9:26:38 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13842
+Aug 12, 2022 9:26:38 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13841
+Aug 12, 2022 9:26:44 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13855
+Aug 12, 2022 9:26:46 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13862
+[0m2022.08.12 21:26:59 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 21:26:59 INFO  time: compiled scala in 0.27s[0m
+Aug 12, 2022 9:27:22 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13892
+Aug 12, 2022 9:27:22 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13891
+[0m2022.08.12 21:27:23 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.12 21:27:25 WARN  there were 28 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.12 21:27:25 INFO  time: compiled scala in 1.56s[0m
