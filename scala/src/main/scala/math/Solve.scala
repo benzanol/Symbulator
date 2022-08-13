@@ -234,6 +234,25 @@ object ZeroRules {
     EquationP(PowP('b, hasxP('c)), 'a)
   }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation('c, SymLog('a, 'b))) }
 
+  //// Trig integrals
+  rules.+("Use ASin to cancel out of Sin"){
+    EquationP(SinP('a), 'r)
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymASin(r)))) }
+  rules.+("Use ACos to cancel out of Cos"){
+    EquationP(CosP('a), 'r)
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymACos(r)))) }
+  rules.+("Use ATan to cancel out of Tan"){
+    EquationP(TanP('a), 'r)
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymATan(r)))) }
+  rules.+("Use Sin to cancel out of ASin"){
+    EquationP(ASinP('a), 'r)
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymSin (r)))) }
+  rules.+("Use Cos to cancel out of ACos"){
+    EquationP(ACosP('a), 'r)
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymCos (r)))) }
+  rules.+("Use Tan to cancel out of ATan"){
+    EquationP(ATanP('a), 'r)
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymTan (r)))) }
 
 
   ///////////// Deal with this later
@@ -266,5 +285,4 @@ object ZeroRules {
       } else Nil
   }
 }
-
 

@@ -245,6 +245,12 @@ object CalcFields {
       latex = newLatex
       expr = Parse.parseLatex(newLatex)
 
+      def containsOtherVars(e: Sym): Boolean = e match {
+        case SymVar(a) if !Seq('x, 'y, X.symbol).contains(a) => true
+        case other => other.exprs.find(containsOtherVars).isDefined
+      }
+      if (expr.isDefined && containsOtherVars(expr.get)) expr = None
+
       Calculators.tickCalculator()
     }
   }

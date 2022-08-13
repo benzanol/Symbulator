@@ -151,9 +151,9 @@ object Latex {
     case SymSin(expr) => s"\\sin ${wrappedLatex(expr)}"
     case SymCos(expr) => s"\\cos ${wrappedLatex(expr)}"
     case SymTan(expr) => s"\\tan ${wrappedLatex(expr)}"
-    case SymASin(expr) => s"\\asin ${wrappedLatex(expr)}"
-    case SymACos(expr) => s"\\acos ${wrappedLatex(expr)}"
-    case SymATan(expr) => s"\\atan ${wrappedLatex(expr)}"
+    case SymASin(expr) => s"\\sin^{-1} ${wrappedLatex(expr)}"
+    case SymACos(expr) => s"\\cos^{-1} ${wrappedLatex(expr)}"
+    case SymATan(expr) => s"\\tan^{-1} ${wrappedLatex(expr)}"
 
     case SymPM(expr) => s"\\pm ${wrappedLatex(expr)}"
 
