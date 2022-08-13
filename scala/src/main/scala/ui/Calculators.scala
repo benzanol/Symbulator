@@ -164,12 +164,15 @@ object CalcSolver {
       expr.replaceExpr(SymVar('x), Sym.X)
     )
 
-    var allZeros = Set[Zero.ZeroRule]()
+    var allZeros = Seq[Zero.ZeroRule]()
 
     def step(): (Seq[Zero.ZeroRule], Boolean) = {
       val stepped = solver.step()
-      allZeros ++= stepped._1
-      return (allZeros.toSeq, stepped._2)
+
+      for (z <- stepped._1 if allZeros.find(_.endResult.get == z.endResult.get).isEmpty)
+        allZeros :+= z
+
+      return (allZeros, stepped._2)
     }
   }
 }
@@ -282,6 +285,9 @@ object CalcFields {
       val stepped = solver.get.step()
       solving = stepped._2
 
+      // Redraw the node after finished solving
+      if (!solving) updateNode()
+
       // If a solution was found, update the html view
       if (stepped._1 != solutions) {
         solutions = stepped._1
@@ -304,9 +310,7 @@ object CalcFields {
         else makeElement("div",
           "id" -> "solutions",
           "children" -> (
-            solutions.flatMap{sol => Seq(
-              makeElement("p", "innerText" -> ","), makeElement("br"), sol.node
-            )}.drop(2) // Remove the first comma and newline
+            solutions.map(_.node)
               ++ Option.when(solving)(makeElement("p", "innerText" -> "Solving...")).toSeq
           )
         )

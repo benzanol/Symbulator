@@ -43,14 +43,14 @@ object Zero {
     )
   }
 
-  class FinalZeroRule(expr: Sym, zero: Sym) extends ZeroRule {
-    def ruleDescription = f"When \\(${expr.toLatex} = 0\\), \\(x = ${zero.toLatex}\\)"
+  class FinalZeroRule(expr: Sym, zero: Sym, description: String) extends ZeroRule {
+    def ruleDescription = f"$description<br/>\\(x = ${zero.toLatex}\\)"
     def endResult = Some(zero)
     def rules = Nil
   }
 
   class IntermediateZeroRule(val expr1: Sym, val expr2: Sym, val description: String) extends ZeroRule {
-    def ruleDescription = f"$description<br/>\\(${expr1} \\rightarrow ${expr2}\\)"
+    def ruleDescription = f"$description<br/>\\(${expr1.toLatex} \\rightarrow ${expr2.toLatex}\\)"
     def endResult = rules.headOption.flatMap(_.endResult)
 
     // Each intermediate zero rule in a solution will have exactly 1
@@ -64,21 +64,29 @@ object Zero {
     }
   }
 
+  def oppositeExpression(e: Sym): Sym = e match {
+    case SymEquation(l, r) => SymEquation(r, l)
+    case e => simplify(**(-1, e))
+  }
 
   class ZeroSolver(val expr: Sym, history: mutable.Set[Sym] = mutable.Set[Sym]()) {
-    var zeros: Set[ZeroRule] =
-      ZeroPatterns.basicZeros(expr).map{ z => new FinalZeroRule(expr, z) }.toSet
+    history.addAll(Seq(expr, oppositeExpression(expr)))
+
+    var zeros: Seq[ZeroRule] =
+      ZeroPatterns.basicZeros(expr)
+        .map{ case (z: Sym, d: String) => new FinalZeroRule(expr, z, d) }
 
     var queue: Seq[(IntermediateZeroRule, ZeroSolver)] = Nil
 
     // Index as -1 indicates that the queue has not yet been generated
     var index = -1
 
-    def step(): (Set[ZeroRule], Boolean) =
-      if (queue.isEmpty && (index != -1 || !zeros.isEmpty)) (zeros, true)
+    def step(): (Seq[ZeroRule], Boolean) =
+      if (queue.isEmpty && (index != -1 || !zeros.isEmpty)) (zeros, false)
       else if (index == -1) {
         // Make the queue all possible rules that aren't already in
         // the history, pairing each with its own solver
+
         queue = ZeroRules.allRules(expr)
           .filter{ r => !history.contains(r.expr2) }
           .map{ r => (r, new ZeroSolver(r.expr2, history)) }
@@ -86,11 +94,14 @@ object Zero {
         // Add the new rules to the history
         history.addAll(queue.map(_._1.expr2))
 
+        // Add negatives/reverses to prevent duplicate rules
+        history.addAll(queue.map(_._1.expr2).map(oppositeExpression))
+
         // Indicate that the queue has now been created
         index = 0
 
         // Don't return anything of interest yet
-        (Set(), false)
+        (Nil, true)
 
       } else {
         val next = queue(index)
@@ -111,20 +122,20 @@ object Zero {
 }
 
 object ZeroPatterns {
-  def basicZeros(e: Sym): Seq[Sym] = (e match {
-    case SymEquation(l, r) if l == X && noX(r) => Seq(r)
-    case SymEquation(l, r) => zRules.all(simplify(++(l, **(-1, r))))
-    case e => zRules.all(simplify(e))
-  }).filter(_.isFinite)
+  def basicZeros(e: Sym): Seq[(Sym, String)] = (e match {
+    case SymEquation(l, r) if l == X && noX(r) => Seq(r -> "Identity")
+    case SymEquation(l, r) => zRules.allWithLabels(simplify(++(l, **(-1, r))))
+    case e => zRules.allWithLabels(simplify(e))
+  }).filter(_._1.isFinite)
 
   // Rules that will always result in a solution
   val zRules = new SeqRules()
 
-  zRules.+("x^p => x = 0 where p != 1"){
+  zRules.+("When \\(x^p = 0\\), \\(x = 0\\) unless \\(p = 0\\)"){
     AsPowP(XP, noxP('p))
   }{ case (p: Sym) => if (p == SymInt(0)) Nil else Seq(0) }
 
-  zRules.+("Quadratic formula"){
+  zRules.+("Quadratic formula:<br/>\\(x=\\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}\\)"){
     SumP(
       @?('as) @@ Repeat(AsProdP(PowP(XP, =#?(2)), Repeat(noxP())), min=1), // Any number of a*x^2
       @?('bs) @@ Repeat(AsProdP(XP, Repeat(noxP()))), // Any number of b*x
@@ -133,8 +144,6 @@ object ZeroPatterns {
   }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
       Seq(quadraticFormula(aS, bS, cS))
   }
-
-
   def quadraticFormula(aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]): Sym = {
     val List(a, b, c) = List(aS, bS, cS).map{ es: Seq[Sym] =>
       val realEs = es.map(_ match {
@@ -180,39 +189,59 @@ object ZeroPatterns {
 object ZeroRules {
   import Zero._
 
-  def allRules(e: Sym): Seq[IntermediateZeroRule] =
-    rules.allWithLabels(e).map{ case (z, str) => new IntermediateZeroRule(e, z, str) }
+  def allRules(e: Sym): Seq[IntermediateZeroRule] = {
+    val out = rules.allWithLabels(e)
+    //println(f"IN = $e \nOUT=$out")
+    return out.map{ case (z, str) =>
+      new IntermediateZeroRule(e, simplify(z), str)
+    }
+  }
 
   val rules = new SeqRules()
 
+  //// Equation -> Expression
   rules.+("The solution to an equation is the zero of one side minus the other."){
-    @?('whole) @@ EquationP(@?('l), @?('r))
-  }{ case (l: Sym, r: Sym, whole: Sym) =>
-      Seq( simplify(++(l, **(r, S(-1)))) )
+    EquationP(@?('l), @?('r))
+  }{ case (l: Sym, r: Sym) =>
+      Seq( simplify(++(l, **(r, -1))) )
   }
 
-  rules.+("f(x)^a = 0 => f(x) = 0"){
-    PowP('a, 'c @@ ConstP())
-  }{ case (a: Sym, c: SymConstant) =>
-      if (c.constant < 0) Nil
-      else Seq(a)
+  //// Expression -> Equation
+  rules.+("Subtract addends from both sides of an equation"){
+    SumP('es @@ __*)
+  }{ case (es: Seq[Sym]) =>
+      for (i <- 0 until es.length if hasX(es(i)))
+      yield SymEquation(es(i), **(-1, +++(es.take(i) ++ es.drop(i + 1))))
   }
 
+
+  //// Control rules
   rules.+("Zero of a product is the zeros of the factors."){
     ProdP('es @@ __*) }{ case es: Seq[Sym] => es }
 
   rules.+("Plus Minus"){ PMP(@?('e)) }{ case e: Sym => Seq(e, **(-1, e)) }
 
-  rules.+("f(x)^a + b = 0 => f(x) + b^1/a = 0"){
-    SumP(PowP(hasxP('a), 'p @@ ConstP()), 'r @@ Repeat(noxP()))
-  }{
-    case (a: Sym, p: SymInt, r: Seq[Sym]) if (p.toInt % 2 == 0) =>
-      Seq(++(a, SymPM(^(**(+++(r), -1), ^(p, -1)))).pipe(simplify))
 
-    case (a: Sym, p: SymConstant, r: Seq[Sym]) =>
-      Seq(++(a, **(-1, ^(**(+++(r), -1), ^(p, -1)))).pipe(simplify))
-  }
+  //// Inverse expressions
+  rules.+("Cancel out log by using it as an exponent."){
+    EquationP(LogP(hasxP('a), 'b), 'c)
+  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(a, ^(b, c))) }
 
+  rules.+("Get the base of a log by using a root."){
+    EquationP(LogP('a, hasxP('b)), 'c)
+  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(b, ^(a, ^(c, -1)))) }
+
+  rules.+("Cancel out a power using a root."){
+    EquationP(PowP(hasxP('b), 'c), 'a)
+  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(b, ^(a, ^(c, -1)))) }
+
+  rules.+("Cancel out an exponential using a log."){
+    EquationP(PowP('b, hasxP('c)), 'a)
+  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation('c, SymLog('a, 'b))) }
+
+
+
+  ///////////// Deal with this later
   rules.+("If log x = 0, x = 1"){
     LogP(@?('a) @@ hasxP(), __)
   }{ case a: Sym => Seq( ++(a, S(-1)) ) }
