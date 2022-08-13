@@ -174,11 +174,13 @@ object CalcSolver {
       // and who aren't approximately equal to any of the existing
       // approximations
       for (z <- stepped._1)
-        if (allZeros.find(_.endResult.get == z.endResult.get).isEmpty)
-          if (z.endResult.get.expanded.map(_.approx()).find(approxes.contains(_)).isEmpty) {
+        if (allZeros.find(_.endResult.get == z.endResult.get).isEmpty) {
+          val apps = z.endResult.get.expanded.map(_.approx())
+          if (apps.find(!_.isFinite).isEmpty && apps.find(approxes.contains(_)).isEmpty) {
             allZeros :+= z
             approxes ++= z.endResult.get.expanded.map(_.approx())
           }
+        }
 
       return (allZeros, stepped._2)
     }
