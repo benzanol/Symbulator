@@ -169,6 +169,7 @@ object CalcSolver {
     def step(): (Seq[Zero.ZeroRule], Boolean) = {
       val stepped = solver.step()
 
+      // Only add zeros who's end results are not already in the list
       for (z <- stepped._1 if allZeros.find(_.endResult.get == z.endResult.get).isEmpty)
         allZeros :+= z
 

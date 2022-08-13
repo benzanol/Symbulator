@@ -66,6 +66,7 @@ object Zero {
     }
   }
 
+
   def oppositeExpression(e: Eqn): Eqn = SymEquation(e.right, e.left)
 
   class ZeroSolver(val expr: Eqn, history: mutable.Set[Eqn] = mutable.Set[Eqn]()) {
@@ -119,9 +120,11 @@ object Zero {
 
 object ZeroPatterns {
   import Zero._
-  def basicZeros(e: Eqn): Seq[FinalZeroRule] =
-    for ((zs, r) <- zRules.allWithLabels(simplify(e)) ; z <- zs)
-    yield new FinalZeroRule(e, simplify(z), r.name)
+  def basicZeros(eqn: Eqn): Seq[FinalZeroRule] =
+    if (eqn.right != SymInt(0)) Nil else {
+      for ((zs, r) <- zRules.allWithLabels(simplify(eqn.left)) ; z <- zs)
+      yield new FinalZeroRule(eqn, simplify(z), r.name)
+    }
 
   // Rules that will always result in a solution
   val zRules = new Rules[Seq[Sym]]()
@@ -195,7 +198,8 @@ object ZeroRules {
   rules.+("The solution to an equation is the zero of one side minus the other."){
     EquationP(@?('l), @?('r))
   }{ case (l: Sym, r: Sym) =>
-      Seq( SymEquation(simplify(++(l, **(r, -1))), 0) )
+      if (l == SymInt(0) || r == SymInt(0)) Nil
+      else Seq( SymEquation(simplify(++(l, **(r, -1))), 0) )
   }
 
   //// Expression -> Equation
