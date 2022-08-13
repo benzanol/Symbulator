@@ -89,10 +89,6 @@ object Integral {
       if (solution.isDefined) Nil
       else IntegralRules.allRules(expr).map(_ -> None)
 
-    //println("Integral: " + expr.toString)
-    //if (solution.isDefined) println("  Solution: " + solution.get.get.toString)
-    //else for (r <- rules) println("  Rule: " + r._1.toString + "\n  Now: " + r._1.forward.toString)
-
     def step(): Option[Option[IntegralRule]] = {
       if (solution.isDefined) {}
       else if (rules.isEmpty) solution = Some(None)

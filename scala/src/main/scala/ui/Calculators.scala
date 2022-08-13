@@ -165,13 +165,20 @@ object CalcSolver {
     )
 
     var allZeros = Seq[Zero.ZeroRule]()
+    var approxes = Set[Double]()
 
     def step(): (Seq[Zero.ZeroRule], Boolean) = {
       val stepped = solver.step()
 
-      // Only add zeros who's end results are not already in the list
-      for (z <- stepped._1 if allZeros.find(_.endResult.get == z.endResult.get).isEmpty)
-        allZeros :+= z
+      // Only add zeros who's end results are not already in the list,
+      // and who aren't approximately equal to any of the existing
+      // approximations
+      for (z <- stepped._1)
+        if (allZeros.find(_.endResult.get == z.endResult.get).isEmpty)
+          if (z.endResult.get.expanded.map(_.approx()).find(approxes.contains(_)).isEmpty) {
+            allZeros :+= z
+            approxes ++= z.endResult.get.expanded.map(_.approx())
+          }
 
       return (allZeros, stepped._2)
     }
@@ -187,9 +194,6 @@ object CalcFields {
 
     def update() {
       for (f <- fields) f.update(this)
-
-      //println(fields(0).asInstanceOf[EquationField].expr)
-      //println(fields(1).asInstanceOf[ResultField].exprs)
 
       Graph.setGraphs(
         fields.flatMap(_.graphs),

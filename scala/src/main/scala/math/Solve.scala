@@ -14,7 +14,6 @@ import sympany.Pattern._
 import org.scalajs.dom.Node
 
 
-
 object Zero {
   import ui.CalcSolver.CalcSolution
   import JsUtils._
@@ -120,25 +119,27 @@ object Zero {
 
 object ZeroPatterns {
   import Zero._
+
   def basicZeros(eqn: Eqn): Seq[FinalZeroRule] =
-    if (eqn.right != SymInt(0)) Nil else {
-      for ((zs, r) <- zRules.allWithLabels(simplify(eqn.left)) ; z <- zs)
-      yield new FinalZeroRule(eqn, simplify(z), r.name)
-    }
+    for ((zs, r) <- rules.allWithLabels(simplify(eqn)) ; z <- zs)
+    yield new FinalZeroRule(eqn, simplify(z), r.name)
+
 
   // Rules that will always result in a solution
-  val zRules = new Rules[Seq[Sym]]()
+  private val rules = new Rules[Seq[Sym]]()
 
-  zRules.+("When \\(x^p = 0\\), \\(x = 0\\) unless \\(p = 0\\)"){
-    AsPowP(XP, noxP('p))
+  rules.+("Identity"){ EquationP(XP, noxP('a)) }{ case (a: Sym) => Seq(a) }
+
+  rules.+("When \\(x^p = 0\\), \\(x = 0\\) unless \\(p = 0\\)"){
+    EquationP(AsPowP(XP, noxP('p)), =?(0))
   }{ case (p: Sym) => if (p == SymInt(0)) Nil else Seq(0) }
 
-  zRules.+("Quadratic formula:<br/>\\(x=\\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}\\)"){
-    SumP(
+  rules.+("Quadratic formula:<br/>\\(x=\\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}\\)"){
+    EquationP(SumP(
       @?('as) @@ Repeat(AsProdP(PowP(XP, =#?(2)), Repeat(noxP())), min=1), // Any number of a*x^2
       @?('bs) @@ Repeat(AsProdP(XP, Repeat(noxP()))), // Any number of b*x
       @?('cs) @@ Repeat(noxP(), min=1) // Any number of c
-    )
+    ), =?(0))
   }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>
       Seq(quadraticFormula(aS, bS, cS))
   }
@@ -155,7 +156,7 @@ object ZeroPatterns {
   }
 
   /*
-   zRules.+("Cubic formula"){
+   rules.+("Cubic formula"){
    SumP(
    @?('as) @@ Repeat(AsProdP(PowP(XP, =#?(3)), Repeat(noxP())), min=1), // Any number of a*x^3
    @?('bs) @@ Repeat(AsProdP(PowP(XP, =#?(2)), Repeat(noxP()))), // Any number of a*x^2
@@ -188,7 +189,7 @@ object ZeroRules {
   import Zero._
 
   def allRules(orig: Eqn): Seq[IntermediateZeroRule] = {
-    return for ((es, r) <- rules.allWithLabels(orig) ; e <- es)
+    for ((es, r) <- rules.allWithLabels(orig) ; e <- es)
     yield new IntermediateZeroRule(orig, simplify(e).asInstanceOf[Eqn], r.name)
   }
 
@@ -196,25 +197,24 @@ object ZeroRules {
 
   //// Equation -> Expression
   rules.+("The solution to an equation is the zero of one side minus the other."){
-    EquationP(@?('l), @?('r))
+    EquationP('l, 'r |> {(_: Sym) != SymInt(0)})
   }{ case (l: Sym, r: Sym) =>
-      if (l == SymInt(0) || r == SymInt(0)) Nil
-      else Seq( SymEquation(simplify(++(l, **(r, -1))), 0) )
+      Seq( SymEquation(simplify(++(l, **(r, -1))), 0) )
   }
 
   //// Expression -> Equation
-  rules.+("Subtract addends from both sides of an equation"){
-    SumP('es @@ __*)
+  rules.+("Subtract from both sides of the equation"){
+    EquationP(SumP('es @@ __*), =?(0))
   }{ case (es: Seq[Sym]) =>
       for (i <- 0 until es.length if hasX(es(i)))
       yield SymEquation(es(i), **(-1, +++(es.take(i) ++ es.drop(i + 1))))
   }
 
-
-  //// Control rules
-  rules.+("Zero of a product is the zeros of the factors."){
-    EquationP(ProdP('es @@ __*), =?(0))
-  }{ case es: Seq[Sym] => es.map{ e => SymEquation(e, 0) } }
+  rules.+("Divide from both sides of the equation."){
+    EquationP('p @@ ProdP(__*), 'a)
+  }{ case (a: Sym, p: SymProd) =>
+      p.exprs.map{ f => SymEquation( simplify(**(p, ^(f, -1))), simplify(**(a, ^(f, -1))) ) }
+  }
 
 
   //// Inverse expressions
