@@ -117,18 +117,23 @@ object CalcSolver {
   }
 
 
-  def integralDrawing(e1: Sym, e2: Sym, ctx: Graph.JsContext) {
+  def integralDrawing(e1: Sym, e2: Sym, ctx: Graph.JsContext,
+    minX: Sym = SymNegativeInfinity(), maxX: Sym = SymPositiveInfinity(),
+    color: String = "#8800BB66"
+  ) {
     import Graph._
 
     // Make sure that both points and both functions are defined
-    val x1 = Graph.pos.x - (10 * Graph.pos.xs)
+    val x1 = minX.approx() max Graph.pos.x - (10 * Graph.pos.xs)
     val y1 = e1.approx('x -> Graph.pos.x)
-    val x2 = Graph.pos.x + (ctx.canvas.width - Graph.marginX) * Graph.pos.xs + (10 * Graph.pos.xs)
+    val x2 = maxX.approx() min (
+      Graph.pos.x + (ctx.canvas.width - Graph.marginX + 10) * Graph.pos.xs
+    )
     val y2 = e1.approx('x -> x2)
 
     ctx.beginPath()
 
-    ctx.fillStyle = "#8800BB66"
+    ctx.fillStyle = color
 
     // Go to the starting position
     ctx.moveTo(canvasX(x1), canvasY(y1))
@@ -166,7 +171,7 @@ object CalcSolver {
     def makeSolver(es: Seq[Seq[Sym]]) = new AsyncIntegralSolver(es(0)(0))
 
     override def drawings: Seq[Graph.JsContext => Unit] =
-      if (draw) this.expressions.map{es => integralDrawing(es(0)(0), 0, _)}.toSeq
+      if (draw) this.expressions.map{es => integralDrawing(es(0)(0), 0, (_: Graph.JsContext))}.toSeq
       else Nil
   }
 
@@ -174,7 +179,7 @@ object CalcSolver {
     def makeSolver(es: Seq[Seq[Sym]]) = new AsyncIntegralSolver(++(es(0)(0), **(-1, es(1)(0))))
 
     override def drawings: Seq[Graph.JsContext => Unit] =
-      this.expressions.map{es => integralDrawing(es(0)(0), es(1)(0), _)}.toSeq
+      this.expressions.map{es => integralDrawing(es(0)(0), es(1)(0), (_: Graph.JsContext))}.toSeq
   }
 
 
@@ -231,8 +236,7 @@ object CalcSolver {
 
     override val title: String = "Area Between Functions:"
 
-    def makeSolver(es: Seq[Seq[Sym]]) = {
-      es match {
+    def makeSolver(es: Seq[Seq[Sym]]) = es match {
         case Seq(Seq(e1), Seq(e2), Seq(i1), Seq(i2), ps) if ps.flatMap(_.expanded).length >= 2 =>
           new AreaBetweenCurvesSolver(e1, e2, i1, i2,
             ps.flatMap(_.expanded).sortWith(_.approx() < _.approx())
@@ -244,11 +248,16 @@ object CalcSolver {
         }))
       }
 
-    }
+    override def drawings: Seq[Graph.JsContext => Unit] =
+      this.solver match {
+        case Some(s: AreaBetweenCurvesSolver) => s.drawings
+        case _ => Nil
+      }
+
   }
 
   class AreaBetweenCurvesSolver(e1: Sym, e2: Sym, i1: Sym, i2: Sym, xs: Seq[Sym]) extends AsyncSolver {
-    // If this solver is created, xs should have atleast 2 elements
+    // If this solver is created, xs should have atleast 2 elements and be in increasing order
     if (xs.length < 2) throw new Error("Cannot solve for area with less than 2 intersections.")
 
     val rule: CalcSolution = (xs.init zip xs.tail)
@@ -281,7 +290,7 @@ object CalcSolver {
           Some(
             new CustomSolution(solution,
               f"\\(\\int_{${x1.toLatex}}^{${xs.last.toLatex}}" +
-              f"\\mid ${++(e1, **(-1, e2)).toLatex} \\mid = ${solution.toLatex}",
+                f"\\mid ${++(e1, **(-1, e2)).toLatex} \\mid = ${solution.toLatex}",
               "<p>" + inequalityStr + " on interval " + rangeStr + "</p><br/>" + integrationStr
             )(sub.toSeq)
           )
@@ -290,6 +299,16 @@ object CalcSolver {
 
     def step(): (Seq[CalcSolution], Boolean) = (Seq(rule), false)
 
+    lazy val drawings: Seq[Graph.JsContext => Unit] =
+      (xs.init zip xs.tail).map{ case (x1, x2) =>
+        val middleX = x1.approx() + (x2.approx() - x1.approx()) / 2.0
+        val e1Greater = e1.approx('x -> middleX) > e2.approx('x -> middleX)
+
+        integralDrawing(e1, e2, (_: Graph.JsContext),
+          minX = x1, maxX = x2,
+          color = if(e1Greater) "#DD444466" else "#4444DD66"
+        )
+      }
   }
 }
 
