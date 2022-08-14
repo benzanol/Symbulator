@@ -1,0 +1,23 @@
+run
+fastLinkJS
+~fastLinkJS
+reload
+hello
+reload
+~fastLinkJS
+reload
+~fastLinkJS
+reload
+fastLinkJS
+reload
+fastLinkJS
+reload
+fastLinkJS
+~fastLinkJS
+~fastLinkJs
+~fastLinkJS
+~fastLinkJs
+~fastLinkJS
+le / fastLinkJS 0s
+  | => scala / Compile / fastLinkJS 0s
+~fastLinkJS

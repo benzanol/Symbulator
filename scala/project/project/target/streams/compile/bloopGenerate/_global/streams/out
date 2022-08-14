@@ -1,0 +1,4 @@
+[debug] [scala-build-build] Classpath dependencies List()
+[debug] [scala-build-build] Dependencies from configurations List()
+[debug] Bloop wrote the configuration of project 'scala-build-build' to '/home/quaviq/Documents/Programming/Scala/Calculator/scala/project/project/.bloop/scala-build-build.json'
+[success] Generated .bloop/scala-build-build.json
