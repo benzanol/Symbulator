@@ -190,8 +190,10 @@ object ZeroRules {
   import Zero._
 
   def allRules(orig: Eqn): Seq[IntermediateZeroRule] = {
-    for ((es, r) <- rules.allWithLabels(orig) ; e <- es)
-    yield new IntermediateZeroRule(orig, simplify(e).asInstanceOf[Eqn], r.name)
+    for ((es, r) <- rules.allWithLabels(orig) ; s <- es.map(simplify) if s.isFinite)
+    yield {
+      new IntermediateZeroRule(orig, s.asInstanceOf[Eqn], r.name)
+    }
   }
 
   val rules = new Rules[Seq[Eqn]]()
@@ -260,30 +262,29 @@ object ZeroRules {
 
   // Divide by x until the lowest power of x is a constant
   rules.+("x^3 + x^2 = x^2(x + 1)"){
-    EquationP('s @@ SumP(Repeat( AsProdP( AsPowP(XP, RatP()), __*), min=2 ), Repeat(noxP())), =?(0))
+    EquationP('s @@ SumP(Repeat( AsProdP( AsPowP(XP, RatP()), __*), min=2 )), =?(0))
   }{ case s: SymSum =>
-      // Figure out the smallest exponent of x, the power of x to divide by
-      val minExpt: SymR = s.exprs.map{ e =>
-        AsProdP( AsPowP(XP, 'p), __*).matches(e)
-          .headOption.map(_.apply('p).asInstanceOf[SymR])
-          .getOrElse(SymR(0))
-      }.foldLeft(SymPositiveInfinity(): SymR)(_ min _)
+      val rule = new Rule[(Sym, SymR)]("Coefficient and power",
+        AsProdP( AsPowP(XP, RatP('p)), 'c @@ __*),
+        { case (c: Seq[Sym], p: SymR) => (simplify(***(c)), p) }
+      )
 
-      if (minExpt.n != 0 && minExpt.d != 0) {
+      // Tuples of coefficient and power
+      val tuples: Seq[(Sym, SymR)] = s.exprs.map(rule.first(_).get)
+
+      // Figure out the smallest exponent of x, the power of x to divide by
+      val minExpt: SymR = tuples.map(_._2).minBy(_.constant)
+
+      if (minExpt.n == 0 || minExpt.d == 0) Nil else {
         // Subtract the min exponent from each power of x
-        val rule = new Rule("", AsProdP( AsPowP(XP, 'p @@ RatP()), 'r @@ __*), {
-          case (p: Sym, r: Seq[Sym]) =>
-            ***( ^(X, ++(p, minExpt.negative)) +: r ).pipe(simplify)
-        })
 
         // Sum the newly divided powers and try to solve
-        val divided = +++( s.exprs.map{ e => rule.first(e).getOrElse{ **(e, ^(X, minExpt.negative)) } } )
+        val newExprs = tuples.map{ case (c: Sym, p: SymR) => simplify(**(c, ^(X, p - minExpt))) }
+        val divided = +++( newExprs )
 
         if (minExpt < 0) Seq(SymEquation(divided, 0))
         else Seq(SymEquation(X, 0), SymEquation(divided, 0))
-
-        // Don't bother if the smallest power is already 0 or undefined
-      } else Nil
+      }
   }
 }
 

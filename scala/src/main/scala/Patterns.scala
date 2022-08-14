@@ -291,9 +291,9 @@ case class ATanP(pat: Pattern = AnyP()) extends Pattern {
 
 case class EquationP(l: Pattern = AnyP(), r: Pattern = AnyP()) extends Pattern {
   def matches(e: Sym): Seq[Binding] = e match {
-    case SymEquation(a, b) => matchSeveral((a -> l), (b -> r))
+    case SymEquation(a, b) => matchSeveral((a -> l), (b -> r)) ++
       // The following line makes the equation work both ways
-      //++ matchSeveral((a -> r), (b -> l))
+      matchSeveral((a -> r), (b -> l))
     case _ => Seq[Binding]()
   }
 }

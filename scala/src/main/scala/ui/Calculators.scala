@@ -178,9 +178,9 @@ object CalcSolver {
   }
 
 
-  class AsyncZeroSolver(expr: Sym) extends AsyncSolver {
+  class AsyncZeroSolver(left: Sym, right: Sym) extends AsyncSolver {
     private val solver = new Zero.ZeroSolver(
-      SymEquation(expr.replaceExpr(SymVar('x), Sym.X), 0)
+      SymEquation(left.replaceExpr(SymVar('x), Sym.X), right.replaceExpr(SymVar('x), Sym.X))
     )
 
     var allZeros = Seq[Zero.ZeroRule]()
@@ -206,7 +206,7 @@ object CalcSolver {
   }
 
   class ZeroResult(n: String)(field: String) extends ResultField(n)(field) {
-    def makeSolver(es: Seq[Seq[Sym]]) = new AsyncZeroSolver(es(0)(0))
+    def makeSolver(es: Seq[Seq[Sym]]) = new AsyncZeroSolver(es(0)(0), 0)
 
     override def points: Seq[(Sym, Sym, Sym)] = {
       for (es <- expressions.toSeq ; e <- es ; s <- solutions ; s1 <- s.solution.expanded)
@@ -215,7 +215,7 @@ object CalcSolver {
   }
 
   class IntersectionResult(n: String)(f0: String, f1: String) extends ResultField(n)(f0, f1) {
-    def makeSolver(es: Seq[Seq[Sym]]) = new AsyncZeroSolver(++(es(0)(0), **(-1, es(1)(0))))
+    def makeSolver(es: Seq[Seq[Sym]]) = new AsyncZeroSolver(es(0)(0), es(1)(0))
 
     override val title: String = "Intersections:"
 
@@ -269,7 +269,6 @@ object CalcSolver {
           val prevSolution = sub.map(_.solution).getOrElse(SymInt(0))
           // Total solution so far
           val solution = simplify(++(prevSolution, thisSolution))
-          //println(f"-1: $x1 -2: $x2 1: $in1 2: $in2 3: $thisSolution")
 
           val rangeStr = f"\\((${x1.toLatex}, ${x2.toLatex})\\)"
           val inequalityStr = f"\\(${e1.toLatex} ${if (e1Greater) ">" else "<"} ${e2.toLatex}\\)"
