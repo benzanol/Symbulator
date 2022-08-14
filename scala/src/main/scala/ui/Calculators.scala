@@ -102,7 +102,7 @@ object CalcSolver {
     val rules = Nil
     val solution = 0
 
-    def beforeNode = stringToNode(text, cls="result-description")
+    def beforeNode = stringToNode(text, cls="result-error")
     def insideNode(num: Int)(wrap: Sym => Sym) = makeElement("p")
     override def node: dom.Node = beforeNode
   }
@@ -237,16 +237,16 @@ object CalcSolver {
     override val title: String = "Area Between Functions:"
 
     def makeSolver(es: Seq[Seq[Sym]]) = es match {
-        case Seq(Seq(e1), Seq(e2), Seq(i1), Seq(i2), ps) if ps.flatMap(_.expanded).length >= 2 =>
-          new AreaBetweenCurvesSolver(e1, e2, i1, i2,
-            ps.flatMap(_.expanded).sortWith(_.approx() < _.approx())
-          )
-        case _ => new CustomSolver(new ErrorSolution(es match {
-          case Seq(_, _, _, _, Nil)    => "No intersection points found"
-          case Seq(_, _, _, _, Seq(_)) => "Only 1 intersection point found"
-          case Seq(_, _, Nil, Nil, _)  => "Integrals of equations not found"
-        }))
-      }
+      case Seq(Seq(e1), Seq(e2), Seq(i1), Seq(i2), ps) if ps.flatMap(_.expanded).length >= 2 =>
+        new AreaBetweenCurvesSolver(e1, e2, i1, i2,
+          ps.flatMap(_.expanded).sortWith(_.approx() < _.approx())
+        )
+      case _ => new CustomSolver(new ErrorSolution(es match {
+        case Seq(_, _, _, _, Nil)    => "No intersection points found"
+        case Seq(_, _, _, _, Seq(_)) => "Only 1 intersection point found"
+        case Seq(_, _, Nil, Nil, _)  => "Integrals of equations not found"
+      }))
+    }
 
     override def drawings: Seq[Graph.JsContext => Unit] =
       this.solver match {
@@ -291,7 +291,7 @@ object CalcSolver {
             new CustomSolution(solution,
               f"\\(\\int_{${x1.toLatex}}^{${xs.last.toLatex}}" +
                 f"\\mid ${++(e1, **(-1, e2)).toLatex} \\mid = ${solution.toLatex}",
-              "<p>" + inequalityStr + " on interval " + rangeStr + "</p><br/>" + integrationStr
+              "" + inequalityStr + " on interval " + rangeStr + "<br/>" + integrationStr
             )(sub.toSeq)
           )
 
@@ -468,25 +468,27 @@ object CalcFields {
           ,
         if (expressions.isEmpty && title == "") makeElement("p")
         else makeElement("div", "class" -> "result-contents", "children" -> Seq(
-          if (expressions.isEmpty)
-            makeElement("p",
-              "class" -> "result-description",
-              "innerText" -> "Enter equations"
-            )
-          else if (!solving && solutions.isEmpty)
-            makeElement("p",
-              "class" -> "result-description",
-              "innerText" -> "No solutions found ):"
-            )
-          else makeElement("div",
+          makeElement("div",
             "class" -> "result-solutions",
-            "children" -> (
-              solutions.map(_.node)
-                ++ Option.when(solving)(makeElement("p",
+            "children" -> {
+              if (expressions.isEmpty)
+                Seq(makeElement("p",
+                  "class" -> "result-description",
+                  "innerText" -> "Enter equations"
+                ))
+              else if (!solving && solutions.isEmpty)
+                Seq(makeElement("p",
+                  "class" -> "result-description",
+                  "innerText" -> "No solutions found ):"
+                ))
+              else {
+                solutions.map(_.node) ++
+                Option.when(solving)(makeElement("p",
                   "class" -> "result-description",
                   "innerText" -> "Solving..."
                 )).toSeq
-            )
+              }
+            }
           )
         ))
       )

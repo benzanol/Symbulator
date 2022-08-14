@@ -85,7 +85,12 @@ button {
 
 .result-description {
     font-size: 15px;
-    /* padding-top: 30px; */
+    padding-top: 20px;
+}
+
+.result-error {
+    font-size: 15px;
+    padding-top: 20px;
 }
 
 .result-solutions {
