@@ -3,12 +3,8 @@ package sympany.math
 import scala.util.chaining._
 import scala.collection.mutable
 
-import scala.scalajs.js.annotation.JSExportTopLevel
-import scala.scalajs.js
-
 import sympany._
 import sympany.math.Simplify.simplify
-import sympany.math.Derivative.derive
 import sympany.Sym._
 import sympany.Pattern._
 import org.scalajs.dom.Node

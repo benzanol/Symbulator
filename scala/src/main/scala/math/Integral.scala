@@ -68,7 +68,7 @@ object Integral {
       "➣ " +
 
       // Include a brief description of the rule
-      this.ruleDescription + "<br/>" +
+      this.ruleDescription + //"<br/>" +
 
       // Show the transformation the rule is making
       "\\(" + wrap(SymIntegral(integral)).toLatex + "=" +
@@ -180,7 +180,7 @@ object IntegralRules {
       if (!usubs.isEmpty) usubs else {
         val parts = allParts(expr)
         if (!parts.isEmpty) parts else {
-          Seq(selfPart(expr))
+          selfPart(expr) +: Identity.identities(expr).map(new IdentityRule(expr, _))
         }
       }
     }
@@ -217,6 +217,12 @@ object IntegralRules {
       tryUsub(expr, sub).map(new USub(expr, sub, _)).toSeq
     )
 
+  class IdentityRule(integral: Sym, identity: (Sym, String)) extends IntegralRule(integral) {
+    def ruleDescription = identity._2
+
+    def forward(in: Sym): Sym = SymIntegral(identity._1)
+    def backward(sol: Sym): Sym = sol
+  }
 
   class ProductRule(integral: Sym) extends IntegralRule(integral) {
     def ruleDescription = "Separate Constant Factors"
