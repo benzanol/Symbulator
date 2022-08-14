@@ -16248,7 +16248,7 @@ function $c_Lsympany_ui_Calculators$() {
   var $$x4 = $m_sci_Seq$();
   var array = [new $c_Lsympany_ui_CalcFields$EquationField("e1"), new $c_Lsympany_ui_CalcSolver$ZeroResult("z", "e1")];
   var $$x3 = new $c_Lsympany_ui_CalcFields$Calculator("Zeros", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
-  var array$1 = [new $c_Lsympany_ui_CalcFields$EquationField("e1"), new $c_Lsympany_ui_CalcFields$EquationField("e2"), new $c_Lsympany_ui_CalcSolver$IntersectionResult("i", "e1", "e2")];
+  var array$1 = [new $c_Lsympany_ui_CalcFields$EquationField("e1"), new $c_Lsympany_ui_CalcFields$EquationField("e2"), new $c_Lsympany_ui_CalcFields$BrField(), new $c_Lsympany_ui_CalcSolver$IntersectionResult("i", "e1", "e2")];
   var $$x2 = new $c_Lsympany_ui_CalcFields$Calculator("Intersections", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1));
   var array$2 = [new $c_Lsympany_ui_CalcFields$EquationField("e1"), new $c_Lsympany_ui_CalcSolver$IntegralResult("i", "e1", true)];
   var $$x1 = new $c_Lsympany_ui_CalcFields$Calculator("Integral", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2));

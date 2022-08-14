@@ -504,6 +504,7 @@ object Calculators {
     new Calculator("Intersections")(
       new EquationField("e1"),
       new EquationField("e2"),
+      new BrField(),
       new IntersectionResult("i")("e1", "e2")
     ),
     new Calculator("Integral")(

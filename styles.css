@@ -27,7 +27,7 @@ button {
 #page-container {
     /* color: black; */
     display: flex;
-    height: 95vh;
+    height: 98vh;
 }
 
 #current-calculator {
@@ -49,6 +49,11 @@ button {
     overflow: auto;
 }
 
+#rainbow-button {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+}
 
 /* Calculator buttons */
 
