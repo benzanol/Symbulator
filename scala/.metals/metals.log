@@ -26379,3 +26379,31 @@ WARNING: Unmatched cancel notification for request id 7736
 [0m2022.08.13 22:02:32 INFO  compiling scala (1 scala source)[0m
 [0m2022.08.13 22:02:34 WARN  there were 21 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
 [0m2022.08.13 22:02:34 INFO  time: compiled scala in 1.67s[0m
+[0m2022.08.13 22:04:11 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.13 22:04:14 WARN  there were 5 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.13 22:04:14 INFO  time: compiled scala in 3.04s[0m
+[0m2022.08.13 22:04:28 INFO  compiling scala (1 scala source)[0m
+Aug 13, 2022 10:04:31 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7791
+Exception in thread "pool-5-thread-3" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$onCompilerJobQueue$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:139)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+[0m2022.08.13 22:04:31 WARN  there were 5 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.13 22:04:31 INFO  time: compiled scala in 3.09s[0m
+Aug 13, 2022 10:04:43 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7834
+[0m2022.08.13 22:06:40 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.13 22:06:42 WARN  there were 21 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.13 22:06:42 INFO  time: compiled scala in 1.91s[0m
+[0m2022.08.13 22:07:19 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.13 22:07:22 WARN  there were 5 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.13 22:07:22 INFO  time: compiled scala in 2.45s[0m
+Aug 13, 2022 10:10:28 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7892
+[0m2022.08.13 22:11:02 INFO  compiling scala (1 scala source)[0m
+[0m2022.08.13 22:11:04 WARN  there were 21 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m2022.08.13 22:11:04 INFO  time: compiled scala in 1.74s[0m

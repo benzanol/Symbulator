@@ -160,6 +160,7 @@ object Latex {
     case SymEquation(l, r) => s"${toLatex(l)} = ${toLatex(r)}"
     case SymVertical(x) => s"x = ${toLatex(x)}"
 
+      // Can't use \int because it shows gray boxes for definite limits
     case SymIntegral(sub) => s"∫ ${wrappedLatex(sub)}"
 
     case SymPoint(x, y) =>

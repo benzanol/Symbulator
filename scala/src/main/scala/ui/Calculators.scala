@@ -277,10 +277,12 @@ object CalcSolver {
           val integralStr =
             if (e1Greater) f"(${e1.toLatex}) - (${e2.toLatex})"
             else f"(${e2.toLatex}) - (${e1.toLatex})"
-          val integrationStr = f"\\(∫_{${x1.toLatex}}^{${x2.toLatex}}${integralStr} = ${thisSolution.toLatex}\\)"
+          val integrationStr = f"\\(\\int_{${x1.toLatex}}^{${x2.toLatex}}${integralStr} = ${thisSolution.toLatex}\\)"
 
           Some(
-            new CustomSolution(solution, f"\\(∫ \\mid ${++(e1, **(-1, e2)).toLatex} \\mid = ${solution.toLatex}",
+            new CustomSolution(solution,
+              f"\\(\\int_{${x1.toLatex}}^{${xs.last.toLatex}}" +
+              f"\\mid ${++(e1, **(-1, e2)).toLatex} \\mid = ${solution.toLatex}",
               "<p>" + inequalityStr + " on interval " + rangeStr + "</p><br/>" + integrationStr
             )(sub.toSeq)
           )

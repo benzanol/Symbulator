@@ -20820,11 +20820,13 @@ function $c_Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver(e1, e2, i1, i2, xs) {
   this.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_e2 = null;
   this.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_i1 = null;
   this.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_i2 = null;
+  this.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_xs = null;
   this.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_rule = null;
   this.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_e1 = e1;
   this.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_e2 = e2;
   this.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_i1 = i1;
   this.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_i2 = i2;
+  this.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_xs = xs;
   if ((xs.length__I() < 2)) {
     throw $ct_jl_Error__T__(new $c_jl_Error(), "Cannot solve for area with less than 2 intersections.")
   };
@@ -20947,20 +20949,26 @@ function $c_Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver(e1, e2, i1, i2, xs) {
             var arg$macro$13 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(thisSolution);
             var $$x15 = $m_sc_StringOps$();
             var array$14 = [arg$macro$10, arg$macro$11, integralStr, arg$macro$13];
-            var integrationStr = $$x15.format$extension__T__sci_Seq__T("\\(\u222b_{%s}^{%s}%s = %s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$14));
-            var this$85 = $m_Lsympany_Sym$();
+            var integrationStr = $$x15.format$extension__T__sci_Seq__T("\\(\\int_{%s}^{%s}%s = %s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$14));
+            var arg$macro$14 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(x1$2);
+            var this$77 = $as_Lsympany_Sym(this$1.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_xs.last__O());
+            var arg$macro$15 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$77);
+            var $$x19 = $m_sc_StringOps$();
+            var array$15 = [arg$macro$14, arg$macro$15];
+            var $$x18 = $$x19.format$extension__T__sci_Seq__T("\\(\\int_{%s}^{%s}", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$15));
+            var this$89 = $m_Lsympany_Sym$();
             var $$x16 = this$1.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_e1;
-            var this$81 = $m_Lsympany_Sym$();
-            var array$15 = [new $c_Lsympany_Sym$ImplicitSymInt((-1)), this$1.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_e2];
-            var es$8 = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$15);
-            var array$16 = [$$x16, this$81.$times$times$times__sci_Seq__Lsympany_SymProd(es$8)];
-            var es$9 = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$16);
-            var this$86 = this$85.$plus$plus$plus__sci_Seq__Lsympany_SymSum(es$9);
-            var arg$macro$14 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$86);
-            var arg$macro$15 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(solution);
+            var this$85 = $m_Lsympany_Sym$();
+            var array$16 = [new $c_Lsympany_Sym$ImplicitSymInt((-1)), this$1.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_e2];
+            var es$8 = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$16);
+            var array$17 = [$$x16, this$85.$times$times$times__sci_Seq__Lsympany_SymProd(es$8)];
+            var es$9 = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$17);
+            var this$90 = this$89.$plus$plus$plus__sci_Seq__Lsympany_SymSum(es$9);
+            var arg$macro$16 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$90);
+            var arg$macro$17 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(solution);
             var $$x17 = $m_sc_StringOps$();
-            var array$17 = [arg$macro$14, arg$macro$15];
-            return new $c_s_Some(new $c_Lsympany_ui_CalcSolver$CustomSolution(solution, $$x17.format$extension__T__sci_Seq__T("\\(\u222b \\mid %s \\mid = %s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$17)), ((((("<p>" + inequalityStr) + " on interval ") + rangeStr) + "</p><br/>") + integrationStr), $m_s_Option$().option2Iterable__s_Option__sc_Iterable(sub).toSeq__sci_Seq()))
+            var array$18 = [arg$macro$16, arg$macro$17];
+            return new $c_s_Some(new $c_Lsympany_ui_CalcSolver$CustomSolution(solution, (("" + $$x18) + $$x17.format$extension__T__sci_Seq__T("\\mid %s \\mid = %s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$18))), ((((("<p>" + inequalityStr) + " on interval ") + rangeStr) + "</p><br/>") + integrationStr), $m_s_Option$().option2Iterable__s_Option__sc_Iterable(sub).toSeq__sci_Seq()))
           }
         }
       }
