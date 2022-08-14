@@ -177,10 +177,19 @@ object IntegralRules {
       Seq(new ProductRule(expr))
     case _ => {
       val usubs = allUsubs(expr)
-      if (usubs.isEmpty) allParts(expr)
-      else usubs
+      if (!usubs.isEmpty) usubs else {
+        val parts = allParts(expr)
+        if (!parts.isEmpty) parts else {
+          Seq(selfPart(expr))
+        }
+      }
     }
   }
+
+
+  // Integration by parts that makes x appear out of thin air
+  def selfPart(expr: Sym): IntegralRule =
+    new Parts(expr, expr, SymInt(1))
 
   // This does NOT include the strategy of making x appear out of
   // nowhere, as that adds a lot of unnecessary computation

@@ -13276,7 +13276,22 @@ $c_Lsympany_math_IntegralRules$.prototype.allRules__Lsympany_Sym__sci_Seq = (fun
     }
   };
   var usubs = this.allUsubs__Lsympany_Sym__sci_Seq(expr);
-  return (usubs.isEmpty__Z() ? this.allParts__Lsympany_Sym__sci_Seq(expr) : usubs)
+  if ((!usubs.isEmpty__Z())) {
+    return usubs
+  } else {
+    var parts = this.allParts__Lsympany_Sym__sci_Seq(expr);
+    if ((!parts.isEmpty__Z())) {
+      return parts
+    } else {
+      var $$x3 = $m_sci_Seq$();
+      var array$2 = [this.selfPart__Lsympany_Sym__Lsympany_math_Integral$IntegralRule(expr)];
+      return $as_sci_Seq($$x3.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2)))
+    }
+  }
+});
+$c_Lsympany_math_IntegralRules$.prototype.selfPart__Lsympany_Sym__Lsympany_math_Integral$IntegralRule = (function(expr) {
+  var this$1 = $m_s_math_BigInt$();
+  return new $c_Lsympany_math_IntegralRules$Parts(expr, expr, $ct_Lsympany_SymInt__s_math_BigInt__(new $c_Lsympany_SymInt(), this$1.apply__I__s_math_BigInt(1)))
 });
 $c_Lsympany_math_IntegralRules$.prototype.allParts__Lsympany_Sym__sci_Seq = (function(expr) {
   var x1 = $m_Lsympany_math_Simplify$().simplify__Lsympany_Sym__Lsympany_Sym(expr);
