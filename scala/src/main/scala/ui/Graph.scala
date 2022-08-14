@@ -149,7 +149,12 @@ object Graph {
   ) {
     this.graphs = exprs
 
-    this.points = Nil
+    this.points = ps.groupBy{t => (t._2, t._3)}.toSeq.map{
+      case ((x, y), seq) =>
+        new IntersectionPoint(seq.map(_._1), x, y,
+          colors(exprs.indexOf(seq.head._1) % colors.length)
+        )
+    }
 
     this.drawings = drawings
 

@@ -27,6 +27,7 @@ object Zero {
     }
 
     def endResult: Option[Sym]
+    def solution = endResult.get
 
 
     def ruleDescription: String

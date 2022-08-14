@@ -206,6 +206,10 @@ object Simplify {
   
   sRules.+("Plus/minus 0 is 0"){ SymP(SymPM(0)) }{ case () => 0 }
 
+  sRules.+("Plus/minus squared cancels out"){
+    PowP(PMP('e), IntP('i) |> ((_: SymInt).n % 2 == 0))
+  }{ case (e: Sym, i: SymInt) => SymPow(e, i) }
+
   sRules.+("Plus/minus -1 is PM1"){
     PMP(AsProdP('n @@ %?() |> { (_: SymR) < 0 }, 'r @@ __*))
   }{ case (n: SymR, r: Seq[Sym]) => SymPM(***( n.negative +: r ))
