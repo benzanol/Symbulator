@@ -19,7 +19,7 @@ button {
     width: 1px;
 }
 
-/* Setting up the layout */
+/* Overall page layout */
 .flex {
     display: flex;
 }
@@ -40,13 +40,35 @@ button {
     overflow: auto;
 }
 
-#calculators {
+#right-sidebar {
     font-size: 20px;
     width: 20%;
     max-width: 400px;
 
     resize: both;
     overflow: auto;
+}
+
+
+/* Calculator buttons */
+
+#calculators {
+    padding: 10px;
+}
+
+.calc-btn {
+    border: 1px solid;
+    border-color: lightgray;
+
+    padding: 12px;
+    margin-top: 10px;
+
+    position: relative;
+    width: 100%;
+}
+
+.current-calc-btn {
+    background-color: #E6EAF0;
 }
 
 
@@ -134,6 +156,14 @@ button {
 .mq-editable-field {
     font-size: 20px;
     margin-top: 30px;
+    width: 90%;
+    /* background-color: #F4F6F8; */
+    /* border-radius: 5px !important; */
+}
+
+.mq-root-block {
+    padding: 12px 10px 10px 10px !important;
+    
 }
 
 /* The graph */

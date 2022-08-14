@@ -349,7 +349,7 @@ object CalcFields {
 
   class EquationField(val name: String) extends CalcField {
     // Create a blank node, then transform it into a mathquill field
-    val mqNode = makeElement("p")
+    val mqNode = makeElement("p", "id" -> f"mq-eqn-$name")
     val node = makeElement("div", "children" -> Seq(makeElement("br"), mqNode))
     js.Dynamic.global.makeMQField(mqNode, this.setLatex(_))
 
@@ -528,6 +528,13 @@ object Calculators {
     currentCalculator = calc
     calc.update()
     document.getElementById("current-calculator").replaceChildren(calc.element)
+
+    // Highlight the button for the current calculator
+    document.getElementsByClassName("current-calc-btn").foreach(_.setAttribute("class", "calc-btn"))
+    document.getElementById(nameToId(calc.name)).setAttribute("class", "calc-btn current-calc-btn")
+
+    // Select the first equation box (won't work)
+    //calc.fields.collectFirst{ case f: EquationField => f.mqNode.asInstanceOf[js.Dynamic].focus() }
   }
 
   // Call JS to start the timer to step the current calculator
@@ -537,10 +544,17 @@ object Calculators {
   }
 
   // Generate the right sidebar for all the calculators
+  def nameToId(name: String) = name.toLowerCase().replace(' ', '-')
   def setupCalculatorList(calcs: Seq[Calculator] = calculators) {
     val calcsDiv = document.getElementById("calculators")
+
     for (calc <- calcs) {
-      val btn = makeElement("button", "class" -> "calc-btn", "innerText" -> calc.name)
+      val btn = makeElement("button",
+        "class" -> "calc-btn",
+        "id" -> nameToId(calc.name),
+        "innerText" -> calc.name
+      )
+
       btn.addEventListener("click", (e: Any) => selectCalculator(calc))
       calcsDiv.appendChild(btn)
       calcsDiv.appendChild(makeElement("br"))

@@ -15,8 +15,8 @@ object Main {
   def main(args: Array[String]): Unit = {
     sympany.ui.Graph.setup
 
-    ui.Calculators.selectCalculator()
     ui.Calculators.setupCalculatorList()
+    ui.Calculators.selectCalculator()
 
     doStuff
   }
