@@ -6635,6 +6635,17 @@ function $f_sc_IterableOnceOps__product__s_math_Numeric__O($thiz, num) {
     return $thiz.reduceLeft__F2__O(op)
   }
 }
+function $f_sc_IterableOnceOps__collectFirst__s_PartialFunction__s_Option($thiz, pf) {
+  var sentinel = new $c_sc_IterableOnceOps$$anon$1($thiz);
+  var it = $as_sc_IterableOnce($thiz).iterator__sc_Iterator();
+  while (it.hasNext__Z()) {
+    var x = pf.applyOrElse__O__F1__O(it.next__O(), sentinel);
+    if ((x !== sentinel)) {
+      return new $c_s_Some(x)
+    }
+  };
+  return $m_s_None$()
+}
 function $f_sc_IterableOnceOps__mkString__T__T__T__T($thiz, start, sep, end) {
   if ($thiz.isEmpty__Z()) {
     return (("" + start) + end)
@@ -16272,7 +16283,8 @@ $c_Lsympany_ui_Calculators$.prototype.selectCalculator__Lsympany_ui_CalcFields$C
   var target = $as_T(String.fromCharCode(32));
   var replacement = $as_T(String.fromCharCode(45));
   var $$x2 = $$x3.getElementById($as_T(this$6.split(target).join(replacement)));
-  $$x2.setAttribute("class", "calc-btn current-calc-btn")
+  $$x2.setAttribute("class", "calc-btn current-calc-btn");
+  calc.Lsympany_ui_CalcFields$Calculator__f_fields.collectFirst__s_PartialFunction__s_Option(new $c_Lsympany_ui_Calculators$$anonfun$selectCalculator$2())
 });
 $c_Lsympany_ui_Calculators$.prototype.tickCalculator__V = (function() {
   this.Lsympany_ui_Calculators$__f_currentCalculator.update__V();
@@ -20636,6 +20648,15 @@ $c_Lsympany_ui_CalcFields$EquationField.prototype.setLatex__T__V = (function(new
   };
   $m_Lsympany_ui_Calculators$().tickCalculator__V()
 });
+function $as_Lsympany_ui_CalcFields$EquationField(obj) {
+  return (((obj instanceof $c_Lsympany_ui_CalcFields$EquationField) || (obj === null)) ? obj : $throwClassCastException(obj, "sympany.ui.CalcFields$EquationField"))
+}
+function $isArrayOf_Lsympany_ui_CalcFields$EquationField(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lsympany_ui_CalcFields$EquationField)))
+}
+function $asArrayOf_Lsympany_ui_CalcFields$EquationField(obj, depth) {
+  return (($isArrayOf_Lsympany_ui_CalcFields$EquationField(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lsympany.ui.CalcFields$EquationField;", depth))
+}
 var $d_Lsympany_ui_CalcFields$EquationField = new $TypeData().initClass({
   Lsympany_ui_CalcFields$EquationField: 0
 }, false, "sympany.ui.CalcFields$EquationField", {
@@ -21758,6 +21779,29 @@ var $d_sc_IterableFactory$ToFactory = new $TypeData().initClass({
   Ljava_io_Serializable: 1
 });
 $c_sc_IterableFactory$ToFactory.prototype.$classData = $d_sc_IterableFactory$ToFactory;
+/** @constructor */
+function $c_sc_IterableOnceOps$$anon$1(outer) {
+  /*<skip>*/
+}
+$c_sc_IterableOnceOps$$anon$1.prototype = new $h_sr_AbstractFunction1();
+$c_sc_IterableOnceOps$$anon$1.prototype.constructor = $c_sc_IterableOnceOps$$anon$1;
+/** @constructor */
+function $h_sc_IterableOnceOps$$anon$1() {
+  /*<skip>*/
+}
+$h_sc_IterableOnceOps$$anon$1.prototype = $c_sc_IterableOnceOps$$anon$1.prototype;
+$c_sc_IterableOnceOps$$anon$1.prototype.apply__O__O = (function(v1) {
+  return this
+});
+var $d_sc_IterableOnceOps$$anon$1 = new $TypeData().initClass({
+  sc_IterableOnceOps$$anon$1: 0
+}, false, "scala.collection.IterableOnceOps$$anon$1", {
+  sc_IterableOnceOps$$anon$1: 1,
+  sr_AbstractFunction1: 1,
+  O: 1,
+  F1: 1
+});
+$c_sc_IterableOnceOps$$anon$1.prototype.$classData = $d_sc_IterableOnceOps$$anon$1;
 function $f_sc_IterableOps__headOption__s_Option($thiz) {
   var it = $thiz.iterator__sc_Iterator();
   return (it.hasNext__Z() ? new $c_s_Some(it.next__O()) : $m_s_None$())
@@ -25014,8 +25058,7 @@ $c_sr_AbstractPartialFunction.prototype.toString__T = (function() {
   return "<function1>"
 });
 $c_sr_AbstractPartialFunction.prototype.apply__O__O = (function(x) {
-  var default$1 = $m_s_PartialFunction$().s_PartialFunction$__f_empty_pf;
-  return this.applyOrElse__Lsympany_Sym__F1__O($as_Lsympany_Sym(x), default$1)
+  return this.applyOrElse__O__F1__O(x, $m_s_PartialFunction$().s_PartialFunction$__f_empty_pf)
 });
 var $d_sr_Nothing$ = new $TypeData().initClass({
   sr_Nothing$: 0
@@ -39874,6 +39917,46 @@ var $d_Lsympany_With = new $TypeData().initClass({
   Ljava_io_Serializable: 1
 });
 $c_Lsympany_With.prototype.$classData = $d_Lsympany_With;
+/** @constructor */
+function $c_Lsympany_ui_Calculators$$anonfun$selectCalculator$2() {
+  /*<skip>*/
+}
+$c_Lsympany_ui_Calculators$$anonfun$selectCalculator$2.prototype = new $h_sr_AbstractPartialFunction();
+$c_Lsympany_ui_Calculators$$anonfun$selectCalculator$2.prototype.constructor = $c_Lsympany_ui_Calculators$$anonfun$selectCalculator$2;
+/** @constructor */
+function $h_Lsympany_ui_Calculators$$anonfun$selectCalculator$2() {
+  /*<skip>*/
+}
+$h_Lsympany_ui_Calculators$$anonfun$selectCalculator$2.prototype = $c_Lsympany_ui_Calculators$$anonfun$selectCalculator$2.prototype;
+$c_Lsympany_ui_Calculators$$anonfun$selectCalculator$2.prototype.applyOrElse__Lsympany_ui_CalcFields$CalcField__F1__O = (function(x1, default$1) {
+  if ((x1 instanceof $c_Lsympany_ui_CalcFields$EquationField)) {
+    var x2 = $as_Lsympany_ui_CalcFields$EquationField(x1);
+    var x = (("MQ(document.getElementById('mq-eqn-" + x2.Lsympany_ui_CalcFields$EquationField__f_name) + "')).focus()");
+    return (0, eval)(x)
+  } else {
+    return default$1.apply__O__O(x1)
+  }
+});
+$c_Lsympany_ui_Calculators$$anonfun$selectCalculator$2.prototype.isDefinedAt__Lsympany_ui_CalcFields$CalcField__Z = (function(x1) {
+  return (x1 instanceof $c_Lsympany_ui_CalcFields$EquationField)
+});
+$c_Lsympany_ui_Calculators$$anonfun$selectCalculator$2.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__Lsympany_ui_CalcFields$CalcField__Z($as_Lsympany_ui_CalcFields$CalcField(x))
+});
+$c_Lsympany_ui_Calculators$$anonfun$selectCalculator$2.prototype.applyOrElse__O__F1__O = (function(x, default$1) {
+  return this.applyOrElse__Lsympany_ui_CalcFields$CalcField__F1__O($as_Lsympany_ui_CalcFields$CalcField(x), default$1)
+});
+var $d_Lsympany_ui_Calculators$$anonfun$selectCalculator$2 = new $TypeData().initClass({
+  Lsympany_ui_Calculators$$anonfun$selectCalculator$2: 0
+}, false, "sympany.ui.Calculators$$anonfun$selectCalculator$2", {
+  Lsympany_ui_Calculators$$anonfun$selectCalculator$2: 1,
+  sr_AbstractPartialFunction: 1,
+  O: 1,
+  F1: 1,
+  s_PartialFunction: 1,
+  Ljava_io_Serializable: 1
+});
+$c_Lsympany_ui_Calculators$$anonfun$selectCalculator$2.prototype.$classData = $d_Lsympany_ui_Calculators$$anonfun$selectCalculator$2;
 function $ct_jl_ArrayIndexOutOfBoundsException__T__($thiz, s) {
   $ct_jl_Throwable__T__jl_Throwable__Z__Z__($thiz, s, null, true, true);
   return $thiz
@@ -40600,6 +40683,9 @@ $c_sc_AbstractIterable.prototype.copyToArray__O__I__I__I = (function(xs, start, 
 });
 $c_sc_AbstractIterable.prototype.sum__s_math_Numeric__O = (function(num) {
   return $f_sc_IterableOnceOps__sum__s_math_Numeric__O(this, num)
+});
+$c_sc_AbstractIterable.prototype.collectFirst__s_PartialFunction__s_Option = (function(pf) {
+  return $f_sc_IterableOnceOps__collectFirst__s_PartialFunction__s_Option(this, pf)
 });
 $c_sc_AbstractIterable.prototype.addString__scm_StringBuilder__T__T__T__scm_StringBuilder = (function(b, start, sep, end) {
   return $f_sc_IterableOnceOps__addString__scm_StringBuilder__T__T__T__scm_StringBuilder(this, b, start, sep, end)
@@ -54800,6 +54886,23 @@ $c_sci_LazyList.prototype.map__F1__sci_LazyList = (function(f) {
 $c_sci_LazyList.prototype.collect__s_PartialFunction__sci_LazyList = (function(pf) {
   return ((this.sci_LazyList__f_scala$collection$immutable$LazyList$$stateEvaluated && this.isEmpty__Z()) ? $m_sci_LazyList$().sci_LazyList$__f__empty : $m_sci_LazyList$().scala$collection$immutable$LazyList$$collectImpl__sci_LazyList__s_PartialFunction__sci_LazyList(this, pf))
 });
+$c_sci_LazyList.prototype.collectFirst__s_PartialFunction__s_Option = (function(pf) {
+  var _$this = this;
+  while (true) {
+    if (_$this.isEmpty__Z()) {
+      return $m_s_None$()
+    } else {
+      var this$1 = _$this;
+      var res = pf.applyOrElse__O__F1__O(this$1.scala$collection$immutable$LazyList$$state__sci_LazyList$State().head__O(), $m_sci_LazyList$().sci_LazyList$__f_scala$collection$immutable$LazyList$$anyToMarker);
+      if ((res === $m_sr_Statics$PFMarker$())) {
+        var this$3 = _$this;
+        _$this = this$3.scala$collection$immutable$LazyList$$state__sci_LazyList$State().tail__sci_LazyList()
+      } else {
+        return new $c_s_Some(res)
+      }
+    }
+  }
+});
 $c_sci_LazyList.prototype.find__F1__s_Option = (function(p) {
   var _$this = this;
   while (true) {
@@ -55200,6 +55303,24 @@ $c_sci_Stream.prototype.collect__s_PartialFunction__sci_Stream = (function(pf) {
       }))(newHead)));
       if ($uZ(runWith.apply__O__O(_$this.head__O()))) {
         return $m_sci_Stream$().collectedTail__O__sci_Stream__s_PartialFunction__sci_Stream(newHead.sr_ObjectRef__f_elem, _$this, pf)
+      } else {
+        _$this = $as_sci_Stream(_$this.tail__O())
+      }
+    }
+  }
+});
+$c_sci_Stream.prototype.collectFirst__s_PartialFunction__s_Option = (function(pf) {
+  var _$this = this;
+  while (true) {
+    if (_$this.isEmpty__Z()) {
+      return $m_s_None$()
+    } else {
+      var newHead = new $c_sr_ObjectRef(null);
+      var runWith = pf.runWith__F1__F1(new $c_sjsr_AnonFunction1(((newHead$1) => ((b$2) => {
+        newHead$1.sr_ObjectRef__f_elem = b$2
+      }))(newHead)));
+      if ($uZ(runWith.apply__O__O(_$this.head__O()))) {
+        return new $c_s_Some(newHead.sr_ObjectRef__f_elem)
       } else {
         _$this = $as_sci_Stream(_$this.tail__O())
       }
@@ -55668,6 +55789,9 @@ $c_sjsr_WrappedVarArgs.prototype.copyToArray__O__I__I__I = (function(xs, start, 
 });
 $c_sjsr_WrappedVarArgs.prototype.sum__s_math_Numeric__O = (function(num) {
   return $f_sc_IterableOnceOps__sum__s_math_Numeric__O(this, num)
+});
+$c_sjsr_WrappedVarArgs.prototype.collectFirst__s_PartialFunction__s_Option = (function(pf) {
+  return $f_sc_IterableOnceOps__collectFirst__s_PartialFunction__s_Option(this, pf)
 });
 $c_sjsr_WrappedVarArgs.prototype.addString__scm_StringBuilder__T__T__T__scm_StringBuilder = (function(b, start, sep, end) {
   return $f_sc_IterableOnceOps__addString__scm_StringBuilder__T__T__T__scm_StringBuilder(this, b, start, sep, end)

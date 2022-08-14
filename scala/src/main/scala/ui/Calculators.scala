@@ -534,7 +534,9 @@ object Calculators {
     document.getElementById(nameToId(calc.name)).setAttribute("class", "calc-btn current-calc-btn")
 
     // Select the first equation box (won't work)
-    //calc.fields.collectFirst{ case f: EquationField => f.mqNode.asInstanceOf[js.Dynamic].focus() }
+    calc.fields.collectFirst{ case f: EquationField =>
+      js.eval(s"MQ(document.getElementById('mq-eqn-${f.name}')).focus()")
+    }
   }
 
   // Call JS to start the timer to step the current calculator
