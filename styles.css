@@ -1,6 +1,7 @@
 body {
     /* background-color: black; */
     /* color: white !important; */
+    font-family: 'Trebuchet MS', sans-serif;
 }
 
 /* Useful things */
@@ -33,6 +34,8 @@ button {
     width: 50%;
     max-width: 800px;
 
+    padding-left: 20px;
+
     resize: both;
     overflow: auto;
 }
@@ -46,9 +49,36 @@ button {
     overflow: auto;
 }
 
+
+/* Calculator Fields */
+.result-title {
+    font-size: 17px;
+    color: #44484A;
+}
+
+.result-description {
+    font-size: 15px;
+    /* padding-top: 30px; */
+}
+
+.result-solutions {
+    border: 1px solid;
+    border-color: lightgray;
+    border-radius: 5px;
+
+    margin-right: 40px;
+    padding: 10px 30px 30px 30px;
+
+    background-color: #F4F6F8;
+}
+
+.text-field {
+    font-size: 18px;
+}
+
+
 /* Solution steps of an equation  */
 .solution-step {
-    font-family: 'Trebuchet MS', sans-serif;
     font-size: 18px;
 
     margin-top: 20px;
@@ -82,6 +112,14 @@ button {
 
 
 /* Mathquill fields */
+.mq-string-equation {
+
+}
+
+.mq-string-text {
+    line-height: 1.8;
+}
+
 .mq-math-mode {
     margin: 0px;
     line-height: 1.0;

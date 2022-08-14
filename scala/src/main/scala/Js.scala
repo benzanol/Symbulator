@@ -34,7 +34,9 @@ object JsUtils {
     makeElement("div",
       "class" -> cls,
       "innerHTML" ->
-        (str.replace("\\(", "<p class=\"mq-static\">")
-          .replace("\\)", "</p>"))
+        ("<span class=\"mq-string-text\">"
+          + str.replace("\\(", "</span><p class=\"mq-static mq-string-equation\">")
+          .replace("\\)", "</p><span class=\"mq-string-text\">")
+          + "</span>")
     )
 }

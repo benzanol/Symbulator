@@ -98,14 +98,22 @@ object CalcSolver {
     def insideNode(num: Int)(wrap: Sym => Sym) = stringToNode(inside)
   }
 
+  class ErrorSolution(text: String) extends CalcSolution {
+    val rules = Nil
+    val solution = 0
+
+    def beforeNode = stringToNode(text, cls="result-description")
+    def insideNode(num: Int)(wrap: Sym => Sym) = makeElement("p")
+    override def node: dom.Node = beforeNode
+  }
+
 
   trait AsyncSolver {
     def step(): (Seq[CalcSolution], Boolean)
   }
 
-  class CustomSolver(str: String) extends AsyncSolver {
-    val rule = new CustomSolution(0, str, str)(Nil)
-    def step() = (Seq(rule), false)
+  class CustomSolver(solution: CalcSolution) extends AsyncSolver {
+    def step() = (Seq(solution), false)
   }
 
 
@@ -201,13 +209,15 @@ object CalcSolver {
     def makeSolver(es: Seq[Seq[Sym]]) = new AsyncZeroSolver(es(0)(0))
 
     override def points: Seq[(Sym, Sym, Sym)] = {
-      for (es <- expressions.toSeq ; s <- solutions)
-      yield (es(0)(0), s.solution, SymInt(0))
+      for (es <- expressions.toSeq ; e <- es ; s <- solutions ; s1 <- s.solution.expanded)
+      yield (e.head, s1, e.head.replaceExpr(SymVar('x), s1))
     }.toSeq
   }
 
   class IntersectionResult(n: String)(f0: String, f1: String) extends ResultField(n)(f0, f1) {
     def makeSolver(es: Seq[Seq[Sym]]) = new AsyncZeroSolver(++(es(0)(0), **(-1, es(1)(0))))
+
+    override val title: String = "Intersections:"
 
     override def points: Seq[(Sym, Sym, Sym)] = {
       for (es <- expressions.toSeq ; e <- es ; s <- solutions ; s1 <- s.solution.expanded)
@@ -218,15 +228,20 @@ object CalcSolver {
 
   class AreaBetweenCurvesResult(n: String)(e1: String, e2: String, i1: String, i2: String, ps: String)
       extends ResultField(n)(e1, e2, i1, i2, ps) {
+
+    override val title: String = "Area Between Functions:"
+
     def makeSolver(es: Seq[Seq[Sym]]) = {
       es match {
-        case Seq(_, _, _, _, Nil) => new CustomSolver("No intersection points found")
-        case Seq(_, _, _, _, Seq(_)) => new CustomSolver("Only 1 intersection point found")
-        case Seq(_, _, Nil, Nil, _) => new CustomSolver("Waiting for integrals")
-        case Seq(Seq(e1), Seq(e2), Seq(i1), Seq(i2), ps) =>
+        case Seq(Seq(e1), Seq(e2), Seq(i1), Seq(i2), ps) if ps.flatMap(_.expanded).length >= 2 =>
           new AreaBetweenCurvesSolver(e1, e2, i1, i2,
             ps.flatMap(_.expanded).sortWith(_.approx() < _.approx())
           )
+        case _ => new CustomSolver(new ErrorSolution(es match {
+          case Seq(_, _, _, _, Nil)    => "No intersection points found"
+          case Seq(_, _, _, _, Seq(_)) => "Only 1 intersection point found"
+          case Seq(_, _, Nil, Nil, _)  => "Integrals of equations not found"
+        }))
       }
 
     }
@@ -256,7 +271,7 @@ object CalcSolver {
           val solution = simplify(++(prevSolution, thisSolution))
           //println(f"-1: $x1 -2: $x2 1: $in1 2: $in2 3: $thisSolution")
 
-          val rangeStr = f"\\((${x1.toLatex}, ${x2.toLatex})\\):"
+          val rangeStr = f"\\((${x1.toLatex}, ${x2.toLatex})\\)"
           val inequalityStr = f"\\(${e1.toLatex} ${if (e1Greater) ">" else "<"} ${e2.toLatex}\\)"
 
           val integralStr =
@@ -266,7 +281,7 @@ object CalcSolver {
 
           Some(
             new CustomSolution(solution, f"\\(∫ \\mid ${++(e1, **(-1, e2)).toLatex} \\mid = ${solution.toLatex}",
-              rangeStr + "<br/>" + inequalityStr + "<br/>" + integrationStr
+              "<p>" + inequalityStr + " on interval " + rangeStr + "</p><br/>" + integrationStr
             )(sub.toSeq)
           )
 
@@ -301,7 +316,7 @@ object CalcFields {
     // Generate the dom representation
     val element = makeElement("div", "class" -> "calculator")
     this.element.replaceChildren(
-      this.fields.flatMap{f => Seq(f.node, makeElement("br"))}:_*
+      this.fields.map(_.node):_*
     )
   }
 
@@ -334,8 +349,9 @@ object CalcFields {
 
   class EquationField(val name: String) extends CalcField {
     // Create a blank node, then transform it into a mathquill field
-    val node = makeElement("p")
-    js.Dynamic.global.makeMQField(node, this.setLatex(_))
+    val mqNode = makeElement("p")
+    val node = makeElement("div", "children" -> Seq(makeElement("br"), mqNode))
+    js.Dynamic.global.makeMQField(mqNode, this.setLatex(_))
 
     // Keep track of the current latex string and expression
     var latex: String = ""
@@ -414,7 +430,6 @@ object CalcFields {
         // Update any points/drawings
         // Start stepping in case any result field depends on this field
         Calculators.tickCalculator()
-        println("TICKCKK")
       }
 
       return solving
@@ -425,27 +440,53 @@ object CalcFields {
     val node: dom.Element = makeElement("div")
     updateNode()
 
+    val title: String = ""
+
     private def updateNode() {
       node.replaceChildren(
-        if (expressions.isEmpty) makeElement("p", "innterText" -> "No Equation!")
-        else if (!solving && solutions.isEmpty)
-          makeElement("p", "innerText" -> "No solutions found ):")
-        else makeElement("div",
-          "id" -> "solutions",
-          "children" -> (
-            solutions.map(_.node)
-              ++ Option.when(solving)(makeElement("p", "innerText" -> "Solving...")).toSeq
+        makeElement("p", "innerHTML" -> title, "class" -> "result-title")
+          ,
+        if (expressions.isEmpty && title == "") makeElement("p")
+        else makeElement("div", "class" -> "result-contents", "children" -> Seq(
+          if (expressions.isEmpty)
+            makeElement("p",
+              "class" -> "result-description",
+              "innerText" -> "Enter equations"
+            )
+          else if (!solving && solutions.isEmpty)
+            makeElement("p",
+              "class" -> "result-description",
+              "innerText" -> "No solutions found ):"
+            )
+          else makeElement("div",
+            "class" -> "result-solutions",
+            "children" -> (
+              solutions.map(_.node)
+                ++ Option.when(solving)(makeElement("p",
+                  "class" -> "result-description",
+                  "innerText" -> "Solving..."
+                )).toSeq
+            )
           )
-        )
+        ))
       )
       js.Dynamic.global.formatStaticEquations()
     }
   }
 
-  class TextField(text: String) extends CalcField {
+  class HtmlField(text: String) extends CalcField {
     val name = "Text"
-    def results = Some(Nil)
-    val node = makeElement("p", "innerText" -> text)
+    val results = Some(Nil)
+    val node = makeElement("div",
+      "class" -> "text-field",
+      "children" -> Seq(stringToNode(text))
+    )
+  }
+
+  class BrField() extends CalcField {
+    val name = "Break"
+    val results = Some(Nil)
+    val node = makeElement("br")
   }
 }
 
@@ -472,9 +513,9 @@ object Calculators {
       new IntegralResult("i1")("e1")(false),
       new EquationField("e2"),
       new IntegralResult("i2")("e2")(false),
-      new TextField("Intersections:"),
+      new BrField(),
       new IntersectionResult("ps")("e1", "e2"),
-      new TextField("Area between curves:"),
+      new BrField(),
       new AreaBetweenCurvesResult("area")("e1", "e2", "i1", "i2", "ps")
     ),
   )
