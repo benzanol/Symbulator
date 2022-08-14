@@ -37,7 +37,7 @@ button {
     padding-left: 20px;
 
     resize: both;
-    overflow: auto;
+    /* overflow: auto; */
 }
 
 #right-sidebar {
@@ -102,6 +102,9 @@ button {
     padding: 10px 30px 30px 30px;
 
     background-color: #F4F6F8;
+
+    /* Scroll sideways */
+    overflow: auto;
 }
 
 .text-field {
