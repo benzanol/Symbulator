@@ -244,6 +244,8 @@ object CalcSolver {
           ps.flatMap(_.expanded).sortWith(_.approx() < _.approx())
         )
       case _ => new CustomSolver(new ErrorSolution(es match {
+        case Seq(_, _, _, _, ps) if ps.find(containsExpr(_, 'k)).isDefined =>
+          "Can't integrate with infinite intersections"
         case Seq(_, _, _, _, Nil)    => "No intersection points found"
         case Seq(_, _, _, _, Seq(_)) => "Only 1 intersection point found"
         case Seq(_, _, Nil, Nil, _)  => "Integrals of equations not found"
