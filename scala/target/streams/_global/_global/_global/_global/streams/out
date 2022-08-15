@@ -1094,3 +1094,13 @@
 [0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Parse.scala, 2022-Aug-14 19:20:28.630 MT).[0m
 [0m[[0m[0minfo[0m] [0m[0m97. Monitoring source files for scala/fastLinkJS...[0m
 [0m[[0m[0minfo[0m] [0m[0m    Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mscala / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala (previous stamp: Hash(d6eaaf45376464343f3fb7485c352bf137dd2a5d), current stamp: Hash(e75d077b9f02e2aa4e89ba5b0602a3dec9411a60))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala, 2022-Aug-14 19:22:22.155 MT),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala, 2022-Aug-14 19:22:22.155 MT).[0m
+[0m[[0m[0minfo[0m] [0m[0m98. Monitoring source files for scala/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m    Press <enter> to interrupt or '?' for more options.[0m

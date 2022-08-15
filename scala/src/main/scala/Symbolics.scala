@@ -274,7 +274,10 @@ case class SymVar(symbol: Symbol = 'x) extends Sym {
   override def approx(env: Bind*): Double =
     env.find(_._1 == symbol) match {
       case Some((s, num)) => num
-      case None => throw new Error("Variable not in bind") ; 0
+      case None => symbol match {
+        case 'k => 0
+        case _ => throw new Error("Variable not in bind") ; 0
+      }
     }
 
   def s = this

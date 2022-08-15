@@ -40663,6 +40663,17 @@ $c_Lsympany_SymVar.prototype.approx__sci_Seq__D = (function(env) {
   };
   var x$1 = $m_s_None$();
   if ((x$1 === x1)) {
+    var x1$2 = this.Lsympany_SymVar__f_symbol;
+    if ((x1$2 !== null)) {
+      $m_s_Symbol$();
+      var o9 = new $c_s_Some(x1$2.s_Symbol__f_name);
+      if ((!o9.isEmpty__Z())) {
+        var p3$2 = $as_T(o9.s_Some__f_value);
+        if ((p3$2 === "k")) {
+          return 0.0
+        }
+      }
+    };
     throw $ct_jl_Error__T__(new $c_jl_Error(), "Variable not in bind")
   };
   throw new $c_s_MatchError(x1)
