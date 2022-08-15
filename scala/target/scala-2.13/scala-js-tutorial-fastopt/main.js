@@ -11618,18 +11618,19 @@ $c_Lsympany_Parse$.prototype.readNumber__T__T2 = (function(str) {
       if (((new $c_s_Array$UnapplySeqWrapper(x1$2), true) && ($m_s_Array$UnapplySeqWrapper$().lengthCompare$extension__O__I__I(x1$2, 2) === 0))) {
         var int$2 = $as_T(x1$2.get(0));
         var dec = $as_T(x1$2.get(1));
+        var $$x3 = $m_Lsympany_SymR$();
         var this$28 = $m_s_math_BigInt$();
         var x = (("" + int$2) + dec);
         var this$27 = $m_jl_Integer$();
         var i$3 = this$27.parseInt__T__I__I(x, 10);
-        var sym = new $c_Lsympany_SymFrac(this$28.apply__I__s_math_BigInt(i$3), $m_s_package$().BigInt__s_math_BigInt$().apply__I__s_math_BigInt(10).pow__I__s_math_BigInt($uI(dec.length)));
+        var sym = $$x3.apply__s_math_BigInt__s_math_BigInt__Lsympany_SymR(this$28.apply__I__s_math_BigInt(i$3), $m_s_package$().BigInt__s_math_BigInt$().apply__I__s_math_BigInt(10).pow__I__s_math_BigInt($uI(dec.length)));
         break matchEnd6
       }
     };
-    var $$x4 = $m_sjsr_package$();
-    var $$x3 = $m_sc_StringOps$();
+    var $$x5 = $m_sjsr_package$();
+    var $$x4 = $m_sc_StringOps$();
     var array = [str];
-    throw $$x4.unwrapJavaScriptException__jl_Throwable__O($ct_jl_Exception__T__(new $c_jl_Exception(), $$x3.format$extension__T__sci_Seq__T("Not a number: %s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))))
+    throw $$x5.unwrapJavaScriptException__jl_Throwable__O($ct_jl_Exception__T__(new $c_jl_Exception(), $$x4.format$extension__T__sci_Seq__T("Not a number: %s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))))
   };
   var beginIndex$1 = i;
   return $ct_T2__O__O__(new $c_T2(), sym, $as_T(str.substring(beginIndex$1)))

@@ -197,6 +197,7 @@ trait Sym {
   def at(x: Double): Double = this.approx('x -> x)
 
 
+
   def isFinite: Boolean = true
 
   //lazy val simple: Sym = Simplify.simplify(this)
@@ -265,7 +266,6 @@ case class SymPoint(x: Sym, y: Sym) extends SymSpecial {
 }
 
 /// Variables
-
 case class SymVar(symbol: Symbol = 'x) extends Sym {
   lazy val exprs = Nil
   def instance(args: Sym*) = this

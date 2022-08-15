@@ -153,7 +153,7 @@ object Parse {
 	  // An integer number (no decimal point)
 	  case Array(int: String) if int.nonEmpty => SymInt(int.toInt)
 	  // A number with a decimal point
-	  case Array(int, dec) => SymFrac((int + dec).toInt, BigInt(10).pow(dec.length))
+	  case Array(int, dec) => SymR((int + dec).toInt, BigInt(10).pow(dec.length))
 	  // An invalid number
 	  case _ => throw new Exception(f"Not a number: $str") ; SymInt(0)
 	}
