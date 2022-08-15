@@ -5,6 +5,8 @@ import scala.util.chaining._
 import sympany._
 import sympany.math.Simplify.simplify
 
+import scala.scalajs.js.annotation.JSExportTopLevel
+
 object Parse {
   // Parse a complete latex string into a symbolic object
   def parseLatex(raw: String): Option[Sym] = try {
@@ -181,6 +183,30 @@ object Parse {
 	  case "cos" => readExprPower(rest).map{
 		case (e, rest2) => (SymCos(e) -> rest2)
 	  }
+	  case "tan" => readExprPower(rest).map{
+		case (e, rest2) => (SymTan(e) -> rest2)
+	  }
+	  case "sin^" => readExpr(rest, pow=true).flatMap{
+		case (pow, rest2) => readExprPower(rest2).map{
+		  case (e, rest3) =>
+            if (pow == SymInt(-1)) (SymASin(e) -> rest3)
+            else (SymPow(SymSin(e), pow) -> rest3)
+		}
+	  }
+	  case "cos^" => readExpr(rest, pow=true).flatMap{
+		case (pow, rest2) => readExprPower(rest2).map{
+		  case (e, rest3) =>
+            if (pow == SymInt(-1)) (SymACos(e) -> rest3)
+            else (SymPow(SymCos(e), pow) -> rest3)
+		}
+	  }
+	  case "tan^" => readExpr(rest, pow=true).flatMap{
+		case (pow, rest2) => readExprPower(rest2).map{
+		  case (e, rest3) =>
+            if (pow == SymInt(-1)) (SymATan(e) -> rest3)
+            else (SymPow(SymTan(e), pow) -> rest3)
+		}
+	  }
 	  case "ln" => readExprPower(rest).map{
 		case (e, rest2) => (SymLog(e) -> rest2)
 	  }
@@ -201,6 +227,9 @@ object Parse {
   
   // Given that str starts with a latex command, return the segments of the command
   // (a list of the command and arguments), and the remainder of the string
+  @JSExportTopLevel("readSegments")
+  def readSegments(str: String) = println(readLatexSegments(str).toString())
+
   def readLatexSegments(str: String): (List[String], String) = {
 	// Characters that should not appear in the name of the command,
 	// but can of couse appear in the command arguments
@@ -218,6 +247,12 @@ object Parse {
 	  }
 	  case '{' => level += 1
 	  case '}' => level -= 1
+
+      // If sin^x / cos^x / log_x return List("sin^") and "x ..."
+      case '^' | '_' if parts.isEmpty && level == 0 => {
+        return (List(str.substring(start, i + 1)), str.substring(i + 1))
+      }
+      // If still reading the command name
 	  case c if parts.isEmpty && !(badChars contains c) => ()
 		
 	  // If the level is 0 and the character isn't "{", it must be the end of the command
