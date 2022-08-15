@@ -46,7 +46,10 @@ object Main {
 
   @JSExportTopLevel("simplify")
   def mainSimple(str: String) {
-    println(Parse.parseLatex(str).get.pipe(simplify))
+    Parse.parseLatex(str) match {
+      case Some(e) => println(simplify(e))
+      case None => println("Invalid expression!")
+    }
   }
   
 }

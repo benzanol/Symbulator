@@ -268,6 +268,15 @@ case class TanP(pat: Pattern = AnyP()) extends Pattern {
   }
 }
 
+case class TrigP(pat: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymSin(a) => matchSeveral((a -> pat))
+    case SymCos(a) => matchSeveral((a -> pat))
+    case SymTan(a) => matchSeveral((a -> pat))
+    case _ => Seq[Binding]()
+  }
+}
+
 case class ASinP(pat: Pattern = AnyP()) extends Pattern {
   def matches(e: Sym): Seq[Binding] = e match {
     case SymASin(a) => matchSeveral((a -> pat))

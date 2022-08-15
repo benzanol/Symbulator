@@ -228,12 +228,12 @@ object Simplify {
   }
 
   /// Inverse trig functions
- sRules.+("ASin of Sin"){ ASinP(SinP('a)) }{ case (a: Sym) => a }
- sRules.+("ACos of Cos"){ ACosP(CosP('a)) }{ case (a: Sym) => a }
- sRules.+("ATan of Tan"){ ATanP(TanP('a)) }{ case (a: Sym) => a }
- sRules.+("Sin of ASin"){ SinP(ASinP('a)) }{ case (a: Sym) => a }
- sRules.+("Cos of ACos"){ CosP(ACosP('a)) }{ case (a: Sym) => a }
- sRules.+("Tan of ATan"){ TanP(ATanP('a)) }{ case (a: Sym) => a }
+  sRules.+("ASin of Sin"){ ASinP(SinP('a)) }{ case (a: Sym) => a }
+  sRules.+("ACos of Cos"){ ACosP(CosP('a)) }{ case (a: Sym) => a }
+  sRules.+("ATan of Tan"){ ATanP(TanP('a)) }{ case (a: Sym) => a }
+  sRules.+("Sin of ASin"){ SinP(ASinP('a)) }{ case (a: Sym) => a }
+  sRules.+("Cos of ACos"){ CosP(ACosP('a)) }{ case (a: Sym) => a }
+  sRules.+("Tan of ATan"){ TanP(ATanP('a)) }{ case (a: Sym) => a }
 
   /// Simplifying infinities
 
@@ -285,6 +285,64 @@ object Simplify {
       if (e.constant > 0) SymNegativeInfinity()
       else if (e.constant < 0) 0
       else SymUndefined()
+  }
+
+  /// Trig values
+  def sineValues = Map[Sym, Sym](
+    0.s -> 0,
+    1~6 -> 1~2,
+    1~4 -> **(1~2, ^(2, 1~2)),
+    1~3 -> **(1~2, ^(3, 1~2)),
+    1~2 -> 1,
+    2~3 -> **(1~2, ^(3, 1~2)),
+    3~4 -> **(1~2, ^(2, 1~2)),
+    5~6 -> 1~2,
+    1.s -> 0,
+    7~6 -> -1~2,
+    5~4 -> **(-1~2, ^(2, 1~2)),
+    4~3 -> **(-1~2, ^(3, 1~2)),
+    3~2 -> -1,
+    5~3 -> **(-1~2, ^(3, 1~2)),
+    7~4 -> **(-1~2, ^(2, 1~2)),
+    11~6 -> -1~2,
+  )
+
+  def arcsineValues = Map[Sym, Sym](
+    -1.s                -> 3~2,
+    **(-1~2, ^(3, 1~2)) -> 4~3,
+    **(-1~2, ^(2, 1~2)) -> 5~4,
+    -1~2                -> 7~6,
+    0.s                 -> 0.s,
+    1~2                 -> 1~6,
+    **(1~2, ^(2, 1~2))  -> 1~4,
+    **(1~2, ^(3, 1~2))  -> 1~3,
+    1.s                 -> 1~2,
+  )
+
+  sRules.+("Sine constants"){ 'w @@ SinP('e) }{
+    case (e: Sym, w: Sym) =>
+      val coefficient = simplify(**(e, ^(Pi, -1)))
+      sineValues.getOrElse(coefficient, w)
+  }
+
+  sRules.+("Cosine constants"){ 'w @@ CosP('e) }{
+    case (e: Sym, w: Sym) =>
+      val shifted = simplify(++(**(e, ^(Pi, -1)), 1~2))
+      sineValues.getOrElse(shifted, w)
+  }
+
+  sRules.+("Sine, cosine, and tan are cyclic"){
+    'w @@ TrigP(ProdP('f @@ RatP() |> { f: SymR => f.n >= (f.d * 2) }, =?(SymPi())))
+  }{ case (f: SymR, w: Sym) => w.instance(**(Pi, SymR(f.n % (f.d * 2), f.d))) }
+
+  sRules.+("Sine inverse constants"){ 'w @@ ASinP('e) }{
+    case (e: Sym, w: Sym) =>
+      arcsineValues.get(e).map{ e => **(++(e, **(2, 'k)), Pi) }.getOrElse(w)
+  }
+
+  sRules.+("Cosine inverse constants"){ 'w @@ ACosP('e) }{
+    case (e: Sym, w: Sym) =>
+      arcsineValues.get(e).map{ e => **(++(-1~2, e, **(2, 'k)), Pi) }.getOrElse(w)
   }
 
   /// Integral rules
