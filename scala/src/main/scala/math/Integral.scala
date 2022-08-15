@@ -15,6 +15,9 @@ import java.lang.module.ModuleDescriptor.Exports
 object Integral {
   import ui.CalcSolver.CalcSolution
 
+  // Maximum number of nested integral solvers before quitting
+  val maxDepth = 15
+
   abstract class IntegralRule(val integral: Sym) extends CalcSolution {
     // Return an expression containing integrals, which when solved,
     // can be sent to `backward` to get the integral of `in`
@@ -79,7 +82,7 @@ object Integral {
     )
   }
 
-  class IntegralSolver(val expr: Sym) {
+  class IntegralSolver(val expr: Sym, depth: Int = 1) {
     private var index = 0
 
     private var solution: Option[Option[IntegralRule]] =
@@ -90,7 +93,7 @@ object Integral {
       else IntegralRules.allRules(expr).map(_ -> None)
 
     def step(): Option[Option[IntegralRule]] = {
-      if (solution.isDefined) {}
+      if (solution.isDefined || depth == maxDepth) {}
       else if (rules.isEmpty) solution = Some(None)
       // Progress the current rule as determined by `index`
       else rules(index) match {
@@ -112,7 +115,9 @@ object Integral {
         // If there is no active solver, figure out if there are remaining integrals
         case (r, None) => r.nextIntegral(r.expression) match {
           // If there is another integral, create a new solver for it
-          case Some(next) => rules = rules.updated(index, r -> Some(new IntegralSolver(next)))
+          case Some(next) => rules = rules.updated(index,
+            r -> Some(new IntegralSolver(next, depth + 1))
+          )
           // If there are no new integrals, the expression is solved
           case None => solution = Some(Some(r))
         }

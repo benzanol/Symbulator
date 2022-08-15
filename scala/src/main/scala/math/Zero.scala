@@ -14,6 +14,9 @@ object Zero {
   import ui.CalcSolver.CalcSolution
   import JsUtils._
 
+  // Maximum number of nested zero solvers
+  val maxDepth = 15
+
   type Eqn = SymEquation
 
   trait ZeroRule extends CalcSolution {
@@ -65,7 +68,10 @@ object Zero {
 
   def oppositeExpression(e: Eqn): Eqn = SymEquation(e.right, e.left)
 
-  class ZeroSolver(val expr: Eqn, history: mutable.Set[Eqn] = mutable.Set[Eqn]()) {
+  class ZeroSolver(val expr: Eqn,
+    history: mutable.Set[Eqn] = mutable.Set[Eqn](),
+    depth: Int = 1
+  ) {
     // Add the expression and its opposite to the history so they are never referenced again
     history.addAll(Seq(expr, oppositeExpression(expr)))
 
@@ -84,7 +90,7 @@ object Zero {
           // the history, pairing each with its own solver
           queue = ZeroRules.allRules(expr)
             .filter{ r => !history.contains(r.expr2) }
-            .map{ r => (r, new ZeroSolver(r.expr2, history)) }
+            .map{ r => (r, new ZeroSolver(r.expr2, history, depth + 1)) }
 
           // Indicate that the queue has now been created
           index = 0
@@ -95,7 +101,8 @@ object Zero {
       }
 
     def step(): (Seq[ZeroRule], Boolean) =
-      if (index == -1) firstStep()
+      if (depth == maxDepth) (Nil, false)
+      else if (index == -1) firstStep()
       else if (queue.isEmpty) (Nil, false)
       else {
         val next = queue(index)
