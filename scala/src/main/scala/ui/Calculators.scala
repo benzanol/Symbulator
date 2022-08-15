@@ -200,7 +200,9 @@ object CalcSolver {
       for (z <- stepped._1)
         if (allZeros.find(_.endResult.get == z.endResult.get).isEmpty) {
           val apps = z.endResult.get.expanded.map(_.approx())
-          if (apps.find(!_.isFinite).isEmpty && apps.find(approxes.contains(_)).isEmpty) {
+          if (apps.find(!_.isFinite).isEmpty && apps.find{a =>
+            approxes.find(a - _ < 0.000001).isDefined
+          }.isEmpty) {
             allZeros :+= z
             approxes ++= z.endResult.get.expanded.map(_.approx())
           }

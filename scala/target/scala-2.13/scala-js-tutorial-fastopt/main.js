@@ -22011,18 +22011,22 @@ $c_Lsympany_ui_CalcSolver$AsyncZeroSolver.prototype.step__T2 = (function() {
       if ((apps.find__F1__s_Option(new $c_sjsr_AnonFunction1(((x$6$2) => {
         var x$6 = $uD(x$6$2);
         return (!((x$6 === x$6) && (!((x$6 === Infinity) || (x$6 === (-Infinity))))))
-      }))).isEmpty__Z() && apps.find__F1__s_Option(new $c_sjsr_AnonFunction1(((this$4$1) => ((x$7$2) => {
-        var x$7 = $uD(x$7$2);
-        return this$4$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_approxes.contains__O__Z(x$7)
+      }))).isEmpty__Z() && apps.find__F1__s_Option(new $c_sjsr_AnonFunction1(((this$4$1) => ((a$2) => {
+        var a = $uD(a$2);
+        var this$8 = this$4$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_approxes.find__F1__s_Option(new $c_sjsr_AnonFunction1(((a$1) => ((x$7$2) => {
+          var x$7 = $uD(x$7$2);
+          return ((a$1 - x$7) < 1.0E-6)
+        }))(a)));
+        return (!this$8.isEmpty__Z())
       }))(this$1))).isEmpty__Z())) {
-        var this$7 = this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_allZeros;
-        this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_allZeros = $as_sci_Seq(this$7.appended__O__O(z));
-        var this$8 = this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_approxes;
+        var this$9 = this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_allZeros;
+        this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_allZeros = $as_sci_Seq(this$9.appended__O__O(z));
+        var this$10 = this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_approxes;
         var that = $as_sc_IterableOnce($as_Lsympany_Sym(z.endResult__s_Option().get__O()).expanded__sci_Seq().map__F1__O(new $c_sjsr_AnonFunction1(((x$8$2) => {
           var x$8 = $as_Lsympany_Sym(x$8$2);
           return x$8.approx__sci_Seq__D($m_sci_Nil$())
         }))));
-        this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_approxes = $as_sci_Set(this$8.concat__sc_IterableOnce__sc_SetOps(that))
+        this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_approxes = $as_sci_Set(this$10.concat__sc_IterableOnce__sc_SetOps(that))
       }
     }
   }))(this)));

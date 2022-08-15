@@ -197,7 +197,6 @@ trait Sym {
   def at(x: Double): Double = this.approx('x -> x)
 
 
-
   def isFinite: Boolean = true
 
   //lazy val simple: Sym = Simplify.simplify(this)
