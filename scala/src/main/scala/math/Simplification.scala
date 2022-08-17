@@ -12,7 +12,7 @@ object Simplify {
   val sRules = new Rules[Sym]()
   
   def simplify(expr: Sym): Sym = {
-    //println("Simplify", expr)
+    println("Simplify", expr)
     expr.mapExprs(simplify).pipe{e =>
       sRules.first(e) match {
         case Some(simpler) => simplify(simpler)
@@ -24,7 +24,10 @@ object Simplify {
   def separateRoot(base: SymInt, root: SymInt): (SymInt, SymInt) =
     ( base.primeFactors.toList.foldLeft(1.s){ (a, t) => a * (t._1 ^ SymInt(t._2.n / root.n)) },
       base.primeFactors.toList.foldLeft(1.s){ (a, t) => a * (t._1 ^ SymInt(t._2.n % root.n)) }
-    )
+    ) match {
+      case (o, i) if (base.toInt < 0) => (SymInt(-1 * o.toInt), i)
+      case t => t
+    }
 
   sRules.+("x^0 = 1"){
     PowP(__, =#?(0))
@@ -53,13 +56,16 @@ object Simplify {
   sRules.+("Factor powers out of roots"){
     'whole @@ PowP(RatP('n, 'd), FracP(=#?(1), 'root))
   }{ case (d: SymInt, n: SymInt, root: SymInt, whole: Sym) =>
-      List(n, d).map(separateRoot(_, root)) match {
+      // Imaginary numbers
+      if ((d < 0 ^ n < 0) && root.toInt % 2 == 0) SymUndefined()
+      else List(n, d).map(separateRoot(_, root)) match {
+        // Outside/inside numerator outside/inside denominator
         case List((on, in), (od, id)) =>
           if (on == 1.s && od == 1.s) whole
-          else **(on~od, ^((SymR(n.n.abs, d.n.abs) / (n~d)) * in~id, 1~root))
+          else **(on~od, ^(in~id, 1~root))
       }
   }
-  
+
   // (n/d) ^ (p/root) = (n^p)/(d^p) ^ (1/root)
   sRules.+("Simplify rational powers of rational bases"){
     PowP(AsProdP(RatP('n, 'd), 'r @@ __*), 'pow @@ RatP('p |> { (_:SymInt) != 1.s }, 'root))

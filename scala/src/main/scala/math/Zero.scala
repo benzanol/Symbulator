@@ -140,10 +140,6 @@ object ZeroPatterns {
 
   rules.+("Identity"){ EquationP(XP, noxP('a)) }{ case (a: Sym) => Seq(a) }
 
-  rules.+("When \\(x^p = 0\\), \\(x = 0\\) unless \\(p = 0\\)"){
-    EquationP(AsPowP(XP, noxP('p)), =?(0))
-  }{ case (p: Sym) => if (p == SymInt(0)) Nil else Seq(0) }
-
   rules.+("Quadratic formula:<br/>\\(x=\\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}\\)"){
     EquationP(SumP(
       @?('as) @@ Repeat(AsProdP(PowP(XP, =#?(2)), Repeat(noxP())), min=1), // Any number of a*x^2
