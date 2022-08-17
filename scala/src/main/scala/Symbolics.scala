@@ -237,6 +237,8 @@ case class SymEquation(left: Sym, right: Sym) extends SymSpecial {
   lazy val exprs = Seq(left, right)
   def instance(args: Sym*) = SymEquation(args(0), args(1))
 
+  override def approx(env: Bind*) = ++(left, **(-1, right)).approx(env:_*)
+
   override def toString = left.toString + " = " + right.toString
 }
 

@@ -184,7 +184,7 @@ object CalcSolver {
 
 
   class AsyncZeroSolver(left: Sym, right: Sym) extends AsyncSolver {
-    private val solver = new Zero.ZeroSolver(
+    val solver = new Zero.ZeroSolver(
       SymEquation(left.replaceExpr(SymVar('x), Sym.X), right.replaceExpr(SymVar('x), Sym.X))
     )
 
@@ -213,7 +213,14 @@ object CalcSolver {
   }
 
   class ZeroResult(n: String)(field: String) extends ResultField(n)(field) {
-    def makeSolver(es: Seq[Seq[Sym]]) = new AsyncZeroSolver(es(0)(0), 0)
+    def makeSolver(es: Seq[Seq[Sym]]) = es(0)(0) match {
+      case SymEquation(l, r) => new AsyncZeroSolver(l, r)
+      case e => new AsyncZeroSolver(e, 0)
+    }
+
+    override def innerTitle =
+      for (s <- solver)
+      yield f"Solutions to \\(${s.asInstanceOf[AsyncZeroSolver].solver.expr.toLatex}\\):"
 
     override def points: Seq[(Sym, Sym, Sym)] = {
       for (es <- expressions.toSeq ; e <- es ; s <- solutions ; s1 <- s.solution.expanded)
@@ -224,7 +231,7 @@ object CalcSolver {
   class IntersectionResult(n: String)(f0: String, f1: String) extends ResultField(n)(f0, f1) {
     def makeSolver(es: Seq[Seq[Sym]]) = new AsyncZeroSolver(es(0)(0), es(1)(0))
 
-    override val title: String = "Intersections:"
+    override def outerTitle = Some("Intersections:")
 
     override def points: Seq[(Sym, Sym, Sym)] = {
       for (es <- expressions.toSeq ; e <- es ; s <- solutions ; s1 <- s.solution.expanded)
@@ -236,7 +243,7 @@ object CalcSolver {
   class AreaBetweenCurvesResult(n: String)(e1: String, e2: String, i1: String, i2: String, ps: String)
       extends ResultField(n)(e1, e2, i1, i2, ps) {
 
-    override val title: String = "Area Between Functions:"
+    override def outerTitle = Some("Area Between Functions:")
 
     def makeSolver(es: Seq[Seq[Sym]]) = es match {
       case Seq(Seq(e1), Seq(e2), Seq(i1), Seq(i2), ps) if ps.flatMap(_.expanded).length >= 2 =>
@@ -460,38 +467,48 @@ object CalcFields {
     }
 
 
+    // Text displayed above the solutions box. Making it a function
+    // allows overrides to be loaded before updateNode is called
+    def outerTitle: Option[String] = None
+    def innerTitle: Option[String] = None
+
     // Generate the dom representation
     val node: dom.Element = makeElement("div")
     updateNode()
 
-    val title: String = ""
-
     private def updateNode() {
-      node.replaceChildren(
-        makeElement("p", "innerHTML" -> title, "class" -> "result-title")
-          ,
-        if (expressions.isEmpty && title == "") makeElement("p")
+      node.replaceChildren(makeElement("br"))
+
+      // If there is an outer title, add it as a node
+      for (t <- outerTitle) node.appendChild(stringToNode(t, cls = "outer-result-title"))
+
+      // Add the main result area
+      node.appendChild(
+        if (expressions.isEmpty && outerTitle.isEmpty) makeElement("p")
         else makeElement("div", "class" -> "result-contents", "children" -> Seq(
+          // The light gray box containing all solutions
           makeElement("div",
             "class" -> "result-solutions",
             "children" -> {
-              if (expressions.isEmpty)
-                Seq(makeElement("p",
-                  "class" -> "result-description",
-                  "innerText" -> "Enter equations"
-                ))
-              else if (!solving && solutions.isEmpty)
-                Seq(makeElement("p",
-                  "class" -> "result-description",
-                  "innerText" -> "No solutions found ):"
-                ))
-              else {
-                solutions.map(_.node) ++
-                Option.when(solving)(makeElement("p",
-                  "class" -> "result-description",
-                  "innerText" -> "Solving..."
-                )).toSeq
-              }
+              innerTitle.map(stringToNode(_, cls = "inner-result-title")).toSeq ++ (
+                if (expressions.isEmpty)
+                  Seq(makeElement("p",
+                    "class" -> "result-description",
+                    "innerText" -> "Enter equations"
+                  ))
+                else if (!solving && solutions.isEmpty)
+                  Seq(makeElement("p",
+                    "class" -> "result-description",
+                    "innerText" -> "No solutions found ):"
+                  ))
+                else {
+                  solutions.map(_.node) ++
+                  Option.when(solving)(makeElement("p",
+                    "class" -> "result-description",
+                    "innerText" -> "Solving..."
+                  )).toSeq
+                }
+              )
             }
           )
         ))

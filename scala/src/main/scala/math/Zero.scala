@@ -8,6 +8,7 @@ import sympany.math.Simplify.simplify
 import sympany.Sym._
 import sympany.Pattern._
 import org.scalajs.dom.Node
+import org.scalajs.dom.Element
 
 
 object Zero {
@@ -44,14 +45,14 @@ object Zero {
     )
   }
 
-  class FinalZeroRule(expr: Eqn, zero: Sym, description: String) extends ZeroRule {
+  class FinalZeroRule(val expr: Eqn, zero: Sym, description: String) extends ZeroRule {
     def ruleDescription = f"$description<br/>\\(x = ${zero.toLatex}\\)"
     def endResult = Some(zero)
     def rules = Nil
   }
 
   class IntermediateZeroRule(val expr1: Eqn, val expr2: Eqn, val description: String) extends ZeroRule {
-    def ruleDescription = f"$description<br/>\\(${expr1.toLatex} \\rightarrow ${expr2.toLatex}\\)"
+    def ruleDescription = f"$description:<br/>\\(${expr2.toLatex}\\)"
     def endResult = rules.headOption.flatMap(_.endResult)
 
     // Each intermediate zero rule in a solution will have exactly 1
@@ -193,19 +194,19 @@ object ZeroRules {
   import Zero._
 
   def allRules(orig: Eqn): Seq[IntermediateZeroRule] = {
-    for ((es, r) <- rules.allWithLabels(orig) ; s <- es.map(simplify) if s.isFinite)
+    for ((es, r) <- rules.allWithLabels(orig) ; (s, str) <- es.map{t => simplify(t._1) -> t._2} if s.isFinite)
     yield {
-      new IntermediateZeroRule(orig, s.asInstanceOf[Eqn], r.name)
+      new IntermediateZeroRule(orig, s.asInstanceOf[Eqn], if (str == "") r.name else str)
     }
   }
 
-  val rules = new Rules[Seq[Eqn]]()
+  val rules = new Rules[Seq[(Eqn, String)]]()
 
   //// Equation -> Expression
   rules.+("The solution to an equation is the zero of one side minus the other."){
     EquationP('l, 'r |> {(_: Sym) != SymInt(0)})
   }{ case (l: Sym, r: Sym) =>
-      Seq( SymEquation(simplify(++(l, **(r, -1))), 0) )
+      Seq( SymEquation(simplify(++(l, **(r, -1))), 0)  -> "")
   }
 
   //// Expression -> Equation
@@ -213,58 +214,60 @@ object ZeroRules {
     EquationP(SumP('es @@ __*), =?(0))
   }{ case (es: Seq[Sym]) =>
       for (i <- 0 until es.length if hasX(es(i)))
-      yield SymEquation(es(i), **(-1, +++(es.take(i) ++ es.drop(i + 1))))
+      yield SymEquation(es(i), **(-1, +++(es.take(i) ++ es.drop(i + 1)))) -> ""
   }
 
-  rules.+("Divide from both sides of the equation."){
-    EquationP('p @@ ProdP(__*), 'a)
-  }{ case (a: Sym, p: SymProd) =>
-      p.exprs.map{ f => SymEquation( simplify(**(p, ^(f, -1))), simplify(**(a, ^(f, -1))) ) }
+  rules.+("Divide from both sides of the equation"){
+    EquationP(ProdP('f, 'r @@ __*), 'a)
+  }{ case (a: Sym, f: Sym, r: Seq[Sym]) =>
+      Seq( SymEquation( simplify(***(r)), simplify(**(a, ^(f, -1))) ) ->
+        f"Divide \\(${f.toLatex}\\) from both sides of the equation"
+       )
   }
 
 
   //// Inverse expressions
   rules.+("Cancel out log by using it as an exponent."){
     EquationP(LogP(hasxP('a), 'b), 'c)
-  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(a, ^(b, c))) }
+  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(a, ^(b, c)) -> "") }
 
   rules.+("Get the base of a log by using a root."){
     EquationP(LogP('a, hasxP('b)), 'c)
-  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(b, ^(a, ^(c, -1)))) }
+  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(b, ^(a, ^(c, -1))) -> "") }
 
   rules.+("Cancel out a power using a root."){
     EquationP(PowP(hasxP('b), 'c), 'a)
-  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(b, ^(a, ^(c, -1)))) }
+  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(b, ^(a, ^(c, -1))) -> "") }
 
   rules.+("Cancel out an exponential using a log."){
     EquationP(PowP('b, hasxP('c)), 'a)
-  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation('c, SymLog('a, 'b))) }
+  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation('c, SymLog('a, 'b)) -> "") }
 
   //// Trig integrals
   rules.+("Use ASin to cancel out of Sin"){
     EquationP(SinP('a), 'r)
-  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymASin(r)))) }
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymASin(r))) -> "") }
   rules.+("Use ACos to cancel out of Cos"){
     EquationP(CosP('a), 'r)
-  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymACos(r)))) }
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymACos(r))) -> "") }
   rules.+("Use ATan to cancel out of Tan"){
     EquationP(TanP('a), 'r)
-  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymATan(r)))) }
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymATan(r))) -> "") }
   rules.+("Use Sin to cancel out of ASin"){
     EquationP(ASinP('a), 'r)
-  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymSin (r)))) }
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymSin (r))) -> "") }
   rules.+("Use Cos to cancel out of ACos"){
     EquationP(ACosP('a), 'r)
-  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymCos (r)))) }
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymCos (r))) -> "") }
   rules.+("Use Tan to cancel out of ATan"){
     EquationP(ATanP('a), 'r)
-  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymTan (r)))) }
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymTan (r))) -> "") }
 
 
   ///////////// Deal with this later
 
   // Divide by x until the lowest power of x is a constant
-  rules.+("x^3 + x^2 = x^2(x + 1)"){
+  rules.+("Factor \\(x\\) out of the equation"){
     EquationP('s @@ SumP(Repeat( AsProdP( AsPowP(XP, RatP()), __*), min=2 )), =?(0))
   }{ case s: SymSum =>
       val rule = new Rule[(Sym, SymR)]("Coefficient and power",
@@ -285,8 +288,7 @@ object ZeroRules {
         val newExprs = tuples.map{ case (c: Sym, p: SymR) => simplify(**(c, ^(X, p - minExpt))) }
         val divided = +++( newExprs )
 
-        if (minExpt < 0) Seq(SymEquation(divided, 0))
-        else Seq(SymEquation(X, 0), SymEquation(divided, 0))
+        Seq(SymEquation(**(^(X, minExpt), divided), 0) -> "")
       }
   }
 }

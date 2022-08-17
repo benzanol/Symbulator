@@ -189,7 +189,7 @@
         "platform": {
             "name": "jvm",
             "config": {
-                "home": "/nix/store/fc4gylc5zibb5qspcrigr4y327aafr1y-openjdk-16+36/lib/openjdk",
+                "home": "/nix/store/vw0n3crkfb3g9awsg31s7i6ri4m711wx-openjdk-17.0.1+12/lib/openjdk",
                 "options": [
                     "-Duser.dir=/home/quaviq/Documents/Programming/Scala/Calculator/scala/project/project"
                 ]
