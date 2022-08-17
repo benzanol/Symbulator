@@ -109,24 +109,31 @@ object Latex {
     case s: SymSum => s"${toLatex(s.sortedExprs.head)} + ${toLatex(Sym.+++(s.sortedExprs.tail))}"
 
     case p: SymProd =>
-      p.sortedExprs.flatMap{
+      p.sortedExprs.flatMap{ // Split up fractions into the top and bottom component
         case SymFrac(n, d) if n == 1 => Seq( ^(S(d), S(-1)) )
         case SymFrac(n, d) if d == 1 => Seq( S(n) )
         case SymFrac(n, d) => Seq( ^(S(d), S(-1)), S(n) )
         case other => Seq(other)
-      }.partitionMap{
+      }.partitionMap{ // Create 2 lists for factors on the top and bottom of the equation
         case SymPow(b, p) if isNegative(p).isDefined =>
           Right(SymPow(b, isNegative(p).get))
         case other => Left(other)
+          // Turn the tuple of lists into a length 2 list of lists so it can be iterated over
       }.pipe{ case (ns: List[Sym], ds: List[Sym]) => List[List[Sym]](ns, ds) }
+      // Add a minus sign to the beginning if -1 is in the factor list
         .map{ es => if (es contains SymInt(-1)) ("- ", es.filter(_ != SymInt(-1))) else ("", es) }
         .map{ case (str, es) => es match {
+          // If there are no factors other than -1, add 1 to the string after the sign
           case List() => str + "1"
+          // Concatenate all the factors separated by spaces
           case _ => str + ***(es).sortedExprs.map{
-            case e: SymSum => s"\\left( ${toLatex(e)} \\right)"
+            case e: SymSum => s" \\quad ( ${toLatex(e)} ) \\quad "
+            // On certain equations, the proper left and right brackets don't appear (mathquill issue)
+            //case e: SymSum => s" \\left( ${toLatex(e)} \\right) "
             case e => toLatex(e)
           }.mkString(" ")
         }}.pipe{
+          // If the denominator is 1 or -1, don't display as a fraction
           case List(n: String, "1") => n
           case List(n: String, "- 1") => "- " + n
           case List(n: String, d: String) =>
@@ -160,7 +167,7 @@ object Latex {
     case SymEquation(l, r) => s"${toLatex(l)} = ${toLatex(r)}"
     case SymVertical(x) => s"x = ${toLatex(x)}"
 
-      // Can't use \int because it shows gray boxes for definite limits
+    // Can't use \int because it shows gray boxes for definite limits
     case SymIntegral(sub) => s"∫ ${wrappedLatex(sub)}"
 
     case SymPoint(x, y) =>

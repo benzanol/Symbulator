@@ -10866,7 +10866,7 @@ $c_Lsympany_Latex$.prototype.toLatex__Lsympany_Sym__T = (function(e) {
           var x0$6 = $as_Lsympany_Sym(x0$6$2);
           if ((x0$6 instanceof $c_Lsympany_SymSum)) {
             var x2$4 = $as_Lsympany_SymSum(x0$6);
-            return (("\\left( " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(x2$4)) + " \\right)")
+            return ((" \\quad ( " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(x2$4)) + " ) \\quad ")
           } else {
             return $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(x0$6)
           }
