@@ -732,3 +732,46 @@
 [0m[[0m[0minfo[0m] [0m[0m60. Monitoring source files for scala/fastLinkJS...[0m
 [0m[[0m[0minfo[0m] [0m[0m    Press <enter> to interrupt or '?' for more options.[0m
 [0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala. This event occurred 0 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mscala / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala (previous stamp: Hash(cbdf98a1d4aec16ddefc703733b354be6c3a90ff), current stamp: Hash(73eff9a1fd547b28e0cfc2c2fae27ca6596b6343))[0m
+[0m[[0m[0mdebug[0m] [0m[0mscala / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala, 2022-Aug-16 22:08:18.454 MT),Trigger)[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala, 2022-Aug-16 22:08:18.454 MT).[0m
+[0m[[0m[0minfo[0m] [0m[0m61. Monitoring source files for scala/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m    Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala. This event occurred 1 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mscala / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala (previous stamp: Hash(73eff9a1fd547b28e0cfc2c2fae27ca6596b6343), current stamp: Hash(cbdf98a1d4aec16ddefc703733b354be6c3a90ff))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala, 2022-Aug-16 22:08:35.803 MT),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala, 2022-Aug-16 22:08:35.803 MT).[0m
+[0m[[0m[0minfo[0m] [0m[0m62. Monitoring source files for scala/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m    Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mscala / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala (previous stamp: Hash(cbdf98a1d4aec16ddefc703733b354be6c3a90ff), current stamp: Hash(6c137425129c2142def89013df94739cb3716d9f))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala, 2022-Aug-16 22:09:04.327 MT),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala, 2022-Aug-16 22:09:04.327 MT).[0m
+[0m[[0m[0minfo[0m] [0m[0m63. Monitoring source files for scala/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m    Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mscala / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala (previous stamp: Hash(6c137425129c2142def89013df94739cb3716d9f), current stamp: Hash(a530335ff09c2b8c6e6d25243f092e90d9b704be))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala, 2022-Aug-16 22:09:16.028 MT),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala, 2022-Aug-16 22:09:16.028 MT).[0m
+[0m[[0m[0minfo[0m] [0m[0m64. Monitoring source files for scala/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m    Press <enter> to interrupt or '?' for more options.[0m

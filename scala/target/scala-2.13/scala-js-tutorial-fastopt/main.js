@@ -26752,9 +26752,6 @@ $c_Lsympany_math_Zero$FinalZeroRule.prototype.solution__Lsympany_Sym = (function
   var this$1 = this.endResult__s_Some();
   return $as_Lsympany_Sym(this$1.s_Some__f_value)
 });
-$c_Lsympany_math_Zero$FinalZeroRule.prototype.insideNode__I__F1__Lorg_scalajs_dom_Element = (function(num, wrap) {
-  return $f_Lsympany_math_Zero$ZeroRule__insideNode__I__F1__Lorg_scalajs_dom_Element(this, num, wrap)
-});
 $c_Lsympany_math_Zero$FinalZeroRule.prototype.wrapFunc__Lsympany_Sym__Lsympany_Sym = (function(e) {
   return e
 });
@@ -26771,6 +26768,15 @@ $c_Lsympany_math_Zero$FinalZeroRule.prototype.ruleDescription__T = (function() {
 });
 $c_Lsympany_math_Zero$FinalZeroRule.prototype.endResult__s_Some = (function() {
   return new $c_s_Some(this.Lsympany_math_Zero$FinalZeroRule__f_zero)
+});
+$c_Lsympany_math_Zero$FinalZeroRule.prototype.insideNode__I__F1__Lorg_scalajs_dom_Element = (function(num, wrap) {
+  if ((this.Lsympany_math_Zero$FinalZeroRule__f_description === "Identity")) {
+    var $$x1 = $m_Lsympany_JsUtils$();
+    var array = [];
+    return $$x1.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
+  } else {
+    return $f_Lsympany_math_Zero$ZeroRule__insideNode__I__F1__Lorg_scalajs_dom_Element(this, num, wrap)
+  }
 });
 $c_Lsympany_math_Zero$FinalZeroRule.prototype.rules__sci_Seq = (function() {
   return $m_sci_Nil$()

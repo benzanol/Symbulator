@@ -49,6 +49,11 @@ object Zero {
     def ruleDescription = f"$description<br/>\\(x = ${zero.toLatex}\\)"
     def endResult = Some(zero)
     def rules = Nil
+
+    // Don't display the identity step (it is redundant)
+    override def insideNode(num: Int)(wrap: Sym => Sym): Element =
+      if (description == "Identity") makeElement("p")
+      else super.insideNode(num)(wrap)
   }
 
   class IntermediateZeroRule(val expr1: Eqn, val expr2: Eqn, val description: String) extends ZeroRule {
