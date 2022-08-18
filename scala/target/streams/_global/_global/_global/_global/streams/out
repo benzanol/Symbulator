@@ -2113,3 +2113,56 @@
 [0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala, 2022-Aug-17 21:22:32.489 MT).[0m
 [0m[[0m[0minfo[0m] [0m[0m178. Monitoring source files for scala/fastLinkJS...[0m
 [0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mscala / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala (previous stamp: Hash(a14047677a91ee8d58ebf8f075353878b04be89b), current stamp: Hash(7047b9a6b565ec6aa374e53a92daca0de9b9c80f))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala, 2022-Aug-17 21:27:45.781 MT),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala, 2022-Aug-17 21:27:45.781 MT).[0m
+[0m[[0m[0minfo[0m] [0m[0m179. Monitoring source files for scala/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mscala / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala (previous stamp: Hash(7047b9a6b565ec6aa374e53a92daca0de9b9c80f), current stamp: Hash(48c282fb6d3ccd44710f09acddcf1fe474836d4b))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala, 2022-Aug-17 21:27:53.012 MT),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala, 2022-Aug-17 21:27:53.012 MT).[0m
+[0m[[0m[0minfo[0m] [0m[0m180. Monitoring source files for scala/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mscala / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala (previous stamp: Hash(4902ec1a68e7c8a471be3a767fa2a6ec6aa14192), current stamp: Hash(90f1b56b8d8cbada29e62a6787a0056ac313efd4))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala, 2022-Aug-17 21:29:27.131 MT),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala, 2022-Aug-17 21:29:27.131 MT).[0m
+[0m[[0m[0minfo[0m] [0m[0m181. Monitoring source files for scala/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mscala / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala (previous stamp: Hash(48c282fb6d3ccd44710f09acddcf1fe474836d4b), current stamp: Hash(7db51bd7aed1ed7a5e341331383d41f2a1c9a41e))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala, 2022-Aug-17 21:30:10.245 MT),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala, 2022-Aug-17 21:30:10.245 MT).[0m
+[0m[[0m[0mdebug[0m] [0m[0mscala / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0minfo[0m] [0m[0m182. Monitoring source files for scala/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m
+[0m[[0m[0mdebug[0m] [0m[0mDiscarding entry for recently updated path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala. This event occurred 2 ms since the last event for this path.[0m
+[0m[[0m[0mdebug[0m] [0m[0mscala / Compile / fastLinkJS - Accepted event for /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala,FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false),FileAttributes(isDirectory = false, isOther = false,isRegularFile = true, isSymbolicLink = false))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived event for path /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreating update event for modified /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala (previous stamp: Hash(7db51bd7aed1ed7a5e341331383d41f2a1c9a41e), current stamp: Hash(aaffe86ece0485036649c3443ee73ab0914b0e55))[0m
+[0m[[0m[0mdebug[0m] [0m[0mReceived file event actions: /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala -> Trigger. Returning: (Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala, 2022-Aug-17 21:30:29.642 MT),Trigger)[0m
+[0m[[0m[0minfo[0m] [0m[0mBuild triggered by /home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala. Running 'fastLinkJS'.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [debug] Received file event Trigger for Update(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Derivative.scala, 2022-Aug-17 21:30:29.642 MT).[0m
+[0m[[0m[0minfo[0m] [0m[0m183. Monitoring source files for scala/fastLinkJS...[0m
+[0m[[0m[0minfo[0m] [0m[0m     Press <enter> to interrupt or '?' for more options.[0m

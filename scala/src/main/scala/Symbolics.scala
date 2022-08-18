@@ -170,7 +170,7 @@ object Latex {
     // Can't use \int because it shows gray boxes for definite limits
     case SymIntegral(sub) => s"∫ ${wrappedLatex(sub)}"
 
-    case SymDerivative(sub) => s"\\frac{d}{dx} ${wrappedLatex(sub)}"
+    case SymDerivative(sub) => s"\\frac{d}{dx} \\left( ${toLatex(sub)} \\right)"
 
     case SymPoint(x, y) =>
       ("(" + x.toLatex + ", \\quad \\quad " + y.toLatex + ")")

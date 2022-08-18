@@ -32,11 +32,12 @@ object Derivative {
     case (desc, forward) => new DerivativeRule(expr, forward, "➣ " + desc)
   }
   def derivativeArgs(expr: Sym): (String, Sym) = expr match {
-		case v: SymVar if v == X => ("\\(\\frac{d}{dx} (x) = 1\\)" -> 1)
+		case v: SymVar if v == X => ("The derivative of x with respect to x is 1" -> 1)
 		case SymVar(a) =>
       ("Substitute the derivative of an unknown variable with respect to x" ->
         SymVar(Symbol(s"d${a.name}/dx")))
 		case _: SymConstant => ("The derivative of a constant is 0" -> 0)
+		case e if Pattern.noX(e) => ("The derivative of a constant is 0" -> 0)
     case SymEquation(l, r) =>
       ("Take the derivative of both sides of the equation" ->
         SymEquation(SymDerivative(l), SymDerivative(r)))
@@ -45,6 +46,10 @@ object Derivative {
         +++(e.exprs.map(SymDerivative(_))))
 		case e: SymProd if e.exprs.length == 0 => ("The derivative of a constant is 0" -> 0)
 		case e: SymProd if e.exprs.length == 1 => derivativeArgs(e.exprs.head)
+    case e: SymProd if e.exprs.filter(Pattern.hasX) == 1 =>
+      ("The derivative of a constant times f(x) is the same as the constant times the derivative of f(x)" ->
+        ***(e.exprs.filter(Pattern.noX) :+ SymDerivative(e.exprs.find(Pattern.hasX).get))
+      )
 		case e: SymProd =>
       ("Product rule: \\(\\frac{d}{dx} a \\cdot b = \\frac{da}{dx} b + a \\frac{db}{dx}\\)" ->
         ++( **(SymDerivative(e.exprs.head), ***(e.exprs.tail)),
