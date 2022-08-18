@@ -21,7 +21,7 @@ object Derivative {
 
     val solution = derive(expr, X.symbol)
 
-    val rules = getDerivatives(forward).map(derivativeRule)
+    val rules = getDerivatives(forward).filter(_ != X).map(derivativeRule)
 
     def beforeNode = stringToNode(f"\\($ddx ${expr.toLatex} = ${solution.toLatex}")
     def insideNode(num: Int)(wrap: Sym => Sym) =
@@ -29,7 +29,7 @@ object Derivative {
   }
 
   def derivativeRule(expr: Sym): CalcSolution = derivativeArgs(expr) match {
-    case (desc, forward) => new DerivativeRule(expr, forward, desc)
+    case (desc, forward) => new DerivativeRule(expr, forward, "➣ " + desc)
   }
   def derivativeArgs(expr: Sym): (String, Sym) = expr match {
 		case v: SymVar if v == X => ("\\(\\frac{d}{dx} (x) = 1\\)" -> 1)
@@ -44,9 +44,7 @@ object Derivative {
       ("The derivative of a sum is the sum of the derivatives of its addends" ->
         +++(e.exprs.map(SymDerivative(_))))
 		case e: SymProd if e.exprs.length == 0 => ("The derivative of a constant is 0" -> 0)
-		case e: SymProd if e.exprs.length == 1 =>
-      ("The derivative of a product with one item is the derivative of the one item" ->
-        SymDerivative(e.exprs.head))
+		case e: SymProd if e.exprs.length == 1 => derivativeArgs(e.exprs.head)
 		case e: SymProd =>
       ("Product rule: \\(\\frac{d}{dx} a \\cdot b = \\frac{da}{dx} b + a \\frac{db}{dx}\\)" ->
         ++( **(SymDerivative(e.exprs.head), ***(e.exprs.tail)),

@@ -332,6 +332,17 @@ object CalcSolver {
         )
       }
   }
+
+
+  class AsyncDerivativeSolver(expr: Sym) extends AsyncSolver {
+    val rule = Derivative.derivativeRule(expr.replaceExpr('x, X))
+
+    def step(): (Seq[CalcSolution], Boolean) = (Seq(rule), false)
+  }
+
+  class DerivativeResult(n: String)(field: String) extends ResultField(n)(field) {
+    def makeSolver(es: Seq[Seq[Sym]]) = new AsyncDerivativeSolver(es(0)(0))
+  }
 }
 
 object CalcFields {
@@ -558,6 +569,10 @@ object Calculators {
       new EquationField("e2"),
       new BrField(),
       new IntersectionResult("i")("e1", "e2")
+    ),
+    new Calculator("Derivative")(
+      new EquationField("e1"),
+      new DerivativeResult("d")("e1")
     ),
     new Calculator("Integral")(
       new EquationField("e1"),
