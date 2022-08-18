@@ -170,6 +170,8 @@ object Latex {
     // Can't use \int because it shows gray boxes for definite limits
     case SymIntegral(sub) => s"∫ ${wrappedLatex(sub)}"
 
+    case SymDerivative(sub) => s"\\frac{d}{dx} ${wrappedLatex(sub)}"
+
     case SymPoint(x, y) =>
       ("(" + x.toLatex + ", \\quad \\quad " + y.toLatex + ")")
   }
@@ -257,12 +259,19 @@ case class SymVertical(x: Sym) extends SymSpecial {
   override def toString = "x = " + x.toString
 }
 
-//// Integral
+//// Integral/Derivative
 case class SymIntegral(expr: Sym) extends SymSpecial {
   lazy val exprs = Seq(expr)
   def instance(args: Sym*) = SymIntegral(args.head)
 
   override def toString = f"Integral($expr)"
+}
+
+case class SymDerivative(expr: Sym) extends SymSpecial {
+  lazy val exprs = Seq(expr)
+  def instance(args: Sym*) = SymDerivative(args.head)
+
+  override def toString = f"d/dx($expr)"
 }
 
 //// Point

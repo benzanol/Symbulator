@@ -80,8 +80,10 @@ object CalcSolver {
       hideBtn.addEventListener("click", (event: Any) => updateHidden(false))
       showBtn.addEventListener("click", (event: Any) => updateHidden(true ))
 
+      // Set up the buttons and fields to be hidden properly
       updateHidden(false)
 
+      // The parent element containing the nested nodes and buttons
       makeElement("div",
         "class" -> "solution-step",
         "children" -> Seq(
