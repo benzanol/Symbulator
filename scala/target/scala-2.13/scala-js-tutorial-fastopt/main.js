@@ -15621,10 +15621,6 @@ function $h_Lsympany_math_Simplify$() {
 }
 $h_Lsympany_math_Simplify$.prototype = $c_Lsympany_math_Simplify$.prototype;
 $c_Lsympany_math_Simplify$.prototype.simplify__Lsympany_Sym__Lsympany_Sym = (function(expr) {
-  var x = $ct_T2__O__O__(new $c_T2(), "Simplify", expr);
-  var this$2 = $m_s_Console$();
-  var this$3 = this$2.out__Ljava_io_PrintStream();
-  this$3.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x + "\n"));
   var f = new $c_sjsr_AnonFunction1(((expr$2$2) => {
     var expr$2 = $as_Lsympany_Sym(expr$2$2);
     return $m_Lsympany_math_Simplify$().simplify__Lsympany_Sym__Lsympany_Sym(expr$2)
@@ -15636,8 +15632,8 @@ $c_Lsympany_math_Simplify$.prototype.simplify__Lsympany_Sym__Lsympany_Sym = (fun
     var simpler = $as_Lsympany_Sym(x2.s_Some__f_value);
     return $m_Lsympany_math_Simplify$().simplify__Lsympany_Sym__Lsympany_Sym(simpler)
   } else {
-    var x$1 = $m_s_None$();
-    if ((!(x$1 === x1))) {
+    var x = $m_s_None$();
+    if ((!(x === x1))) {
       throw new $c_s_MatchError(x1)
     };
     return a
@@ -16004,6 +16000,7 @@ function $c_Lsympany_math_Zero$ZeroSolver(expr, history, depth) {
   this.Lsympany_math_Zero$ZeroSolver__f_expr = null;
   this.Lsympany_math_Zero$ZeroSolver__f_history = null;
   this.Lsympany_math_Zero$ZeroSolver__f_depth = 0;
+  this.Lsympany_math_Zero$ZeroSolver__f_fullQueue = null;
   this.Lsympany_math_Zero$ZeroSolver__f_queue = null;
   this.Lsympany_math_Zero$ZeroSolver__f_index = 0;
   this.Lsympany_math_Zero$ZeroSolver__f_expr = expr;
@@ -16013,6 +16010,7 @@ function $c_Lsympany_math_Zero$ZeroSolver(expr, history, depth) {
   var array = [expr, new $c_Lsympany_SymEquation(expr.Lsympany_SymEquation__f_right, expr.Lsympany_SymEquation__f_left)];
   var xs = $$x1.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
   history.addAll__sc_IterableOnce__scm_HashSet(xs);
+  this.Lsympany_math_Zero$ZeroSolver__f_fullQueue = $m_sci_Nil$();
   this.Lsympany_math_Zero$ZeroSolver__f_queue = $m_sci_Nil$();
   this.Lsympany_math_Zero$ZeroSolver__f_index = (-1)
 }
@@ -16040,6 +16038,7 @@ $c_Lsympany_math_Zero$ZeroSolver.prototype.firstStep__T2 = (function() {
       var r$3 = $as_Lsympany_math_Zero$IntermediateZeroRule(r$3$2);
       return $ct_T2__O__O__(new $c_T2(), r$3, new $c_Lsympany_math_Zero$ZeroSolver(r$3.Lsympany_math_Zero$IntermediateZeroRule__f_expr2, this$2$1.Lsympany_math_Zero$ZeroSolver__f_history, ((1 + this$2$1.Lsympany_math_Zero$ZeroSolver__f_depth) | 0)))
     }))(this))));
+    this.Lsympany_math_Zero$ZeroSolver__f_fullQueue = this.Lsympany_math_Zero$ZeroSolver__f_queue;
     this.Lsympany_math_Zero$ZeroSolver__f_index = 0;
     return $ct_T2__O__O__(new $c_T2(), $m_sci_Nil$(), true)
   };
@@ -16062,6 +16061,14 @@ $c_Lsympany_math_Zero$ZeroSolver.prototype.step__T2 = (function() {
       this.Lsympany_math_Zero$ZeroSolver__f_index = 0
     } else {
       this.Lsympany_math_Zero$ZeroSolver__f_index = $intMod(((1 + this.Lsympany_math_Zero$ZeroSolver__f_index) | 0), this.Lsympany_math_Zero$ZeroSolver__f_queue.length__I())
+    };
+    var x = stepped._1__O();
+    var x$2 = $m_sci_Nil$();
+    if ((!((x !== null) && $dp_equals__O__Z(x, x$2)))) {
+      var x$1 = stepped._1__O();
+      var this$3 = $m_s_Console$();
+      var this$4 = this$3.out__Ljava_io_PrintStream();
+      this$4.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x$1 + "\n"))
     };
     return $ct_T2__O__O__(new $c_T2(), $as_sc_IterableOps(stepped._1__O()).map__F1__O(new $c_sjsr_AnonFunction1(((next$1) => ((r$2) => {
       var r = $as_Lsympany_math_Zero$ZeroRule(r$2);
@@ -16164,17 +16171,33 @@ $c_Lsympany_math_ZeroPatterns$.prototype.basicZeros__Lsympany_SymEquation__sci_S
   return $as_sci_Seq(this.Lsympany_math_ZeroPatterns$__f_rules.allWithLabels__Lsympany_Sym__sci_Seq($m_Lsympany_math_Simplify$().simplify__Lsympany_Sym__Lsympany_Sym(eqn)).withFilter__F1__sc_WithFilter(new $c_sjsr_AnonFunction1(((check$ifrefutable$1$2) => {
     var check$ifrefutable$1 = $as_T2(check$ifrefutable$1$2);
     return (check$ifrefutable$1 !== null)
-  }))).flatMap__F1__O(new $c_sjsr_AnonFunction1(((eqn$1) => ((x$2$2) => {
-    var x$2 = $as_T2(x$2$2);
-    if ((x$2 !== null)) {
-      var zs = $as_sci_Seq(x$2._1__O());
-      var r = $as_Lsympany_Rule(x$2._2__O());
-      return $as_sc_IterableOnce(zs.map__F1__O(new $c_sjsr_AnonFunction1(((eqn$1$1, r$1) => ((z$2) => {
+  }))).flatMap__F1__O(new $c_sjsr_AnonFunction1(((eqn$1) => ((x$3$2) => {
+    var x$3 = $as_T2(x$3$2);
+    if ((x$3 !== null)) {
+      var zs = $as_sci_Seq(x$3._1__O());
+      var r = $as_Lsympany_Rule(x$3._2__O());
+      return $as_sc_IterableOnce(zs.withFilter__F1__sc_WithFilter(new $c_sjsr_AnonFunction1(((eqn$1$1) => ((z$2) => {
         var z = $as_Lsympany_Sym(z$2);
-        return new $c_Lsympany_math_Zero$FinalZeroRule(eqn$1$1, $m_Lsympany_math_Simplify$().simplify__Lsympany_Sym__Lsympany_Sym(z), r$1.Lsympany_Rule__f_name)
+        var this$12 = $m_Lsympany_Sym$();
+        var $$x1 = eqn$1$1.Lsympany_SymEquation__f_left;
+        var this$8 = $m_Lsympany_Sym$();
+        var array = [new $c_Lsympany_Sym$ImplicitSymInt((-1)), eqn$1$1.Lsympany_SymEquation__f_right];
+        var es = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array);
+        var array$1 = [$$x1, this$8.$times$times$times__sci_Seq__Lsympany_SymProd(es)];
+        var es$1 = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1);
+        var stabilizer$1 = this$12.$plus$plus$plus__sci_Seq__Lsympany_SymSum(es$1);
+        var self = $m_Lsympany_Sym$().X__Lsympany_SymVar().Lsympany_SymVar__f_symbol;
+        var y = z.approx__sci_Seq__D($m_sci_Nil$());
+        var array$2 = [$ct_T2__O__O__(new $c_T2(), self, y)];
+        var env = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2);
+        var x = $f_Lsympany_SymOp__approx__sci_Seq__D(stabilizer$1, env);
+        return ($uD(Math.abs(x)) < 1.0E-8)
+      }))(eqn$1))).map__F1__O(new $c_sjsr_AnonFunction1(((eqn$1$2, r$1) => ((z$3$2) => {
+        var z$3 = $as_Lsympany_Sym(z$3$2);
+        return new $c_Lsympany_math_Zero$FinalZeroRule(eqn$1$2, $m_Lsympany_math_Simplify$().simplify__Lsympany_Sym__Lsympany_Sym(z$3), r$1.Lsympany_Rule__f_name)
       }))(eqn$1, r))))
     } else {
-      throw new $c_s_MatchError(x$2)
+      throw new $c_s_MatchError(x$3)
     }
   }))(eqn))))
 });
@@ -16185,21 +16208,21 @@ $c_Lsympany_math_ZeroPatterns$.prototype.quadraticFormula__sci_Seq__sci_Seq__sci
   var this$13 = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(elems);
   var f = ((es$2) => {
     var es = $as_sci_Seq(es$2);
-    var realEs = $as_sci_Seq(es.map__F1__O(new $c_sjsr_AnonFunction1(((x$3$2) => {
-      var x$3 = $as_Lsympany_Sym(x$3$2);
-      if ((x$3 instanceof $c_Lsympany_SymProd)) {
-        var x2 = $as_Lsympany_SymProd(x$3);
+    var realEs = $as_sci_Seq(es.map__F1__O(new $c_sjsr_AnonFunction1(((x$4$2) => {
+      var x$4 = $as_Lsympany_Sym(x$4$2);
+      if ((x$4 instanceof $c_Lsympany_SymProd)) {
+        var x2 = $as_Lsympany_SymProd(x$4);
         var a = x2.exprs__sci_Seq().filter__F1__O(new $c_sjsr_AnonFunction1(((e$2) => {
           var e = $as_Lsympany_Sym(e$2);
           return $m_Lsympany_Pattern$().noX__Lsympany_Sym__Z(e)
         })));
         var es$1 = $as_sci_Seq(a);
         return $m_Lsympany_Sym$().$times$times$times__sci_Seq__Lsympany_SymProd(es$1)
-      } else if ($m_Lsympany_Pattern$().hasX__Lsympany_Sym__Z(x$3)) {
+      } else if ($m_Lsympany_Pattern$().hasX__Lsympany_Sym__Z(x$4)) {
         var this$10 = $m_s_math_BigInt$();
         return $ct_Lsympany_SymInt__s_math_BigInt__(new $c_Lsympany_SymInt(), this$10.apply__I__s_math_BigInt(1))
       } else {
-        return x$3
+        return x$4
       }
     }))));
     var a$1 = $m_Lsympany_Sym$().$plus$plus$plus__sci_Seq__Lsympany_SymSum(realEs);
@@ -16222,26 +16245,26 @@ $c_Lsympany_math_ZeroPatterns$.prototype.quadraticFormula__sci_Seq__sci_Seq__sci
     var x1 = h
   };
   matchEnd4: {
-    var x$4___1;
-    var x$4___2;
-    var x$4___3;
+    var x$5___1;
+    var x$5___2;
+    var x$5___3;
     if ((x1 !== null)) {
       $m_sci_List$();
       if (((new $c_sc_SeqFactory$UnapplySeqWrapper(x1), true) && (x1.lengthCompare__I__I(3) === 0))) {
         var a$2 = $as_Lsympany_Sym($f_sc_LinearSeqOps__apply__I__O(x1, 0));
         var b = $as_Lsympany_Sym($f_sc_LinearSeqOps__apply__I__O(x1, 1));
         var c = $as_Lsympany_Sym($f_sc_LinearSeqOps__apply__I__O(x1, 2));
-        var x$4___1 = a$2;
-        var x$4___2 = b;
-        var x$4___3 = c;
+        var x$5___1 = a$2;
+        var x$5___2 = b;
+        var x$5___3 = c;
         break matchEnd4
       }
     };
     throw new $c_s_MatchError(x1)
   };
-  var a$2$1 = $as_Lsympany_Sym(x$4___1);
-  var b$2 = $as_Lsympany_Sym(x$4___2);
-  var c$2 = $as_Lsympany_Sym(x$4___3);
+  var a$2$1 = $as_Lsympany_Sym(x$5___1);
+  var b$2 = $as_Lsympany_Sym(x$5___2);
+  var c$2 = $as_Lsympany_Sym(x$5___3);
   var this$59 = $m_Lsympany_Sym$();
   var this$48 = $m_Lsympany_Sym$();
   var this$28 = $m_Lsympany_Sym$();
@@ -16302,11 +16325,11 @@ function $c_Lsympany_math_ZeroRules$() {
   var this$3 = $m_s_Symbol$();
   var _s$1 = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$3, "r"));
   var this$7 = new $c_Lsympany_Pattern$ImplicitPatternVar(_s$1);
-  var satisfies = new $c_sjsr_AnonFunction1(((x$8$2) => {
-    var x$8 = $as_Lsympany_Sym(x$8$2);
+  var satisfies = new $c_sjsr_AnonFunction1(((x$9$2) => {
+    var x$9 = $as_Lsympany_Sym(x$9$2);
     var this$6 = $m_s_math_BigInt$();
     var x$2 = $ct_Lsympany_SymInt__s_math_BigInt__(new $c_Lsympany_SymInt(), this$6.apply__I__s_math_BigInt(0));
-    return (!((x$8 !== null) && x$8.equals__O__Z(x$2)))
+    return (!((x$9 !== null) && x$9.equals__O__Z(x$2)))
   }));
   $$x2.$plus__T__Lsympany_Pattern__F1__V("The solution to an equation is the zero of one side minus the other.", new $c_Lsympany_EquationP($$x1, new $c_Lsympany_Satisfies(this$7, satisfies)), new $c_sjsr_AnonFunction1(((x0$1$2) => {
     if ((x0$1$2 instanceof $c_T2)) {
@@ -16761,17 +16784,17 @@ function $c_Lsympany_math_ZeroRules$() {
         };
         throw new $c_s_MatchError(x0$15$2)
       })));
-      var tuples = $as_sci_Seq(x2$15.exprs__sci_Seq().map__F1__O(new $c_sjsr_AnonFunction1(((rule$1) => ((x$9$2) => {
-        var x$9 = $as_Lsympany_Sym(x$9$2);
-        return $as_T2(rule$1.first__Lsympany_Sym__s_Option(x$9).get__O())
+      var tuples = $as_sci_Seq(x2$15.exprs__sci_Seq().map__F1__O(new $c_sjsr_AnonFunction1(((rule$1) => ((x$10$2) => {
+        var x$10 = $as_Lsympany_Sym(x$10$2);
+        return $as_T2(rule$1.first__Lsympany_Sym__s_Option(x$10).get__O())
       }))(rule))));
-      var this$212 = $as_sc_IterableOnceOps(tuples.map__F1__O(new $c_sjsr_AnonFunction1(((x$10$2) => {
-        var x$10 = $as_T2(x$10$2);
-        return $as_Lsympany_SymR(x$10._2__O())
+      var this$212 = $as_sc_IterableOnceOps(tuples.map__F1__O(new $c_sjsr_AnonFunction1(((x$11$2) => {
+        var x$11 = $as_T2(x$11$2);
+        return $as_Lsympany_SymR(x$11._2__O())
       }))));
-      var f$1 = new $c_sjsr_AnonFunction1(((x$11$2) => {
-        var x$11 = $as_Lsympany_SymR(x$11$2);
-        return x$11.constant__D()
+      var f$1 = new $c_sjsr_AnonFunction1(((x$12$2) => {
+        var x$12 = $as_Lsympany_SymR(x$12$2);
+        return x$12.constant__D()
       }));
       var cmp = $m_s_math_Ordering$DeprecatedDoubleOrdering$();
       var minExpt = $as_Lsympany_SymR($f_sc_IterableOnceOps__minBy__F1__s_math_Ordering__O(this$212, f$1, cmp));
@@ -16806,14 +16829,24 @@ function $c_Lsympany_math_ZeroRules$() {
           throw new $c_s_MatchError(x0$16)
         }))(minExpt))));
         var divided = $m_Lsympany_Sym$().$plus$plus$plus__sci_Seq__Lsympany_SymSum(newExprs);
-        var $$x63 = $m_sci_Seq$();
+        var $$x64 = $m_sci_Seq$();
         var this$222 = $m_Lsympany_Sym$();
         var base$1 = $m_Lsympany_Sym$().X__Lsympany_SymVar();
         var array$23 = [new $c_Lsympany_SymPow(base$1, minExpt), divided];
         var es$5 = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$23);
         var self$13 = new $c_Lsympany_SymEquation(this$222.$times$times$times__sci_Seq__Lsympany_SymProd(es$5), new $c_Lsympany_Sym$ImplicitSymInt(0));
-        var array$24 = [$ct_T2__O__O__(new $c_T2(), self$13, "")];
-        return $as_sci_Seq($$x63.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$24)))
+        var this$225 = $m_s_math_BigInt$();
+        var x$2$1 = $ct_Lsympany_SymInt__s_math_BigInt__(new $c_Lsympany_SymInt(), this$225.apply__I__s_math_BigInt(1));
+        if (((minExpt !== null) && minExpt.equals__O__Z(x$2$1))) {
+          var y$1 = "Factor \\(x\\) out of the equation"
+        } else {
+          var arg$macro$2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(minExpt);
+          var $$x63 = $m_sc_StringOps$();
+          var array$24 = [arg$macro$2];
+          var y$1 = $$x63.format$extension__T__sci_Seq__T("Factor \\(x^{%s}\\) out of the equation", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$24))
+        };
+        var array$25 = [$ct_T2__O__O__(new $c_T2(), self$13, y$1)];
+        return $as_sci_Seq($$x64.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$25)))
       }
     } else {
       throw new $c_s_MatchError(x0$14$2)
@@ -16831,11 +16864,11 @@ $c_Lsympany_math_ZeroRules$.prototype.allRules__Lsympany_SymEquation__sci_Seq = 
   return $as_sci_Seq(this.Lsympany_math_ZeroRules$__f_rules.allWithLabels__Lsympany_Sym__sci_Seq(orig).withFilter__F1__sc_WithFilter(new $c_sjsr_AnonFunction1(((check$ifrefutable$2$2) => {
     var check$ifrefutable$2 = $as_T2(check$ifrefutable$2$2);
     return (check$ifrefutable$2 !== null)
-  }))).flatMap__F1__O(new $c_sjsr_AnonFunction1(((orig$1) => ((x$7$2) => {
-    var x$7 = $as_T2(x$7$2);
-    if ((x$7 !== null)) {
-      var es = $as_sci_Seq(x$7._1__O());
-      var r = $as_Lsympany_Rule(x$7._2__O());
+  }))).flatMap__F1__O(new $c_sjsr_AnonFunction1(((orig$1) => ((x$8$2) => {
+    var x$8 = $as_T2(x$8$2);
+    if ((x$8 !== null)) {
+      var es = $as_sci_Seq(x$8._1__O());
+      var r = $as_Lsympany_Rule(x$8._2__O());
       return $as_sc_IterableOnce($as_sc_IterableOps(es.map__F1__O(new $c_sjsr_AnonFunction1(((t$2) => {
         var t = $as_T2(t$2);
         var self = $m_Lsympany_math_Simplify$().simplify__Lsympany_Sym__Lsympany_Sym($as_Lsympany_Sym(t._1__O()));
@@ -16844,26 +16877,26 @@ $c_Lsympany_math_ZeroRules$.prototype.allRules__Lsympany_SymEquation__sci_Seq = 
       })))).withFilter__F1__sc_WithFilter(new $c_sjsr_AnonFunction1(((check$ifrefutable$3$2) => {
         var check$ifrefutable$3 = $as_T2(check$ifrefutable$3$2);
         return (check$ifrefutable$3 !== null)
-      }))).withFilter__F1__sc_WithFilter(new $c_sjsr_AnonFunction1(((x$5$2) => {
-        var x$5 = $as_T2(x$5$2);
-        if ((x$5 !== null)) {
-          var s = $as_Lsympany_Sym(x$5._1__O());
-          return s.isFinite__Z()
-        } else {
-          throw new $c_s_MatchError(x$5)
-        }
-      }))).map__F1__O(new $c_sjsr_AnonFunction1(((orig$1$1, r$1) => ((x$6$2) => {
+      }))).withFilter__F1__sc_WithFilter(new $c_sjsr_AnonFunction1(((x$6$2) => {
         var x$6 = $as_T2(x$6$2);
         if ((x$6 !== null)) {
-          var s$1 = $as_Lsympany_Sym(x$6._1__O());
-          var str = $as_T(x$6._2__O());
-          return new $c_Lsympany_math_Zero$IntermediateZeroRule(orig$1$1, $as_Lsympany_SymEquation(s$1), ((str === "") ? r$1.Lsympany_Rule__f_name : str))
+          var s = $as_Lsympany_Sym(x$6._1__O());
+          return s.isFinite__Z()
         } else {
           throw new $c_s_MatchError(x$6)
         }
+      }))).map__F1__O(new $c_sjsr_AnonFunction1(((orig$1$1, r$1) => ((x$7$2) => {
+        var x$7 = $as_T2(x$7$2);
+        if ((x$7 !== null)) {
+          var s$1 = $as_Lsympany_Sym(x$7._1__O());
+          var str = $as_T(x$7._2__O());
+          return new $c_Lsympany_math_Zero$IntermediateZeroRule(orig$1$1, $as_Lsympany_SymEquation(s$1), ((str === "") ? r$1.Lsympany_Rule__f_name : str))
+        } else {
+          throw new $c_s_MatchError(x$7)
+        }
       }))(orig$1, r))))
     } else {
-      throw new $c_s_MatchError(x$7)
+      throw new $c_s_MatchError(x$8)
     }
   }))(orig))))
 });
@@ -16904,9 +16937,9 @@ function $c_Lsympany_ui_CalcFields$Calculator(name, fields) {
   var array = [$ct_T2__O__O__(new $c_T2(), "class", "calculator")];
   this.Lsympany_ui_CalcFields$Calculator__f_element = $$x1.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
   var $$x2 = this.Lsympany_ui_CalcFields$Calculator__f_element;
-  var a = fields.map__F1__O(new $c_sjsr_AnonFunction1(((x$22$2) => {
-    var x$22 = $as_Lsympany_ui_CalcFields$CalcField(x$22$2);
-    return x$22.node__Lorg_scalajs_dom_Element()
+  var a = fields.map__F1__O(new $c_sjsr_AnonFunction1(((x$21$2) => {
+    var x$21 = $as_Lsympany_ui_CalcFields$CalcField(x$21$2);
+    return x$21.node__Lorg_scalajs_dom_Element()
   })));
   var seq = $as_sci_Seq(a);
   $$x2.replaceChildren(...$m_sjsr_Compat$().toJSVarArgsImpl__sci_Seq__sjs_js_Array(seq))
@@ -16919,9 +16952,9 @@ function $h_Lsympany_ui_CalcFields$Calculator() {
 }
 $h_Lsympany_ui_CalcFields$Calculator.prototype = $c_Lsympany_ui_CalcFields$Calculator.prototype;
 $c_Lsympany_ui_CalcFields$Calculator.prototype.step__Z = (function() {
-  return $as_sc_SeqOps(this.Lsympany_ui_CalcFields$Calculator__f_fields.map__F1__O(new $c_sjsr_AnonFunction1(((x$16$2) => {
-    var x$16 = $as_Lsympany_ui_CalcFields$CalcField(x$16$2);
-    return x$16.step__Z()
+  return $as_sc_SeqOps(this.Lsympany_ui_CalcFields$Calculator__f_fields.map__F1__O(new $c_sjsr_AnonFunction1(((x$15$2) => {
+    var x$15 = $as_Lsympany_ui_CalcFields$CalcField(x$15$2);
+    return x$15.step__Z()
   })))).contains__O__Z(true)
 });
 $c_Lsympany_ui_CalcFields$Calculator.prototype.update__V = (function() {
@@ -16929,28 +16962,28 @@ $c_Lsympany_ui_CalcFields$Calculator.prototype.update__V = (function() {
     var f = $as_Lsympany_ui_CalcFields$CalcField(f$2);
     f.update__Lsympany_ui_CalcFields$Calculator__V(this$1)
   }))(this)));
-  $m_Lsympany_ui_Graph$().setGraphs__sci_Seq__sci_Seq__sci_Seq__V($as_sci_Seq(this.Lsympany_ui_CalcFields$Calculator__f_fields.flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$17$2) => {
+  $m_Lsympany_ui_Graph$().setGraphs__sci_Seq__sci_Seq__sci_Seq__V($as_sci_Seq(this.Lsympany_ui_CalcFields$Calculator__f_fields.flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$16$2) => {
+    var x$16 = $as_Lsympany_ui_CalcFields$CalcField(x$16$2);
+    return x$16.graphs__sci_Seq()
+  })))), $as_sci_Seq(this.Lsympany_ui_CalcFields$Calculator__f_fields.flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$17$2) => {
     var x$17 = $as_Lsympany_ui_CalcFields$CalcField(x$17$2);
-    return x$17.graphs__sci_Seq()
+    return x$17.points__sci_Seq()
   })))), $as_sci_Seq(this.Lsympany_ui_CalcFields$Calculator__f_fields.flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$18$2) => {
     var x$18 = $as_Lsympany_ui_CalcFields$CalcField(x$18$2);
-    return x$18.points__sci_Seq()
-  })))), $as_sci_Seq(this.Lsympany_ui_CalcFields$Calculator__f_fields.flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$19$2) => {
-    var x$19 = $as_Lsympany_ui_CalcFields$CalcField(x$19$2);
-    return x$19.drawings__sci_Seq()
+    return x$18.drawings__sci_Seq()
   })))))
 });
 $c_Lsympany_ui_CalcFields$Calculator.prototype.getExpressions__T__s_Option = (function(name) {
-  var this$2 = this.Lsympany_ui_CalcFields$Calculator__f_fields.find__F1__s_Option(new $c_sjsr_AnonFunction1(((name$1) => ((x$20$2) => {
-    var x$20 = $as_Lsympany_ui_CalcFields$CalcField(x$20$2);
-    return (x$20.name__T() === name$1)
+  var this$2 = this.Lsympany_ui_CalcFields$Calculator__f_fields.find__F1__s_Option(new $c_sjsr_AnonFunction1(((name$1) => ((x$19$2) => {
+    var x$19 = $as_Lsympany_ui_CalcFields$CalcField(x$19$2);
+    return (x$19.name__T() === name$1)
   }))(name)));
   if (this$2.isEmpty__Z()) {
     return $m_s_None$()
   } else {
     var arg1 = this$2.get__O();
-    var x$21 = $as_Lsympany_ui_CalcFields$CalcField(arg1);
-    return x$21.results__s_Option()
+    var x$20 = $as_Lsympany_ui_CalcFields$CalcField(arg1);
+    return x$20.results__s_Option()
   }
 });
 function $as_Lsympany_ui_CalcFields$Calculator(obj) {
@@ -21555,9 +21588,9 @@ function $c_Lsympany_ui_CalcFields$EquationField(name) {
   var y$1 = $$x4.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3));
   var array$4 = [$ct_T2__O__O__(new $c_T2(), "children", y$1)];
   this.Lsympany_ui_CalcFields$EquationField__f_node = $$x5.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$4));
-  makeMQField(this.Lsympany_ui_CalcFields$EquationField__f_mqNode, $m_sjs_js_Any$().fromFunction1__F1__sjs_js_Function1(new $c_sjsr_AnonFunction1(((this$20) => ((x$23$2) => {
-    var x$23 = $as_T(x$23$2);
-    this$20.setLatex__T__V(x$23)
+  makeMQField(this.Lsympany_ui_CalcFields$EquationField__f_mqNode, $m_sjs_js_Any$().fromFunction1__F1__sjs_js_Function1(new $c_sjsr_AnonFunction1(((this$20) => ((x$22$2) => {
+    var x$22 = $as_T(x$22$2);
+    this$20.setLatex__T__V(x$22)
   }))(this))));
   this.Lsympany_ui_CalcFields$EquationField__f_latex = "";
   this.Lsympany_ui_CalcFields$EquationField__f_expression = $m_s_None$()
@@ -21593,9 +21626,9 @@ $c_Lsympany_ui_CalcFields$EquationField.prototype.results__s_Option = (function(
     return $m_s_None$()
   } else {
     var arg1 = this$1.get__O();
-    var x$24 = $as_Lsympany_Sym(arg1);
+    var x$23 = $as_Lsympany_Sym(arg1);
     var $$x1 = $m_sci_Seq$();
-    var array = [x$24];
+    var array = [x$23];
     return new $c_s_Some($as_sci_Seq($$x1.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))))
   }
 });
@@ -21657,8 +21690,8 @@ function $p_Lsympany_ui_CalcFields$ResultField__updateNode__V($thiz) {
       var $$x5 = $m_s_None$()
     } else {
       var arg1$1 = this$17.get__O();
-      var x$26 = $as_T(arg1$1);
-      var $$x5 = new $c_s_Some($m_Lsympany_JsUtils$().stringToNode__T__T__Lorg_scalajs_dom_Element(x$26, "inner-result-title"))
+      var x$25 = $as_T(arg1$1);
+      var $$x5 = new $c_s_Some($m_Lsympany_JsUtils$().stringToNode__T__T__Lorg_scalajs_dom_Element(x$25, "inner-result-title"))
     };
     var this$47 = $$x6.option2Iterable__s_Option__sc_Iterable($$x5).toSeq__sci_Seq();
     if ($thiz.Lsympany_ui_CalcFields$ResultField__f_expressions.isEmpty__Z()) {
@@ -21674,9 +21707,9 @@ function $p_Lsympany_ui_CalcFields$ResultField__updateNode__V($thiz) {
       var array$5 = [$$x9.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$4))];
       var suffix$1 = $$x10.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$5))
     } else {
-      var this$46 = $as_sc_IterableOps($thiz.Lsympany_ui_CalcFields$ResultField__f_solutions.map__F1__O(new $c_sjsr_AnonFunction1(((x$27$2) => {
-        var x$27 = $as_Lsympany_ui_CalcSolver$CalcSolution(x$27$2);
-        return x$27.node__Lorg_scalajs_dom_Node()
+      var this$46 = $as_sc_IterableOps($thiz.Lsympany_ui_CalcFields$ResultField__f_solutions.map__F1__O(new $c_sjsr_AnonFunction1(((x$26$2) => {
+        var x$26 = $as_Lsympany_ui_CalcSolver$CalcSolution(x$26$2);
+        return x$26.node__Lorg_scalajs_dom_Node()
       }))));
       var $$x13 = $m_s_Option$();
       var cond = $thiz.Lsympany_ui_CalcFields$ResultField__f_solving;
@@ -21745,9 +21778,9 @@ $c_Lsympany_ui_CalcFields$ResultField.prototype.name__T = (function() {
 $c_Lsympany_ui_CalcFields$ResultField.prototype.results__s_Option = (function() {
   var this$1 = this.Lsympany_ui_CalcFields$ResultField__f_solver;
   var cond = (!this$1.isEmpty__Z());
-  return (cond ? new $c_s_Some($as_sci_Seq(this.Lsympany_ui_CalcFields$ResultField__f_solutions.map__F1__O(new $c_sjsr_AnonFunction1(((x$25$2) => {
-    var x$25 = $as_Lsympany_ui_CalcSolver$CalcSolution(x$25$2);
-    return x$25.solution__Lsympany_Sym()
+  return (cond ? new $c_s_Some($as_sci_Seq(this.Lsympany_ui_CalcFields$ResultField__f_solutions.map__F1__O(new $c_sjsr_AnonFunction1(((x$24$2) => {
+    var x$24 = $as_Lsympany_ui_CalcSolver$CalcSolution(x$24$2);
+    return x$24.solution__Lsympany_Sym()
   }))))) : $m_s_None$())
 });
 $c_Lsympany_ui_CalcFields$ResultField.prototype.update__Lsympany_ui_CalcFields$Calculator__V = (function(c) {
@@ -21815,8 +21848,8 @@ function $p_Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__drawings$lzycompute_
         var self$1 = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$8, "x"));
         var array$1 = [$ct_T2__O__O__(new $c_T2(), self$1, middleX)];
         var e1Greater = ($$x2 > $$x1.approx__sci_Seq__D($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1)));
-        return new $c_sjsr_AnonFunction1(((this$14, x1$2$1, x2$1, e1Greater$1) => ((x$15$2) => {
-          $m_Lsympany_ui_CalcSolver$().integralDrawing__Lsympany_Sym__Lsympany_Sym__Lorg_scalajs_dom_CanvasRenderingContext2D__Lsympany_Sym__Lsympany_Sym__T__V(this$14.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_e1, this$14.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_e2, x$15$2, x1$2$1, x2$1, (e1Greater$1 ? "#DD444466" : "#4444DD66"))
+        return new $c_sjsr_AnonFunction1(((this$14, x1$2$1, x2$1, e1Greater$1) => ((x$14$2) => {
+          $m_Lsympany_ui_CalcSolver$().integralDrawing__Lsympany_Sym__Lsympany_Sym__Lorg_scalajs_dom_CanvasRenderingContext2D__Lsympany_Sym__Lsympany_Sym__T__V(this$14.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_e1, this$14.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_e2, x$14$2, x1$2$1, x2$1, (e1Greater$1 ? "#DD444466" : "#4444DD66"))
         }))(this$1, x1$2, x2, e1Greater))
       } else {
         throw new $c_s_MatchError(x0$1)
@@ -21913,8 +21946,8 @@ function $c_Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver(e1, e2, i1, i2, xs) {
               var this$50 = $m_s_None$()
             } else {
               var arg1 = sub.get__O();
-              var x$14 = $as_Lsympany_ui_CalcSolver$CalcSolution(arg1);
-              var this$50 = new $c_s_Some(x$14.solution__Lsympany_Sym())
+              var x$13 = $as_Lsympany_ui_CalcSolver$CalcSolution(arg1);
+              var this$50 = new $c_s_Some(x$13.solution__Lsympany_Sym())
             };
             if (this$50.isEmpty__Z()) {
               var this$51 = $m_s_math_BigInt$();
@@ -22116,22 +22149,26 @@ $c_Lsympany_ui_CalcSolver$AsyncZeroSolver.prototype.step__T2 = (function() {
       if ((apps.find__F1__s_Option(new $c_sjsr_AnonFunction1(((x$6$2) => {
         var x$6 = $uD(x$6$2);
         return (!((x$6 === x$6) && (!((x$6 === Infinity) || (x$6 === (-Infinity))))))
-      }))).isEmpty__Z() && apps.find__F1__s_Option(new $c_sjsr_AnonFunction1(((this$4$1) => ((a$2) => {
+      }))).isEmpty__Z() && $as_sc_SeqOps(apps.flatMap__F1__O(new $c_sjsr_AnonFunction1(((this$4$1) => ((a$2) => {
         var a = $uD(a$2);
-        var this$8 = this$4$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_approxes.find__F1__s_Option(new $c_sjsr_AnonFunction1(((a$1) => ((x$7$2) => {
-          var x$7 = $uD(x$7$2);
-          return ((a$1 - x$7) < 1.0E-6)
-        }))(a)));
-        return (!this$8.isEmpty__Z())
-      }))(this$1))).isEmpty__Z())) {
-        var this$9 = this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_allZeros;
-        this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_allZeros = $as_sci_Seq(this$9.appended__O__O(z));
-        var this$10 = this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_approxes;
-        var that = $as_sc_IterableOnce($as_Lsympany_Sym(z.endResult__s_Option().get__O()).expanded__sci_Seq().map__F1__O(new $c_sjsr_AnonFunction1(((x$8$2) => {
-          var x$8 = $as_Lsympany_Sym(x$8$2);
-          return x$8.approx__sci_Seq__D($m_sci_Nil$())
+        var this$12 = this$4$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_approxes;
+        var p = new $c_sjsr_AnonFunction1(((a$1) => ((b$2) => {
+          var b = $uD(b$2);
+          var x$1 = (a$1 - b);
+          return ($uD(Math.abs(x$1)) < 1.0E-5)
+        }))(a));
+        return $as_sci_Set($ct_sc_IterableOps$WithFilter__sc_IterableOps__F1__(new $c_sc_IterableOps$WithFilter(), this$12, p).map__F1__O(new $c_sjsr_AnonFunction1(((b$3$2) => {
+          $uD(b$3$2)
+        }))))
+      }))(this$1)))).isEmpty__Z())) {
+        var this$13 = this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_allZeros;
+        this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_allZeros = $as_sci_Seq(this$13.appended__O__O(z));
+        var this$14 = this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_approxes;
+        var that = $as_sc_IterableOnce($as_Lsympany_Sym(z.endResult__s_Option().get__O()).expanded__sci_Seq().map__F1__O(new $c_sjsr_AnonFunction1(((x$7$2) => {
+          var x$7 = $as_Lsympany_Sym(x$7$2);
+          return x$7.approx__sci_Seq__D($m_sci_Nil$())
         }))));
-        this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_approxes = $as_sci_Set(this$10.concat__sc_IterableOnce__sc_SetOps(that))
+        this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_approxes = $as_sci_Set(this$14.concat__sc_IterableOnce__sc_SetOps(that))
       }
     }
   }))(this)));
@@ -26912,18 +26949,18 @@ $c_Lsympany_ui_CalcSolver$AreaBetweenCurvesResult.prototype.makeSolver__sci_Seq_
                     $m_sci_Seq$();
                     if (((new $c_sc_SeqFactory$UnapplySeqWrapper(p6), true) && (p6.lengthCompare__I__I(1) === 0))) {
                       var i2 = $as_Lsympany_Sym(p6.apply__I__O(0));
-                      if (($as_sc_SeqOps(ps.flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$9$2) => {
-                        var x$9 = $as_Lsympany_Sym(x$9$2);
-                        return x$9.expanded__sci_Seq()
+                      if (($as_sc_SeqOps(ps.flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$8$2) => {
+                        var x$8 = $as_Lsympany_Sym(x$8$2);
+                        return x$8.expanded__sci_Seq()
                       })))).length__I() >= 2)) {
-                        var this$40 = $as_sc_SeqOps(ps.flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$10$2) => {
-                          var x$10 = $as_Lsympany_Sym(x$10$2);
-                          return x$10.expanded__sci_Seq()
+                        var this$40 = $as_sc_SeqOps(ps.flatMap__F1__O(new $c_sjsr_AnonFunction1(((x$9$2) => {
+                          var x$9 = $as_Lsympany_Sym(x$9$2);
+                          return x$9.expanded__sci_Seq()
                         }))));
-                        var lt = new $c_sjsr_AnonFunction2(((x$11$2, x$12$2) => {
+                        var lt = new $c_sjsr_AnonFunction2(((x$10$2, x$11$2) => {
+                          var x$10 = $as_Lsympany_Sym(x$10$2);
                           var x$11 = $as_Lsympany_Sym(x$11$2);
-                          var x$12 = $as_Lsympany_Sym(x$12$2);
-                          return (x$11.approx__sci_Seq__D($m_sci_Nil$()) < x$12.approx__sci_Seq__D($m_sci_Nil$()))
+                          return (x$10.approx__sci_Seq__D($m_sci_Nil$()) < x$11.approx__sci_Seq__D($m_sci_Nil$()))
                         }));
                         return new $c_Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver(e1, e2, i1, i2, $as_sci_Seq($f_sc_SeqOps__sortWith__F2__O(this$40, lt)))
                       }
@@ -26943,12 +26980,12 @@ $c_Lsympany_ui_CalcSolver$AreaBetweenCurvesResult.prototype.makeSolver__sci_Seq_
       $m_sci_Seq$();
       if (((new $c_sc_SeqFactory$UnapplySeqWrapper(es), true) && (es.lengthCompare__I__I(5) === 0))) {
         var ps$2 = $as_sci_Seq(es.apply__I__O(4));
-        var this$49 = ps$2.find__F1__s_Option(new $c_sjsr_AnonFunction1(((x$13$2) => {
-          var x$13 = $as_Lsympany_Sym(x$13$2);
+        var this$49 = ps$2.find__F1__s_Option(new $c_sjsr_AnonFunction1(((x$12$2) => {
+          var x$12 = $as_Lsympany_Sym(x$12$2);
           var $$x2 = $m_Lsympany_Sym$();
           var this$47 = $m_s_Symbol$();
           var _s = $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$47, "k"));
-          return $$x2.containsExpr__Lsympany_Sym__Lsympany_Sym__Z(x$13, new $c_Lsympany_Sym$ImplicitSymVar(_s))
+          return $$x2.containsExpr__Lsympany_Sym__Lsympany_Sym__Z(x$12, new $c_Lsympany_Sym$ImplicitSymVar(_s))
         })));
         if ((!this$49.isEmpty__Z())) {
           var $$x1 = "Can't integrate with infinite intersections";

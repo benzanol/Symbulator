@@ -78,10 +78,18 @@ object Zero {
     history: mutable.Set[Eqn] = mutable.Set[Eqn](),
     depth: Int = 1
   ) {
+    // Just for testing purposes
+    import scala.scalajs.js
+    def jsobj: js.Dictionary[Any] =  js.Dictionary(
+      "expr" -> expr.toString(),
+      "children" -> js.Array(fullQueue.map(_._2.jsobj):_*)
+    )
+
     // Add the expression and its opposite to the history so they are never referenced again
     history.addAll(Seq(expr, oppositeExpression(expr)))
 
     // List of child solvers and the rules they go with
+    var fullQueue: Seq[(IntermediateZeroRule, ZeroSolver)] = Nil
     var queue: Seq[(IntermediateZeroRule, ZeroSolver)] = Nil
 
     // Index as -1 indicates that the queue has not yet been generated
@@ -97,6 +105,8 @@ object Zero {
           queue = ZeroRules.allRules(expr)
             .filter{ r => !history.contains(r.expr2) }
             .map{ r => (r, new ZeroSolver(r.expr2, history, depth + 1)) }
+
+          fullQueue = queue
 
           // Indicate that the queue has now been created
           index = 0
@@ -122,6 +132,8 @@ object Zero {
           index = (index + 1) % queue.length
         }
 
+        if (stepped._1 != Nil) println(stepped._1)
+
         return (stepped._1.map(next._1.withSubRule), !queue.isEmpty)
       }
   }
@@ -131,7 +143,9 @@ object ZeroPatterns {
   import Zero._
 
   def basicZeros(eqn: Eqn): Seq[FinalZeroRule] =
-    for ((zs, r) <- rules.allWithLabels(simplify(eqn)) ; z <- zs)
+    for ((zs, r) <- rules.allWithLabels(simplify(eqn)) ; z <- zs
+      if ++(eqn.left, **(-1, eqn.right)).approx(X.symbol -> z.approx()).abs < 0.00000001
+    )
     yield new FinalZeroRule(eqn, simplify(z), r.name)
 
 
@@ -289,8 +303,10 @@ object ZeroRules {
         val newExprs = tuples.map{ case (c: Sym, p: SymR) => simplify(**(c, ^(X, p - minExpt))) }
         val divided = +++( newExprs )
 
-        Seq(SymEquation(**(^(X, minExpt), divided), 0) -> "")
+        Seq(SymEquation(**(^(X, minExpt), divided), 0) -> {
+          if (minExpt == SymInt(1)) "Factor \\(x\\) out of the equation"
+          else f"Factor \\(x^{${minExpt.toLatex}}\\) out of the equation"
+        })
       }
   }
 }
-

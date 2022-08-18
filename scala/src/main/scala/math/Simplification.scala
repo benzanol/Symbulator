@@ -12,7 +12,6 @@ object Simplify {
   val sRules = new Rules[Sym]()
   
   def simplify(expr: Sym): Sym = {
-    println("Simplify", expr)
     expr.mapExprs(simplify).pipe{e =>
       sRules.first(e) match {
         case Some(simpler) => simplify(simpler)

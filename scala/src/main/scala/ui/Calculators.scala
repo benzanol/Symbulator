@@ -198,15 +198,24 @@ object CalcSolver {
       // and who aren't approximately equal to any of the existing
       // approximations
       for (z <- stepped._1)
+
+        // Remove zeros with the exact same final solution
         if (allZeros.find(_.endResult.get == z.endResult.get).isEmpty) {
+
+          // Remove zeros with the same approximate result
           val apps = z.endResult.get.expanded.map(_.approx())
-          if (apps.find(!_.isFinite).isEmpty && apps.find{a =>
-            approxes.find(a - _ < 0.000001).isDefined
-          }.isEmpty) {
+          if (apps.find(!_.isFinite).isEmpty &&
+            { for (a <- apps ; b <- approxes if (a - b).abs < 0.00001) yield () }.isEmpty
+          ) {
+
             allZeros :+= z
             approxes ++= z.endResult.get.expanded.map(_.approx())
+
           }
         }
+
+      // Display the heirarchy of zero solvers for testing purposes
+      // if (!stepped._2) Main.jslog(solver.jsobj)
 
       return (allZeros, stepped._2)
     }
