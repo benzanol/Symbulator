@@ -17646,7 +17646,7 @@ function $c_Lsympany_ui_Calculators$() {
   var $$x4 = new $c_Lsympany_ui_CalcFields$Calculator("Intersections", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1));
   var array$2 = [new $c_Lsympany_ui_CalcFields$EquationField("e1"), $ct_Lsympany_ui_CalcSolver$DerivativeResult__T__T__(new $c_Lsympany_ui_CalcSolver$DerivativeResult(), "d", "e1")];
   var $$x3 = new $c_Lsympany_ui_CalcFields$Calculator("Derivative", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2));
-  var array$3 = [new $c_Lsympany_ui_CalcFields$EquationField("e"), new $c_Lsympany_ui_CalcSolver$ExtremasDerivativeResult("d", "e"), new $c_Lsympany_ui_CalcSolver$ExtremasResult("z", "d")];
+  var array$3 = [new $c_Lsympany_ui_CalcFields$EquationField("e"), new $c_Lsympany_ui_CalcSolver$ExtremasDerivativeResult("d", "e"), new $c_Lsympany_ui_CalcSolver$ExtremasResult("z", "d", "e")];
   var $$x2 = new $c_Lsympany_ui_CalcFields$Calculator("Local Minima/Maxima", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3));
   var array$4 = [new $c_Lsympany_ui_CalcFields$EquationField("e1"), new $c_Lsympany_ui_CalcSolver$IntegralResult("i", "e1", true)];
   var $$x1 = new $c_Lsympany_ui_CalcFields$Calculator("Integral", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$4));
@@ -27628,7 +27628,7 @@ var $d_Lsympany_ui_CalcSolver$DerivativeResult = new $TypeData().initClass({
 });
 $c_Lsympany_ui_CalcSolver$DerivativeResult.prototype.$classData = $d_Lsympany_ui_CalcSolver$DerivativeResult;
 /** @constructor */
-function $c_Lsympany_ui_CalcSolver$ExtremasResult(n, field) {
+function $c_Lsympany_ui_CalcSolver$ExtremasResult(n, derivF, exprF) {
   this.Lsympany_ui_CalcFields$ResultField__f_name = null;
   this.Lsympany_ui_CalcFields$ResultField__f_fields = null;
   this.Lsympany_ui_CalcFields$ResultField__f_expressions = null;
@@ -27636,7 +27636,7 @@ function $c_Lsympany_ui_CalcSolver$ExtremasResult(n, field) {
   this.Lsympany_ui_CalcFields$ResultField__f_solving = false;
   this.Lsympany_ui_CalcFields$ResultField__f_solver = null;
   this.Lsympany_ui_CalcFields$ResultField__f_node = null;
-  var array = [field];
+  var array = [derivF, exprF];
   $ct_Lsympany_ui_CalcFields$ResultField__T__sci_Seq__(this, n, $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
 }
 $c_Lsympany_ui_CalcSolver$ExtremasResult.prototype = new $h_Lsympany_ui_CalcFields$ResultField();
@@ -27649,7 +27649,7 @@ $h_Lsympany_ui_CalcSolver$ExtremasResult.prototype = $c_Lsympany_ui_CalcSolver$E
 $c_Lsympany_ui_CalcSolver$ExtremasResult.prototype.makeSolver__sci_Seq__Lsympany_ui_CalcSolver$AsyncSolver = (function(es) {
   if ((es !== null)) {
     $m_sci_Seq$();
-    if (((new $c_sc_SeqFactory$UnapplySeqWrapper(es), true) && (es.lengthCompare__I__I(1) === 0))) {
+    if (((new $c_sc_SeqFactory$UnapplySeqWrapper(es), true) && (es.lengthCompare__I__I(2) === 0))) {
       var p3 = $as_sci_Seq(es.apply__I__O(0));
       if ((p3 !== null)) {
         $m_sci_Seq$();
@@ -27670,21 +27670,19 @@ $c_Lsympany_ui_CalcSolver$ExtremasResult.prototype.outerTitle__s_Option = (funct
 $c_Lsympany_ui_CalcSolver$ExtremasResult.prototype.points__sci_Seq = (function() {
   var this$7 = $as_sci_Seq($m_s_Option$().option2Iterable__s_Option__sc_Iterable(this.Lsympany_ui_CalcFields$ResultField__f_expressions).toSeq__sci_Seq().flatMap__F1__O(new $c_sjsr_AnonFunction1(((this$1) => ((es$2) => {
     var es = $as_sci_Seq(es$2);
-    return $as_sci_Seq(es.flatMap__F1__O(new $c_sjsr_AnonFunction1(((this$2) => ((es2$2) => {
-      var es2 = $as_sci_Seq(es2$2);
-      return $as_sci_Seq(es2.flatMap__F1__O(new $c_sjsr_AnonFunction1(((this$3) => ((e$2) => {
-        var e = $as_Lsympany_Sym(e$2);
-        return $as_sci_Seq(this$3.Lsympany_ui_CalcFields$ResultField__f_solutions.flatMap__F1__O(new $c_sjsr_AnonFunction1(((e$1) => ((s$2) => {
-          var s = $as_Lsympany_ui_CalcSolver$CalcSolution(s$2);
-          return $as_sci_Seq(s.solution__Lsympany_Sym().expanded__sci_Seq().map__F1__O(new $c_sjsr_AnonFunction1(((e$3) => ((s1$2) => {
-            var s1 = $as_Lsympany_Sym(s1$2);
-            var $$x2 = new $c_Lsympany_Sym$ImplicitSymInt(0);
-            var $$x1 = $m_Lsympany_math_Simplify$();
-            var t = $m_Lsympany_Sym$().X__Lsympany_SymVar();
-            return new $c_T3($$x2, s1, $$x1.simplify__Lsympany_Sym__Lsympany_Sym($m_Lsympany_Sym$().replaceExpr__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym(e$3, t, s1)))
-          }))(e$1))))
-        }))(e))))
-      }))(this$2))))
+    return $as_sci_Seq($as_sc_IterableOps(es.apply__I__O(1)).flatMap__F1__O(new $c_sjsr_AnonFunction1(((this$2) => ((e$2) => {
+      var e = $as_Lsympany_Sym(e$2);
+      return $as_sci_Seq(this$2.Lsympany_ui_CalcFields$ResultField__f_solutions.flatMap__F1__O(new $c_sjsr_AnonFunction1(((e$1) => ((s$2) => {
+        var s = $as_Lsympany_ui_CalcSolver$CalcSolution(s$2);
+        return $as_sci_Seq(s.solution__Lsympany_Sym().expanded__sci_Seq().map__F1__O(new $c_sjsr_AnonFunction1(((e$3) => ((s1$2) => {
+          var s1 = $as_Lsympany_Sym(s1$2);
+          var $$x2 = new $c_Lsympany_Sym$ImplicitSymInt(0);
+          var $$x1 = $m_Lsympany_math_Simplify$();
+          var this$6 = $m_s_Symbol$();
+          var t = $ct_Lsympany_SymVar__s_Symbol__(new $c_Lsympany_SymVar(), $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$6, "x")));
+          return new $c_T3($$x2, s1, $$x1.simplify__Lsympany_Sym__Lsympany_Sym($m_Lsympany_Sym$().replaceExpr__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym__Lsympany_Sym(e$3, t, s1)))
+        }))(e$1))))
+      }))(e))))
     }))(this$1))))
   }))(this))));
   return this$7
@@ -50501,6 +50499,9 @@ $c_sc_SeqView$Sorted.prototype.withFilter__F1__sc_WithFilter = (function(p) {
 $c_sc_SeqView$Sorted.prototype.tail__O = (function() {
   return $f_sc_IterableOps__tail__O(this)
 });
+$c_sc_SeqView$Sorted.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_IterableOps__flatMap__F1__O(this, f)
+});
 $c_sc_SeqView$Sorted.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_IterableOps__zip__sc_IterableOnce__O(this, that)
 });
@@ -50689,6 +50690,9 @@ $c_sc_SeqView$Sorted$ReverseSorted.prototype.withFilter__F1__sc_WithFilter = (fu
 });
 $c_sc_SeqView$Sorted$ReverseSorted.prototype.tail__O = (function() {
   return $f_sc_IterableOps__tail__O(this)
+});
+$c_sc_SeqView$Sorted$ReverseSorted.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_IterableOps__flatMap__F1__O(this, f)
 });
 $c_sc_SeqView$Sorted$ReverseSorted.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_IterableOps__zip__sc_IterableOnce__O(this, that)
@@ -52220,6 +52224,9 @@ $c_Lorg_scalajs_dom_DOMList$DOMListSeq.prototype.tail__O = (function() {
 });
 $c_Lorg_scalajs_dom_DOMList$DOMListSeq.prototype.map__F1__O = (function(f) {
   return $f_sc_IterableOps__map__F1__O(this, f)
+});
+$c_Lorg_scalajs_dom_DOMList$DOMListSeq.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_IterableOps__flatMap__F1__O(this, f)
 });
 $c_Lorg_scalajs_dom_DOMList$DOMListSeq.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_IterableOps__zip__sc_IterableOnce__O(this, that)
@@ -54921,6 +54928,9 @@ $c_sci_Set$Set1.prototype.unzip__F1__T2 = (function(asPair) {
 $c_sci_Set$Set1.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
 });
+$c_sci_Set$Set1.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
+});
 $c_sci_Set$Set1.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
 });
@@ -55014,6 +55024,9 @@ $c_sci_Set$Set2.prototype.unzip__F1__T2 = (function(asPair) {
 });
 $c_sci_Set$Set2.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
+});
+$c_sci_Set$Set2.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
 });
 $c_sci_Set$Set2.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
@@ -55156,6 +55169,9 @@ $c_sci_Set$Set3.prototype.unzip__F1__T2 = (function(asPair) {
 });
 $c_sci_Set$Set3.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
+});
+$c_sci_Set$Set3.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
 });
 $c_sci_Set$Set3.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
@@ -55320,6 +55336,9 @@ $c_sci_Set$Set4.prototype.unzip__F1__T2 = (function(asPair) {
 });
 $c_sci_Set$Set4.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
+});
+$c_sci_Set$Set4.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
 });
 $c_sci_Set$Set4.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
@@ -56251,6 +56270,9 @@ $c_sci_Map$Map1.prototype.unzip__F1__T2 = (function(asPair) {
 $c_sci_Map$Map1.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
 });
+$c_sci_Map$Map1.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
+});
 $c_sci_Map$Map1.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
 });
@@ -56379,6 +56401,9 @@ $c_sci_Map$Map2.prototype.unzip__F1__T2 = (function(asPair) {
 });
 $c_sci_Map$Map2.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
+});
+$c_sci_Map$Map2.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
 });
 $c_sci_Map$Map2.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
@@ -56547,6 +56572,9 @@ $c_sci_Map$Map3.prototype.unzip__F1__T2 = (function(asPair) {
 });
 $c_sci_Map$Map3.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
+});
+$c_sci_Map$Map3.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
 });
 $c_sci_Map$Map3.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
@@ -56745,6 +56773,9 @@ $c_sci_Map$Map4.prototype.unzip__F1__T2 = (function(asPair) {
 });
 $c_sci_Map$Map4.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
+});
+$c_sci_Map$Map4.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
 });
 $c_sci_Map$Map4.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
@@ -57024,6 +57055,9 @@ $c_sci_HashSet.prototype.unzip__F1__T2 = (function(asPair) {
 });
 $c_sci_HashSet.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
+});
+$c_sci_HashSet.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
 });
 $c_sci_HashSet.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
@@ -58682,6 +58716,9 @@ $c_sci_HashMap.prototype.unzip__F1__T2 = (function(asPair) {
 $c_sci_HashMap.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
 });
+$c_sci_HashMap.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
+});
 $c_sci_HashMap.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
 });
@@ -59090,6 +59127,9 @@ $c_sci_TreeSeqMap.prototype.unzip__F1__T2 = (function(asPair) {
 $c_sci_TreeSeqMap.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
 });
+$c_sci_TreeSeqMap.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
+});
 $c_sci_TreeSeqMap.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
 });
@@ -59480,6 +59520,9 @@ $c_scm_HashSet.prototype.unzip__F1__T2 = (function(asPair) {
 });
 $c_scm_HashSet.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
+});
+$c_scm_HashSet.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
 });
 $c_scm_HashSet.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
@@ -61431,6 +61474,9 @@ $c_scm_ArraySeq.prototype.unzip__F1__T2 = (function(asPair) {
 });
 $c_scm_ArraySeq.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
+});
+$c_scm_ArraySeq.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
 });
 $c_scm_ArraySeq.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
@@ -64671,6 +64717,9 @@ $c_scm_HashMap.prototype.unzip__F1__T2 = (function(asPair) {
 });
 $c_scm_HashMap.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
+});
+$c_scm_HashMap.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
 });
 $c_scm_HashMap.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
@@ -68500,6 +68549,9 @@ $c_scm_ListBuffer.prototype.unzip__F1__T2 = (function(asPair) {
 $c_scm_ListBuffer.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
 });
+$c_scm_ListBuffer.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
+});
 $c_scm_ListBuffer.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
 });
@@ -68694,6 +68746,9 @@ $c_scm_ArrayBuffer.prototype.unzip__F1__T2 = (function(asPair) {
 });
 $c_scm_ArrayBuffer.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
+});
+$c_scm_ArrayBuffer.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
 });
 $c_scm_ArrayBuffer.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
@@ -68936,6 +68991,9 @@ $c_sjs_js_WrappedArray.prototype.appendedAll__sc_IterableOnce__O = (function(suf
 $c_sjs_js_WrappedArray.prototype.unzip__F1__T2 = (function(asPair) {
   return $f_sc_StrictOptimizedIterableOps__unzip__F1__T2(this, asPair)
 });
+$c_sjs_js_WrappedArray.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
+});
 $c_sjs_js_WrappedArray.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)
 });
@@ -69077,6 +69135,9 @@ $c_scm_ArrayDeque.prototype.unzip__F1__T2 = (function(asPair) {
 });
 $c_scm_ArrayDeque.prototype.map__F1__O = (function(f) {
   return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f)
+});
+$c_scm_ArrayDeque.prototype.flatMap__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__flatMap__F1__O(this, f)
 });
 $c_scm_ArrayDeque.prototype.zip__sc_IterableOnce__O = (function(that) {
   return $f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this, that)

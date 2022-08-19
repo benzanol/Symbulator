@@ -251,9 +251,9 @@ object CalcSolver {
   }
 
 
-  class ExtremasResult(n: String)(field: String) extends ResultField(n)(field) {
+  class ExtremasResult(n: String)(derivF: String, exprF: String) extends ResultField(n)(derivF, exprF) {
     def makeSolver(es: Seq[Seq[Sym]]) = es match {
-      case Seq(Seq(d)) => new AsyncZeroSolver(d, 0)
+      case Seq(Seq(d), _) => new AsyncZeroSolver(d, 0)
         case _ => new CustomSolver(new ErrorSolution("Solving derivative..."))
     }
 
@@ -261,8 +261,8 @@ object CalcSolver {
       Option.when(expressions.isDefined)("Find the zeros of the derivative:")
 
     override def points: Seq[(Sym, Sym, Sym)] = {
-      for (es <- expressions.toSeq ; es2 <- es ; e <- es2 ; s <- solutions ; s1 <- s.solution.expanded)
-      yield (0.s, s1, simplify(e.replaceExpr(X, s1)))
+      for (es <- expressions.toSeq ; e <- es(1) ; s <- solutions ; s1 <- s.solution.expanded)
+      yield (0.s, s1, simplify(e.replaceExpr(SymVar('x), s1)))
     }.toSeq
   }
 
@@ -598,7 +598,7 @@ object Calculators {
     new Calculator("Local Minima/Maxima")(
       new EquationField("e"),
       new ExtremasDerivativeResult("d")("e"),
-      new ExtremasResult("z")("d")
+      new ExtremasResult("z")("d", "e")
     ),
     new Calculator("Integral")(
       new EquationField("e1"),
