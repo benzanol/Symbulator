@@ -217,6 +217,15 @@ object ZeroRules {
 
   val rules = new Rules[Seq[(Eqn, String)]]()
 
+  //// Identities
+  rules.+("Fancy identity"){ EquationP('l, 'r) }{
+    case (l: Sym, r: Sym) =>
+      Identity.identities(l).map{ i => SymEquation(simplify(i.full), r) ->
+        f"${i.description}:<br/>\\(${i.from.toLatex} \\quad \\rightarrow \\quad ${i.to.toLatex}\\)" } ++
+      Identity.identities(r).map{ i => SymEquation(l, simplify(i.full)) ->
+        f"${i.description}:<br/>\\(${i.from.toLatex} \\quad \\rightarrow \\quad ${i.to.toLatex}\\)" }
+  }
+
   //// Equation -> Expression
   rules.+("The solution to an equation is the zero of one side minus the other."){
     EquationP('l, 'r |> {(_: Sym) != SymInt(0)})

@@ -222,10 +222,11 @@ object IntegralRules {
       tryUsub(expr, sub).map(new USub(expr, sub, _)).toSeq
     )
 
-  class IdentityRule(integral: Sym, identity: (Sym, String)) extends IntegralRule(integral) {
-    def ruleDescription = identity._2
+  import Identity.AlgebraIdentity
+  class IdentityRule(integral: Sym, identity: AlgebraIdentity) extends IntegralRule(integral) {
+    def ruleDescription = identity.description
 
-    def forward(in: Sym): Sym = SymIntegral(identity._1)
+    def forward(in: Sym): Sym = SymIntegral(identity.full)
     def backward(sol: Sym): Sym = sol
   }
 
@@ -270,7 +271,7 @@ object IntegralRules {
   }
 
   class USub(integral: Sym, val u: Sym, val replaced: Sym) extends IntegralRule(integral) {
-    def ruleDescription = f"U Substitution:<br/>\\(u=${u.toLatex}\\), \\(du=${derive(u, X.symbol).toLatex}\\)"
+    def ruleDescription = f"U Substitution:<br/>\\(u=${u.toLatex}\\), \\(du=${derive(u, X.symbol).toLatex}\\)<br/>"
 
     def forward(in: Sym) = SymIntegral(replaced)
     def backward(sol: Sym): Sym = sol.replaceExpr(X, u)

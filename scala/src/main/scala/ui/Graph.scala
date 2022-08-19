@@ -150,10 +150,12 @@ object Graph {
     this.graphs = exprs
 
     this.points = ps.groupBy{t => (t._2, t._3)}.toSeq.map{
-      case ((x, y), seq) =>
+      case ((x, y), seq) => {
+        val idx = exprs.indexOf(seq.head._1)
         new IntersectionPoint(seq.map(_._1), x, y,
-          colors(exprs.indexOf(seq.head._1) % colors.length)
+          colors({if (idx == -1) 0 else idx} % colors.length)
         )
+      }
     }
 
     this.drawings = drawings

@@ -251,6 +251,27 @@ object CalcSolver {
   }
 
 
+  class ExtremasResult(n: String)(field: String) extends ResultField(n)(field) {
+    def makeSolver(es: Seq[Seq[Sym]]) = es match {
+      case Seq(Seq(d)) => new AsyncZeroSolver(d, 0)
+        case _ => new CustomSolver(new ErrorSolution("Solving derivative..."))
+    }
+
+    override def outerTitle: Option[String] =
+      Option.when(expressions.isDefined)("Find the zeros of the derivative:")
+
+    override def points: Seq[(Sym, Sym, Sym)] = {
+      for (es <- expressions.toSeq ; es2 <- es ; e <- es2 ; s <- solutions ; s1 <- s.solution.expanded)
+      yield (0.s, s1, simplify(e.replaceExpr(X, s1)))
+    }.toSeq
+  }
+
+  class ExtremasDerivativeResult(n: String)(field: String) extends DerivativeResult(n)(field) {
+    override def outerTitle: Option[String] =
+      expressions.map{ es => f"Derivative of \\(${es(0)(0).toLatex}\\):" }
+  }
+
+
   class AreaBetweenCurvesResult(n: String)(e1: String, e2: String, i1: String, i2: String, ps: String)
       extends ResultField(n)(e1, e2, i1, i2, ps) {
 
@@ -573,6 +594,11 @@ object Calculators {
     new Calculator("Derivative")(
       new EquationField("e1"),
       new DerivativeResult("d")("e1")
+    ),
+    new Calculator("Local Minima/Maxima")(
+      new EquationField("e"),
+      new ExtremasDerivativeResult("d")("e"),
+      new ExtremasResult("z")("d")
     ),
     new Calculator("Integral")(
       new EquationField("e1"),

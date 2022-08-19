@@ -203,12 +203,12 @@ object Simplify {
       +++( ***((a + b) +: r) +: rest )
   }
   
-  sRules.+("Distributive property"){
+  sRules.+("Distributive property for rationals"){
     ProdP(SumP('terms @@ __*), 'n @@ %?(), 'rest @@ __*)
   }{ case (n: Sym, rest: Seq[Sym], terms: Seq[Sym]) =>
       ***( +++( terms.map{ e => **(e, n) } ) +: rest )
   }
-  
+
   sRules.+("Plus/minus 0 is 0"){ SymP(SymPM(0)) }{ case () => 0 }
 
   sRules.+("Plus/minus squared cancels out"){
