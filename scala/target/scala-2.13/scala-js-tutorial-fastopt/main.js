@@ -22679,18 +22679,15 @@ $c_Lsympany_ui_CalcSolver$AsyncZeroSolver.prototype.step__T2 = (function() {
       if ((apps.find__F1__s_Option(new $c_sjsr_AnonFunction1(((x$6$2) => {
         var x$6 = $uD(x$6$2);
         return (!((x$6 === x$6) && (!((x$6 === Infinity) || (x$6 === (-Infinity))))))
-      }))).isEmpty__Z() && $as_sc_SeqOps(apps.flatMap__F1__O(new $c_sjsr_AnonFunction1(((this$4$1) => ((a$2) => {
+      }))).isEmpty__Z() && $as_sc_SeqOps(apps.map__F1__O(new $c_sjsr_AnonFunction1(((this$4$1) => ((a$2) => {
         var a = $uD(a$2);
-        var this$12 = this$4$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_approxes;
-        var p = new $c_sjsr_AnonFunction1(((a$1) => ((b$2) => {
+        var this$12 = this$4$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_approxes.find__F1__s_Option(new $c_sjsr_AnonFunction1(((a$1) => ((b$2) => {
           var b = $uD(b$2);
           var x$1 = (a$1 - b);
           return ($uD(Math.abs(x$1)) < 1.0E-5)
-        }))(a));
-        return $as_sci_Set($ct_sc_IterableOps$WithFilter__sc_IterableOps__F1__(new $c_sc_IterableOps$WithFilter(), this$12, p).map__F1__O(new $c_sjsr_AnonFunction1(((b$3$2) => {
-          $uD(b$3$2)
-        }))))
-      }))(this$1)))).isEmpty__Z())) {
+        }))(a)));
+        return (!this$12.isEmpty__Z())
+      }))(this$1)))).contains__O__Z(false))) {
         var this$13 = this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_allZeros;
         this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_allZeros = $as_sci_Seq(this$13.appended__O__O(z));
         var this$14 = this$1.Lsympany_ui_CalcSolver$AsyncZeroSolver__f_approxes;

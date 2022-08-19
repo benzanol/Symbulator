@@ -207,7 +207,7 @@ object CalcSolver {
           // Remove zeros with the same approximate result
           val apps = z.endResult.get.expanded.map(_.approx())
           if (apps.find(!_.isFinite).isEmpty &&
-            { for (a <- apps ; b <- approxes if (a - b).abs < 0.00001) yield () }.isEmpty
+            apps.map{ a => approxes.find{ b => (a - b).abs < 0.00001 }.isDefined }.contains(false)
           ) {
 
             allZeros :+= z
