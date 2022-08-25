@@ -312,7 +312,7 @@ object Simplify {
     11~6 -> -1~2,
   )
 
-  def arcsineValues = Map[Sym, Sym](
+  def arcsineValues1 = Map[Sym, Sym](
     -1.s                -> 3~2,
     **(-1~2, ^(3, 1~2)) -> 4~3,
     **(-1~2, ^(2, 1~2)) -> 5~4,
@@ -321,6 +321,18 @@ object Simplify {
     1~2                 -> 1~6,
     **(1~2, ^(2, 1~2))  -> 1~4,
     **(1~2, ^(3, 1~2))  -> 1~3,
+    1.s                 -> 1~2,
+  )
+
+  def arcsineValues2 = Map[Sym, Sym](
+    -1.s                -> 3~2,
+    **(-1~2, ^(3, 1~2)) -> 5~3,
+    **(-1~2, ^(2, 1~2)) -> 7~4,
+    -1~2                -> 11~6,
+    0.s                 -> 1.s,
+    1~2                 -> 5~6,
+    **(1~2, ^(2, 1~2))  -> 3~4,
+    **(1~2, ^(3, 1~2))  -> 2~3,
     1.s                 -> 1~2,
   )
 
@@ -341,13 +353,19 @@ object Simplify {
   }{ case (f: SymR, w: Sym) => w.instance(**(Pi, SymR(f.n % (f.d * 2), f.d))) }
 
   sRules.+("Sine inverse constants"){ 'w @@ ASinP('e) }{
-    case (e: Sym, w: Sym) =>
-      arcsineValues.get(e).map{ e => **(++(e, **(2, 'k)), Pi) }.getOrElse(w)
+    case (e: Sym, w: Sym) => arcsineValues1.get(e).map{ e => **(++(e, **(2, 'k)), Pi) }.getOrElse(w)
   }
 
   sRules.+("Cosine inverse constants"){ 'w @@ ACosP('e) }{
-    case (e: Sym, w: Sym) =>
-      arcsineValues.get(e).map{ e => **(++(-1~2, e, **(2, 'k)), Pi) }.getOrElse(w)
+    case (e: Sym, w: Sym) => arcsineValues1.get(e).map{ e => **(++(-1~2, e, **(2, 'k)), Pi) }.getOrElse(w)
+  }
+
+  sRules.+("Sine inverse constants 2"){ 'w @@ ASin2P('e) }{
+    case (e: Sym, w: Sym) => arcsineValues2.get(e).map{ e => **(++(e, **(2, 'k)), Pi) }.getOrElse(w)
+  }
+
+  sRules.+("Cosine inverse constants 2"){ 'w @@ ACos2P('e) }{
+    case (e: Sym, w: Sym) => arcsineValues2.get(e).map{ e => **(++(-1~2, e, **(2, 'k)), Pi) }.getOrElse(w)
   }
 
   /// Integral rules

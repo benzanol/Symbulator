@@ -246,7 +246,7 @@ object ZeroRules {
   }{ case (a: Sym, f: Sym, r: Seq[Sym]) =>
       Seq( SymEquation( simplify(***(r)), simplify(**(a, ^(f, -1))) ) ->
         f"Divide \\(${f.toLatex}\\) from both sides of the equation"
-       )
+      )
   }
 
 
@@ -268,24 +268,33 @@ object ZeroRules {
   }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation('c, SymLog('a, 'b)) -> "") }
 
   //// Trig integrals
-  rules.+("Use ASin to cancel out of Sin"){
+  rules.+("Take the inverse sine of each side"){
     EquationP(SinP('a), 'r)
   }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymASin(r))) -> "") }
-  rules.+("Use ACos to cancel out of Cos"){
+  rules.+("Take the inverse cosine of each side"){
     EquationP(CosP('a), 'r)
   }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymACos(r))) -> "") }
-  rules.+("Use ATan to cancel out of Tan"){
+
+  rules.+("Take the inverse sine of each side"){
+    EquationP(SinP('a), 'r)
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymASin2(r))) -> "") }
+  rules.+("Take the inverse cosine of each side"){
+    EquationP(CosP('a), 'r)
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymACos2(r))) -> "") }
+
+  rules.+("Take the inverse tangent of each side"){
     EquationP(TanP('a), 'r)
   }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymATan(r))) -> "") }
-  rules.+("Use Sin to cancel out of ASin"){
+
+  rules.+("Take the sine of each side"){
     EquationP(ASinP('a), 'r)
-  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymSin (r))) -> "") }
-  rules.+("Use Cos to cancel out of ACos"){
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymSin(r))) -> "") }
+  rules.+("Take the cosine of each side"){
     EquationP(ACosP('a), 'r)
-  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymCos (r))) -> "") }
-  rules.+("Use Tan to cancel out of ATan"){
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymCos(r))) -> "") }
+  rules.+("Take the tangent of each side"){
     EquationP(ATanP('a), 'r)
-  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymTan (r))) -> "") }
+  }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymTan(r))) -> "") }
 
 
   ///////////// Deal with this later

@@ -260,6 +260,12 @@ object CalcSolver {
     override def outerTitle: Option[String] =
       Option.when(expressions.isDefined)("Find the zeros of the derivative:")
 
+    override def innerTitle: Option[String] =
+      Option.when(expressions.isDefined && !expressions.get(0).isEmpty){
+        "\\(" + expressions.get(0)(0).toLatex + "= 0\\)"
+      }
+
+
     override def points: Seq[(Sym, Sym, Sym)] = {
       for (es <- expressions.toSeq ; e <- es(1) ; s <- solutions ; s1 <- s.solution.expanded)
       yield (0.s, s1, simplify(e.replaceExpr(SymVar('x), s1)))

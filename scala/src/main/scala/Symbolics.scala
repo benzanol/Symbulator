@@ -501,16 +501,31 @@ case class SymTan(expr: Sym) extends SymOp {
 case class SymASin(expr: Sym) extends SymOp {
   override def toString = f"asin($expr)"
   lazy val exprs = Seq(expr)
-  def instance(args: Sym*) = SymASin(args.head)
+  def instance(args: Sym*) = new SymASin(args.head)
   def operation(vs: Double*) = Math.asin(vs.head)
 }
 
 case class SymACos(expr: Sym) extends SymOp {
   override def toString = f"acos($expr)"
   lazy val exprs = Seq(expr)
-  def instance(args: Sym*) = SymACos(args.head)
+  def instance(args: Sym*) = new SymACos(args.head)
   def operation(vs: Double*) = Math.acos(vs.head)
 }
+
+case class SymASin2(expr: Sym) extends SymOp {
+  override def toString = f"asin2($expr)"
+  lazy val exprs = Seq(expr)
+  def instance(args: Sym*) = new SymASin2(args.head)
+  def operation(vs: Double*) = Math.asin(vs.head)
+}
+
+case class SymACos2(expr: Sym) extends SymOp {
+  override def toString = f"acos2($expr)"
+  lazy val exprs = Seq(expr)
+  def instance(args: Sym*) = new SymACos2(args.head)
+  def operation(vs: Double*) = Math.acos(vs.head)
+}
+
 
 case class SymATan(expr: Sym) extends SymOp {
   override def toString = f"tan($expr)"

@@ -2,77 +2,48 @@
 [0m[[0m[0mdebug[0m] [0m[0mInitial source changes: [0m
 [0m[[0m[0mdebug[0m] [0m[0m	removed:Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	added: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/ui/Calculators.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala)[0m
 [0m[[0m[0mdebug[0m] [0m[0mInvalidated products: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mExternal API changes: API Changes: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(sympany.ui.CalcFields.CalcField, sympany.ui.CalcSolver.ErrorSolution, sympany.ui.CalcSolver.IntersectionResult, sympany.ui.CalcSolver.DoubleIntegralResult, sympany.ui.CalcFields.Calculator, sympany.ui.CalcSolver.AsyncZeroSolver, sympany.ui.CalcSolver.ExtremasResult, sympany.ui.CalcSolver, sympany.ui.CalcFields.HtmlField, sympany.ui.CalcSolver.ZeroResult, sympany.ui.CalcFields.ResultField, sympany.ui.CalcSolver.IntegralResult, sympany.ui.CalcSolver.AreaBetweenCurvesResult, sympany.ui.CalcSolver.CustomSolution, sympany.ui.CalcSolver.AsyncSolver, sympany.ui.CalcFields.BrField, sympany.ui.CalcSolver.AreaBetweenCurvesSolver, sympany.ui.CalcSolver.AsyncDerivativeSolver, sympany.ui.Calculators, sympany.ui.CalcSolver.DerivativeResult, sympany.ui.CalcSolver.CalcSolution, sympany.ui.CalcFields, sympany.ui.CalcSolver.CustomSolver, sympany.ui.CalcSolver.ExtremasDerivativeResult, sympany.ui.CalcSolver.AsyncIntegralSolver, sympany.ui.CalcFields.EquationField)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(sympany.math.ZeroPatterns, sympany.math.Zero.IntermediateZeroRule, sympany.math.ZeroRules, sympany.math.Zero.FinalZeroRule, sympany.math.Zero.ZeroSolver, sympany.math.Zero, sympany.math.Zero.ZeroRule)[0m
 [0m[[0m[0mdebug[0m] [0m[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0mSources indirectly invalidated by:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	product: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	external source: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(sympany.ui.CalcFields.CalcField, sympany.ui.CalcSolver.ErrorSolution, sympany.ui.CalcSolver.IntersectionResult, sympany.ui.CalcSolver.DoubleIntegralResult, sympany.ui.CalcFields.Calculator, sympany.ui.CalcSolver.AsyncZeroSolver, sympany.ui.CalcSolver.ExtremasResult, sympany.ui.CalcSolver, sympany.ui.CalcFields.HtmlField, sympany.ui.CalcSolver.ZeroResult, sympany.ui.CalcFields.ResultField, sympany.ui.CalcSolver.IntegralResult, sympany.ui.CalcSolver.AreaBetweenCurvesResult, sympany.ui.CalcSolver.CustomSolution, sympany.ui.CalcSolver.AsyncSolver, sympany.ui.CalcFields.BrField, sympany.ui.CalcSolver.AreaBetweenCurvesSolver, sympany.ui.CalcSolver.AsyncDerivativeSolver, sympany.ui.Calculators, sympany.ui.CalcSolver.DerivativeResult, sympany.ui.CalcSolver.CalcSolution, sympany.ui.CalcFields, sympany.ui.CalcSolver.CustomSolver, sympany.ui.CalcSolver.ExtremasDerivativeResult, sympany.ui.CalcSolver.AsyncIntegralSolver, sympany.ui.CalcFields.EquationField)[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/ui/Calculators.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.ui.CalcFields.CalcField, sympany.ui.CalcSolver.ErrorSolution, sympany.ui.CalcSolver.IntersectionResult, sympany.ui.CalcSolver.DoubleIntegralResult, sympany.ui.CalcFields.Calculator, sympany.ui.CalcSolver.AsyncZeroSolver, sympany.ui.CalcSolver.ExtremasResult, sympany.ui.CalcSolver, sympany.ui.CalcFields.HtmlField, sympany.ui.CalcSolver.ZeroResult, sympany.ui.CalcFields.ResultField, sympany.ui.CalcSolver.IntegralResult, sympany.ui.CalcSolver.AreaBetweenCurvesResult, sympany.ui.CalcSolver.CustomSolution, sympany.ui.CalcSolver.AsyncSolver, sympany.ui.CalcFields.BrField, sympany.ui.CalcSolver.AreaBetweenCurvesSolver, sympany.ui.CalcSolver.AsyncDerivativeSolver, sympany.ui.Calculators, sympany.ui.CalcSolver.DerivativeResult, sympany.ui.CalcSolver.CalcSolution, sympany.ui.CalcFields, sympany.ui.CalcSolver.CustomSolver, sympany.ui.CalcSolver.ExtremasDerivativeResult, sympany.ui.CalcSolver.AsyncIntegralSolver, sympany.ui.CalcFields.EquationField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcFields.ResultField by sympany.ui.CalcFields.CalcField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.IntersectionResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.DoubleIntegralResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.ExtremasResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.ZeroResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.IntegralResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.AreaBetweenCurvesResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.DerivativeResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.ExtremasDerivativeResult by sympany.ui.CalcSolver.DerivativeResult[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcFields.EquationField by sympany.ui.CalcFields.CalcField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcFields.BrField by sympany.ui.CalcFields.CalcField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcFields.HtmlField by sympany.ui.CalcFields.CalcField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.AreaBetweenCurvesSolver by sympany.ui.CalcSolver.AsyncSolver[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.AsyncDerivativeSolver by sympany.ui.CalcSolver.AsyncSolver[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.CustomSolver by sympany.ui.CalcSolver.AsyncSolver[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.AsyncIntegralSolver by sympany.ui.CalcSolver.AsyncSolver[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Integral.IntegralRule by sympany.ui.CalcSolver.CalcSolution[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.Parts by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns.ExponentIRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns.PowerIRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.ProductRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns.BasicIRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.SumRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.IdentityRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.USub by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Derivative.DerivativeRule by sympany.ui.CalcSolver.CalcSolution[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Zero.ZeroRule by sympany.ui.CalcSolver.CalcSolution[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Zero.FinalZeroRule by sympany.math.Zero.ZeroRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Zero.IntermediateZeroRule by sympany.math.Zero.ZeroRule[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(sympany.math.ZeroPatterns, sympany.math.Zero.IntermediateZeroRule, sympany.math.ZeroRules, sympany.math.Zero.FinalZeroRule, sympany.math.Zero.ZeroSolver, sympany.math.Zero, sympany.math.Zero.ZeroRule)[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.ZeroPatterns, sympany.math.Zero.IntermediateZeroRule, sympany.math.ZeroRules, sympany.math.Zero.FinalZeroRule, sympany.math.Zero.ZeroSolver, sympany.math.Zero, sympany.math.Zero.ZeroRule[0m
 [0m[[0m[0minfo[0m] [0m[0mCompiling 1 Scala source to /home/quaviq/Documents/Programming/Scala/Calculator/scala/target/scala-2.13/classes ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.13:1.3.2:compile for Scala 2.13.1[0m
 [0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.13:1.3.2:compile for Scala 2.13.1[0m
-[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 5bbb017d for Scala compiler version 2.13.1[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 2916e1c for Scala compiler version 2.13.1[0m
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-Xplugin:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-compiler_2.13.1/1.10.0/scalajs-compiler_2.13.1-1.10.0.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.1/scala-library-2.13.1.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/home/quaviq/Documents/Programming/Scala/Calculator/scala/target/scala-2.13/classes:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-dom_sjs1_2.13/2.1.0/scalajs-dom_sjs1_2.13-2.1.0.jar:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-library_2.13/1.10.0/scalajs-library_2.13-1.10.0.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 0.78208526 s[0m
+[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 1.065112234 s[0m
 [0m[[0m[0mdebug[0m] [0m[0mDone compiling.[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.ui.Calculators...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.ui.Calculators[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.ui.Calculators)[0m
-[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.Main. This dependency is not being considered for invalidation.[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.ui.Calculators,ModifiedNames(changes = UsedName(finalize,[Default]))) invalidates 1 classes due to The sympany.ui.Calculators has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.ZeroRules...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.ZeroRules[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.ZeroRules)[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.ZeroRules,ModifiedNames(changes = UsedName(finalize,[Default]))) invalidates 1 classes due to The sympany.math.ZeroRules has the following regular definitions changed:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	UsedName(finalize,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.ui.Calculators)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.ZeroRules)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m        [0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.ui.CalcFields...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.ui.CalcFields[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.ui.CalcFields)[0m
-[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.Main. This dependency is not being considered for invalidation.[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.ui.CalcFields,ModifiedNames(changes = UsedName(finalize,[Default]))) invalidates 1 classes due to The sympany.ui.CalcFields has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.math.Zero...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.math.Zero[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.math.Zero)[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.ui.CalcSolver.AsyncZeroSolver. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.ui.CalcSolver.ZeroResult. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.math.Zero,ModifiedNames(changes = UsedName(finalize,[Default]))) invalidates 1 classes due to The sympany.math.Zero has the following regular definitions changed:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	UsedName(finalize,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.ui.CalcFields)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.math.Zero)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m        [0m

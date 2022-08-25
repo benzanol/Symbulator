@@ -30,14 +30,16 @@ button {
     height: 98vh;
 }
 
-#current-calculator {
+#left-sidebar {
     width: 50%;
     max-width: 800px;
 
-    padding-left: 20px;
+    /* resize: both; */
+    overflow: auto;
+}
 
-    resize: both;
-    /* overflow: auto; */
+#current-calculator {
+    padding-left: 20px;
 }
 
 #right-sidebar {
@@ -45,7 +47,7 @@ button {
     width: 20%;
     max-width: 400px;
 
-    resize: both;
+    /* resize: both; */
     overflow: auto;
 }
 

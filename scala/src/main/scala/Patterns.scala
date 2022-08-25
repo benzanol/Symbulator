@@ -291,6 +291,20 @@ case class ACosP(pat: Pattern = AnyP()) extends Pattern {
   }
 }
 
+case class ASin2P(pat: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymASin2(a) => matchSeveral((a -> pat))
+    case _ => Seq[Binding]()
+  }
+}
+
+case class ACos2P(pat: Pattern = AnyP()) extends Pattern {
+  def matches(e: Sym): Seq[Binding] = e match {
+    case SymACos2(a) => matchSeveral((a -> pat))
+    case _ => Seq[Binding]()
+  }
+}
+
 case class ATanP(pat: Pattern = AnyP()) extends Pattern {
   def matches(e: Sym): Seq[Binding] = e match {
     case SymATan(a) => matchSeveral((a -> pat))
