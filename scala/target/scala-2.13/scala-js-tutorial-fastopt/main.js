@@ -18216,7 +18216,7 @@ $c_Lsympany_ui_Graph$.prototype.draw__V = (function() {
   })));
   this.Lsympany_ui_Graph$__f_fctx.clearRect(0.0, 0.0, this.marginX__I(), $uI(this.Lsympany_ui_Graph$__f_fc.height));
   this.Lsympany_ui_Graph$__f_fctx.clearRect(0.0, (((-20) + $uI(this.Lsympany_ui_Graph$__f_fc.height)) | 0), $uI(this.Lsympany_ui_Graph$__f_fc.width), $uI(this.Lsympany_ui_Graph$__f_fc.height));
-  this.Lsympany_ui_Graph$__f_gctx.font = "14px Serif";
+  this.Lsympany_ui_Graph$__f_gctx.font = "14px Arial";
   var $$x4 = this.Lsympany_ui_Graph$__f_gctx;
   var s$1 = this.Lsympany_ui_Graph$__f_gridColor;
   $$x4.strokeStyle = s$1;
@@ -18402,12 +18402,12 @@ $c_Lsympany_ui_Graph$.prototype.drawGrid__Lorg_scalajs_dom_CanvasRenderingContex
               var $$x6 = false
             };
             if ($$x6) {
+              var this$71 = cur;
+              var numString = $f_T__replaceAll__T__T__T(this$71.s_math_BigDecimal__f_bigDecimal.toString__T(), "\\.?0+$", "");
               if (horizontal) {
-                var this$71 = cur;
-                ctx.fillText(this$71.s_math_BigDecimal__f_bigDecimal.toString__T(), 5.0, ((5 + pixInt) | 0))
+                ctx.fillText(numString, 5.0, ((5 + pixInt) | 0))
               } else {
-                var this$72 = cur;
-                ctx.fillText(this$72.s_math_BigDecimal__f_bigDecimal.toString__T(), (((-10) + pixInt) | 0), (((-5) + $uI(ctx.canvas.height)) | 0))
+                ctx.fillText(numString, (((-10) + pixInt) | 0), (((-5) + $uI(ctx.canvas.height)) | 0))
               }
             };
             cur = cur.$plus__s_math_BigDecimal__s_math_BigDecimal(dist);

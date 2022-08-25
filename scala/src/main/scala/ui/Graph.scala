@@ -207,7 +207,7 @@ object Graph {
 
 
     // Draw the grid on the background canvas
-    gctx.font = "14px Serif"
+    gctx.font = "14px Arial"
     gctx.strokeStyle = gridColor
     drawGrid(gctx)
   }
@@ -265,9 +265,13 @@ object Graph {
           if (horizontal) drawLine(marginX, pixInt, ctx.canvas.width, pixInt, thickness)
           else drawLine(pixInt, 0, pixInt, ctx.canvas.height - marginY, thickness)
 
-          if (textAll || (text2s && cur % (dist*2) == 0) || (text5s && cur % (dist*5) == 0))
-            if (horizontal) ctx.fillText(cur.toString, 5, pixInt + 5)
-            else ctx.fillText(cur.toString, pixInt - 10, ctx.canvas.height - 5)
+          if (textAll || (text2s && cur % (dist*2) == 0) || (text5s && cur % (dist*5) == 0)) {
+            // Remove trailing zeros and decimal
+            val numString = cur.toString.replaceAll("\\.?0+$", "")
+
+            if (horizontal) ctx.fillText(numString, 5, pixInt + 5)
+            else ctx.fillText(numString, pixInt - 10, ctx.canvas.height - 5)
+          }
 
           cur += dist
           pix += pixDist
