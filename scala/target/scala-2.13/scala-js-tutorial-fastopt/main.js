@@ -18404,10 +18404,12 @@ $c_Lsympany_ui_Graph$.prototype.drawGrid__Lorg_scalajs_dom_CanvasRenderingContex
             if ($$x6) {
               var this$71 = cur;
               var numString = $f_T__replaceAll__T__T__T(this$71.s_math_BigDecimal__f_bigDecimal.toString__T(), "\\.?0+$", "");
+              var textWidth = $uD(ctx.measureText(numString).width);
+              ctx.fillStyle = "#44494B";
               if (horizontal) {
                 ctx.fillText(numString, 5.0, ((5 + pixInt) | 0))
               } else {
-                ctx.fillText(numString, (((-10) + pixInt) | 0), (((-5) + $uI(ctx.canvas.height)) | 0))
+                ctx.fillText(numString, (pixInt - (textWidth / 2.0)), (((-5) + $uI(ctx.canvas.height)) | 0))
               }
             };
             cur = cur.$plus__s_math_BigDecimal__s_math_BigDecimal(dist);
