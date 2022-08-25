@@ -346,7 +346,7 @@ object CalcSolver {
             new CustomSolution(solution,
               f"\\(\\int_{${x1.toLatex}}^{${xs.last.toLatex}}" +
                 f"\\mid ${++(e1, **(-1, e2)).toLatex} \\mid = ${solution.toLatex}",
-              "" + inequalityStr + " on interval " + rangeStr + "<br/>" + integrationStr
+              "➣" + inequalityStr + " on interval " + rangeStr + "<br/>" + integrationStr
             )(sub.toSeq)
           )
 

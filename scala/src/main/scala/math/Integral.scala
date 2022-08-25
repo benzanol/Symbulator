@@ -258,8 +258,8 @@ object IntegralRules {
 
   class Parts(integral: Sym, val u: Sym, val dv: Sym) extends IntegralRule(integral) {
     def ruleDescription = (f"Integration by Parts:"
-      + f"<br/>\\(dv=${dv.toLatex}\\), \\(v=${SymIntegral(dv).toLatex}\\)"
-      + f"<br/>\\(u=${u.toLatex}\\), \\(du=${du.toLatex}\\)"
+      + f"<br/>\\(dv=${dv.toLatex}\\) \\(v=${SymIntegral(dv).toLatex}\\)"
+      + f"<br/>\\(u=${u.toLatex}\\) \\(du=${du.toLatex}\\)"
       + f"<br/><br/>\\(∫u \\cdot dv = u \\cdot v - ∫ v \\cdot du \\)"
     )
 

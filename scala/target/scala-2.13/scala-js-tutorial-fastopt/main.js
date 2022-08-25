@@ -22830,7 +22830,7 @@ function $c_Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver(e1, e2, i1, i2, xs) {
             var arg$macro$17 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(solution);
             var $$x17 = $m_sc_StringOps$();
             var array$18 = [arg$macro$16, arg$macro$17];
-            return new $c_s_Some(new $c_Lsympany_ui_CalcSolver$CustomSolution(solution, (("" + $$x18) + $$x17.format$extension__T__sci_Seq__T("\\mid %s \\mid = %s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$18))), ((((inequalityStr + " on interval ") + rangeStr) + "<br/>") + integrationStr), $m_s_Option$().option2Iterable__s_Option__sc_Iterable(sub).toSeq__sci_Seq()))
+            return new $c_s_Some(new $c_Lsympany_ui_CalcSolver$CustomSolution(solution, (("" + $$x18) + $$x17.format$extension__T__sci_Seq__T("\\mid %s \\mid = %s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$18))), ((((("\u27a3" + inequalityStr) + " on interval ") + rangeStr) + "<br/>") + integrationStr), $m_s_Option$().option2Iterable__s_Option__sc_Iterable(sub).toSeq__sci_Seq()))
           }
         }
       }
@@ -27399,14 +27399,14 @@ $c_Lsympany_math_IntegralRules$Parts.prototype.ruleDescription__T = (function() 
   var arg$macro$2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$2);
   var $$x3 = $m_sc_StringOps$();
   var array = [arg$macro$1, arg$macro$2];
-  var $$x2 = $$x3.format$extension__T__sci_Seq__T("<br/>\\(dv=%s\\), \\(v=%s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
+  var $$x2 = $$x3.format$extension__T__sci_Seq__T("<br/>\\(dv=%s\\) \\(v=%s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
   var this$6 = this.Lsympany_math_IntegralRules$Parts__f_u;
   var arg$macro$3 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$6);
   var this$7 = this.du__Lsympany_Sym();
   var arg$macro$4 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$7);
   var $$x1 = $m_sc_StringOps$();
   var array$1 = [arg$macro$3, arg$macro$4];
-  return ((("Integration by Parts:" + $$x2) + $$x1.format$extension__T__sci_Seq__T("<br/>\\(u=%s\\), \\(du=%s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1))) + "<br/><br/>\\(\u222bu \\cdot dv = u \\cdot v - \u222b v \\cdot du \\)")
+  return ((("Integration by Parts:" + $$x2) + $$x1.format$extension__T__sci_Seq__T("<br/>\\(u=%s\\) \\(du=%s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1))) + "<br/><br/>\\(\u222bu \\cdot dv = u \\cdot v - \u222b v \\cdot du \\)")
 });
 $c_Lsympany_math_IntegralRules$Parts.prototype.du__Lsympany_Sym = (function() {
   return $m_Lsympany_math_Derivative$().derive__Lsympany_Sym__s_Symbol__Lsympany_Sym(this.Lsympany_math_IntegralRules$Parts__f_u, $m_Lsympany_Sym$().X__Lsympany_SymVar().Lsympany_SymVar__f_symbol)
