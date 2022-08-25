@@ -406,7 +406,7 @@ object Graph {
       if (Math.sqrt( Math.pow(canvasX(x)-mx, 2) + Math.pow(canvasY(y)-my, 2) ) < pointRadius) {
 
         // Set the current point
-        this.currentPoint = Some(p)
+        currentPoint = Some(p)
 
         // Make the cursor a pointer
         setPointer(true)
@@ -414,7 +414,7 @@ object Graph {
         // Set the text of the point box and move it to the cursor
         val box = document.getElementById("point-box")
         box.innerText = s"\\left( ${p.x.toLatex}, \\quad ${p.y.toLatex} \\right)"
-        box.setAttribute("style", s"left:${event.clientX}px; top:${event.clientY}px; display:block;")
+        box.setAttribute("style", s"left:${event.clientX + 10}px; top:${event.clientY + 10}px; display:block;")
 
         // Format the point as a latex equation
         js.eval("MQ.StaticMath(document.getElementById('point-box'));")
@@ -426,12 +426,13 @@ object Graph {
     // If no points were found, make sure the box is hidden
     hidePointBox()
     setPointer(false)
-    this.currentPoint = None
+    currentPoint = None
   }
 
   def hidePointBox() {
     val box = document.getElementById("point-box")
-    box.setAttribute("style", "display:none;")
+    box.innerHTML = ""
+    box.setAttribute("style", "display:none;" )
   }
 
   def maybeClickPoint(event: dom.MouseEvent) =

@@ -132,7 +132,7 @@ object Zero {
           index = (index + 1) % queue.length
         }
 
-        if (stepped._1 != Nil) println(stepped._1)
+        //if (stepped._1 != Nil) println(stepped._1)
 
         return (stepped._1.map(next._1.withSubRule), !queue.isEmpty)
       }

@@ -16616,14 +16616,6 @@ $c_Lsympany_math_Zero$ZeroSolver.prototype.step__T2 = (function() {
     } else {
       this.Lsympany_math_Zero$ZeroSolver__f_index = $intMod(((1 + this.Lsympany_math_Zero$ZeroSolver__f_index) | 0), this.Lsympany_math_Zero$ZeroSolver__f_queue.length__I())
     };
-    var x = stepped._1__O();
-    var x$2 = $m_sci_Nil$();
-    if ((!((x !== null) && $dp_equals__O__Z(x, x$2)))) {
-      var x$1 = stepped._1__O();
-      var this$3 = $m_s_Console$();
-      var this$4 = this$3.out__Ljava_io_PrintStream();
-      this$4.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x$1 + "\n"))
-    };
     return $ct_T2__O__O__(new $c_T2(), $as_sc_IterableOps(stepped._1__O()).map__F1__O(new $c_sjsr_AnonFunction1(((next$1) => ((r$2) => {
       var r = $as_Lsympany_math_Zero$ZeroRule(r$2);
       return $as_Lsympany_math_Zero$IntermediateZeroRule(next$1._1__O()).withSubRule__Lsympany_math_Zero$ZeroRule__Lsympany_math_Zero$IntermediateZeroRule(r)
@@ -18573,7 +18565,7 @@ $c_Lsympany_ui_Graph$.prototype.highlightPoints__Lorg_scalajs_dom_MouseEvent__V 
         var $$x2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$5);
         var this$6 = p.Lsympany_ui_Graph$IntersectionPoint__f_y;
         box.innerText = (((("\\left( " + $$x2) + ", \\quad ") + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$6)) + " \\right)");
-        box.setAttribute("style", (((("left:" + $uD(event$1.clientX)) + "px; top:") + $uD(event$1.clientY)) + "px; display:block;"));
+        box.setAttribute("style", (((("left:" + ($uD(event$1.clientX) + 10.0)) + "px; top:") + ($uD(event$1.clientY) + 10.0)) + "px; display:block;"));
         (0, eval)("MQ.StaticMath(document.getElementById('point-box'));");
         throw new $c_sr_NonLocalReturnControl$mcV$sp(nonLocalReturnKey1$1, (void 0))
       }
@@ -18596,6 +18588,7 @@ $c_Lsympany_ui_Graph$.prototype.highlightPoints__Lorg_scalajs_dom_MouseEvent__V 
 });
 $c_Lsympany_ui_Graph$.prototype.hidePointBox__V = (function() {
   var box = document.getElementById("point-box");
+  box.innerHTML = "";
   box.setAttribute("style", "display:none;")
 });
 $c_Lsympany_ui_Graph$.prototype.maybeClickPoint__Lorg_scalajs_dom_MouseEvent__V = (function(event) {

@@ -189,7 +189,6 @@ button {
 
 .mq-root-block {
     padding: 12px 10px 10px 10px !important;
-    
 }
 
 /* The graph */
@@ -216,4 +215,10 @@ button {
     border-width: 2px;
     border-radius: 4px;
     padding: 2px;
+
+    font-size: 20px;
+}
+
+#point-box .mq-root-block {
+    padding: 8px 5px 4px 5px !important;
 }
