@@ -2,88 +2,218 @@
 [0m[[0m[0mdebug[0m] [0m[0mInitial source changes: [0m
 [0m[[0m[0mdebug[0m] [0m[0m	removed:Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	added: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/ui/Calculators.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala)[0m
 [0m[[0m[0mdebug[0m] [0m[0mInvalidated products: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mExternal API changes: API Changes: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(sympany.ui.CalcFields.CalcField, sympany.ui.CalcSolver.ErrorSolution, sympany.ui.CalcSolver.IntersectionResult, sympany.ui.CalcSolver.DoubleIntegralResult, sympany.ui.CalcFields.Calculator, sympany.ui.CalcSolver.AsyncZeroSolver, sympany.ui.CalcSolver.ExtremasResult, sympany.ui.CalcSolver, sympany.ui.CalcFields.HtmlField, sympany.ui.CalcSolver.ZeroResult, sympany.ui.CalcFields.ResultField, sympany.ui.CalcSolver.IntegralResult, sympany.ui.CalcSolver.AreaBetweenCurvesResult, sympany.ui.CalcSolver.CustomSolution, sympany.ui.CalcSolver.AsyncSolver, sympany.ui.CalcFields.BrField, sympany.ui.CalcSolver.AreaBetweenCurvesSolver, sympany.ui.CalcSolver.AsyncDerivativeSolver, sympany.ui.Calculators, sympany.ui.CalcSolver.DerivativeResult, sympany.ui.CalcSolver.CalcSolution, sympany.ui.CalcFields, sympany.ui.CalcSolver.CustomSolver, sympany.ui.CalcSolver.ExtremasDerivativeResult, sympany.ui.CalcSolver.AsyncIntegralSolver, sympany.ui.CalcFields.EquationField)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(sympany.SymEquation, sympany.SymProd, sympany.Sym.ImplicitSymInt, sympany.SymIntegral, sympany.SymDerivative, sympany.SymE, sympany.SymDecimal, sympany.Latex, sympany.SymOp, sympany.SymR, sympany.SymACos2, sympany.SymTan, sympany.SymASin, sympany.SymInt, sympany.SymConstant, sympany.Sym.ImplicitSymBigInt, sympany.SymASin2, sympany.SymLog, sympany.SymCos, sympany.SymATan, sympany.SymFrac, sympany.SymSin, sympany.SymPoint, sympany.SymACos, sympany.SymVertical, sympany.SymPositiveInfinity, sympany.SymPi, sympany.SymPM, sympany.Sym.ImplicitSymVar, sympany.Sym, sympany.SymVar, sympany.SymSum, sympany.SymUndefined, sympany.SymPow, sympany.SymNegativeInfinity, sympany.SymSpecial)[0m
 [0m[[0m[0mdebug[0m] [0m[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0mSources indirectly invalidated by:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	product: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	external source: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(sympany.ui.CalcFields.CalcField, sympany.ui.CalcSolver.ErrorSolution, sympany.ui.CalcSolver.IntersectionResult, sympany.ui.CalcSolver.DoubleIntegralResult, sympany.ui.CalcFields.Calculator, sympany.ui.CalcSolver.AsyncZeroSolver, sympany.ui.CalcSolver.ExtremasResult, sympany.ui.CalcSolver, sympany.ui.CalcFields.HtmlField, sympany.ui.CalcSolver.ZeroResult, sympany.ui.CalcFields.ResultField, sympany.ui.CalcSolver.IntegralResult, sympany.ui.CalcSolver.AreaBetweenCurvesResult, sympany.ui.CalcSolver.CustomSolution, sympany.ui.CalcSolver.AsyncSolver, sympany.ui.CalcFields.BrField, sympany.ui.CalcSolver.AreaBetweenCurvesSolver, sympany.ui.CalcSolver.AsyncDerivativeSolver, sympany.ui.Calculators, sympany.ui.CalcSolver.DerivativeResult, sympany.ui.CalcSolver.CalcSolution, sympany.ui.CalcFields, sympany.ui.CalcSolver.CustomSolver, sympany.ui.CalcSolver.ExtremasDerivativeResult, sympany.ui.CalcSolver.AsyncIntegralSolver, sympany.ui.CalcFields.EquationField)[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/ui/Calculators.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.ui.CalcFields.CalcField, sympany.ui.CalcSolver.ErrorSolution, sympany.ui.CalcSolver.IntersectionResult, sympany.ui.CalcSolver.DoubleIntegralResult, sympany.ui.CalcFields.Calculator, sympany.ui.CalcSolver.AsyncZeroSolver, sympany.ui.CalcSolver.ExtremasResult, sympany.ui.CalcSolver, sympany.ui.CalcFields.HtmlField, sympany.ui.CalcSolver.ZeroResult, sympany.ui.CalcFields.ResultField, sympany.ui.CalcSolver.IntegralResult, sympany.ui.CalcSolver.AreaBetweenCurvesResult, sympany.ui.CalcSolver.CustomSolution, sympany.ui.CalcSolver.AsyncSolver, sympany.ui.CalcFields.BrField, sympany.ui.CalcSolver.AreaBetweenCurvesSolver, sympany.ui.CalcSolver.AsyncDerivativeSolver, sympany.ui.Calculators, sympany.ui.CalcSolver.DerivativeResult, sympany.ui.CalcSolver.CalcSolution, sympany.ui.CalcFields, sympany.ui.CalcSolver.CustomSolver, sympany.ui.CalcSolver.ExtremasDerivativeResult, sympany.ui.CalcSolver.AsyncIntegralSolver, sympany.ui.CalcFields.EquationField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcFields.ResultField by sympany.ui.CalcFields.CalcField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.IntersectionResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.DoubleIntegralResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.ExtremasResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.ZeroResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.IntegralResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.AreaBetweenCurvesResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.DerivativeResult by sympany.ui.CalcFields.ResultField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.ExtremasDerivativeResult by sympany.ui.CalcSolver.DerivativeResult[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcFields.BrField by sympany.ui.CalcFields.CalcField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcFields.EquationField by sympany.ui.CalcFields.CalcField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcFields.HtmlField by sympany.ui.CalcFields.CalcField[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.AreaBetweenCurvesSolver by sympany.ui.CalcSolver.AsyncSolver[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.AsyncDerivativeSolver by sympany.ui.CalcSolver.AsyncSolver[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.CustomSolver by sympany.ui.CalcSolver.AsyncSolver[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.AsyncIntegralSolver by sympany.ui.CalcSolver.AsyncSolver[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Integral.IntegralRule by sympany.ui.CalcSolver.CalcSolution[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.Parts by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns.ExponentIRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns.PowerIRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.ProductRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns.BasicIRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.SumRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.IdentityRule by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.USub by sympany.math.Integral.IntegralRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Derivative.DerivativeRule by sympany.ui.CalcSolver.CalcSolution[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Zero.ZeroRule by sympany.ui.CalcSolver.CalcSolution[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Zero.IntermediateZeroRule by sympany.math.Zero.ZeroRule[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Zero.FinalZeroRule by sympany.math.Zero.ZeroRule[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(sympany.SymEquation, sympany.SymProd, sympany.Sym.ImplicitSymInt, sympany.SymIntegral, sympany.SymDerivative, sympany.SymE, sympany.SymDecimal, sympany.Latex, sympany.SymOp, sympany.SymR, sympany.SymACos2, sympany.SymTan, sympany.SymASin, sympany.SymInt, sympany.SymConstant, sympany.Sym.ImplicitSymBigInt, sympany.SymASin2, sympany.SymLog, sympany.SymCos, sympany.SymATan, sympany.SymFrac, sympany.SymSin, sympany.SymPoint, sympany.SymACos, sympany.SymVertical, sympany.SymPositiveInfinity, sympany.SymPi, sympany.SymPM, sympany.Sym.ImplicitSymVar, sympany.Sym, sympany.SymVar, sympany.SymSum, sympany.SymUndefined, sympany.SymPow, sympany.SymNegativeInfinity, sympany.SymSpecial)[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/Symbolics.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.SymEquation, sympany.SymProd, sympany.Sym.ImplicitSymInt, sympany.SymIntegral, sympany.SymDerivative, sympany.SymE, sympany.SymDecimal, sympany.Latex, sympany.SymOp, sympany.SymR, sympany.SymACos2, sympany.SymTan, sympany.SymASin, sympany.SymInt, sympany.SymConstant, sympany.Sym.ImplicitSymBigInt, sympany.SymASin2, sympany.SymLog, sympany.SymCos, sympany.SymATan, sympany.SymFrac, sympany.SymSin, sympany.SymPoint, sympany.SymACos, sympany.SymVertical, sympany.SymPositiveInfinity, sympany.SymPi, sympany.SymPM, sympany.Sym.ImplicitSymVar, sympany.Sym, sympany.SymVar, sympany.SymSum, sympany.SymUndefined, sympany.SymPow, sympany.SymNegativeInfinity, sympany.SymSpecial[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymACos2 by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymTan by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymASin by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymASin2 by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymLog by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymCos by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymATan by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymSin by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymACos by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymSum by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymPow by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymInt by sympany.SymR[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.Sym.ImplicitSymBigInt by sympany.SymInt[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymFrac by sympany.SymR[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymPositiveInfinity by sympany.SymR[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymUndefined by sympany.SymR[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymNegativeInfinity by sympany.SymR[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymPi by sympany.SymConstant[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymVar by sympany.Sym[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymSpecial by sympany.Sym[0m
 [0m[[0m[0minfo[0m] [0m[0mCompiling 1 Scala source to /home/quaviq/Documents/Programming/Scala/Calculator/scala/target/scala-2.13/classes ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.13:1.3.2:compile for Scala 2.13.1[0m
 [0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.13:1.3.2:compile for Scala 2.13.1[0m
-[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 435a1ee0 for Scala compiler version 2.13.1[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 638f66e0 for Scala compiler version 2.13.1[0m
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-Xplugin:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-compiler_2.13.1/1.10.0/scalajs-compiler_2.13.1-1.10.0.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.1/scala-library-2.13.1.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/home/quaviq/Documents/Programming/Scala/Calculator/scala/target/scala-2.13/classes:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-dom_sjs1_2.13/2.1.0/scalajs-dom_sjs1_2.13-2.1.0.jar:/home/quaviq/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-library_2.13/1.10.0/scalajs-library_2.13-1.10.0.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 0.971036972 s[0m
+[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 3.77082988 s[0m
 [0m[[0m[0mdebug[0m] [0m[0mDone compiling.[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.ui.Calculators...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.ui.Calculators[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.ui.Calculators)[0m
-[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.Main. This dependency is not being considered for invalidation.[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.ui.Calculators,ModifiedNames(changes = UsedName(finalize,[Default]))) invalidates 1 classes due to The sympany.ui.Calculators has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.SymFrac...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.SymFrac[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.SymFrac)[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.RatP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.FracP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.SymFrac,ModifiedNames(changes = UsedName(finalize,[Default]))) invalidates 1 classes due to The sympany.SymFrac has the following regular definitions changed:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	UsedName(finalize,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.ui.Calculators)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.SymFrac)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m        [0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.ui.CalcSolver...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.ui.CalcSolver[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.ui.CalcSolver)[0m
-[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Integral.IntegralRule. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from sympany.SymOp...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymProd by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymACos2 by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymTan by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymASin by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymASin2 by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymLog by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymCos by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymATan by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymSin by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymACos by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymSum by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SymPow by sympany.SymOp[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(sympany.SymProd, sympany.SymOp, sympany.SymACos2, sympany.SymTan, sympany.SymASin, sympany.SymASin2, sympany.SymLog, sympany.SymCos, sympany.SymATan, sympany.SymSin, sympany.SymACos, sympany.SymSum, sympany.SymPow)[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroPatterns. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Identity. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralRules.Parts. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralPatterns.ExponentIRule. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralPatterns.PowerIRule. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.ui.CalcSolver.DoubleIntegralResult. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralPatterns. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralRules.ProductRule. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroRules. This dependency is not being considered for invalidation.[0m
 [0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Derivative. This dependency is not being considered for invalidation.[0m
-[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Integral. This dependency is not being considered for invalidation.[0m
-[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Derivative.DerivativeRule. This dependency is not being considered for invalidation.[0m
-[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Zero. This dependency is not being considered for invalidation.[0m
-[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Zero.ZeroRule. This dependency is not being considered for invalidation.[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.ui.CalcSolver,ModifiedNames(changes = UsedName(finalize,[Default]))) invalidates 1 classes due to The sympany.ui.CalcSolver has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Simplify. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.AsProdP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralRules. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.ProdP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.ui.CalcSolver.AreaBetweenCurvesSolver. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.Parse. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroPatterns. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroRules. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.ACos2P. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.TrigP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroRules. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Derivative. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Simplify. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.TanP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.Parse. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroRules. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Derivative. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.ASinP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.Parse. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroRules. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.ASin2P. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralPatterns.ExponentIRule. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroRules. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Derivative. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.LogP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.Parse. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Identity. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.CosP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.TrigP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralPatterns. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroRules. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Derivative. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Simplify. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.Parse. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroRules. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Derivative. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.ATanP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.Parse. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Identity. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.TrigP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralPatterns. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroRules. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Derivative. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Simplify. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.SinP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.Parse. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroRules. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Derivative. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.Parse. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.ACosP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroPatterns. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Identity. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralRules.Parts. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralPatterns.PowerIRule. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.ui.CalcSolver.DoubleIntegralResult. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroRules. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.SumP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Derivative. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Simplify. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralRules. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralRules.SumRule. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.ui.CalcSolver.AreaBetweenCurvesSolver. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.AsSumP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.Parse. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroPatterns. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Identity. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralPatterns.ExponentIRule. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralPatterns.PowerIRule. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.ZeroRules. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Derivative. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.Simplify. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.PowP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.AsPowP. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.math.IntegralRules. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of sympany.Parse. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(sympany.SymOp,ModifiedNames(changes = UsedName(finalize,[Default]))) invalidates 13 classes due to The sympany.SymOp has the following regular definitions changed:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	UsedName(finalize,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.ui.CalcSolver)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	> by transitive inheritance: Set(sympany.SymProd, sympany.SymOp, sympany.SymACos2, sympany.SymTan, sympany.SymASin, sympany.SymASin2, sympany.SymLog, sympany.SymCos, sympany.SymATan, sympany.SymSin, sympany.SymACos, sympany.SymSum, sympany.SymPow)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m	> [0m
 [0m[[0m[0mdebug[0m] [0m[0m        [0m
 [0m[[0m[0mdebug[0m] [0m[0mNew invalidations:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	Set(sympany.SymProd, sympany.SymACos2, sympany.SymTan, sympany.SymASin, sympany.SymASin2, sympany.SymLog, sympany.SymCos, sympany.SymATan, sympany.SymSin, sympany.SymACos, sympany.SymSum, sympany.SymPow)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: sympany.SymProd, sympany.SymACos2, sympany.SymTan, sympany.SymASin, sympany.SymASin2, sympany.SymLog, sympany.SymCos, sympany.SymATan, sympany.SymSin, sympany.SymACos, sympany.SymSum, sympany.SymPow[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.ZeroPatterns by sympany.SymProd[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Identity by sympany.SymProd[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules by sympany.math.Identity[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.IdentityRule by sympany.math.Identity[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.ZeroRules by sympany.math.Identity[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.Parts by sympany.SymProd[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns.ExponentIRule by sympany.SymProd[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns.PowerIRule by sympany.SymProd[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.DoubleIntegralResult by sympany.SymProd[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralPatterns by sympany.SymProd[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.ProductRule by sympany.SymProd[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Derivative by sympany.SymProd[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Integral by sympany.math.Derivative[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.AsyncIntegralSolver by sympany.math.Integral[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.AsyncDerivativeSolver by sympany.math.Derivative[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.USub by sympany.math.Derivative[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Simplify by sympany.SymProd[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.ExtremasResult by sympany.math.Simplify[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.Latex by sympany.math.Simplify[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver by sympany.math.Simplify[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Integral.IntegralRule by sympany.ui.CalcSolver[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Derivative.DerivativeRule by sympany.ui.CalcSolver[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Zero by sympany.ui.CalcSolver[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.AsyncZeroSolver by sympany.math.Zero[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.Zero.ZeroRule by sympany.ui.CalcSolver[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.math.IntegralRules.SumRule by sympany.math.Simplify[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcSolver.AreaBetweenCurvesSolver by sympany.math.Simplify[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.Parse by sympany.math.Simplify[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ui.CalcFields.EquationField by sympany.Parse[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.JsBindings by sympany.Parse[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.Main by sympany.Parse[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.AsProdP by sympany.SymProd[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ProdP by sympany.SymProd[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ACos2P by sympany.SymACos2[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.TrigP by sympany.SymTan[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.TanP by sympany.SymTan[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ASinP by sympany.SymASin[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ASin2P by sympany.SymASin2[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.LogP by sympany.SymLog[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.CosP by sympany.SymCos[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ATanP by sympany.SymATan[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SinP by sympany.SymSin[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.ACosP by sympany.SymACos[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.SumP by sympany.SymSum[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.AsSumP by sympany.SymSum[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.PowP by sympany.SymPow[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncluding sympany.AsPowP by sympany.SymPow[0m
 [0m[[0m[0mdebug[0m] [0m[0mPreviously invalidated, but (transitively) depend on new invalidations:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mNo classes were invalidated.[0m

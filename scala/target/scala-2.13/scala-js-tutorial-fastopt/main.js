@@ -6882,6 +6882,13 @@ $c_sc_StringOps$.prototype.slice$extension__T__I__I__T = (function(this$, from, 
   var end = ((until < that) ? until : that);
   return ((start >= end) ? "" : $as_T(this$.substring(start, end)))
 });
+$c_sc_StringOps$.prototype.escape$extension__T__C__T = (function(this$, ch) {
+  return (((((ch >= 97) && (ch <= 122)) || ((ch >= 65) && (ch <= 90))) || ((ch >= 48) && (ch <= 57))) ? $as_T(String.fromCharCode(ch)) : ("\\" + $bC(ch)))
+});
+$c_sc_StringOps$.prototype.split$extension__T__C__AT = (function(this$, separator) {
+  var regex = $m_sc_StringOps$().escape$extension__T__C__T(this$, separator);
+  return $f_T__split__T__I__AT(this$, regex, 0)
+});
 $c_sc_StringOps$.prototype.unwrapArg$extension__T__O__O = (function(this$, arg) {
   if ((arg instanceof $c_s_math_ScalaNumber)) {
     var x2 = $as_s_math_ScalaNumber(arg);
@@ -10419,7 +10426,7 @@ function $h_Lsympany_JsUtils$() {
   /*<skip>*/
 }
 $h_Lsympany_JsUtils$.prototype = $c_Lsympany_JsUtils$.prototype;
-$c_Lsympany_JsUtils$.prototype.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element = (function(tag, props) {
+$c_Lsympany_JsUtils$.prototype.createElement__T__sci_Seq__Lorg_scalajs_dom_Element = (function(tag, props) {
   var e = document.createElement(tag);
   props.foreach__F1__V(new $c_sjsr_AnonFunction1(((e$1) => ((x0$1$2) => {
     var x0$1 = $as_T2(x0$1$2);
@@ -10464,12 +10471,114 @@ $c_Lsympany_JsUtils$.prototype.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element
   }))(e)));
   return e
 });
-$c_Lsympany_JsUtils$.prototype.stringToNode__T__T__Lorg_scalajs_dom_Element = (function(str, cls) {
-  var $$x1 = $ct_T2__O__O__(new $c_T2(), "class", cls);
-  var this$5 = $as_T(str.split("\\(").join("</span><p class=\"mq-static mq-string-equation\">"));
-  var y = (("<span class=\"mq-string-text\">" + $as_T(this$5.split("\\)").join("</p><span class=\"mq-string-text\">"))) + "</span>");
-  var array = [$$x1, $ct_T2__O__O__(new $c_T2(), "innerHTML", y)];
-  return this.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
+$c_Lsympany_JsUtils$.prototype.createLatexElement__T__sci_Seq__Lorg_scalajs_dom_Element = (function(latex, props) {
+  var element = this.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", props);
+  katexFormatElement(element, latex);
+  return element
+});
+$c_Lsympany_JsUtils$.prototype.stringToNode__T__sci_Seq__Lorg_scalajs_dom_Element = (function(str, props) {
+  if ($m_sc_StringOps$().contains$extension__T__C__Z(str, 10)) {
+    var this$4 = $m_s_Predef$().wrapRefArray__AO__scm_ArraySeq$ofRef($m_sc_StringOps$().split$extension__T__C__AT(str, 10));
+    $m_sci_List$();
+    var this$10 = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$4);
+    var f = ((s$2) => {
+      var s = $as_T(s$2);
+      var $$x1 = $m_Lsympany_JsUtils$();
+      var array = [];
+      return $$x1.stringToNode__T__sci_Seq__Lorg_scalajs_dom_Element(s, $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
+    });
+    if ((this$10 === $m_sci_Nil$())) {
+      var y = $m_sci_Nil$()
+    } else {
+      var arg1 = this$10.head__O();
+      var h = new $c_sci_$colon$colon(f(arg1), $m_sci_Nil$());
+      var t = h;
+      var rest = $as_sci_List(this$10.tail__O());
+      while ((rest !== $m_sci_Nil$())) {
+        var arg1$1 = rest.head__O();
+        var nx = new $c_sci_$colon$colon(f(arg1$1), $m_sci_Nil$());
+        t.sci_$colon$colon__f_next = nx;
+        t = nx;
+        rest = $as_sci_List(rest.tail__O())
+      };
+      var y = h
+    };
+    var rassoc$1 = $ct_T2__O__O__(new $c_T2(), "children", y);
+    var el = this.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $as_sci_Seq(props.prepended__O__O(rassoc$1)));
+    return el
+  };
+  var array$1 = [$ct_T2__O__O__(new $c_T2(), "class", "mixed-string")];
+  var el$2 = this.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1));
+  var elem = false;
+  elem = false;
+  var elem$1 = 0;
+  elem$1 = 0;
+  var end = (((-2) + $uI(str.length)) | 0);
+  var isEmpty = (end < 0);
+  if ((!isEmpty)) {
+    var i = 0;
+    while (true) {
+      var v1 = i;
+      if ((!elem)) {
+        var endIndex = ((2 + v1) | 0);
+        var $$x2 = ($as_T(str.substring(v1, endIndex)) === "\\(")
+      } else {
+        var $$x2 = false
+      };
+      if ($$x2) {
+        if ((v1 > 0)) {
+          var $$x4 = $m_Lsympany_JsUtils$();
+          var $$x3 = $ct_T2__O__O__(new $c_T2(), "class", "mixed-string-text");
+          var beginIndex = elem$1;
+          var y$1 = $as_T(str.substring(beginIndex, v1));
+          var array$2 = [$$x3, $ct_T2__O__O__(new $c_T2(), "innerHTML", y$1)];
+          el$2.appendChild($$x4.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2)))
+        };
+        elem$1 = ((2 + v1) | 0);
+        elem = true
+      } else {
+        if (elem) {
+          var endIndex$1 = ((2 + v1) | 0);
+          var $$x5 = ($as_T(str.substring(v1, endIndex$1)) === "\\)")
+        } else {
+          var $$x5 = false
+        };
+        if ($$x5) {
+          var $$x7 = $m_Lsympany_JsUtils$();
+          var beginIndex$1 = elem$1;
+          var $$x6 = $as_T(str.substring(beginIndex$1, v1));
+          var array$3 = [$ct_T2__O__O__(new $c_T2(), "class", "mixed-string-latex")];
+          el$2.appendChild($$x7.createLatexElement__T__sci_Seq__Lorg_scalajs_dom_Element($$x6, $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3)));
+          elem$1 = ((2 + v1) | 0);
+          elem = false
+        }
+      };
+      if ((i === end)) {
+        break
+      };
+      i = ((1 + i) | 0)
+    }
+  };
+  if ((elem$1 < $uI(str.length))) {
+    if (elem) {
+      var beginIndex$2 = elem$1;
+      var $$x9 = $as_T(str.substring(beginIndex$2));
+      var array$4 = [$ct_T2__O__O__(new $c_T2(), "class", "mixed-string-latex")];
+      var $$x8 = this.createLatexElement__T__sci_Seq__Lorg_scalajs_dom_Element($$x9, $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$4))
+    } else {
+      var $$x10 = $ct_T2__O__O__(new $c_T2(), "class", "mixed-string-text");
+      var beginIndex$3 = elem$1;
+      var y$2 = $as_T(str.substring(beginIndex$3));
+      var array$5 = [$$x10, $ct_T2__O__O__(new $c_T2(), "innerHTML", y$2)];
+      var $$x8 = this.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$5))
+    };
+    el$2.appendChild($$x8)
+  };
+  var $$x11 = $m_sci_Seq$();
+  var array$6 = [el$2];
+  var y$3 = $$x11.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$6));
+  var rassoc$2 = $ct_T2__O__O__(new $c_T2(), "children", y$3);
+  return this.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $as_sci_Seq(props.prepended__O__O(rassoc$2)))
 });
 var $d_Lsympany_JsUtils$ = new $TypeData().initClass({
   Lsympany_JsUtils$: 0
@@ -10866,7 +10975,7 @@ $c_Lsympany_Latex$.prototype.toLatex__Lsympany_Sym__T = (function(e) {
           var x0$6 = $as_Lsympany_Sym(x0$6$2);
           if ((x0$6 instanceof $c_Lsympany_SymSum)) {
             var x2$4 = $as_Lsympany_SymSum(x0$6);
-            return ((" \\quad ( " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(x2$4)) + " ) \\quad ")
+            return ((" \\left( " + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(x2$4)) + " \\right) ")
           } else {
             return $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(x0$6)
           }
@@ -16771,7 +16880,7 @@ function $c_Lsympany_math_ZeroPatterns$() {
   var $$x5 = new $c_Lsympany_SumP($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3));
   $m_Lsympany_Pattern$();
   var sym = new $c_Lsympany_Sym$ImplicitSymInt(0);
-  $$x8.$plus__T__Lsympany_Pattern__F1__V("Quadratic formula:<br/>\\(x=\\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}\\)", new $c_Lsympany_EquationP($$x5, new $c_Lsympany_SymP(sym)), new $c_sjsr_AnonFunction1(((x0$2$2) => {
+  $$x8.$plus__T__Lsympany_Pattern__F1__V("Quadratic formula:\n\\(x=\\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}\\)", new $c_Lsympany_EquationP($$x5, new $c_Lsympany_SymP(sym)), new $c_sjsr_AnonFunction1(((x0$2$2) => {
     if ((x0$2$2 instanceof $c_T3)) {
       var x2$1 = $as_T3(x0$2$2);
       var aS = x2$1.T3__f__1;
@@ -16976,7 +17085,7 @@ function $c_Lsympany_math_ZeroRules$() {
             var arg$macro$3 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$9);
             var $$x3 = $m_sc_StringOps$();
             var array = [arg$macro$1, arg$macro$2, arg$macro$3];
-            var y = $$x3.format$extension__T__sci_Seq__T("%s:<br/>\\(%s \\quad \\rightarrow \\quad %s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
+            var y = $$x3.format$extension__T__sci_Seq__T("%s:\n\\(%s \\quad \\rightarrow \\quad %s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
             return $ct_T2__O__O__(new $c_T2(), self, y)
           }))(x4))));
           var suffix = $as_sc_IterableOnce($m_Lsympany_math_Identity$().identities__Lsympany_Sym__sci_Seq(x4).map__F1__O(new $c_sjsr_AnonFunction1(((x3$1) => ((i$3$2) => {
@@ -16989,7 +17098,7 @@ function $c_Lsympany_math_ZeroRules$() {
             var arg$macro$6 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$16);
             var $$x4 = $m_sc_StringOps$();
             var array$1 = [arg$macro$4, arg$macro$5, arg$macro$6];
-            var y$1 = $$x4.format$extension__T__sci_Seq__T("%s:<br/>\\(%s \\quad \\rightarrow \\quad %s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1));
+            var y$1 = $$x4.format$extension__T__sci_Seq__T("%s:\n\\(%s \\quad \\rightarrow \\quad %s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1));
             return $ct_T2__O__O__(new $c_T2(), self$1, y$1)
           }))(x3))));
           return $as_sci_Seq(this$21.concat__sc_IterableOnce__O(suffix))
@@ -17669,7 +17778,7 @@ function $c_Lsympany_ui_CalcFields$Calculator(name, fields) {
   this.Lsympany_ui_CalcFields$Calculator__f_fields = fields;
   var $$x1 = $m_Lsympany_JsUtils$();
   var array = [$ct_T2__O__O__(new $c_T2(), "class", "calculator")];
-  this.Lsympany_ui_CalcFields$Calculator__f_element = $$x1.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
+  this.Lsympany_ui_CalcFields$Calculator__f_element = $$x1.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
   var $$x2 = this.Lsympany_ui_CalcFields$Calculator__f_element;
   var a = fields.map__F1__O(new $c_sjsr_AnonFunction1(((x$21$2) => {
     var x$21 = $as_Lsympany_ui_CalcFields$CalcField(x$21$2);
@@ -17868,7 +17977,7 @@ function $f_Lsympany_ui_CalcSolver$CalcSolution__wrappedInsideNode__I__F1__Lorg_
     var array = [$thiz.insideNode__I__F1__Lorg_scalajs_dom_Element(num, wrap)];
     var y = $$x1.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
     var array$1 = [$$x2, $ct_T2__O__O__(new $c_T2(), "children", y)];
-    var rassoc$1 = $$x3.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1));
+    var rassoc$1 = $$x3.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1));
     var this$14 = $as_sc_SeqOps($thiz.rules__sci_Seq().map__F1__O(new $c_sjsr_AnonFunction1(((this$12, num$1, wrap$1) => ((r$2) => {
       var r = $as_Lsympany_ui_CalcSolver$CalcSolution(r$2);
       var num$2 = ((1 + num$1) | 0);
@@ -17880,7 +17989,7 @@ function $f_Lsympany_ui_CalcSolver$CalcSolution__wrappedInsideNode__I__F1__Lorg_
     }))($thiz, num, wrap))));
     var y$1 = this$14.prepended__O__O(rassoc$1);
     var array$2 = [$ct_T2__O__O__(new $c_T2(), "children", y$1)];
-    return $$x4.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2))
+    return $$x4.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2))
   } else {
     var $$x6 = $m_Lsympany_JsUtils$();
     var $$x5 = $ct_T2__O__O__(new $c_T2(), "class", "solution-step-details");
@@ -17891,16 +18000,16 @@ function $f_Lsympany_ui_CalcSolver$CalcSolution__wrappedInsideNode__I__F1__Lorg_
     }))));
     var y$2 = this$22.prepended__O__O(rassoc$2);
     var array$3 = [$$x5, $ct_T2__O__O__(new $c_T2(), "children", y$2)];
-    return $$x6.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3))
+    return $$x6.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3))
   }
 }
 function $f_Lsympany_ui_CalcSolver$CalcSolution__node__Lorg_scalajs_dom_Node($thiz) {
   var $$x1 = $m_Lsympany_JsUtils$();
   var array = [$ct_T2__O__O__(new $c_T2(), "class", "show-steps-btn"), $ct_T2__O__O__(new $c_T2(), "innerText", "\u25b9 Show Steps")];
-  var showBtn = $$x1.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("button", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
+  var showBtn = $$x1.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("button", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
   var $$x2 = $m_Lsympany_JsUtils$();
   var array$1 = [$ct_T2__O__O__(new $c_T2(), "class", "show-steps-btn"), $ct_T2__O__O__(new $c_T2(), "innerText", "\u25bf Hide Steps")];
-  var hideBtn = $$x2.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("button", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1));
+  var hideBtn = $$x2.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("button", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1));
   var $$x5 = $m_Lsympany_JsUtils$();
   var $$x4 = $ct_T2__O__O__(new $c_T2(), "class", "solution-step-indented");
   var $$x3 = $m_sci_Seq$();
@@ -17911,7 +18020,7 @@ function $f_Lsympany_ui_CalcSolver$CalcSolution__node__Lorg_scalajs_dom_Node($th
   var array$2 = [$f_Lsympany_ui_CalcSolver$CalcSolution__wrappedInsideNode__I__F1__Lorg_scalajs_dom_Node($thiz, 0, wrap)];
   var y = $$x3.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2));
   var array$3 = [$$x4, $ct_T2__O__O__(new $c_T2(), "children", y)];
-  var details = $$x5.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3));
+  var details = $$x5.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3));
   hideBtn.addEventListener("click", ((arg$outer, details$1, hideBtn$1, showBtn$1) => ((arg1$2) => {
     $p_Lsympany_ui_CalcSolver$CalcSolution__updateHidden$1__Z__Lorg_scalajs_dom_Element__Lorg_scalajs_dom_Element__Lorg_scalajs_dom_Element__V(arg$outer, false, details$1, hideBtn$1, showBtn$1)
   }))($thiz, details, hideBtn, showBtn));
@@ -17925,7 +18034,7 @@ function $f_Lsympany_ui_CalcSolver$CalcSolution__node__Lorg_scalajs_dom_Node($th
   var array$4 = [$thiz.beforeNode__Lorg_scalajs_dom_Node(), showBtn, hideBtn, details];
   var y$1 = $$x6.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$4));
   var array$5 = [$$x7, $ct_T2__O__O__(new $c_T2(), "children", y$1)];
-  return $$x8.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$5))
+  return $$x8.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$5))
 }
 function $p_Lsympany_ui_CalcSolver$CalcSolution__updateHidden$1__Z__Lorg_scalajs_dom_Element__Lorg_scalajs_dom_Element__Lorg_scalajs_dom_Element__V($thiz, expanded, details$1, hideBtn$1, showBtn$1) {
   var value = (!expanded);
@@ -17952,17 +18061,17 @@ function $c_Lsympany_ui_Calculators$() {
   this.Lsympany_ui_Calculators$__f_currentCalculator = null;
   $n_Lsympany_ui_Calculators$ = this;
   var $$x6 = $m_sci_Seq$();
-  var array = [new $c_Lsympany_ui_CalcFields$EquationField("e1"), new $c_Lsympany_ui_CalcSolver$ZeroResult("z", "e1")];
+  var array = [new $c_Lsympany_ui_CalcFields$EquationField("e1", ""), new $c_Lsympany_ui_CalcSolver$ZeroResult("z", "e1")];
   var $$x5 = new $c_Lsympany_ui_CalcFields$Calculator("Zeros", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
-  var array$1 = [new $c_Lsympany_ui_CalcFields$EquationField("e1"), new $c_Lsympany_ui_CalcFields$EquationField("e2"), new $c_Lsympany_ui_CalcFields$BrField(), new $c_Lsympany_ui_CalcSolver$IntersectionResult("i", "e1", "e2")];
+  var array$1 = [new $c_Lsympany_ui_CalcFields$EquationField("e1", ""), new $c_Lsympany_ui_CalcFields$EquationField("e2", ""), new $c_Lsympany_ui_CalcFields$BrField(), new $c_Lsympany_ui_CalcSolver$IntersectionResult("i", "e1", "e2")];
   var $$x4 = new $c_Lsympany_ui_CalcFields$Calculator("Intersections", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1));
-  var array$2 = [new $c_Lsympany_ui_CalcFields$EquationField("e1"), $ct_Lsympany_ui_CalcSolver$DerivativeResult__T__T__(new $c_Lsympany_ui_CalcSolver$DerivativeResult(), "d", "e1")];
+  var array$2 = [new $c_Lsympany_ui_CalcFields$EquationField("e1", "\\(\\frac{d}{dx}\\)"), $ct_Lsympany_ui_CalcSolver$DerivativeResult__T__T__(new $c_Lsympany_ui_CalcSolver$DerivativeResult(), "d", "e1")];
   var $$x3 = new $c_Lsympany_ui_CalcFields$Calculator("Derivative", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2));
-  var array$3 = [new $c_Lsympany_ui_CalcFields$EquationField("e"), new $c_Lsympany_ui_CalcSolver$ExtremasDerivativeResult("d", "e"), new $c_Lsympany_ui_CalcSolver$ExtremasResult("z", "d", "e")];
+  var array$3 = [new $c_Lsympany_ui_CalcFields$EquationField("e", ""), new $c_Lsympany_ui_CalcSolver$ExtremasDerivativeResult("d", "e"), new $c_Lsympany_ui_CalcSolver$ExtremasResult("z", "d", "e")];
   var $$x2 = new $c_Lsympany_ui_CalcFields$Calculator("Local Minima/Maxima", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3));
-  var array$4 = [new $c_Lsympany_ui_CalcFields$EquationField("e1"), new $c_Lsympany_ui_CalcSolver$IntegralResult("i", "e1", true)];
+  var array$4 = [new $c_Lsympany_ui_CalcFields$EquationField("e1", "\\(\\int\\)"), new $c_Lsympany_ui_CalcSolver$IntegralResult("i", "e1", true)];
   var $$x1 = new $c_Lsympany_ui_CalcFields$Calculator("Integral", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$4));
-  var array$5 = [new $c_Lsympany_ui_CalcFields$EquationField("e1"), new $c_Lsympany_ui_CalcSolver$IntegralResult("i1", "e1", false), new $c_Lsympany_ui_CalcFields$EquationField("e2"), new $c_Lsympany_ui_CalcSolver$IntegralResult("i2", "e2", false), new $c_Lsympany_ui_CalcFields$BrField(), new $c_Lsympany_ui_CalcSolver$IntersectionResult("ps", "e1", "e2"), new $c_Lsympany_ui_CalcFields$BrField(), new $c_Lsympany_ui_CalcSolver$AreaBetweenCurvesResult("area", "e1", "e2", "i1", "i2", "ps")];
+  var array$5 = [new $c_Lsympany_ui_CalcFields$EquationField("e1", ""), new $c_Lsympany_ui_CalcSolver$IntegralResult("i1", "e1", false), new $c_Lsympany_ui_CalcFields$EquationField("e2", ""), new $c_Lsympany_ui_CalcSolver$IntegralResult("i2", "e2", false), new $c_Lsympany_ui_CalcFields$BrField(), new $c_Lsympany_ui_CalcSolver$IntersectionResult("ps", "e1", "e2"), new $c_Lsympany_ui_CalcFields$BrField(), new $c_Lsympany_ui_CalcSolver$AreaBetweenCurvesResult("area", "e1", "e2", "i1", "i2", "ps")];
   var array$6 = [$$x5, $$x4, $$x3, $$x2, $$x1, new $c_Lsympany_ui_CalcFields$Calculator("Area between curves", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$5))];
   this.Lsympany_ui_Calculators$__f_calculators = $as_sci_Seq($$x6.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$6)));
   this.Lsympany_ui_Calculators$__f_currentCalculator = $as_Lsympany_ui_CalcFields$Calculator(this.Lsympany_ui_Calculators$__f_calculators.apply__I__O(0))
@@ -18015,7 +18124,7 @@ $c_Lsympany_ui_Calculators$.prototype.setupCalculatorList__sci_Seq__V = (functio
     var $$x1 = $ct_T2__O__O__(new $c_T2(), "id", y);
     var y$1 = calc.Lsympany_ui_CalcFields$Calculator__f_name;
     var array = [$$x2, $$x1, $ct_T2__O__O__(new $c_T2(), "innerText", y$1)];
-    var btn = $$x3.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("button", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
+    var btn = $$x3.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("button", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
     btn.addEventListener("click", ((calc$1) => ((arg1$2) => {
       $m_Lsympany_ui_Calculators$();
       $m_Lsympany_ui_Calculators$().selectCalculator__Lsympany_ui_CalcFields$Calculator__V(calc$1)
@@ -18023,7 +18132,7 @@ $c_Lsympany_ui_Calculators$.prototype.setupCalculatorList__sci_Seq__V = (functio
     calcsDiv$1.appendChild(btn);
     var $$x4 = $m_Lsympany_JsUtils$();
     var array$1 = [];
-    return calcsDiv$1.appendChild($$x4.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("br", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1)))
+    return calcsDiv$1.appendChild($$x4.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("br", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1)))
   }))(calcsDiv)))
 });
 var $d_Lsympany_ui_Calculators$ = new $TypeData().initClass({
@@ -20655,6 +20764,17 @@ function $h_s_LowPriorityImplicits() {
   /*<skip>*/
 }
 $h_s_LowPriorityImplicits.prototype = $c_s_LowPriorityImplicits.prototype;
+$c_s_LowPriorityImplicits.prototype.wrapRefArray__AO__scm_ArraySeq$ofRef = (function(xs) {
+  if ((xs === null)) {
+    return null
+  } else if ((xs.u.length === 0)) {
+    var this$3 = $m_scm_ArraySeq$();
+    $m_s_reflect_ManifestFactory$ObjectManifest$();
+    return this$3.scm_ArraySeq$__f_EmptyArraySeq
+  } else {
+    return new $c_scm_ArraySeq$ofRef(xs)
+  }
+});
 /** @constructor */
 function $c_s_Option$() {
   /*<skip>*/
@@ -20674,6 +20794,9 @@ $c_s_Option$.prototype.option2Iterable__s_Option__sc_Iterable = (function(xo) {
     var a = xo.get__O();
     return new $c_sc_Iterable$$anon$1(a)
   }
+});
+$c_s_Option$.prototype.when__Z__F0__s_Option = (function(cond, a) {
+  return (cond ? new $c_s_Some(a.apply__O()) : $m_s_None$())
 });
 var $d_s_Option$ = new $TypeData().initClass({
   s_Option$: 0
@@ -22157,27 +22280,31 @@ $c_Lsympany_math_Derivative$DerivativeRule.prototype.rules__sci_Seq = (function(
   return this.Lsympany_math_Derivative$DerivativeRule__f_rules
 });
 $c_Lsympany_math_Derivative$DerivativeRule.prototype.beforeNode__Lorg_scalajs_dom_Element = (function() {
-  var $$x2 = $m_Lsympany_JsUtils$();
+  var $$x3 = $m_Lsympany_JsUtils$();
   var arg$macro$1 = this.Lsympany_math_Derivative$DerivativeRule__f_ddx;
   var this$1 = this.Lsympany_math_Derivative$DerivativeRule__f_expr;
   var arg$macro$2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$1);
   var this$2 = this.Lsympany_math_Derivative$DerivativeRule__f_solution;
   var arg$macro$3 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$2);
-  var $$x1 = $m_sc_StringOps$();
+  var $$x2 = $m_sc_StringOps$();
   var array = [arg$macro$1, arg$macro$2, arg$macro$3];
-  return $$x2.stringToNode__T__T__Lorg_scalajs_dom_Element($$x1.format$extension__T__sci_Seq__T("\\(%s %s = %s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array)), "")
+  var $$x1 = $$x2.format$extension__T__sci_Seq__T("\\(%s %s = %s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
+  var array$1 = [];
+  return $$x3.stringToNode__T__sci_Seq__Lorg_scalajs_dom_Element($$x1, $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1))
 });
 $c_Lsympany_math_Derivative$DerivativeRule.prototype.insideNode__I__F1__Lorg_scalajs_dom_Element = (function(num, wrap) {
-  var $$x2 = $m_Lsympany_JsUtils$();
+  var $$x3 = $m_Lsympany_JsUtils$();
   var arg$macro$1 = this.Lsympany_math_Derivative$DerivativeRule__f_description;
   var arg$macro$2 = this.Lsympany_math_Derivative$DerivativeRule__f_ddx;
   var this$1 = this.Lsympany_math_Derivative$DerivativeRule__f_expr;
   var arg$macro$3 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$1);
   var this$2 = this.Lsympany_math_Derivative$DerivativeRule__f_forward;
   var arg$macro$4 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$2);
-  var $$x1 = $m_sc_StringOps$();
+  var $$x2 = $m_sc_StringOps$();
   var array = [arg$macro$1, arg$macro$2, arg$macro$3, arg$macro$4];
-  return $$x2.stringToNode__T__T__Lorg_scalajs_dom_Element($$x1.format$extension__T__sci_Seq__T("%s<br/>\\(%s %s = %s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array)), "")
+  var $$x1 = $$x2.format$extension__T__sci_Seq__T("%s<br/>\\(%s %s = %s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
+  var array$1 = [];
+  return $$x3.stringToNode__T__sci_Seq__Lorg_scalajs_dom_Element($$x1, $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1))
 });
 $c_Lsympany_math_Derivative$DerivativeRule.prototype.beforeNode__Lorg_scalajs_dom_Node = (function() {
   return this.beforeNode__Lorg_scalajs_dom_Element()
@@ -22254,19 +22381,23 @@ $c_Lsympany_math_Integral$IntegralRule.prototype.solveNext__Lsympany_math_Integr
   this.Lsympany_math_Integral$IntegralRule__f_rules = $as_sci_Seq(this$2.appended__O__O(r))
 });
 $c_Lsympany_math_Integral$IntegralRule.prototype.beforeNode__Lorg_scalajs_dom_Element = (function() {
-  var $$x2 = $m_Lsympany_JsUtils$();
+  var $$x3 = $m_Lsympany_JsUtils$();
   var this$1 = new $c_Lsympany_SymIntegral(this.Lsympany_math_Integral$IntegralRule__f_integral);
-  var $$x1 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$1);
+  var $$x2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$1);
   var this$2 = this.backward__Lsympany_Sym__Lsympany_Sym(this.Lsympany_math_Integral$IntegralRule__f_expression);
-  return $$x2.stringToNode__T__T__Lorg_scalajs_dom_Element((((("\\(" + $$x1) + " = ") + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$2)) + "\\)"), "")
+  var $$x1 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$2);
+  var array = [];
+  return $$x3.stringToNode__T__sci_Seq__Lorg_scalajs_dom_Element((((("\\(" + $$x2) + " = ") + $$x1) + "\\)"), $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
 });
 $c_Lsympany_math_Integral$IntegralRule.prototype.insideNode__I__F1__Lorg_scalajs_dom_Element = (function(num, wrap) {
-  var $$x3 = $m_Lsympany_JsUtils$();
-  var $$x2 = this.ruleDescription__T();
+  var $$x4 = $m_Lsympany_JsUtils$();
+  var $$x3 = this.ruleDescription__T();
   var this$1 = $as_Lsympany_Sym(wrap.apply__O__O(new $c_Lsympany_SymIntegral(this.Lsympany_math_Integral$IntegralRule__f_integral)));
-  var $$x1 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$1);
+  var $$x2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$1);
   var this$2 = this.wrapFunc__Lsympany_Sym__Lsympany_Sym($as_Lsympany_Sym(wrap.apply__O__O(this.forward__Lsympany_Sym__Lsympany_Sym(this.Lsympany_math_Integral$IntegralRule__f_integral))));
-  return $$x3.stringToNode__T__T__Lorg_scalajs_dom_Element((((((("\u27a3 " + $$x2) + "\\(") + $$x1) + "=") + $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$2)) + "\\)"), "solution-step-title")
+  var $$x1 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$2);
+  var array = [$ct_T2__O__O__(new $c_T2(), "class", "solution-step-title")];
+  return $$x4.stringToNode__T__sci_Seq__Lorg_scalajs_dom_Element((((((("\u27a3 " + $$x3) + "\\(") + $$x2) + "=") + $$x1) + "\\)"), $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
 });
 $c_Lsympany_math_Integral$IntegralRule.prototype.beforeNode__Lorg_scalajs_dom_Node = (function() {
   return this.beforeNode__Lorg_scalajs_dom_Element()
@@ -22284,21 +22415,28 @@ function $f_Lsympany_math_Zero$ZeroRule__beforeNode__Lorg_scalajs_dom_Node($thiz
   var x1 = $thiz.endResult__s_Option();
   var x = $m_s_None$();
   if ((x === x1)) {
-    return $m_Lsympany_JsUtils$().stringToNode__T__T__Lorg_scalajs_dom_Element("Unsolved root", "")
+    var $$x1 = $m_Lsympany_JsUtils$();
+    var array = [$ct_T2__O__O__(new $c_T2(), "innerText", "Unsolved root")];
+    return $$x1.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
   } else if ((x1 instanceof $c_s_Some)) {
     var x2 = $as_s_Some(x1);
     var z = $as_Lsympany_Sym(x2.s_Some__f_value);
-    var $$x2 = $m_Lsympany_JsUtils$();
+    var $$x4 = $m_Lsympany_JsUtils$();
     var arg$macro$1 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(z);
-    var $$x1 = $m_sc_StringOps$();
-    var array = [arg$macro$1];
-    return $$x2.stringToNode__T__T__Lorg_scalajs_dom_Element($$x1.format$extension__T__sci_Seq__T("\\(x = %s\\)<br/>", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array)), "")
+    var $$x3 = $m_sc_StringOps$();
+    var array$1 = [arg$macro$1];
+    var $$x2 = $$x3.format$extension__T__sci_Seq__T("x = %s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1));
+    var array$2 = [];
+    return $$x4.createLatexElement__T__sci_Seq__Lorg_scalajs_dom_Element($$x2, $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2))
   } else {
     throw new $c_s_MatchError(x1)
   }
 }
 function $f_Lsympany_math_Zero$ZeroRule__insideNode__I__F1__Lorg_scalajs_dom_Element($thiz, num, wrap) {
-  return $m_Lsympany_JsUtils$().stringToNode__T__T__Lorg_scalajs_dom_Element((("\u27a3 " + $thiz.ruleDescription__T()) + "<br/>"), "solution-step-title")
+  var $$x2 = $m_Lsympany_JsUtils$();
+  var $$x1 = $thiz.ruleDescription__T();
+  var array = [$ct_T2__O__O__(new $c_T2(), "class", "solution-step-title")];
+  return $$x2.stringToNode__T__sci_Seq__Lorg_scalajs_dom_Element(("\u27a3 " + $$x1), $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
 }
 function $is_Lsympany_math_Zero$ZeroRule(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lsympany_math_Zero$ZeroRule)))
@@ -22321,7 +22459,7 @@ function $c_Lsympany_ui_CalcFields$BrField() {
   this.Lsympany_ui_CalcFields$BrField__f_results = new $c_s_Some($m_sci_Nil$());
   var $$x1 = $m_Lsympany_JsUtils$();
   var array = [];
-  this.Lsympany_ui_CalcFields$BrField__f_node = $$x1.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("br", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
+  this.Lsympany_ui_CalcFields$BrField__f_node = $$x1.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("br", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
 }
 $c_Lsympany_ui_CalcFields$BrField.prototype = new $h_O();
 $c_Lsympany_ui_CalcFields$BrField.prototype.constructor = $c_Lsympany_ui_CalcFields$BrField;
@@ -22382,30 +22520,41 @@ function $p_Lsympany_ui_CalcFields$EquationField__containsOtherVars$1__Lsympany_
   return (!this$7.isEmpty__Z())
 }
 /** @constructor */
-function $c_Lsympany_ui_CalcFields$EquationField(name) {
+function $c_Lsympany_ui_CalcFields$EquationField(name, pre) {
   this.Lsympany_ui_CalcFields$EquationField__f_name = null;
+  this.Lsympany_ui_CalcFields$EquationField__f_pre = null;
   this.Lsympany_ui_CalcFields$EquationField__f_mqNode = null;
   this.Lsympany_ui_CalcFields$EquationField__f_node = null;
   this.Lsympany_ui_CalcFields$EquationField__f_latex = null;
   this.Lsympany_ui_CalcFields$EquationField__f_expression = null;
   this.Lsympany_ui_CalcFields$EquationField__f_name = name;
+  this.Lsympany_ui_CalcFields$EquationField__f_pre = pre;
   var $$x2 = $m_Lsympany_JsUtils$();
   var $$x1 = $m_sc_StringOps$();
   var array = [name];
   var y = $$x1.format$extension__T__sci_Seq__T("mq-eqn-%s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
   var array$1 = [$ct_T2__O__O__(new $c_T2(), "id", y)];
-  this.Lsympany_ui_CalcFields$EquationField__f_mqNode = $$x2.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1));
-  var $$x5 = $m_Lsympany_JsUtils$();
+  this.Lsympany_ui_CalcFields$EquationField__f_mqNode = $$x2.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1));
+  var $$x10 = $m_Lsympany_JsUtils$();
+  var $$x9 = $m_sci_Seq$();
+  var $$x8 = $m_Lsympany_JsUtils$();
+  var array$2 = [];
+  var $$x7 = $$x8.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("br", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2));
+  var $$x6 = $m_Lsympany_JsUtils$();
+  var $$x5 = $ct_T2__O__O__(new $c_T2(), "class", "equation-span");
   var $$x4 = $m_sci_Seq$();
   var $$x3 = $m_Lsympany_JsUtils$();
-  var array$2 = [];
-  var array$3 = [$$x3.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("br", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2)), this.Lsympany_ui_CalcFields$EquationField__f_mqNode];
-  var y$1 = $$x4.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3));
-  var array$4 = [$ct_T2__O__O__(new $c_T2(), "children", y$1)];
-  this.Lsympany_ui_CalcFields$EquationField__f_node = $$x5.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$4));
-  makeMQField(this.Lsympany_ui_CalcFields$EquationField__f_mqNode, $m_sjs_js_Any$().fromFunction1__F1__sjs_js_Function1(new $c_sjsr_AnonFunction1(((this$20) => ((x$22$2) => {
+  var array$3 = [$ct_T2__O__O__(new $c_T2(), "class", "equation-pre")];
+  var array$4 = [$$x3.stringToNode__T__sci_Seq__Lorg_scalajs_dom_Element(pre, $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3)), this.Lsympany_ui_CalcFields$EquationField__f_mqNode];
+  var y$1 = $$x4.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$4));
+  var array$5 = [$$x5, $ct_T2__O__O__(new $c_T2(), "children", y$1)];
+  var array$6 = [$$x7, $$x6.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("span", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$5))];
+  var y$2 = $$x9.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$6));
+  var array$7 = [$ct_T2__O__O__(new $c_T2(), "children", y$2)];
+  this.Lsympany_ui_CalcFields$EquationField__f_node = $$x10.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$7));
+  makeMQField(this.Lsympany_ui_CalcFields$EquationField__f_mqNode, $m_sjs_js_Any$().fromFunction1__F1__sjs_js_Function1(new $c_sjsr_AnonFunction1(((this$35) => ((x$22$2) => {
     var x$22 = $as_T(x$22$2);
-    this$20.setLatex__T__V(x$22)
+    this$35.setLatex__T__V(x$22)
   }))(this))));
   this.Lsympany_ui_CalcFields$EquationField__f_latex = "";
   this.Lsympany_ui_CalcFields$EquationField__f_expression = $m_s_None$()
@@ -22480,73 +22629,71 @@ function $p_Lsympany_ui_CalcFields$ResultField__updateNode__V($thiz) {
   var $$x2 = $thiz.Lsympany_ui_CalcFields$ResultField__f_node;
   var $$x1 = $m_Lsympany_JsUtils$();
   var array = [];
-  var a = $$x1.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("br", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
+  var a = $$x1.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("br", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
   $$x2.replaceChildren(a);
-  var this$7 = $thiz.outerTitle__s_Option();
-  if ((!this$7.isEmpty__Z())) {
-    var arg1 = this$7.get__O();
-    var t = $as_T(arg1);
-    $thiz.Lsympany_ui_CalcFields$ResultField__f_node.appendChild($m_Lsympany_JsUtils$().stringToNode__T__T__Lorg_scalajs_dom_Element(t, "outer-result-title"))
+  var this$13 = $thiz.outerTitle__s_Option();
+  var f = new $c_sjsr_AnonFunction1(((this$7) => ((t$2) => {
+    var t = $as_T(t$2);
+    var $$x4 = this$7.Lsympany_ui_CalcFields$ResultField__f_node;
+    var $$x3 = $m_Lsympany_JsUtils$();
+    var array$1 = [$ct_T2__O__O__(new $c_T2(), "class", "outer-result-title")];
+    return $$x4.appendChild($$x3.stringToNode__T__sci_Seq__Lorg_scalajs_dom_Element(t, $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1)))
+  }))($thiz));
+  if ((!this$13.isEmpty__Z())) {
+    f.apply__O__O(this$13.get__O())
   };
   var $$x19 = $thiz.Lsympany_ui_CalcFields$ResultField__f_node;
   if (($thiz.Lsympany_ui_CalcFields$ResultField__f_expressions.isEmpty__Z() && $thiz.outerTitle__s_Option().isEmpty__Z())) {
-    var $$x4 = $m_Lsympany_JsUtils$();
-    var array$1 = [];
-    var $$x3 = $$x4.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1))
+    var $$x6 = $m_Lsympany_JsUtils$();
+    var array$2 = [];
+    var $$x5 = $$x6.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2))
   } else {
     var $$x18 = $m_Lsympany_JsUtils$();
     var $$x17 = $ct_T2__O__O__(new $c_T2(), "class", "result-contents");
     var $$x16 = $m_sci_Seq$();
     var $$x15 = $m_Lsympany_JsUtils$();
     var $$x14 = $ct_T2__O__O__(new $c_T2(), "class", "result-solutions");
-    var $$x6 = $m_s_Option$();
-    var this$17 = $thiz.innerTitle__s_Option();
-    if (this$17.isEmpty__Z()) {
-      var $$x5 = $m_s_None$()
-    } else {
-      var arg1$1 = this$17.get__O();
-      var x$25 = $as_T(arg1$1);
-      var $$x5 = new $c_s_Some($m_Lsympany_JsUtils$().stringToNode__T__T__Lorg_scalajs_dom_Element(x$25, "inner-result-title"))
-    };
-    var this$47 = $$x6.option2Iterable__s_Option__sc_Iterable($$x5).toSeq__sci_Seq();
-    if ($thiz.Lsympany_ui_CalcFields$ResultField__f_expressions.isEmpty__Z()) {
-      var $$x8 = $m_sci_Seq$();
+    var $$x8 = $m_s_Option$();
+    var this$28 = $thiz.innerTitle__s_Option();
+    var f$1 = new $c_sjsr_AnonFunction1(((x$25$2) => {
+      var x$25 = $as_T(x$25$2);
       var $$x7 = $m_Lsympany_JsUtils$();
-      var array$2 = [$ct_T2__O__O__(new $c_T2(), "class", "result-description"), $ct_T2__O__O__(new $c_T2(), "innerText", "Enter equations")];
-      var array$3 = [$$x7.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2))];
-      var suffix$1 = $$x8.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3))
-    } else if (((!$thiz.Lsympany_ui_CalcFields$ResultField__f_solving) && $thiz.Lsympany_ui_CalcFields$ResultField__f_solutions.isEmpty__Z())) {
+      var array$3 = [$ct_T2__O__O__(new $c_T2(), "class", "inner-result-title")];
+      return $$x7.stringToNode__T__sci_Seq__Lorg_scalajs_dom_Element(x$25, $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$3))
+    }));
+    var this$57 = $$x8.option2Iterable__s_Option__sc_Iterable((this$28.isEmpty__Z() ? $m_s_None$() : new $c_s_Some(f$1.apply__O__O(this$28.get__O())))).toSeq__sci_Seq();
+    if ($thiz.Lsympany_ui_CalcFields$ResultField__f_expressions.isEmpty__Z()) {
       var $$x10 = $m_sci_Seq$();
       var $$x9 = $m_Lsympany_JsUtils$();
-      var array$4 = [$ct_T2__O__O__(new $c_T2(), "class", "result-description"), $ct_T2__O__O__(new $c_T2(), "innerText", "No solutions found ):")];
-      var array$5 = [$$x9.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$4))];
+      var array$4 = [$ct_T2__O__O__(new $c_T2(), "class", "result-description"), $ct_T2__O__O__(new $c_T2(), "innerText", "Enter equations")];
+      var array$5 = [$$x9.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$4))];
       var suffix$1 = $$x10.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$5))
+    } else if (((!$thiz.Lsympany_ui_CalcFields$ResultField__f_solving) && $thiz.Lsympany_ui_CalcFields$ResultField__f_solutions.isEmpty__Z())) {
+      var $$x12 = $m_sci_Seq$();
+      var $$x11 = $m_Lsympany_JsUtils$();
+      var array$6 = [$ct_T2__O__O__(new $c_T2(), "class", "result-description"), $ct_T2__O__O__(new $c_T2(), "innerText", "No solutions found ):")];
+      var array$7 = [$$x11.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$6))];
+      var suffix$1 = $$x12.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$7))
     } else {
-      var this$46 = $as_sc_IterableOps($thiz.Lsympany_ui_CalcFields$ResultField__f_solutions.map__F1__O(new $c_sjsr_AnonFunction1(((x$26$2) => {
+      var this$56 = $as_sc_IterableOps($thiz.Lsympany_ui_CalcFields$ResultField__f_solutions.map__F1__O(new $c_sjsr_AnonFunction1(((x$26$2) => {
         var x$26 = $as_Lsympany_ui_CalcSolver$CalcSolution(x$26$2);
         return x$26.node__Lorg_scalajs_dom_Node()
       }))));
-      var $$x13 = $m_s_Option$();
-      var cond = $thiz.Lsympany_ui_CalcFields$ResultField__f_solving;
-      if (cond) {
-        var $$x12 = $m_Lsympany_JsUtils$();
-        var array$6 = [$ct_T2__O__O__(new $c_T2(), "class", "result-description"), $ct_T2__O__O__(new $c_T2(), "innerText", "Solving...")];
-        var $$x11 = new $c_s_Some($$x12.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$6)))
-      } else {
-        var $$x11 = $m_s_None$()
-      };
-      var suffix = $$x13.option2Iterable__s_Option__sc_Iterable($$x11).toSeq__sci_Seq();
-      var suffix$1 = $as_sc_IterableOnce(this$46.concat__sc_IterableOnce__O(suffix))
+      var suffix = $m_s_Option$().option2Iterable__s_Option__sc_Iterable($m_s_Option$().when__Z__F0__s_Option($thiz.Lsympany_ui_CalcFields$ResultField__f_solving, new $c_sjsr_AnonFunction0((() => {
+        var $$x13 = $m_Lsympany_JsUtils$();
+        var array$8 = [$ct_T2__O__O__(new $c_T2(), "class", "result-description"), $ct_T2__O__O__(new $c_T2(), "innerText", "Solving...")];
+        return $$x13.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$8))
+      })))).toSeq__sci_Seq();
+      var suffix$1 = $as_sc_IterableOnce(this$56.concat__sc_IterableOnce__O(suffix))
     };
-    var y = this$47.appendedAll__sc_IterableOnce__O(suffix$1);
-    var array$7 = [$$x14, $ct_T2__O__O__(new $c_T2(), "children", y)];
-    var array$8 = [$$x15.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$7))];
-    var y$1 = $$x16.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$8));
-    var array$9 = [$$x17, $ct_T2__O__O__(new $c_T2(), "children", y$1)];
-    var $$x3 = $$x18.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$9))
+    var y = this$57.appendedAll__sc_IterableOnce__O(suffix$1);
+    var array$9 = [$$x14, $ct_T2__O__O__(new $c_T2(), "children", y)];
+    var array$10 = [$$x15.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$9))];
+    var y$1 = $$x16.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$10));
+    var array$11 = [$$x17, $ct_T2__O__O__(new $c_T2(), "children", y$1)];
+    var $$x5 = $$x18.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$11))
   };
-  $$x19.appendChild($$x3);
-  formatStaticEquations()
+  $$x19.appendChild($$x5)
 }
 function $ct_Lsympany_ui_CalcFields$ResultField__T__sci_Seq__($thiz, name, fields) {
   $thiz.Lsympany_ui_CalcFields$ResultField__f_name = name;
@@ -22557,7 +22704,7 @@ function $ct_Lsympany_ui_CalcFields$ResultField__T__sci_Seq__($thiz, name, field
   $thiz.Lsympany_ui_CalcFields$ResultField__f_solver = $m_s_None$();
   var $$x1 = $m_Lsympany_JsUtils$();
   var array = [];
-  $thiz.Lsympany_ui_CalcFields$ResultField__f_node = $$x1.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
+  $thiz.Lsympany_ui_CalcFields$ResultField__f_node = $$x1.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("div", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
   $p_Lsympany_ui_CalcFields$ResultField__updateNode__V($thiz);
   return $thiz
 }
@@ -22780,7 +22927,7 @@ function $c_Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver(e1, e2, i1, i2, xs) {
             var arg$macro$2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(x2);
             var $$x11 = $m_sc_StringOps$();
             var array$10 = [arg$macro$1, arg$macro$2];
-            var rangeStr = $$x11.format$extension__T__sci_Seq__T("\\((%s, %s)\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$10));
+            var rangeStr = $$x11.format$extension__T__sci_Seq__T("\\(%s < x < %s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$10));
             var this$59 = this$1.Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver__f_e1;
             var arg$macro$3 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$59);
             var arg$macro$4 = (e1Greater ? ">" : "<");
@@ -22830,7 +22977,7 @@ function $c_Lsympany_ui_CalcSolver$AreaBetweenCurvesSolver(e1, e2, i1, i2, xs) {
             var arg$macro$17 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(solution);
             var $$x17 = $m_sc_StringOps$();
             var array$18 = [arg$macro$16, arg$macro$17];
-            return new $c_s_Some(new $c_Lsympany_ui_CalcSolver$CustomSolution(solution, (("" + $$x18) + $$x17.format$extension__T__sci_Seq__T("\\mid %s \\mid = %s", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$18))), ((((("\u27a3" + inequalityStr) + " on interval ") + rangeStr) + "<br/>") + integrationStr), $m_s_Option$().option2Iterable__s_Option__sc_Iterable(sub).toSeq__sci_Seq()))
+            return new $c_s_Some(new $c_Lsympany_ui_CalcSolver$CustomSolution(solution, (("" + $$x18) + $$x17.format$extension__T__sci_Seq__T("\\mid %s \\mid = \\)\\( %s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$18))), ((((("\u27a3" + inequalityStr) + " on interval ") + rangeStr) + "\n") + integrationStr), $m_s_Option$().option2Iterable__s_Option__sc_Iterable(sub).toSeq__sci_Seq()))
           }
         }
       }
@@ -23055,10 +23202,16 @@ $c_Lsympany_ui_CalcSolver$CustomSolution.prototype.rules__sci_Seq = (function() 
   return this.Lsympany_ui_CalcSolver$CustomSolution__f_rules
 });
 $c_Lsympany_ui_CalcSolver$CustomSolution.prototype.beforeNode__Lorg_scalajs_dom_Element = (function() {
-  return $m_Lsympany_JsUtils$().stringToNode__T__T__Lorg_scalajs_dom_Element(this.Lsympany_ui_CalcSolver$CustomSolution__f_before, "")
+  var $$x2 = $m_Lsympany_JsUtils$();
+  var $$x1 = this.Lsympany_ui_CalcSolver$CustomSolution__f_before;
+  var array = [];
+  return $$x2.stringToNode__T__sci_Seq__Lorg_scalajs_dom_Element($$x1, $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
 });
 $c_Lsympany_ui_CalcSolver$CustomSolution.prototype.insideNode__I__F1__Lorg_scalajs_dom_Element = (function(num, wrap) {
-  return $m_Lsympany_JsUtils$().stringToNode__T__T__Lorg_scalajs_dom_Element(this.Lsympany_ui_CalcSolver$CustomSolution__f_inside, "")
+  var $$x2 = $m_Lsympany_JsUtils$();
+  var $$x1 = this.Lsympany_ui_CalcSolver$CustomSolution__f_inside;
+  var array = [];
+  return $$x2.stringToNode__T__sci_Seq__Lorg_scalajs_dom_Element($$x1, $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
 });
 $c_Lsympany_ui_CalcSolver$CustomSolution.prototype.beforeNode__Lorg_scalajs_dom_Node = (function() {
   return this.beforeNode__Lorg_scalajs_dom_Element()
@@ -23116,12 +23269,15 @@ $c_Lsympany_ui_CalcSolver$ErrorSolution.prototype.wrapFunc__Lsympany_Sym__Lsympa
   return e
 });
 $c_Lsympany_ui_CalcSolver$ErrorSolution.prototype.beforeNode__Lorg_scalajs_dom_Element = (function() {
-  return $m_Lsympany_JsUtils$().stringToNode__T__T__Lorg_scalajs_dom_Element(this.Lsympany_ui_CalcSolver$ErrorSolution__f_text, "result-error")
+  var $$x2 = $m_Lsympany_JsUtils$();
+  var $$x1 = this.Lsympany_ui_CalcSolver$ErrorSolution__f_text;
+  var array = [$ct_T2__O__O__(new $c_T2(), "class", "result-error")];
+  return $$x2.stringToNode__T__sci_Seq__Lorg_scalajs_dom_Element($$x1, $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
 });
 $c_Lsympany_ui_CalcSolver$ErrorSolution.prototype.insideNode__I__F1__Lorg_scalajs_dom_Element = (function(num, wrap) {
   var $$x1 = $m_Lsympany_JsUtils$();
   var array = [];
-  return $$x1.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
+  return $$x1.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
 });
 $c_Lsympany_ui_CalcSolver$ErrorSolution.prototype.node__Lorg_scalajs_dom_Node = (function() {
   return this.beforeNode__Lorg_scalajs_dom_Element()
@@ -27399,14 +27555,14 @@ $c_Lsympany_math_IntegralRules$Parts.prototype.ruleDescription__T = (function() 
   var arg$macro$2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$2);
   var $$x3 = $m_sc_StringOps$();
   var array = [arg$macro$1, arg$macro$2];
-  var $$x2 = $$x3.format$extension__T__sci_Seq__T("<br/>\\(dv=%s\\) \\(v=%s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
+  var $$x2 = $$x3.format$extension__T__sci_Seq__T("\n \\(dv=%s\\) \\(v=%s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array));
   var this$6 = this.Lsympany_math_IntegralRules$Parts__f_u;
   var arg$macro$3 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$6);
   var this$7 = this.du__Lsympany_Sym();
   var arg$macro$4 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$7);
   var $$x1 = $m_sc_StringOps$();
   var array$1 = [arg$macro$3, arg$macro$4];
-  return ((("Integration by Parts:" + $$x2) + $$x1.format$extension__T__sci_Seq__T("<br/>\\(u=%s\\) \\(du=%s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1))) + "<br/><br/>\\(\u222bu \\cdot dv = u \\cdot v - \u222b v \\cdot du \\)")
+  return ((("Integration by Parts:" + $$x2) + $$x1.format$extension__T__sci_Seq__T("\n \\(u=%s\\) \\(du=%s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1))) + "\n \n")
 });
 $c_Lsympany_math_IntegralRules$Parts.prototype.du__Lsympany_Sym = (function() {
   return $m_Lsympany_math_Derivative$().derive__Lsympany_Sym__s_Symbol__Lsympany_Sym(this.Lsympany_math_IntegralRules$Parts__f_u, $m_Lsympany_Sym$().X__Lsympany_SymVar().Lsympany_SymVar__f_symbol)
@@ -27569,7 +27725,7 @@ $c_Lsympany_math_IntegralRules$USub.prototype.ruleDescription__T = (function() {
   var arg$macro$2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$2);
   var $$x1 = $m_sc_StringOps$();
   var array = [arg$macro$1, arg$macro$2];
-  return $$x1.format$extension__T__sci_Seq__T("U Substitution:<br/>\\(u=%s\\), \\(du=%s\\)<br/>", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
+  return $$x1.format$extension__T__sci_Seq__T("U Substitution:\n\\(u=%s\\), \\(du=%s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
 });
 $c_Lsympany_math_IntegralRules$USub.prototype.backward__Lsympany_Sym__Lsympany_Sym = (function(sol) {
   var t = $m_Lsympany_Sym$().X__Lsympany_SymVar();
@@ -27630,7 +27786,7 @@ $c_Lsympany_math_Zero$FinalZeroRule.prototype.ruleDescription__T = (function() {
   var arg$macro$2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$1);
   var $$x1 = $m_sc_StringOps$();
   var array = [arg$macro$1, arg$macro$2];
-  return $$x1.format$extension__T__sci_Seq__T("%s<br/>\\(x = %s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
+  return $$x1.format$extension__T__sci_Seq__T("%s\n\\(x = %s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
 });
 $c_Lsympany_math_Zero$FinalZeroRule.prototype.endResult__s_Some = (function() {
   return new $c_s_Some(this.Lsympany_math_Zero$FinalZeroRule__f_zero)
@@ -27639,7 +27795,7 @@ $c_Lsympany_math_Zero$FinalZeroRule.prototype.insideNode__I__F1__Lorg_scalajs_do
   if ((this.Lsympany_math_Zero$FinalZeroRule__f_description === "Identity")) {
     var $$x1 = $m_Lsympany_JsUtils$();
     var array = [];
-    return $$x1.makeElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
+    return $$x1.createElement__T__sci_Seq__Lorg_scalajs_dom_Element("p", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
   } else {
     return $f_Lsympany_math_Zero$ZeroRule__insideNode__I__F1__Lorg_scalajs_dom_Element(this, num, wrap)
   }
@@ -27698,7 +27854,7 @@ $c_Lsympany_math_Zero$IntermediateZeroRule.prototype.ruleDescription__T = (funct
   var arg$macro$2 = $m_Lsympany_Latex$().toLatex__Lsympany_Sym__T(this$1);
   var $$x1 = $m_sc_StringOps$();
   var array = [arg$macro$1, arg$macro$2];
-  return $$x1.format$extension__T__sci_Seq__T("%s:<br/>\\(%s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
+  return $$x1.format$extension__T__sci_Seq__T("%s:\n\\(%s\\)", $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array))
 });
 $c_Lsympany_math_Zero$IntermediateZeroRule.prototype.endResult__s_Option = (function() {
   var this$1 = this.Lsympany_math_Zero$IntermediateZeroRule__f_rules.headOption__s_Option();

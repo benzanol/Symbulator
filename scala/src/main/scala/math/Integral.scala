@@ -56,8 +56,6 @@ object Integral {
 
 
     // Functions for displaying
-    import JsUtils.makeElement
-
     def beforeNode = JsUtils.stringToNode("\\(" +
       SymIntegral(integral).toLatex + " = " +
       solution.toLatex + "\\)"
@@ -78,7 +76,7 @@ object Integral {
         this.wrapFunc(wrap(forward(integral))).toLatex + /*"+c" +*/ "\\)"
         ,
 
-      cls = "solution-step-title"
+      "class" -> "solution-step-title"
     )
   }
 
@@ -258,9 +256,9 @@ object IntegralRules {
 
   class Parts(integral: Sym, val u: Sym, val dv: Sym) extends IntegralRule(integral) {
     def ruleDescription = (f"Integration by Parts:"
-      + f"<br/>\\(dv=${dv.toLatex}\\) \\(v=${SymIntegral(dv).toLatex}\\)"
-      + f"<br/>\\(u=${u.toLatex}\\) \\(du=${du.toLatex}\\)"
-      + f"<br/><br/>\\(∫u \\cdot dv = u \\cdot v - ∫ v \\cdot du \\)"
+      + f"\n \\(dv=${dv.toLatex}\\) \\(v=${SymIntegral(dv).toLatex}\\)"
+      + f"\n \\(u=${u.toLatex}\\) \\(du=${du.toLatex}\\)"
+      + "\n \n"
     )
 
     def v = SymIntegral(dv)
@@ -271,7 +269,7 @@ object IntegralRules {
   }
 
   class USub(integral: Sym, val u: Sym, val replaced: Sym) extends IntegralRule(integral) {
-    def ruleDescription = f"U Substitution:<br/>\\(u=${u.toLatex}\\), \\(du=${derive(u, X.symbol).toLatex}\\)<br/>"
+    def ruleDescription = f"U Substitution:\n\\(u=${u.toLatex}\\), \\(du=${derive(u, X.symbol).toLatex}\\)"
 
     def forward(in: Sym) = SymIntegral(replaced)
     def backward(sol: Sym): Sym = sol.replaceExpr(X, u)

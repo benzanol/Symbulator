@@ -18,7 +18,7 @@ object JsBindings {
 }
 
 object JsUtils {
-  def makeElement(tag: String, props: (String, Any)*): dom.Element = {
+  def createElement(tag: String, props: (String, Any)*): dom.Element = {
     val e: dom.Element = document.createElement(tag)
     props.foreach{
       case ("innerHTML", html: String) => e.innerHTML = html
@@ -30,13 +30,57 @@ object JsUtils {
     return e
   }
 
-  def stringToNode(str: String, cls: String = "") =
-    makeElement("div",
-      "class" -> cls,
-      "innerHTML" ->
-        ("<span class=\"mq-string-text\">"
-          + str.replace("\\(", "</span><p class=\"mq-static mq-string-equation\">")
-          .replace("\\)", "</p><span class=\"mq-string-text\">")
-          + "</span>")
-    )
+  def createLatexElement(latex: String, props: (String, Any)*): dom.Element = {
+    val element = createElement("div", props:_*)
+    js.Dynamic.global.katexFormatElement(element, latex)
+    return element
+  }
+
+  def stringToNode(str: String, props: (String, Any)*): dom.Element = {
+    if (str.contains('\n')) {
+      val el = createElement("div",
+        { ("children" -> str.split('\n').toList.map{s => stringToNode(s)}) +: props}:_*
+      )
+
+      return el
+    }
+
+    val el = createElement("div", "class" -> "mixed-string")
+    var latex = false
+    var prev = 0
+
+    for (i <- 0 to str.length - 2)
+
+    // Start a latex block
+    if (!latex && str.substring(i, i + 2) == "\\(") {
+      if (i > 0) el.appendChild(createElement("div",
+        "class" -> "mixed-string-text",
+        "innerHTML" -> str.substring(prev, i)
+      ))
+      prev = i + 2
+      latex = true
+
+      // Finish a latex block
+    } else if (latex && str.substring(i, i + 2) == "\\)") {
+      el.appendChild(createLatexElement(str.substring(prev, i),
+        "class" -> "mixed-string-latex"
+      ))
+      prev = i + 2
+      latex = false
+    }
+
+    // Add the last element
+    if (prev < str.length) el.appendChild{
+      if (latex) createLatexElement(str.substring(prev),
+        "class" -> "mixed-string-latex"
+      )
+      else createElement("div",
+        "class" -> "mixed-string-text",
+        "innerHTML" -> str.substring(prev)
+      )
+    }
+
+    return createElement("div", {("children" -> Seq(el)) +: props}:_*)
+  }
+
 }

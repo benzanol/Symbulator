@@ -1,13 +1,34 @@
+// Set up mathquill
+const MQ = MathQuill.getInterface(2);
+
+function makeMQField(elem, onChange) {
+    MQ.MathField(elem, {
+        handlers: {
+            edit: (field) => {
+                const eqn_elem = field.__controller.container.context;
+                onChange(MQ(eqn_elem).latex());
+            }
+        }
+    });
+}
+
+
+// Format all latex equation with katex
+function katexFormatElement(element, latex) {
+    katex.render(latex, element, { throwOnError: false });
+}
+
+
 var tickTimer = null
 function tickCalculator(call) {
     // Kill any existing tick timer
     clearTimeout(tickTimer)
-    //console.log("Ticking - " + tickTimer)
+    //console.log('Ticking - ' + tickTimer)
 
     if (call()) {
         tickTimer = setTimeout(() => tickCalculator(call), 0);
     } else {
-        //console.log("Stopped ticking")
+        //console.log('Stopped ticking')
     }
 }
 

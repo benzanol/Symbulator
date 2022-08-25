@@ -127,9 +127,7 @@ object Latex {
           case List() => str + "1"
           // Concatenate all the factors separated by spaces
           case _ => str + ***(es).sortedExprs.map{
-            case e: SymSum => s" \\quad ( ${toLatex(e)} ) \\quad "
-            // On certain equations, the proper left and right brackets don't appear (mathquill issue)
-            //case e: SymSum => s" \\left( ${toLatex(e)} \\right) "
+            case e: SymSum => s" \\left( ${toLatex(e)} \\right) "
             case e => toLatex(e)
           }.mkString(" ")
         }}.pipe{

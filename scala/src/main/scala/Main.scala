@@ -37,7 +37,6 @@ object Main {
    val div = sympany.ui.Equations.makeElement(
    "p", "class" -> "mq-static", "innerText" -> e.toLatex)
    document.getElementById("equations").appendChild(div)
-   js.eval("formatStaticEquations()")
    }
    */
 

@@ -7,13 +7,13 @@ import sympany._
 import sympany.math.Simplify.simplify
 import sympany.Sym._
 import sympany.Pattern._
+import JsUtils._
 import org.scalajs.dom.Node
 import org.scalajs.dom.Element
 
 
 object Zero {
   import ui.CalcSolver.CalcSolution
-  import JsUtils._
 
   // Maximum number of nested zero solvers
   val maxDepth = 15
@@ -22,8 +22,8 @@ object Zero {
 
   trait ZeroRule extends CalcSolution {
     def beforeNode: Node = endResult match {
-      case None => stringToNode("Unsolved root")
-      case Some(z) => stringToNode(f"\\(x = ${z.toLatex}\\)<br/>")
+      case None => createElement("p", "innerText" -> "Unsolved root")
+      case Some(z) => createLatexElement(f"x = ${z.toLatex}")
     }
 
     def endResult: Option[Sym]
@@ -31,33 +31,33 @@ object Zero {
 
 
     def ruleDescription: String
-    def insideNode(num: Int)(wrap: Sym => Sym) = JsUtils.stringToNode(
+    def insideNode(num: Int)(wrap: Sym => Sym) = stringToNode(
       // Have a bullet before the rule
       //"①②③④⑤⑥⑦⑧⑨"(num) + " " +
       "➣ " +
 
       // Include a brief description of the rule
-      this.ruleDescription + "<br/>"
+      this.ruleDescription
 
       // Show the transformation the rule is making
       ,
-      cls = "solution-step-title"
+      "class" -> "solution-step-title"
     )
   }
 
   class FinalZeroRule(val expr: Eqn, zero: Sym, description: String) extends ZeroRule {
-    def ruleDescription = f"$description<br/>\\(x = ${zero.toLatex}\\)"
+    def ruleDescription = f"${description}\n\\(x = ${zero.toLatex}\\)"
     def endResult = Some(zero)
     def rules = Nil
 
     // Don't display the identity step (it is redundant)
     override def insideNode(num: Int)(wrap: Sym => Sym): Element =
-      if (description == "Identity") makeElement("p")
+      if (description == "Identity") createElement("p")
       else super.insideNode(num)(wrap)
   }
 
   class IntermediateZeroRule(val expr1: Eqn, val expr2: Eqn, val description: String) extends ZeroRule {
-    def ruleDescription = f"$description:<br/>\\(${expr2.toLatex}\\)"
+    def ruleDescription = f"$description:\n\\(${expr2.toLatex}\\)"
     def endResult = rules.headOption.flatMap(_.endResult)
 
     // Each intermediate zero rule in a solution will have exactly 1
@@ -154,7 +154,7 @@ object ZeroPatterns {
 
   rules.+("Identity"){ EquationP(XP, noxP('a)) }{ case (a: Sym) => Seq(a) }
 
-  rules.+("Quadratic formula:<br/>\\(x=\\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}\\)"){
+  rules.+("Quadratic formula:\n\\(x=\\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}\\)"){
     EquationP(SumP(
       @?('as) @@ Repeat(AsProdP(PowP(XP, =#?(2)), Repeat(noxP())), min=1), // Any number of a*x^2
       @?('bs) @@ Repeat(AsProdP(XP, Repeat(noxP()))), // Any number of b*x
@@ -221,9 +221,9 @@ object ZeroRules {
   rules.+("Fancy identity"){ EquationP('l, 'r) }{
     case (l: Sym, r: Sym) =>
       Identity.identities(l).map{ i => SymEquation(simplify(i.full), r) ->
-        f"${i.description}:<br/>\\(${i.from.toLatex} \\quad \\rightarrow \\quad ${i.to.toLatex}\\)" } ++
+        f"${i.description}:\n\\(${i.from.toLatex} \\quad \\rightarrow \\quad ${i.to.toLatex}\\)" } ++
       Identity.identities(r).map{ i => SymEquation(l, simplify(i.full)) ->
-        f"${i.description}:<br/>\\(${i.from.toLatex} \\quad \\rightarrow \\quad ${i.to.toLatex}\\)" }
+        f"${i.description}:\n\\(${i.from.toLatex} \\quad \\rightarrow \\quad ${i.to.toLatex}\\)" }
   }
 
   //// Equation -> Expression

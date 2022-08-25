@@ -42,30 +42,30 @@ object CalcSolver {
       // rules, but if it only created one, list it after, but at the
       // same level as, this rule
       if (rules.length == 1)
-        makeElement("div", "children" -> (
-          makeElement("div",
+        createElement("div", "children" -> (
+          createElement("div",
             "class" -> "solution-step-details",
             "children" -> Seq(insideNode(num)(wrap))
           ) +: rules.map{r => r.wrappedInsideNode(num + 1){e => this.wrapFunc(wrap(e))}}
         ))
       else
-        makeElement("div",
+        createElement("div",
           "class" -> "solution-step-details",
           "children" -> (insideNode(num)(wrap) +: rules.map(_.node))
         )
     }
 
     def node: dom.Node = {
-      val showBtn = makeElement("button",
+      val showBtn = createElement("button",
         "class" -> "show-steps-btn",
         "innerText" -> "▹ Show Steps"
       )
-      val hideBtn = makeElement("button",
+      val hideBtn = createElement("button",
         "class" -> "show-steps-btn",
         "innerText" -> "▿ Hide Steps"
       )
 
-      val details = makeElement("div",
+      val details = createElement("div",
         "class" -> "solution-step-indented",
         "children" -> Seq(wrappedInsideNode(0)(identity))
       )
@@ -84,7 +84,7 @@ object CalcSolver {
       updateHidden(false)
 
       // The parent element containing the nested nodes and buttons
-      makeElement("div",
+      createElement("div",
         "class" -> "solution-step",
         "children" -> Seq(
           beforeNode,
@@ -104,8 +104,8 @@ object CalcSolver {
     val rules = Nil
     val solution = 0
 
-    def beforeNode = stringToNode(text, cls="result-error")
-    def insideNode(num: Int)(wrap: Sym => Sym) = makeElement("p")
+    def beforeNode = stringToNode(text, "class" -> "result-error")
+    def insideNode(num: Int)(wrap: Sym => Sym) = createElement("p")
     override def node: dom.Node = beforeNode
   }
 
@@ -201,20 +201,20 @@ object CalcSolver {
       // approximations
       for (z <- stepped._1)
 
-        // Remove zeros with the exact same final solution
-        if (allZeros.find(_.endResult.get == z.endResult.get).isEmpty) {
+      // Remove zeros with the exact same final solution
+      if (allZeros.find(_.endResult.get == z.endResult.get).isEmpty) {
 
-          // Remove zeros with the same approximate result
-          val apps = z.endResult.get.expanded.map(_.approx())
-          if (apps.find(!_.isFinite).isEmpty &&
-            apps.map{ a => approxes.find{ b => (a - b).abs < 0.00001 }.isDefined }.contains(false)
-          ) {
+        // Remove zeros with the same approximate result
+        val apps = z.endResult.get.expanded.map(_.approx())
+        if (apps.find(!_.isFinite).isEmpty &&
+          apps.map{ a => approxes.find{ b => (a - b).abs < 0.00001 }.isDefined }.contains(false)
+        ) {
 
-            allZeros :+= z
-            approxes ++= z.endResult.get.expanded.map(_.approx())
+          allZeros :+= z
+          approxes ++= z.endResult.get.expanded.map(_.approx())
 
-          }
         }
+      }
 
       // Display the heirarchy of zero solvers for testing purposes
       // if (!stepped._2) Main.jslog(solver.jsobj)
@@ -260,7 +260,7 @@ object CalcSolver {
   class ExtremasResult(n: String)(derivF: String, exprF: String) extends ResultField(n)(derivF, exprF) {
     def makeSolver(es: Seq[Seq[Sym]]) = es match {
       case Seq(Seq(d), _) => new AsyncZeroSolver(d, 0)
-        case _ => new CustomSolver(new ErrorSolution("Solving derivative..."))
+      case _ => new CustomSolver(new ErrorSolution("Solving derivative..."))
     }
 
     override def outerTitle: Option[String] =
@@ -334,7 +334,7 @@ object CalcSolver {
           // Total solution so far
           val solution = simplify(++(prevSolution, thisSolution))
 
-          val rangeStr = f"\\((${x1.toLatex}, ${x2.toLatex})\\)"
+          val rangeStr = f"\\(${x1.toLatex} < x < ${x2.toLatex}\\)"
           val inequalityStr = f"\\(${e1.toLatex} ${if (e1Greater) ">" else "<"} ${e2.toLatex}\\)"
 
           val integralStr =
@@ -345,8 +345,8 @@ object CalcSolver {
           Some(
             new CustomSolution(solution,
               f"\\(\\int_{${x1.toLatex}}^{${xs.last.toLatex}}" +
-                f"\\mid ${++(e1, **(-1, e2)).toLatex} \\mid = ${solution.toLatex}",
-              "➣" + inequalityStr + " on interval " + rangeStr + "<br/>" + integrationStr
+                f"\\mid ${++(e1, **(-1, e2)).toLatex} \\mid = \\)\\( ${solution.toLatex}\\)",
+              "➣" + inequalityStr + " on interval " + rangeStr + "\n" + integrationStr
             )(sub.toSeq)
           )
 
@@ -400,7 +400,7 @@ object CalcFields {
       fields.find(_.name == name).flatMap(_.results)
 
     // Generate the dom representation
-    val element = makeElement("div", "class" -> "calculator")
+    val element = createElement("div", "class" -> "calculator")
     this.element.replaceChildren(
       this.fields.map(_.node):_*
     )
@@ -433,10 +433,15 @@ object CalcFields {
     def drawings: Seq[Graph.JsContext => Unit] = Nil
   }
 
-  class EquationField(val name: String) extends CalcField {
+  class EquationField(val name: String, val pre: String = "") extends CalcField {
     // Create a blank node, then transform it into a mathquill field
-    val mqNode = makeElement("p", "id" -> f"mq-eqn-$name")
-    val node = makeElement("div", "children" -> Seq(makeElement("br"), mqNode))
+    val mqNode = createElement("p", "id" -> f"mq-eqn-$name")
+    val node = createElement("div", "children" -> Seq(
+      createElement("br"),
+      createElement("span", "class" -> "equation-span", "children" -> Seq(
+        stringToNode(pre, "class" -> "equation-pre"), mqNode
+      ))
+    ))
     js.Dynamic.global.makeMQField(mqNode, this.setLatex(_))
 
     // Keep track of the current latex string and expression
@@ -528,37 +533,37 @@ object CalcFields {
     def innerTitle: Option[String] = None
 
     // Generate the dom representation
-    val node: dom.Element = makeElement("div")
+    val node: dom.Element = createElement("div")
     updateNode()
 
     private def updateNode() {
-      node.replaceChildren(makeElement("br"))
+      node.replaceChildren(createElement("br"))
 
       // If there is an outer title, add it as a node
-      for (t <- outerTitle) node.appendChild(stringToNode(t, cls = "outer-result-title"))
+      for (t <- outerTitle) node.appendChild(stringToNode(t, "class" -> "outer-result-title"))
 
       // Add the main result area
       node.appendChild(
-        if (expressions.isEmpty && outerTitle.isEmpty) makeElement("p")
-        else makeElement("div", "class" -> "result-contents", "children" -> Seq(
+        if (expressions.isEmpty && outerTitle.isEmpty) createElement("p")
+        else createElement("div", "class" -> "result-contents", "children" -> Seq(
           // The light gray box containing all solutions
-          makeElement("div",
+          createElement("div",
             "class" -> "result-solutions",
             "children" -> {
-              innerTitle.map(stringToNode(_, cls = "inner-result-title")).toSeq ++ (
+              innerTitle.map(stringToNode(_, "class" -> "inner-result-title")).toSeq ++ (
                 if (expressions.isEmpty)
-                  Seq(makeElement("p",
+                  Seq(createElement("p",
                     "class" -> "result-description",
                     "innerText" -> "Enter equations"
                   ))
                 else if (!solving && solutions.isEmpty)
-                  Seq(makeElement("p",
+                  Seq(createElement("p",
                     "class" -> "result-description",
                     "innerText" -> "No solutions found ):"
                   ))
                 else {
                   solutions.map(_.node) ++
-                  Option.when(solving)(makeElement("p",
+                  Option.when(solving)(createElement("p",
                     "class" -> "result-description",
                     "innerText" -> "Solving..."
                   )).toSeq
@@ -568,14 +573,13 @@ object CalcFields {
           )
         ))
       )
-      js.Dynamic.global.formatStaticEquations()
     }
   }
 
   class HtmlField(text: String) extends CalcField {
     val name = "Text"
     val results = Some(Nil)
-    val node = makeElement("div",
+    val node = createElement("div",
       "class" -> "text-field",
       "children" -> Seq(stringToNode(text))
     )
@@ -584,7 +588,7 @@ object CalcFields {
   class BrField() extends CalcField {
     val name = "Break"
     val results = Some(Nil)
-    val node = makeElement("br")
+    val node = createElement("br")
   }
 }
 
@@ -604,7 +608,7 @@ object Calculators {
       new IntersectionResult("i")("e1", "e2")
     ),
     new Calculator("Derivative")(
-      new EquationField("e1"),
+      new EquationField("e1", pre="\\(\\frac{d}{dx}\\)"),
       new DerivativeResult("d")("e1")
     ),
     new Calculator("Local Minima/Maxima")(
@@ -613,7 +617,7 @@ object Calculators {
       new ExtremasResult("z")("d", "e")
     ),
     new Calculator("Integral")(
-      new EquationField("e1"),
+      new EquationField("e1", pre="\\(\\int\\)"),
       new IntegralResult("i")("e1")(true),
     ),
     new Calculator("Area between curves")(
@@ -641,7 +645,7 @@ object Calculators {
     document.getElementsByClassName("current-calc-btn").foreach(_.setAttribute("class", "calc-btn"))
     document.getElementById(nameToId(calc.name)).setAttribute("class", "calc-btn current-calc-btn")
 
-    // Select the first equation box (won't work)
+    // Select the first mathquill equation box
     calc.fields.collectFirst{ case f: EquationField =>
       js.eval(s"MQ(document.getElementById('mq-eqn-${f.name}')).focus()")
     }
@@ -659,7 +663,7 @@ object Calculators {
     val calcsDiv = document.getElementById("calculators")
 
     for (calc <- calcs) {
-      val btn = makeElement("button",
+      val btn = createElement("button",
         "class" -> "calc-btn",
         "id" -> nameToId(calc.name),
         "innerText" -> calc.name
@@ -667,7 +671,7 @@ object Calculators {
 
       btn.addEventListener("click", (e: Any) => selectCalculator(calc))
       calcsDiv.appendChild(btn)
-      calcsDiv.appendChild(makeElement("br"))
+      calcsDiv.appendChild(createElement("br"))
     }
   }
 }
