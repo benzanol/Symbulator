@@ -368,6 +368,19 @@ object Simplify {
     case (e: Sym, w: Sym) => arcsineValues2.get(e).map{ e => **(++(-1~2, e, **(2, 'k)), Pi) }.getOrElse(w)
   }
 
+
+  sRules.+("Sine of cyclic value with pi"){
+    SinP(ProdP(=?(Pi), SumP(=?(**('k, 2)), noxP('e))))
+  }{ case (e: Sym) => SymSin(**(Pi, e)) }
+
+  sRules.+("Cosine of cyclic value with pi"){
+    CosP(ProdP(=?(Pi), SumP(=?(**('k, 2)), noxP('e))))
+  }{ case (e: Sym) => SymCos(**(Pi, e)) }
+
+  sRules.+("Tangent of cyclic value with pi"){
+    TanP(ProdP(=?(Pi), SumP(=?(**('k, 2)), noxP('e))))
+  }{ case (e: Sym) => SymTan(**(Pi, e)) }
+
   /// Integral rules
 
   /*

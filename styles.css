@@ -96,6 +96,13 @@ button {
     padding-top: 20px;
 }
 
+.outer-result-title .mq-root-block {
+    padding: 2px !important;
+}
+.inner-result-title .mq-root-block {
+    padding: 2px !important;
+}
+
 .result-description {
     font-size: 15px;
     padding-top: 20px;
@@ -222,3 +229,4 @@ button {
 #point-box .mq-root-block {
     padding: 8px 5px 4px 5px !important;
 }
+

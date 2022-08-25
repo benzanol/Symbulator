@@ -230,12 +230,13 @@ object CalcSolver {
     }
 
     override def innerTitle =
-      for (s <- solver)
-      yield f"Solutions to \\(${s.asInstanceOf[AsyncZeroSolver].solver.expr.toLatex}\\):"
+      Option.when(expressions.isDefined && !expressions.get(0).isEmpty){
+        "Solutions to \\(" + expressions.get(0)(0).toLatex + " = 0\\):"
+      }
 
     override def points: Seq[(Sym, Sym, Sym)] = {
       for (es <- expressions.toSeq ; e <- es ; s <- solutions ; s1 <- s.solution.expanded)
-      yield (e.head, s1, e.head.replaceExpr(SymVar('x), s1))
+      yield (e.head, s1, SymInt(0))
     }.toSeq
   }
 
@@ -243,6 +244,11 @@ object CalcSolver {
     def makeSolver(es: Seq[Seq[Sym]]) = new AsyncZeroSolver(es(0)(0), es(1)(0))
 
     override def outerTitle = Some("Intersections:")
+
+    override def innerTitle: Option[String] =
+      Option.when(expressions.isDefined && !expressions.get(0).isEmpty && !expressions.get(1).isEmpty){
+        "Solutions to \\(" + expressions.get(0)(0).toLatex + " = " + expressions.get(1)(0).toLatex + "\\):"
+      }
 
     override def points: Seq[(Sym, Sym, Sym)] = {
       for (es <- expressions.toSeq ; e <- es ; s <- solutions ; s1 <- s.solution.expanded)
@@ -262,7 +268,7 @@ object CalcSolver {
 
     override def innerTitle: Option[String] =
       Option.when(expressions.isDefined && !expressions.get(0).isEmpty){
-        "\\(" + expressions.get(0)(0).toLatex + "= 0\\)"
+        "Solutions to \\(" + expressions.get(0)(0).toLatex + "= 0\\):"
       }
 
 

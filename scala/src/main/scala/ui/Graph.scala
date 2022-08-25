@@ -273,7 +273,7 @@ object Graph {
 
             ctx.fillStyle = "#44494B"
 
-            if (horizontal) ctx.fillText(numString, 5, pixInt + 5)
+            if (horizontal) ctx.fillText(numString, 0, pixInt + 5)
             else ctx.fillText(numString, pixInt - textWidth / 2, ctx.canvas.height - 5)
           }
 
