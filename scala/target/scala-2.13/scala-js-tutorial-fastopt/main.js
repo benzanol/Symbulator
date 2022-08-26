@@ -18721,7 +18721,7 @@ $c_Lsympany_ui_Graph$.prototype.connectWithCurves__sci_Seq__Lorg_scalajs_dom_Can
     var t = $as_T2(t$2);
     return new $c_T2$mcII$sp($m_Lsympany_ui_Graph$().canvasX__D__I(t._1$mcD$sp__D()), $m_Lsympany_ui_Graph$().canvasY__D__I(t._2$mcD$sp__D()))
   }))));
-  $uI(ctx.canvas.height);
+  var height = (((-20) + $uI(ctx.canvas.height)) | 0);
   ctx.moveTo($as_T2(ps.apply__I__O(0))._1$mcI$sp__I(), $as_T2(ps.apply__I__O(0))._2$mcI$sp__I());
   var this$3 = $m_RTLong$();
   var value = (1000000.0 * $uD((0, $m_jl_System$NanoTime$().jl_System$NanoTime$__f_getHighPrecisionTime)()));
@@ -18734,51 +18734,59 @@ $c_Lsympany_ui_Graph$.prototype.connectWithCurves__sci_Seq__Lorg_scalajs_dom_Can
     ctx.beginPath()
   };
   var end = (((-4) + ps.length__I()) | 0);
-  var isEmpty = (end < 1);
-  if ((!isEmpty)) {
-    var i = 1;
-    while (true) {
-      var v1 = i;
-      if ($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_rainbow) {
-        ctx.beginPath()
-      };
-      if ($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_rainbow) {
-        var s = (("hsla(" + (v1 + timeOffset)) + ", 100%, 50%, 1.0)");
-        ctx.strokeStyle = s
-      };
-      var xc = (((($as_T2(ps.apply__I__O(v1))._1$mcI$sp__I() + $as_T2(ps.apply__I__O(((1 + v1) | 0)))._1$mcI$sp__I()) | 0) / 2) | 0);
-      var yc = (((($as_T2(ps.apply__I__O(v1))._2$mcI$sp__I() + $as_T2(ps.apply__I__O(((1 + v1) | 0)))._2$mcI$sp__I()) | 0) / 2) | 0);
-      var xc2 = (((($as_T2(ps.apply__I__O(((2 + v1) | 0)))._1$mcI$sp__I() + $as_T2(ps.apply__I__O(((1 + v1) | 0)))._1$mcI$sp__I()) | 0) / 2) | 0);
-      var yc2 = (((($as_T2(ps.apply__I__O(((2 + v1) | 0)))._2$mcI$sp__I() + $as_T2(ps.apply__I__O(((1 + v1) | 0)))._2$mcI$sp__I()) | 0) / 2) | 0);
-      if (($m_Lsympany_ui_Graph$(), false)) {
-        var img = (0, eval)("let i = new Image() ; i.src = './Cat.png' ; i");
-        var a = (((yc2 - yc) | 0) / ((xc2 - xc) | 0));
-        var angle = $uD(Math.atan(a));
-        ctx.translate(xc, yc);
-        ctx.rotate(angle);
-        ctx.drawImage(img, (-100.0), (-100.0), 200.0, 200.0);
-        ctx.rotate((-angle));
-        ctx.translate(((-xc) | 0), ((-yc) | 0))
-      };
-      ctx.moveTo($as_T2(ps.apply__I__O((((-1) + v1) | 0)))._1$mcI$sp__I(), $as_T2(ps.apply__I__O((((-1) + v1) | 0)))._2$mcI$sp__I());
-      ctx.quadraticCurveTo($as_T2(ps.apply__I__O(v1))._1$mcI$sp__I(), $as_T2(ps.apply__I__O(v1))._2$mcI$sp__I(), xc, yc);
-      if ($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_rainbow) {
-        ctx.moveTo($as_T2(ps.apply__I__O(v1))._1$mcI$sp__I(), $as_T2(ps.apply__I__O(v1))._2$mcI$sp__I());
-        ctx.quadraticCurveTo(xc, yc, xc2, yc2)
-      };
-      if ($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_rainbow) {
-        ctx.stroke()
-      };
-      if ((i === end)) {
-        break
-      };
-      i = ((1 + i) | 0)
+  var this$16 = new $c_sci_Range$Inclusive(1, end, 1);
+  var p = new $c_sjsr_AnonFunction1(((ps$1, height$1) => ((i$2) => {
+    var i = $uI(i$2);
+    var x = (($as_T2(ps$1.apply__I__O(i))._2$mcI$sp__I() - $as_T2(ps$1.apply__I__O(((1 + i) | 0)))._2$mcI$sp__I()) | 0);
+    if ((((x < 0) ? ((-x) | 0) : x) < height$1)) {
+      var x$1 = (($as_T2(ps$1.apply__I__O(((1 + i) | 0)))._2$mcI$sp__I() - $as_T2(ps$1.apply__I__O(((2 + i) | 0)))._2$mcI$sp__I()) | 0);
+      return (((x$1 < 0) ? ((-x$1) | 0) : x$1) < height$1)
+    } else {
+      return false
     }
-  };
+  }))(ps, height));
+  var this$21 = $ct_sc_IterableOps$WithFilter__sc_IterableOps__F1__(new $c_sc_IterableOps$WithFilter(), this$16, p);
+  var f = new $c_sjsr_AnonFunction1(((ctx$1, timeOffset$1, ps$2) => ((i$3$2) => {
+    var i$3 = $uI(i$3$2);
+    if ($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_rainbow) {
+      ctx$1.beginPath()
+    };
+    if ($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_rainbow) {
+      var s = (("hsla(" + (i$3 + timeOffset$1)) + ", 100%, 50%, 1.0)");
+      ctx$1.strokeStyle = s
+    };
+    var xc = (((($as_T2(ps$2.apply__I__O(i$3))._1$mcI$sp__I() + $as_T2(ps$2.apply__I__O(((1 + i$3) | 0)))._1$mcI$sp__I()) | 0) / 2) | 0);
+    var yc = (((($as_T2(ps$2.apply__I__O(i$3))._2$mcI$sp__I() + $as_T2(ps$2.apply__I__O(((1 + i$3) | 0)))._2$mcI$sp__I()) | 0) / 2) | 0);
+    var xc2 = (((($as_T2(ps$2.apply__I__O(((2 + i$3) | 0)))._1$mcI$sp__I() + $as_T2(ps$2.apply__I__O(((1 + i$3) | 0)))._1$mcI$sp__I()) | 0) / 2) | 0);
+    var yc2 = (((($as_T2(ps$2.apply__I__O(((2 + i$3) | 0)))._2$mcI$sp__I() + $as_T2(ps$2.apply__I__O(((1 + i$3) | 0)))._2$mcI$sp__I()) | 0) / 2) | 0);
+    if (($m_Lsympany_ui_Graph$(), false)) {
+      var img = (0, eval)("let i = new Image() ; i.src = './Cat.png' ; i");
+      var a = (((yc2 - yc) | 0) / ((xc2 - xc) | 0));
+      var angle = $uD(Math.atan(a));
+      ctx$1.translate(xc, yc);
+      ctx$1.rotate(angle);
+      ctx$1.drawImage(img, (-100.0), (-100.0), 200.0, 200.0);
+      ctx$1.rotate((-angle));
+      ctx$1.translate(((-xc) | 0), ((-yc) | 0))
+    };
+    ctx$1.moveTo($as_T2(ps$2.apply__I__O((((-1) + i$3) | 0)))._1$mcI$sp__I(), $as_T2(ps$2.apply__I__O((((-1) + i$3) | 0)))._2$mcI$sp__I());
+    ctx$1.quadraticCurveTo($as_T2(ps$2.apply__I__O(i$3))._1$mcI$sp__I(), $as_T2(ps$2.apply__I__O(i$3))._2$mcI$sp__I(), xc, yc);
+    if ($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_rainbow) {
+      ctx$1.moveTo($as_T2(ps$2.apply__I__O(i$3))._1$mcI$sp__I(), $as_T2(ps$2.apply__I__O(i$3))._2$mcI$sp__I());
+      ctx$1.quadraticCurveTo(xc, yc, xc2, yc2)
+    };
+    if ($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_rainbow) {
+      ctx$1.stroke()
+    }
+  }))(ctx, timeOffset, ps));
+  this$21.filtered__sc_Iterable().foreach__F1__V(f);
   if (this.Lsympany_ui_Graph$__f_rainbow) {
     ctx.beginPath()
   };
-  ctx.quadraticCurveTo($as_T2(ps.apply__I__O((((-2) + ps.length__I()) | 0)))._1$mcI$sp__I(), $as_T2(ps.apply__I__O((((-2) + ps.length__I()) | 0)))._2$mcI$sp__I(), $as_T2(ps.last__O())._1$mcI$sp__I(), $as_T2(ps.last__O())._2$mcI$sp__I());
+  var x$2 = (($as_T2(ps.apply__I__O((((-2) + ps.length__I()) | 0)))._2$mcI$sp__I() - $as_T2(ps.last__O())._2$mcI$sp__I()) | 0);
+  if ((((x$2 < 0) ? ((-x$2) | 0) : x$2) < height)) {
+    ctx.quadraticCurveTo($as_T2(ps.apply__I__O((((-2) + ps.length__I()) | 0)))._1$mcI$sp__I(), $as_T2(ps.apply__I__O((((-2) + ps.length__I()) | 0)))._2$mcI$sp__I(), $as_T2(ps.last__O())._1$mcI$sp__I(), $as_T2(ps.last__O())._2$mcI$sp__I())
+  };
   ctx.stroke()
 });
 $c_Lsympany_ui_Graph$.prototype.toggleRainbow__V = (function() {
@@ -18880,14 +18888,14 @@ $c_Lsympany_ui_Graph$.prototype.calculateSegments__Lsympany_Sym__sci_Seq = (func
       var x$1 = new $c_sr_DoubleRef(elem);
       var lastMultiple = x$1.sr_DoubleRef__f_elem;
       var max = ((this$13.Lsympany_ui_Graph$__f_pos.Lsympany_ui_Graph$GraphPos__f_x + width) + dist);
-      var lt = new $c_sjsr_AnonFunction2(((x$9$2, x$10$2) => {
-        var x$9 = $uD(x$9$2);
+      var lt = new $c_sjsr_AnonFunction2(((x$10$2, x$11$2) => {
         var x$10 = $uD(x$10$2);
-        return (x$9 < x$10)
-      }));
-      var extrasLeft = $as_sci_Seq($as_sc_SeqOps($as_sc_IterableOps($f_sc_SeqOps__sortWith__F2__O(extras, lt)).filter__F1__O(new $c_sjsr_AnonFunction1(((x$2) => ((x$11$2) => {
         var x$11 = $uD(x$11$2);
-        return (x$11 > x$2.sr_DoubleRef__f_elem)
+        return (x$10 < x$11)
+      }));
+      var extrasLeft = $as_sci_Seq($as_sc_SeqOps($as_sc_IterableOps($f_sc_SeqOps__sortWith__F2__O(extras, lt)).filter__F1__O(new $c_sjsr_AnonFunction1(((x$2) => ((x$12$2) => {
+        var x$12 = $uD(x$12$2);
+        return (x$12 > x$2.sr_DoubleRef__f_elem)
       }))(x$1)))).distinct__O());
       $m_sci_List$();
       var array$2 = [$m_sci_Nil$()];

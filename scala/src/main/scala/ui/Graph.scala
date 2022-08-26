@@ -294,6 +294,7 @@ object Graph {
     for (i <- 0 until this.segments.length ; s <- this.segments(i)) {
       fctx.strokeStyle = colors(i % colors.length)
       connectWithCurves(s)(fctx)
+      //connectWithLines(s)(fctx)
     }
 
   // Drawing special points
@@ -332,7 +333,10 @@ object Graph {
 
     if (!this.rainbow) ctx.beginPath()
 
-    for (i <- 1 to ps.length - 4) {
+    for (i <- 1 to ps.length - 4
+      // If the difference in y values is too large, it is probably an overflow error
+      if (ps(i)._2 - ps(i+1)._2).abs < height && (ps(i+1)._2 - ps(i+2)._2).abs < height
+    ) {
       if (this.rainbow) ctx.beginPath()
 
       if (this.rainbow)
@@ -375,9 +379,36 @@ object Graph {
     if (this.rainbow) ctx.beginPath()
 
 
-    // Curve through the last two ps
-    ctx.quadraticCurveTo(
-      ps(ps.length - 2)._1, ps(ps.length - 2)._2, ps.last._1, ps.last._2);
+    if ((ps(ps.length - 2)._2 - ps.last._2).abs < height)
+      // Curve through the last two ps
+      ctx.quadraticCurveTo(
+        ps(ps.length - 2)._1, ps(ps.length - 2)._2, ps.last._1, ps.last._2);
+
+    ctx.stroke()
+  }
+
+  def connectWithLines(points: Seq[(Double, Double)])(implicit ctx: JsContext) {
+    ctx.lineWidth = graphThickness
+
+    // It's impossible to make a graph with less than 2 points
+    if (points.length < 2) return
+
+    // Convert the points to positions on the canvas
+    val ps = points.map{ t => (canvasX(t._1), canvasY(t._2)) }
+
+    // Go to the starting point
+    ctx.moveTo(ps(0)._1, ps(0)._2);
+
+    val maxY = ctx.canvas.height
+    var prevY = ps(0)._2
+
+    for ((x, y) <- ps.tail) {
+      // Don't draw a line if the distance is too big, as its proobably an overflow rollover
+      if ((prevY - y).abs > maxY) ctx.moveTo(x, y)
+      else ctx.lineTo(x, y)
+
+      prevY = y
+    }
 
     ctx.stroke()
   }

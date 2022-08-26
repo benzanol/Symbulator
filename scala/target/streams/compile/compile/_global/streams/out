@@ -1,20 +1,2 @@
-[0m[[0m[33mwarn[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala:163:16: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure[0m
-[0m[[0m[33mwarn[0m] [0m[0m  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>[0m
-[0m[[0m[33mwarn[0m] [0m[0m               ^[0m
-[0m[[0m[33mwarn[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala:163:30: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure[0m
-[0m[[0m[33mwarn[0m] [0m[0m  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>[0m
-[0m[[0m[33mwarn[0m] [0m[0m                             ^[0m
-[0m[[0m[33mwarn[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala:163:44: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure[0m
-[0m[[0m[33mwarn[0m] [0m[0m  }{ case (aS: Seq[Sym], bS: Seq[Sym], cS: Seq[Sym]) =>[0m
-[0m[[0m[33mwarn[0m] [0m[0m                                           ^[0m
-[0m[[0m[33mwarn[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala:240:16: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure[0m
-[0m[[0m[33mwarn[0m] [0m[0m  }{ case (es: Seq[Sym]) =>[0m
-[0m[[0m[33mwarn[0m] [0m[0m               ^[0m
-[0m[[0m[33mwarn[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala:248:31: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure[0m
-[0m[[0m[33mwarn[0m] [0m[0m  }{ case (a: Sym, f: Sym, r: Seq[Sym]) =>[0m
-[0m[[0m[33mwarn[0m] [0m[0m                              ^[0m
-[0m[[0m[33mwarn[0m] [0m[0m/home/quaviq/Documents/Programming/Scala/Calculator/scala/src/main/scala/math/Zero.scala:320:20: non-variable type argument sympany.Sym in type pattern Seq[sympany.Sym] (the underlying of Seq[sympany.Sym]) is unchecked since it is eliminated by erasure[0m
-[0m[[0m[33mwarn[0m] [0m[0m        { case (c: Seq[Sym], p: SymR) => (simplify(***(c)), p) }[0m
-[0m[[0m[33mwarn[0m] [0m[0m                   ^[0m
-[0m[[0m[33mwarn[0m] [0m[0mthere were 44 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
-[0m[[0m[33mwarn[0m] [0m[0m7 warnings found[0m
+[0m[[0m[33mwarn[0m] [0m[0mthere were 14 deprecation warnings (since 2.13.0); re-run with -deprecation for details[0m
+[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
