@@ -227,10 +227,11 @@ object ZeroRules {
   }
 
   //// Equation -> Expression
-  rules.+("The solution to an equation is the zero of one side minus the other."){
+  rules.+("The solution to an equation is the zero of one side minus the other"){
     EquationP('l, 'r |> {(_: Sym) != SymInt(0)})
   }{ case (l: Sym, r: Sym) =>
-      Seq( SymEquation(simplify(++(l, **(r, -1))), 0)  -> "")
+      Seq( SymEquation(simplify(++(l, **(r, -1))), 0) ->
+        f"Subtract \\(${r.toLatex}\\) from both sides of the equation")
   }
 
   //// Expression -> Equation
@@ -238,7 +239,8 @@ object ZeroRules {
     EquationP(SumP('es @@ __*), =?(0))
   }{ case (es: Seq[Sym]) =>
       for (i <- 0 until es.length if hasX(es(i)))
-      yield SymEquation(es(i), **(-1, +++(es.take(i) ++ es.drop(i + 1)))) -> ""
+      yield (SymEquation(es(i), **(-1, +++(es.take(i) ++ es.drop(i + 1)))) ->
+        f"Subtract \\(${+++(es.take(i) ++ es.drop(i + 1)).toLatex}\\) from both sides of the equation")
   }
 
   rules.+("Divide from both sides of the equation"){
@@ -251,48 +253,58 @@ object ZeroRules {
 
 
   //// Inverse expressions
-  rules.+("Cancel out log by using it as an exponent."){
+  rules.+("Cancel out log by using it as an exponent"){
     EquationP(LogP(hasxP('a), 'b), 'c)
-  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(a, ^(b, c)) -> "") }
+  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(a, ^(b, c)) ->
+    (f"Raise \\(${b.toLatex}\\) to the power of both sides of the equation\n" +
+      f"\\(${b.toLatex}^{${SymLog(a, b).toLatex}} = ${b.toLatex}^{${c.toLatex}}\\)")
+  ) }
 
-  rules.+("Get the base of a log by using a root."){
+  // For when x is in the base of a log, this one is even a little beyond me
+  rules.+("Get the base of a log by using a root"){
     EquationP(LogP('a, hasxP('b)), 'c)
   }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(b, ^(a, ^(c, -1))) -> "") }
 
-  rules.+("Cancel out a power using a root."){
+  rules.+("Cancel out a power using a root"){
     EquationP(PowP(hasxP('b), 'c), 'a)
-  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(b, ^(a, ^(c, -1))) -> "") }
+  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(b, ^(a, ^(c, -1))) ->
+    (f"Take the \\(${c.toLatex} ^{th}\\) root of both sides of the equation\n" +
+      f"\\(\\sqrt[${c.toLatex}]{${b.toLatex}^{${c.toLatex}}} = \\sqrt[${c.toLatex}]{${a.toLatex}}\\)")
+  ) }
 
-  rules.+("Cancel out an exponential using a log."){
+  rules.+("Cancel out an exponential using a log"){
     EquationP(PowP('b, hasxP('c)), 'a)
-  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation('c, SymLog('a, 'b)) -> "") }
+  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(c, SymLog(a, b)) ->
+    (f"Take the log base \\(${b.toLatex}\\) of both sides of the equation\n" +
+    f"\\(\\log_{${b.toLatex}} ${b.toLatex}^{${c.toLatex}} = \\log_{${b.toLatex}} ${a.toLatex}\\)")
+  ) }
 
   //// Trig integrals
-  rules.+("Take the inverse sine of each side"){
+  rules.+("Take the inverse sine of both sides of the equation"){
     EquationP(SinP('a), 'r)
   }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymASin(r))) -> "") }
-  rules.+("Take the inverse cosine of each side"){
+  rules.+("Take the inverse cosine of both sides of the equation"){
     EquationP(CosP('a), 'r)
   }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymACos(r))) -> "") }
 
-  rules.+("Take the inverse sine of each side"){
+  rules.+("Take the inverse sine of both sides of the equation"){
     EquationP(SinP('a), 'r)
   }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymASin2(r))) -> "") }
-  rules.+("Take the inverse cosine of each side"){
+  rules.+("Take the inverse cosine of both sides of the equation"){
     EquationP(CosP('a), 'r)
   }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymACos2(r))) -> "") }
 
-  rules.+("Take the inverse tangent of each side"){
+  rules.+("Take the inverse tangent of both sides of the equation"){
     EquationP(TanP('a), 'r)
   }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymATan(r))) -> "") }
 
-  rules.+("Take the sine of each side"){
+  rules.+("Take the sine of both sides of the equation"){
     EquationP(ASinP('a), 'r)
   }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymSin(r))) -> "") }
-  rules.+("Take the cosine of each side"){
+  rules.+("Take the cosine of both sides of the equation"){
     EquationP(ACosP('a), 'r)
   }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymCos(r))) -> "") }
-  rules.+("Take the tangent of each side"){
+  rules.+("Take the tangent of both sides of the equation"){
     EquationP(ATanP('a), 'r)
   }{ case (a: Sym, r: Sym) => Seq(SymEquation(a, simplify(SymTan(r))) -> "") }
 

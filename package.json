@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "evaluatex": "^2.2.0",
+    "katex": "^0.16.0",
     "mathquill": "^0.10.1-a"
   }
 }
