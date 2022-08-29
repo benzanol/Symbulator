@@ -28125,6 +28125,21 @@ $h_Lsympany_ui_CalcSolver$DerivativeResult.prototype = $c_Lsympany_ui_CalcSolver
 $c_Lsympany_ui_CalcSolver$DerivativeResult.prototype.makeSolver__sci_Seq__Lsympany_ui_CalcSolver$AsyncDerivativeSolver = (function(es) {
   return new $c_Lsympany_ui_CalcSolver$AsyncDerivativeSolver($as_Lsympany_Sym($as_sc_SeqOps(es.apply__I__O(0)).apply__I__O(0)))
 });
+$c_Lsympany_ui_CalcSolver$DerivativeResult.prototype.graphs__sci_Seq = (function() {
+  var $$x4 = $m_s_Option$();
+  var this$1 = this.Lsympany_ui_CalcFields$ResultField__f_expressions;
+  if (this$1.isEmpty__Z()) {
+    var $$x1 = $m_s_None$()
+  } else {
+    var arg1 = this$1.get__O();
+    var e = $as_sci_Seq(arg1);
+    var $$x3 = $m_Lsympany_math_Derivative$();
+    var $$x2 = $as_Lsympany_Sym($as_sc_SeqOps(e.apply__I__O(0)).apply__I__O(0));
+    var this$2 = $m_s_Symbol$();
+    var $$x1 = new $c_s_Some($$x3.derive__Lsympany_Sym__s_Symbol__Lsympany_Sym($$x2, $as_s_Symbol($c_s_JSUniquenessCache.prototype.apply__T__O.call(this$2, "x"))))
+  };
+  return $$x4.option2Iterable__s_Option__sc_Iterable($$x1).toSeq__sci_Seq()
+});
 $c_Lsympany_ui_CalcSolver$DerivativeResult.prototype.makeSolver__sci_Seq__Lsympany_ui_CalcSolver$AsyncSolver = (function(es) {
   return this.makeSolver__sci_Seq__Lsympany_ui_CalcSolver$AsyncDerivativeSolver(es)
 });

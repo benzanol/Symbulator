@@ -375,6 +375,9 @@ object CalcSolver {
 
   class DerivativeResult(n: String)(field: String) extends ResultField(n)(field) {
     def makeSolver(es: Seq[Seq[Sym]]) = new AsyncDerivativeSolver(es(0)(0))
+
+    override def graphs: Seq[Sym] = 
+      expressions.map{ e => Derivative.derive(e(0)(0), 'x) }.toSeq
   }
 }
 
