@@ -11203,7 +11203,46 @@ $c_Lsympany_Main$.prototype.main__AT__V = (function(args) {
   $$x1.setupCalculatorList__sci_Seq__V(this$1.Lsympany_ui_Calculators$__f_calculators);
   var $$x2 = $m_Lsympany_ui_Calculators$();
   var this$2 = $m_Lsympany_ui_Calculators$();
-  $$x2.selectCalculator__Lsympany_ui_CalcFields$Calculator__V(this$2.Lsympany_ui_Calculators$__f_currentCalculator)
+  $$x2.selectCalculator__Lsympany_ui_CalcFields$Calculator__V(this$2.Lsympany_ui_Calculators$__f_currentCalculator);
+  var $$x3 = $m_sci_Seq$();
+  var array = [1, 2, 3];
+  var mylist = $as_sci_Seq($$x3.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array)));
+  var x = mylist.filter__F1__O(new $c_sjsr_AnonFunction1(((a$2) => {
+    var a = $uI(a$2);
+    return (a === 2)
+  })));
+  var this$8 = $m_s_Console$();
+  var this$9 = this$8.out__Ljava_io_PrintStream();
+  this$9.java$lang$JSConsoleBasedPrintStream$$printString__T__V((x + "\n"));
+  var m = $as_scm_Map($m_scm_Map$().empty__O());
+  var it = mylist.iterator__sc_Iterator();
+  while (it.hasNext__Z()) {
+    var elem = it.next__O();
+    var a$3 = $uI(elem);
+    var key = ((2 + a$3) | 0);
+    var bldr = $as_scm_Builder(m.getOrElseUpdate__O__F0__O(key, new $c_sjsr_AnonFunction0(((this$10) => (() => this$10.newSpecificBuilder__scm_Builder()))(mylist))));
+    bldr.addOne__O__scm_Growable(elem)
+  };
+  var this$11 = $m_sci_HashMap$();
+  var result = this$11.sci_HashMap$__f_EmptyMap;
+  var mapIt = m.iterator__sc_Iterator();
+  while (mapIt.hasNext__Z()) {
+    var x1 = $as_T2(mapIt.next__O());
+    if ((x1 === null)) {
+      throw new $c_s_MatchError(x1)
+    };
+    var k = x1._1__O();
+    var v = $as_scm_Builder(x1._2__O());
+    result = result.updated__O__O__sci_HashMap(k, v.result__O())
+  };
+  $m_Lsympany_Main$().jslog__O__V(10);
+  $m_sci_List$();
+  var array$1 = [4];
+  var elems = $ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1);
+  $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(elems)
+});
+$c_Lsympany_Main$.prototype.jslog__O__V = (function(arg) {
+  console.log(arg)
 });
 $c_Lsympany_Main$.prototype.mainSimple__T__V = (function(str) {
   var x1 = $m_Lsympany_Parse$().parseLatex__T__s_Option(str);
@@ -18205,8 +18244,9 @@ function $c_Lsympany_ui_Graph$() {
   this.Lsympany_ui_Graph$__f_points = null;
   this.Lsympany_ui_Graph$__f_drawings = null;
   this.Lsympany_ui_Graph$__f_colors = null;
-  this.Lsympany_ui_Graph$__f_graphThickness = 0;
-  this.Lsympany_ui_Graph$__f_gridColor = null;
+  this.Lsympany_ui_Graph$__f_graphThickness = 0.0;
+  this.Lsympany_ui_Graph$__f_gridColors = null;
+  this.Lsympany_ui_Graph$__f_gridThicknesses = null;
   this.Lsympany_ui_Graph$__f_segments = null;
   this.Lsympany_ui_Graph$__f_rainbow = false;
   this.Lsympany_ui_Graph$__f_rainbowTimer = null;
@@ -18228,8 +18268,13 @@ function $c_Lsympany_ui_Graph$() {
   var $$x1 = $m_sci_Seq$();
   var array = ["#AA0000", "#0000AA", "#008800"];
   this.Lsympany_ui_Graph$__f_colors = $as_sci_Seq($$x1.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array)));
-  this.Lsympany_ui_Graph$__f_graphThickness = 5;
-  this.Lsympany_ui_Graph$__f_gridColor = "#AAAAAA";
+  this.Lsympany_ui_Graph$__f_graphThickness = 3.5;
+  var $$x2 = $m_sci_Seq$();
+  var array$1 = ["#888888", "#888888", "#777777", "#666666", "#666666", "#555555"];
+  this.Lsympany_ui_Graph$__f_gridColors = $as_sci_Seq($$x2.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$1)));
+  var $$x3 = $m_sci_Seq$();
+  var array$2 = [0.0, 0.5, 0.8, 1.0, 1.5, 2.2];
+  this.Lsympany_ui_Graph$__f_gridThicknesses = $as_sci_Seq($$x3.apply__sci_Seq__sc_SeqOps($ct_sjsr_WrappedVarArgs__sjs_js_Array__(new $c_sjsr_WrappedVarArgs(), array$2)));
   this.Lsympany_ui_Graph$__f_segments = $as_sci_Seq($m_sci_Seq$().apply__sci_Seq__sc_SeqOps($m_sci_Nil$()));
   this.Lsympany_ui_Graph$__f_rainbow = false;
   this.Lsympany_ui_Graph$__f_rainbowTimer = $m_s_None$();
@@ -18285,9 +18330,9 @@ $c_Lsympany_ui_Graph$.prototype.setup__V = (function() {
   }));
   this.setGraphs__sci_Seq__sci_Seq__sci_Seq__V($m_sci_Nil$(), $m_sci_Nil$(), $m_sci_Nil$())
 });
-$c_Lsympany_ui_Graph$.prototype.drawLine__I__I__I__I__I__Lorg_scalajs_dom_CanvasRenderingContext2D__V = (function(x1, y1, x2, y2, w, ctx) {
+$c_Lsympany_ui_Graph$.prototype.drawLine__I__I__I__I__D__Lorg_scalajs_dom_CanvasRenderingContext2D__V = (function(x1, y1, x2, y2, w, ctx) {
   ctx.beginPath();
-  if ((w !== (-1))) {
+  if ((w !== (-1.0))) {
     ctx.lineWidth = w
   };
   ctx.moveTo(x1, y1);
@@ -18453,9 +18498,6 @@ $c_Lsympany_ui_Graph$.prototype.draw__V = (function() {
   this.Lsympany_ui_Graph$__f_fctx.clearRect(0.0, 0.0, this.marginX__I(), $uI(this.Lsympany_ui_Graph$__f_fc.height));
   this.Lsympany_ui_Graph$__f_fctx.clearRect(0.0, (((-20) + $uI(this.Lsympany_ui_Graph$__f_fc.height)) | 0), $uI(this.Lsympany_ui_Graph$__f_fc.width), $uI(this.Lsympany_ui_Graph$__f_fc.height));
   this.Lsympany_ui_Graph$__f_gctx.font = "14px Arial";
-  var $$x4 = this.Lsympany_ui_Graph$__f_gctx;
-  var s$1 = this.Lsympany_ui_Graph$__f_gridColor;
-  $$x4.strokeStyle = s$1;
   this.drawGrid__Lorg_scalajs_dom_CanvasRenderingContext2D__V(this.Lsympany_ui_Graph$__f_gctx)
 });
 $c_Lsympany_ui_Graph$.prototype.drawGrid__Lorg_scalajs_dom_CanvasRenderingContext2D__V = (function(ctx) {
@@ -18593,7 +18635,7 @@ $c_Lsympany_ui_Graph$.prototype.drawGrid__Lorg_scalajs_dom_CanvasRenderingContex
           var f$2__f = f$1
         };
         var pix = $uD(f$2__f(a$3));
-        var thickness = (($as_sci_List(elem$1).length__I() - v1) | 0);
+        var weight = (($as_sci_List(elem$1).length__I() - v1) | 0);
         var textAll = ($uD(Math.abs(pixDist)) > 100.0);
         if (textAll) {
           var powOf10 = true
@@ -18610,18 +18652,21 @@ $c_Lsympany_ui_Graph$.prototype.drawGrid__Lorg_scalajs_dom_CanvasRenderingContex
           var that$4 = this$65.decimal__D__Ljava_math_MathContext__s_math_BigDecimal(d$2, this$65.s_math_BigDecimal$__f_defaultMathContext);
           if ($f_s_math_Ordered__$less__O__Z(this$66, that$4)) {
             var pixInt = $doubleToInt(pix);
+            var s = $as_T($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_gridColors.apply__I__O(weight));
+            ctx.strokeStyle = s;
+            var thickness = $uD($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_gridThicknesses.apply__I__O(weight));
             if (horizontal) {
-              $m_Lsympany_ui_Graph$().drawLine__I__I__I__I__I__Lorg_scalajs_dom_CanvasRenderingContext2D__V($m_Lsympany_ui_Graph$().marginX__I(), pixInt, $uI(ctx.canvas.width), pixInt, thickness, ctx)
+              $m_Lsympany_ui_Graph$().drawLine__I__I__I__I__D__Lorg_scalajs_dom_CanvasRenderingContext2D__V($m_Lsympany_ui_Graph$().marginX__I(), pixInt, $uI(ctx.canvas.width), pixInt, thickness, ctx)
             } else {
-              $m_Lsympany_ui_Graph$().drawLine__I__I__I__I__I__Lorg_scalajs_dom_CanvasRenderingContext2D__V(pixInt, 0, pixInt, (($uI(ctx.canvas.height) - ($m_Lsympany_ui_Graph$(), 20)) | 0), thickness, ctx)
+              $m_Lsympany_ui_Graph$().drawLine__I__I__I__I__D__Lorg_scalajs_dom_CanvasRenderingContext2D__V(pixInt, 0, pixInt, (($uI(ctx.canvas.height) - ($m_Lsympany_ui_Graph$(), 20)) | 0), thickness, ctx)
             };
             if (textAll) {
               var $$x7 = true
             } else if (text2s) {
-              var this$68 = cur;
-              var this$67 = $m_s_math_BigDecimal$();
-              var that$5 = dist.$times__s_math_BigDecimal__s_math_BigDecimal(this$67.apply__I__Ljava_math_MathContext__s_math_BigDecimal(2, this$67.s_math_BigDecimal$__f_defaultMathContext));
-              var xn = this$68.remainder__s_math_BigDecimal__s_math_BigDecimal(that$5);
+              var this$69 = cur;
+              var this$68 = $m_s_math_BigDecimal$();
+              var that$5 = dist.$times__s_math_BigDecimal__s_math_BigDecimal(this$68.apply__I__Ljava_math_MathContext__s_math_BigDecimal(2, this$68.s_math_BigDecimal$__f_defaultMathContext));
+              var xn = this$69.remainder__s_math_BigDecimal__s_math_BigDecimal(that$5);
               var $$x7 = $m_sr_BoxesRunTime$().equalsNumObject__jl_Number__O__Z(xn, 0)
             } else {
               var $$x7 = false
@@ -18629,17 +18674,17 @@ $c_Lsympany_ui_Graph$.prototype.drawGrid__Lorg_scalajs_dom_CanvasRenderingContex
             if ($$x7) {
               var $$x6 = true
             } else if (text5s) {
-              var this$70 = cur;
-              var this$69 = $m_s_math_BigDecimal$();
-              var that$6 = dist.$times__s_math_BigDecimal__s_math_BigDecimal(this$69.apply__I__Ljava_math_MathContext__s_math_BigDecimal(5, this$69.s_math_BigDecimal$__f_defaultMathContext));
-              var xn$1 = this$70.remainder__s_math_BigDecimal__s_math_BigDecimal(that$6);
+              var this$71 = cur;
+              var this$70 = $m_s_math_BigDecimal$();
+              var that$6 = dist.$times__s_math_BigDecimal__s_math_BigDecimal(this$70.apply__I__Ljava_math_MathContext__s_math_BigDecimal(5, this$70.s_math_BigDecimal$__f_defaultMathContext));
+              var xn$1 = this$71.remainder__s_math_BigDecimal__s_math_BigDecimal(that$6);
               var $$x6 = $m_sr_BoxesRunTime$().equalsNumObject__jl_Number__O__Z(xn$1, 0)
             } else {
               var $$x6 = false
             };
             if ($$x6) {
-              var this$71 = cur;
-              var numString = $f_T__replaceAll__T__T__T(this$71.s_math_BigDecimal__f_bigDecimal.toString__T(), "\\.?0+$", "");
+              var this$72 = cur;
+              var numString = $f_T__replaceAll__T__T__T(this$72.s_math_BigDecimal__f_bigDecimal.toString__T(), "\\.?0+$", "");
               var textWidth = $uD(ctx.measureText(numString).width);
               ctx.fillStyle = "#44494B";
               if (horizontal) {
@@ -18660,6 +18705,10 @@ $c_Lsympany_ui_Graph$.prototype.drawGrid__Lorg_scalajs_dom_CanvasRenderingContex
         i = ((1 + i) | 0)
       }
     };
+    var s$1 = $as_T($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_gridColors.apply__I__O(5));
+    ctx.strokeStyle = s$1;
+    $m_Lsympany_ui_Graph$().drawLine__I__I__I__I__D__Lorg_scalajs_dom_CanvasRenderingContext2D__V($m_Lsympany_ui_Graph$().marginX__I(), $m_Lsympany_ui_Graph$().canvasY__D__I(0.0), $uI(ctx.canvas.width), $m_Lsympany_ui_Graph$().canvasY__D__I(0.0), $uD($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_gridThicknesses.apply__I__O(5)), ctx);
+    $m_Lsympany_ui_Graph$().drawLine__I__I__I__I__D__Lorg_scalajs_dom_CanvasRenderingContext2D__V($m_Lsympany_ui_Graph$().canvasX__D__I(0.0), 0, $m_Lsympany_ui_Graph$().canvasX__D__I(0.0), (($uI(ctx.canvas.height) - ($m_Lsympany_ui_Graph$(), 20)) | 0), $uD($m_Lsympany_ui_Graph$().Lsympany_ui_Graph$__f_gridThicknesses.apply__I__O(5)), ctx);
     these = $as_sci_List(these.tail__O())
   }
 });

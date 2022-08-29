@@ -2,9 +2,7 @@ package sympany
 
 import scala.util.chaining._
 
-import org.scalajs.dom
 import org.scalajs.dom.document
-import scala.scalajs.js
 import scala.scalajs.js.annotation.JSExportTopLevel
 
 import sympany._
@@ -12,11 +10,29 @@ import sympany.math.Simplify.simplify
 
 object Main {
 
+  /* This is the docstring
+   * Pretty interesting, right!
+   */
+  def myfunc(arg: String, num: Int): Int = {
+
+    return arg.length
+  }
+
   def main(args: Array[String]): Unit = {
     sympany.ui.Graph.setup
 
     ui.Calculators.setupCalculatorList()
     ui.Calculators.selectCalculator()
+
+    val mylist = Seq(1, 2, 3)
+    println(mylist.filter(a => a + 2 == 4))
+    mylist.groupBy(a => a + 2)
+
+    Main.jslog(10)
+
+    val a = 4
+    a.pipe[List[Int]](List(_))
+    a.!=(4)
 
     doStuff
   }

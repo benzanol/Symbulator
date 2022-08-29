@@ -35,7 +35,7 @@ object Graph {
   type JsCanvas = dom.HTMLCanvasElement
   type JsContext = dom.CanvasRenderingContext2D
 
-  def drawLine(x1: Int, y1: Int, x2: Int, y2: Int, w: Int = -1)
+  def drawLine(x1: Int, y1: Int, x2: Int, y2: Int, w: Double = -1)
     (implicit ctx: JsContext): Unit = {
 
     ctx.beginPath()
@@ -133,8 +133,10 @@ object Graph {
   var points = Seq[IntersectionPoint]()
   var drawings = Seq[JsContext => Unit]()
   val colors = Seq("#AA0000", "#0000AA", "#008800")
-  val graphThickness = 5
-  val gridColor = "#AAAAAA"
+  val graphThickness = 3.5
+
+  val gridColors = Seq("#888888", "#888888", "#777777", "#666666", "#666666", "#555555")
+  val gridThicknesses = Seq(0, 0.5, 0.8, 1, 1.5, 2.2)
 
   var segments = Seq[Seq[Seq[(Double, Double)]]]()
 
@@ -208,7 +210,6 @@ object Graph {
 
     // Draw the grid on the background canvas
     gctx.font = "14px Arial"
-    gctx.strokeStyle = gridColor
     drawGrid(gctx)
   }
 
@@ -251,7 +252,8 @@ object Graph {
         var cur: BigDecimal = dist * Math.ceil(start / dist.toDouble).toInt
         var pix: Double = cur.toDouble.pipe(if (horizontal) canvasY else canvasX)
 
-        val thickness = dists.length - i
+        // The shorter the distance between lines, the lower the weight of the line
+        val weight = dists.length - i
 
         // Calculate when to display text
         val textAll = pixDist.abs > textPixMin
@@ -262,9 +264,15 @@ object Graph {
         // Draw each line for the current distance
         while (cur < start + size) {
           val pixInt = pix.toInt
+
+          // Get the line thickness and color based on the line weight
+          ctx.strokeStyle = gridColors(weight)
+          val thickness = gridThicknesses(weight)
+
           if (horizontal) drawLine(marginX, pixInt, ctx.canvas.width, pixInt, thickness)
           else drawLine(pixInt, 0, pixInt, ctx.canvas.height - marginY, thickness)
 
+          // If the lines are far enough apart, add number labels
           if (textAll || (text2s && cur % (dist*2) == 0) || (text5s && cur % (dist*5) == 0)) {
             // Remove trailing zeros and decimal
             val numString = cur.toString.replaceAll("\\.?0+$", "")
@@ -281,6 +289,11 @@ object Graph {
           pix += pixDist
         }
       }
+
+      // Draw the x and y axes in bold
+      ctx.strokeStyle = gridColors(5)
+      drawLine(marginX, canvasY(0), ctx.canvas.width, canvasY(0), gridThicknesses(5))
+      drawLine(canvasX(0), 0, canvasX(0), ctx.canvas.height - marginY, gridThicknesses(5))
     }
   }
 
