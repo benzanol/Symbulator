@@ -187,14 +187,17 @@ button {
 
 
 .mixed-string {
+    white-space: wrap;
 }
 .mixed-string-latex {
     display: inline-block;
     padding: 0px 10px 0px 10px;
+    white-space: nowrap;
 }
 .mixed-string-text {
     display: inline-block;
     line-height: 1.8;
+    /* white-space: pre; */
 }
 
 

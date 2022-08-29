@@ -335,7 +335,7 @@ object Graph {
 
     for (i <- 1 to ps.length - 4
       // If the difference in y values is too large, it is probably an overflow error
-      if (ps(i)._2 - ps(i+1)._2).abs < height && (ps(i+1)._2 - ps(i+2)._2).abs < height
+      if (ps(i)._2 - ps(i+1)._2).abs < (2*height) && (ps(i+1)._2 - ps(i+2)._2).abs < (2*height)
     ) {
       if (this.rainbow) ctx.beginPath()
 
@@ -379,7 +379,7 @@ object Graph {
     if (this.rainbow) ctx.beginPath()
 
 
-    if ((ps(ps.length - 2)._2 - ps.last._2).abs < height)
+    if ((ps(ps.length - 2)._2 - ps.last._2).abs < (2*height))
       // Curve through the last two ps
       ctx.quadraticCurveTo(
         ps(ps.length - 2)._1, ps(ps.length - 2)._2, ps.last._1, ps.last._2);

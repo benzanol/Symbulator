@@ -261,12 +261,12 @@ object ZeroRules {
   ) }
 
   // For when x is in the base of a log, this one is even a little beyond me
-  rules.+("Get the base of a log by using a root"){
-    EquationP(LogP('a, hasxP('b)), 'c)
-  }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(b, ^(a, ^(c, -1))) -> "") }
+  //rules.+("Get the base of a log by using a root"){
+    //EquationP(LogP('a, hasxP('b)), 'c)
+  //}{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(b, ^(a, ^(c, -1))) -> "") }
 
   rules.+("Cancel out a power using a root"){
-    EquationP(PowP(hasxP('b), 'c), 'a)
+    EquationP(PowP(hasxP('b), noxP('c) |> {(_: Sym).approx() > 0}), 'a)
   }{ case (a: Sym, b: Sym, c: Sym) => Seq(SymEquation(b, ^(a, ^(c, -1))) ->
     (f"Take the \\(${c.toLatex} ^{th}\\) root of both sides of the equation\n" +
       f"\\(\\sqrt[${c.toLatex}]{${b.toLatex}^{${c.toLatex}}} = \\sqrt[${c.toLatex}]{${a.toLatex}}\\)")

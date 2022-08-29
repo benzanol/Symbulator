@@ -88,6 +88,10 @@ object Simplify {
   sRules.+("Power with a log as the exponent"){
     PowP('b, LogP('p, 'b))
   }{ case (b: Sym, p: Sym) => p }
+
+  sRules.+("Log of a power"){
+    LogP(PowP('b, 'p), 'b)
+  }{ case (b: Sym, p: Sym) => p }
   
   sRules.+("Power to a product with a log"){
     PowP('b, ProdP(LogP('p, 'b), 'rest @@ __*))
