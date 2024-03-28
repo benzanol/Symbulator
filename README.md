@@ -1,6 +1,6 @@
 # Symbulator
 
-![Symbulator](./files/Symbulator.png)
+![Symbulator](./images/Symbulator.png)
 
 Symbulator is a Computer Algebra System combined with a Graphing Calculator written in Scala and transpiled to web using ScalaJS.
 This means that performs symbolic manipulations of equations to calculate exact mathematical expressions for zeros, intersections, and integrals.
